@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+    <item android:title="我的功能">
+        <menu>
+            <item
+                android:id="@+id/nav_google_sign_in"
+                android:title="以Google登入" />
+            <item
+                android:id="@+id/nav_facebook_sign_in"
+                android:title="以Facebook登入" />
+            <item
+                android:id="@+id/nav_friend_list"
+                android:title="好友清單" />
+            <item
+                android:id="@+id/nav_my_notifications"
+                android:title="我的通知" />
+            <item
+                android:id="@+id/nav_logout"
+                android:title="登出" />
+        </menu>
+    </item>
+
+</menu>
