@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.emil.triptrip.database.AttendUser
 import com.emil.triptrip.database.DayKey
 import com.emil.triptrip.database.SpotTag
@@ -22,14 +24,27 @@ class MyTripsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // data binding
         val binding = MyTripsFragmentBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+
+        // setup viewModel
+        val app = requireNotNull(activity).application
+        val viewModelFactory = MyTripsViewModelFactory(app)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MyTripsViewModel::class.java)
+        binding.viewModel = viewModel
 
 
+        // setup recyclerView adapter
+        val adapter = TripsAdapter(viewModel)
+        binding.recyclerTrips.adapter = adapter
 
-
-
-
-
+        // submit trips data to recyclerView
+        viewModel.tripsData.observe(viewLifecycleOwner, Observer { trips ->
+            if (trips != null) {
+                adapter.submitList(trips)
+            }
+        })
 
 
 
@@ -40,6 +55,12 @@ class MyTripsFragment : Fragment() {
 //        binding.button2.setOnClickListener {
 //            testFirebaseSPOTTAG()
 //        }
+
+        ///////////////////// use floating btn set fake data
+        binding.buttonAddTrip.setOnClickListener {
+            viewModel.fakeData()
+        }
+        /////////////////////
 
 
         return binding.root

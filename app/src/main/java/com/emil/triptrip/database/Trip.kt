@@ -13,6 +13,8 @@ data class Trip(
     var attendUserList: MutableList<AttendUser>? = null,
     var dayKeyList: MutableList<DayKey>? = null,
     // route line class, wait addition
-    var private: Boolean? = true
+    var private: Boolean? = true,
+    var mainImg: String? = null
 ): Parcelable {
+
 }

@@ -4,7 +4,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
+        <variable
+            name="tripData"
+            type="com.emil.triptrip.database.Trip" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,13 +17,14 @@
         <ImageView
             android:id="@+id/image_main"
             android:layout_width="wrap_content"
-            android:layout_height="140dp"
+            android:layout_height="160dp"
             android:alpha="0.5"
-            android:scaleType="centerCrop"
+            android:scaleType="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            tools:srcCompat="@tools:sample/backgrounds/scenic"
+            app:imageUrl="@{tripData.mainImg}"/>
 
         <TextView
             android:id="@+id/text_trips_title"
@@ -29,6 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:textSize="24sp"
+            android:text="@{tripData.title}"
             android:fontFamily="@font/architects_daughter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -56,7 +60,8 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_trips_title"
-            tools:text="2000.01.01"/>
+            tools:text="2000.01.01"
+            app:timeTransfer="@{tripData.startTime}"/>
 
         <TextView
             android:id="@+id/text_stop_date"
@@ -67,25 +72,44 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/text_dash"
             app:layout_constraintTop_toTopOf="@+id/text_dash"
+            app:timeTransfer="@{tripData.stopTime}"
             tools:text="2000.01.05"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_main">
 
+            <TextView
+                android:id="@+id/text_attend_title"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:text="@string/attend_user"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:fontFamily="@font/noto_sans"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/list_attend_users"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:id="@+id/recycler_list_attend_users"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
                 android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/text_attend_title"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

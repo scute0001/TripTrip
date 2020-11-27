@@ -4,25 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="user"
+            type="com.emil.triptrip.database.AttendUser" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp">
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="@{user.userId}"
+            android:fontFamily="@font/noto_sans"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            app:chipIcon="@drawable/ic_nav_profile"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="喵喵" />
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
