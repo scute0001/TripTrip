@@ -6,14 +6,14 @@
     <data>
         <variable
             name="viewModel"
-            type="com.emil.triptrip.ui.MyTripsViewModel" />
+            type="com.emil.triptrip.ui.mytrips.MyTripsViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.MyTripsFragment">
+        tools:context=".ui.mytrips.MyTripsFragment">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/button_add_trip"

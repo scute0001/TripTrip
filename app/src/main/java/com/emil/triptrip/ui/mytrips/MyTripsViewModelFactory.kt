@@ -1,4 +1,4 @@
-package com.emil.triptrip.ui
+package com.emil.triptrip.ui.mytrips
 
 import android.app.Application
 import androidx.lifecycle.ViewModel

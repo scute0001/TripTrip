@@ -7,7 +7,19 @@
 
     <fragment
         android:id="@+id/myTripsFragment"
-        android:name="com.emil.triptrip.ui.MyTripsFragment"
+        android:name="com.emil.triptrip.ui.mytrips.MyTripsFragment"
         android:label="my_trips_fragment"
-        tools:layout="@layout/my_trips_fragment" />
+        tools:layout="@layout/my_trips_fragment" >
+        <action
+            android:id="@+id/action_myTripsFragment_to_tripDetailFragment"
+            app:destination="@id/tripDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tripDetailFragment"
+        android:name="com.emil.triptrip.ui.tripdetail.TripDetailFragment"
+        android:label="trip_detail_fragment"
+        tools:layout="@layout/trip_detail_fragment">
+        <argument android:name="tripData"
+            app:argType="com.emil.triptrip.database.Trip"/>
+    </fragment>
 </navigation>

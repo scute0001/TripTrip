@@ -1,4 +1,4 @@
-package com.emil.triptrip.ui
+package com.emil.triptrip.ui.mytrips
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,7 +10,9 @@ import com.emil.triptrip.database.Trip
 import com.emil.triptrip.databinding.ListTripsBinding
 
 
-class TripsAdapter(val viewModel: MyTripsViewModel): ListAdapter<Trip, TripViewHolder>(DiffCallback()) {
+class TripsAdapter(val viewModel: MyTripsViewModel): ListAdapter<Trip, TripViewHolder>(
+    DiffCallback()
+) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TripViewHolder {
         return TripViewHolder.from(parent)
     }
@@ -22,16 +24,21 @@ class TripsAdapter(val viewModel: MyTripsViewModel): ListAdapter<Trip, TripViewH
 
 class TripViewHolder(val binding: ListTripsBinding): RecyclerView.ViewHolder(binding.root) {
     fun bind(viewModel: MyTripsViewModel, item: Trip) {
-        Log.i("item", "item is $item")
         binding.tripData = item
 
+        // set users to recyclerview
         val adapter = UsersAdapter()
         binding.recyclerListAttendUsers.adapter = adapter
         adapter.submitList(item.attendUserList)
 
+        // set data and click function to navigation to trip detail page
+        binding.root.setOnClickListener {
+            viewModel._navToTripDetail.value = item
+        }
+
     }
     companion object {
-        fun from(parent: ViewGroup): TripViewHolder{
+        fun from(parent: ViewGroup): TripViewHolder {
             val inflater = LayoutInflater.from(parent.context)
             val binding = ListTripsBinding.inflate(inflater, parent, false)
             return TripViewHolder(binding)

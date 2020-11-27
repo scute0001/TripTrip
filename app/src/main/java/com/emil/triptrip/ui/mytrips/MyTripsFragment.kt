@@ -1,4 +1,4 @@
-package com.emil.triptrip.ui
+package com.emil.triptrip.ui.mytrips
 
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.emil.triptrip.database.AttendUser
 import com.emil.triptrip.database.DayKey
 import com.emil.triptrip.database.SpotTag
@@ -30,7 +31,8 @@ class MyTripsFragment : Fragment() {
 
         // setup viewModel
         val app = requireNotNull(activity).application
-        val viewModelFactory = MyTripsViewModelFactory(app)
+        val viewModelFactory =
+            MyTripsViewModelFactory(app)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MyTripsViewModel::class.java)
         binding.viewModel = viewModel
 
@@ -43,6 +45,14 @@ class MyTripsFragment : Fragment() {
         viewModel.tripsData.observe(viewLifecycleOwner, Observer { trips ->
             if (trips != null) {
                 adapter.submitList(trips)
+            }
+        })
+
+        // observe navigation to trip detail page
+        viewModel.navToTripDetail.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                findNavController().navigate(MyTripsFragmentDirections.actionMyTripsFragmentToTripDetailFragment(it))
+                viewModel.navToDetailPageFinished()
             }
         })
 

@@ -1,4 +1,4 @@
-package com.emil.triptrip.ui
+package com.emil.triptrip.ui.mytrips
 
 import android.app.Application
 import android.util.Log
@@ -16,8 +16,18 @@ class MyTripsViewModel(app: Application) : AndroidViewModel(app) {
     val tripsData: LiveData<List<Trip>>
         get() = _tripsData
 
+    val _navToTripDetail = MutableLiveData<Trip>()
+    val navToTripDetail: LiveData<Trip>
+        get() = _navToTripDetail
+
     init {
+        _navToTripDetail.value = null
         fakeData()
+    }
+
+    // navigation to trip detail page completed and clean data
+    fun navToDetailPageFinished() {
+        _navToTripDetail.value = null
     }
 
 

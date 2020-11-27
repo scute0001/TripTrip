@@ -1,4 +1,4 @@
-package com.emil.triptrip.ui
+package com.emil.triptrip.ui.mytrips
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,7 +9,9 @@ import com.emil.triptrip.database.AttendUser
 import com.emil.triptrip.databinding.ListAttendUserBinding
 
 
-class UsersAdapter(): ListAdapter<AttendUser, UsersViewHolder>(UsersDiffCallback()) {
+class UsersAdapter(): ListAdapter<AttendUser, UsersViewHolder>(
+    UsersDiffCallback()
+) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsersViewHolder {
         return UsersViewHolder.from(parent)
     }
@@ -25,7 +27,7 @@ class UsersViewHolder(val binding: ListAttendUserBinding): RecyclerView.ViewHold
 
     }
     companion object {
-        fun from(parent: ViewGroup): UsersViewHolder{
+        fun from(parent: ViewGroup): UsersViewHolder {
             val inflater = LayoutInflater.from(parent.context)
             val binding = ListAttendUserBinding.inflate(inflater, parent, false)
             return UsersViewHolder(binding)
