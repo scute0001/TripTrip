@@ -25,13 +25,21 @@ class MyTripsFragment : Fragment() {
         val binding = MyTripsFragmentBinding.inflate(inflater, container, false)
 
 
-        binding.button.setOnClickListener {
-            testFirebase()
-        }
 
-        binding.button2.setOnClickListener {
-            testFirebaseSPOTTAG()
-        }
+
+
+
+
+
+
+
+//        binding.button.setOnClickListener {
+//            testFirebase()
+//        }
+//
+//        binding.button2.setOnClickListener {
+//            testFirebaseSPOTTAG()
+//        }
 
 
         return binding.root
