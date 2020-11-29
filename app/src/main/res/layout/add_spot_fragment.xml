@@ -12,247 +12,340 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout_in_scrollview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:background="@color/grayImgWhite">
 
-            <TextView
-                android:id="@+id/text_spot_title"
-                style="@style/add_spot_title_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/spot_name_title"
-                app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-                app:layout_constraintStart_toStartOf="@+id/guideline_left"
+            <ImageView
+                android:id="@+id/image_title"
+                android:layout_width="0dp"
+                android:layout_height="260dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_add_spot_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/editText_spot_title"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_title"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/shape_radius_for_text_editext"
-                android:ems="10"
-                android:hint="Input spot name here."
-                android:inputType="textPersonName"
-                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_add_spot_card"
+                android:padding="16dp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/text_spot_title" />
+                app:layout_constraintTop_toBottomOf="@id/image_title">
 
-            <TextView
-                android:id="@+id/text_start_time_title"
-                style="@style/add_spot_title_description"
-                android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/editText_spot_title"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="16dp"
+                    android:ems="10"
+                    android:hint="Input spot name here."
+                    android:inputType="textPersonName"
+                    android:textAlignment="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/text_spot_title"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_spot_title"
+                    style="@style/add_spot_title_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_add_spot_title"
+                    android:text="@string/spot_name_title"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_start_time"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/start_time"
+                android:background="@drawable/shape_add_spot_card"
+                android:padding="16dp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/editText_spot_title" />
+                app:layout_constraintTop_toBottomOf="@id/constraint_title">
 
-            <TextView
-                android:id="@+id/text_start_time"
+                <TextView
+                    android:id="@+id/text_start_time_title"
+                    style="@style/add_spot_title_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_add_spot_title"
+                    android:text="@string/start_time"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_start_time"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/shape_underline"
+                    android:gravity="center"
+                    android:hint="選擇開始時間"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/text_start_time_title"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="10:00" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_stay_period"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/shape_radius_for_text_editext"
-                android:gravity="center"
-                android:hint="選擇開始時間"
-                app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-                app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/text_start_time_title"
-                tools:text="10:00" />
-
-            <TextView
-                android:id="@+id/text_stay_period_title"
-                style="@style/add_spot_title_description"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/stay_time"
+                android:background="@drawable/shape_add_spot_card"
+                android:padding="16dp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/text_start_time" />
+                app:layout_constraintTop_toBottomOf="@+id/constraint_start_time">
+
+                <TextView
+                    android:id="@+id/text_stay_period_title"
+                    style="@style/add_spot_title_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_add_spot_title"
+                    android:text="@string/stay_time"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/editText_stay_time"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="16dp"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="1HR"
+                    android:inputType="text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/text_stay_period_title"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-            <EditText
-                android:id="@+id/editText_stay_time"
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_select_map"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/shape_radius_for_text_editext"
-                android:ems="10"
-                android:gravity="center"
-                android:hint="1HR"
-                android:inputType="text"
-                app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-                app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/text_stay_period_title" />
-
-            <TextView
-                android:id="@+id/text_spot_location_title"
-                style="@style/add_spot_title_description"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/add_spot"
+                android:background="@drawable/shape_add_spot_card"
+                android:padding="16dp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/editText_stay_time" />
+                app:layout_constraintTop_toBottomOf="@+id/constraint_stay_period">
 
-            <ImageButton
-                android:id="@+id/button_choice_from_map"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="8dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_baseline_add_circle_24"
-                app:layout_constraintBottom_toBottomOf="@+id/text_search_from_map"
-                app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/text_search_from_map"
-                app:layout_constraintTop_toTopOf="@+id/text_search_from_map"
-                app:layout_constraintVertical_bias="0.0"
-                android:background="@drawable/shape_circle_btn"/>
+                <TextView
+                    android:id="@+id/text_spot_location_title"
+                    style="@style/add_spot_title_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_add_spot_title"
+                    android:text="@string/add_spot"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/text_search_from_map"
+                <ImageButton
+                    android:id="@+id/button_choice_from_map"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/shape_circle_btn"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_baseline_add_circle_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_search_from_map"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/text_search_from_map"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/text_search_from_map"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="center"
+                    android:hint="從地圖搜尋"
+                    android:background="@drawable/shape_underline"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/button_choice_from_map"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_spot_location_title"
+                    tools:text="AppWorks School" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_spot_type"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/shape_radius_for_text_editext"
-                android:gravity="center"
-                android:hint="從地圖搜尋"
-                app:layout_constraintEnd_toStartOf="@+id/button_choice_from_map"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/text_spot_location_title"
-                tools:text="AppWorks School" />
-
-            <TextView
-                android:id="@+id/text_spot_type_title"
-                style="@style/add_spot_title_description"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/spot_type"
+                android:background="@drawable/shape_add_spot_card"
+                android:padding="16dp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+                app:layout_constraintHorizontal_bias="0.231"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/text_search_from_map" />
+                app:layout_constraintTop_toBottomOf="@+id/constraint_select_map">
 
-            <ImageButton
-                android:id="@+id/button_food"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/ic_baseline_add_circle_24"
-                android:scaleType="fitCenter"
-                app:layout_constraintEnd_toStartOf="@+id/button_scene"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/text_spot_type_title"
-                android:background="@drawable/shape_circle_btn"/>
+                <TextView
+                    android:id="@+id/text_spot_type_title"
+                    style="@style/add_spot_title_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_add_spot_title"
+                    android:text="@string/spot_type"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageButton
-                android:id="@+id/button_scene"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="16dp"
-                android:src="@drawable/ic_baseline_add_circle_24"
-                android:scaleType="fitCenter"
-                app:layout_constraintBottom_toBottomOf="@+id/button_food"
-                app:layout_constraintEnd_toStartOf="@+id/button_trans"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/button_food"
-                app:layout_constraintTop_toTopOf="@+id/button_food"
-                android:background="@drawable/shape_circle_btn"/>
+                <ImageButton
+                    android:id="@+id/button_food"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="32dp"
+                    android:background="@drawable/shape_circle_btn"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_baseline_add_circle_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_spot_type_title"
+                    app:layout_constraintStart_toEndOf="@+id/text_spot_type_title"
+                    app:layout_constraintTop_toTopOf="@+id/text_spot_type_title" />
 
-            <ImageButton
-                android:id="@+id/button_trans"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="16dp"
-                android:src="@drawable/ic_baseline_add_circle_24"
-                android:scaleType="fitCenter"
-                app:layout_constraintBottom_toBottomOf="@+id/button_scene"
-                app:layout_constraintEnd_toStartOf="@+id/button_hotel"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/button_scene"
-                app:layout_constraintTop_toTopOf="@+id/button_scene"
-                android:background="@drawable/shape_circle_btn"/>
+                <ImageButton
+                    android:id="@+id/button_scene"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/shape_circle_btn"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_baseline_add_circle_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/button_food"
+                    app:layout_constraintStart_toEndOf="@+id/button_food"
+                    app:layout_constraintTop_toTopOf="@+id/button_food" />
 
-            <ImageButton
-                android:id="@+id/button_hotel"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="16dp"
-                android:src="@drawable/ic_baseline_add_circle_24"
-                android:scaleType="fitCenter"
-                app:layout_constraintBottom_toBottomOf="@+id/button_trans"
-                app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/button_trans"
-                app:layout_constraintTop_toTopOf="@+id/button_trans"
-                android:background="@drawable/shape_circle_btn"/>
+                <ImageButton
+                    android:id="@+id/button_trans"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/shape_circle_btn"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_baseline_add_circle_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/button_scene"
+                    app:layout_constraintStart_toEndOf="@+id/button_scene"
+                    app:layout_constraintTop_toTopOf="@+id/button_scene" />
 
-            <TextView
-                android:id="@+id/text_content_title"
-                style="@style/add_spot_title_description"
-                android:layout_width="wrap_content"
+                <ImageButton
+                    android:id="@+id/button_hotel"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/shape_circle_btn"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_baseline_add_circle_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/button_trans"
+                    app:layout_constraintStart_toEndOf="@+id/button_trans"
+                    app:layout_constraintTop_toTopOf="@+id/button_trans" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/spot_content"
+                android:background="@drawable/shape_add_spot_card"
+                android:padding="16dp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/button_food" />
+                app:layout_constraintTop_toBottomOf="@+id/constraint_spot_type">
 
-            <EditText
-                android:id="@+id/editText_content"
+                <TextView
+                    android:id="@+id/text_content_title"
+                    style="@style/add_spot_title_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_add_spot_title"
+                    android:text="@string/spot_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/editText_content"
+                    android:layout_width="0dp"
+                    android:layout_height="180dp"
+                    android:layout_marginTop="8dp"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:background="@drawable/shape_radius_for_spot_info_input"
+                    android:hint="Add your travel detail here."
+                    android:inputType="textMultiLine"
+                    android:padding="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_content_title" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout_add_picture"
                 android:layout_width="0dp"
-                android:layout_height="180dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/shape_radius_for_text_editext"
-                android:ems="10"
-                android:gravity="start|top"
-                android:hint="Add your travel detail here."
-                android:inputType="textMultiLine"
-                android:padding="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-                app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/text_content_title" />
-
-            <TextView
-                android:id="@+id/text_add_pic_title"
-                style="@style/add_spot_title_description"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/upload_picture"
-                app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-                app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/editText_content" />
-
-            <ImageButton
-                android:id="@+id/button_add_pic"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/shape_radius_for_text_editext"
+                android:background="@drawable/shape_add_spot_card"
+                android:padding="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/text_add_pic_title"
-                app:layout_constraintVertical_bias="0.0"
-                tools:src="@tools:sample/backgrounds/scenic" />
+                app:layout_constraintTop_toBottomOf="@+id/constraint_content">
+
+                <TextView
+                    android:id="@+id/text_add_pic_title"
+                    style="@style/add_spot_title_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_add_spot_title"
+                    android:text="@string/upload_picture"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/button_add_pic"
+                    android:layout_width="0dp"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/shape_radius_for_text_editext"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_add_pic_title"
+                    tools:src="@tools:sample/backgrounds/scenic" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_left"
@@ -267,6 +360,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_end="16dp" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
@@ -304,5 +399,7 @@
             app:layout_constraintStart_toEndOf="@+id/button_submit_spot"
             app:layout_constraintTop_toTopOf="@+id/button_submit_spot" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
