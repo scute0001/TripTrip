@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.emil.triptrip.MainActivity
 import com.emil.triptrip.R
 import com.emil.triptrip.databinding.TripDetailFragmentBinding
 
@@ -16,6 +18,8 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.trip_detail_fragment.view.*
 
 class TripDetailFragment : Fragment() {
 
@@ -30,7 +34,10 @@ class TripDetailFragment : Fragment() {
          * user has installed Google Play services and returned to the app.
          */
         val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+        googleMap.addMarker(MarkerOptions()
+            .position(sydney)
+            .title("Marker in Sydney")
+            .snippet("This is a pen"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
 
@@ -46,6 +53,16 @@ class TripDetailFragment : Fragment() {
         // get data from safe args
         val tripData = TripDetailFragmentArgs.fromBundle(requireArguments()).tripData
         Log.i("tripData", "tripData is $tripData")
+
+        //////
+//        val activity = activity as MainActivity
+//        activity.toolbar_title.text = tripData.title
+        //////
+
+        // click add spot and navigation add spot page
+        binding.buttenAddSpot.setOnClickListener {
+            findNavController().navigate(TripDetailFragmentDirections.actionTripDetailFragmentToAddSpotFragment())
+        }
 
 
         return binding.root

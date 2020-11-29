@@ -33,5 +33,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageButton
+            android:id="@+id/butten_add_spot"
+            android:layout_width="66dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="16dp"
+            android:scaleType="fitEnd"
+            android:clickable="true"
+            android:paddingHorizontal="6dp"
+            android:paddingVertical="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/ic_spot_add"
+            android:background="@drawable/shape_circle_btn"/>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

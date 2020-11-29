@@ -4,4 +4,13 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="search_trip">Search trip</string>
     <string name="attend_user">參與者:</string>
+    <string name="spot_name_title">地點名稱</string>
+    <string name="start_time">開始時間</string>
+    <string name="stay_time">預計停留</string>
+    <string name="add_spot">標記地圖</string>
+    <string name="spot_type">景點類型</string>
+    <string name="spot_content">行程內容</string>
+    <string name="upload_picture">上傳圖片</string>
+    <string name="ok">確定</string>
+    <string name="cancel">取消</string>
 </resources>

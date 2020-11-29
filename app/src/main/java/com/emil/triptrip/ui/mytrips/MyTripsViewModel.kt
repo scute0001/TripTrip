@@ -47,7 +47,7 @@ class MyTripsViewModel(app: Application) : AndroidViewModel(app) {
         )
 
         val testData2 = Trip(
-            title = "阿拉花瓜C8763",
+            title = "C8763",
             startTime = System.currentTimeMillis(),
             stopTime = System.currentTimeMillis(),
             status = 0,

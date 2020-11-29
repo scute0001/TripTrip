@@ -21,5 +21,13 @@
         tools:layout="@layout/trip_detail_fragment">
         <argument android:name="tripData"
             app:argType="com.emil.triptrip.database.Trip"/>
+        <action
+            android:id="@+id/action_tripDetailFragment_to_addSpotFragment"
+            app:destination="@id/addSpotFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/addSpotFragment"
+        android:name="com.emil.triptrip.ui.addspot.AddSpotFragment"
+        android:label="add_spot_fragment"
+        tools:layout="@layout/add_spot_fragment" />
 </navigation>
