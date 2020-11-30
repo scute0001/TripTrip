@@ -56,6 +56,11 @@ class MyTripsFragment : Fragment() {
             }
         })
 
+        // navigation to add trip page
+        binding.buttonAddTrip.setOnClickListener {
+            findNavController().navigate(MyTripsFragmentDirections.actionMyTripsFragmentToAddTripFragment())
+        }
+
 
 
 //        binding.button.setOnClickListener {
@@ -65,13 +70,6 @@ class MyTripsFragment : Fragment() {
 //        binding.button2.setOnClickListener {
 //            testFirebaseSPOTTAG()
 //        }
-
-        ///////////////////// use floating btn set fake data
-        binding.buttonAddTrip.setOnClickListener {
-            viewModel.fakeData()
-        }
-        /////////////////////
-
 
         return binding.root
     }

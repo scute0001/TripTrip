@@ -13,4 +13,7 @@
     <string name="upload_picture">上傳圖片</string>
     <string name="ok">確定</string>
     <string name="cancel">取消</string>
+    <string name="upload_trip_background">上傳底圖</string>
+    <string name="add_attend_user">加入參與者</string>
+    <string name="add_new_trip">新增旅程</string>
 </resources>

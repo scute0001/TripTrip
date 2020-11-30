@@ -84,13 +84,13 @@ class MainActivity : AppCompatActivity() {
      */
     private fun setupNavController() {
         findNavController(R.id.navHostFragment).addOnDestinationChangedListener { navController: NavController, navDestination: NavDestination, _: Bundle? ->
-//            viewModel.currentFragmentType.value = when (navController.currentDestination?.id) {
-//                R.id.tripDetailFragment -> PageManager.pageName
-//                else -> resources.getString(R.string.app_name)
-//            }
+            viewModel.currentFragmentType.value = when (navController.currentDestination?.id) {
+                R.id.addTripFragment -> resources.getString(R.string.add_new_trip)
+                else -> resources.getString(R.string.app_name)
+            }
 
-            if (navDestination.id != R.id.tripDetailFragment)
-                viewModel.currentFragmentType.value = "TripTrip"
+//            if (navDestination.id != R.id.tripDetailFragment)
+//                viewModel.currentFragmentType.value = "TripTrip"
         }
     }
 }

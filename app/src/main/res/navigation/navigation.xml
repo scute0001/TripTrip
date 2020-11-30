@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_myTripsFragment_to_tripDetailFragment"
             app:destination="@id/tripDetailFragment" />
+        <action
+            android:id="@+id/action_myTripsFragment_to_addTripFragment"
+            app:destination="@id/addTripFragment" />
     </fragment>
     <fragment
         android:id="@+id/tripDetailFragment"
@@ -30,4 +33,8 @@
         android:name="com.emil.triptrip.ui.addspot.AddSpotFragment"
         android:label="add_spot_fragment"
         tools:layout="@layout/add_spot_fragment" />
+    <fragment
+        android:id="@+id/addTripFragment"
+        android:name="com.emil.triptrip.ui.addtrip.AddTripFragment"
+        android:label="AddTripFragment" />
 </navigation>
