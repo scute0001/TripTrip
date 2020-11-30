@@ -5,6 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="viewModel"
+            type="com.emil.triptrip.MainActivityViewModel" />
 
     </data>
     <androidx.drawerlayout.widget.DrawerLayout
@@ -36,7 +39,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/architects_daughter"
                     android:letterSpacing="0.15"
-                    android:text="@string/app_name"
+                    android:text="@{viewModel.currentFragmentType}"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold" />

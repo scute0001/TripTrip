@@ -7,21 +7,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.emil.triptrip.MainActivity
+import com.emil.triptrip.MainActivityViewModel
 import com.emil.triptrip.R
 import com.emil.triptrip.databinding.TripDetailFragmentBinding
 
 import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.trip_detail_fragment.view.*
 
 class TripDetailFragment : Fragment() {
+    private lateinit var viewModel: TripDetailViewModel
 
     private val callback = OnMapReadyCallback { googleMap ->
         /**
@@ -46,18 +45,21 @@ class TripDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        return inflater.inflate(R.layout.fragment_trip_detail, container, false)
 
         val binding = TripDetailFragmentBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
 
         // get data from safe args
         val tripData = TripDetailFragmentArgs.fromBundle(requireArguments()).tripData
         Log.i("tripData", "tripData is $tripData")
 
-        //////
-//        val activity = activity as MainActivity
-//        activity.toolbar_title.text = tripData.title
-        //////
+        val app = requireNotNull(activity).application
+
+        //set data and create to viewModel
+        val viewModelFactory = TripDetailViewModelFactory(app, tripData)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(TripDetailViewModel::class.java)
+        binding.viewModel = viewModel
+
 
         // click add spot and navigation add spot page
         binding.buttenAddSpot.setOnClickListener {
@@ -74,4 +76,15 @@ class TripDetailFragment : Fragment() {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // get title bar test from bundle
+        activity?.let {
+            ViewModelProvider(it).get(MainActivityViewModel::class.java).apply {
+                currentFragmentType.value = TripDetailFragmentArgs.fromBundle(requireArguments()).tripData.title
+            }
+        }
+    }
+
 }

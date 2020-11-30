@@ -1,6 +1,5 @@
 package com.emil.triptrip.ui.mytrips
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil

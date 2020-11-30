@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -15,6 +18,7 @@ import com.emil.triptrip.databinding.NavHeaderDrawerBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var viewModel: MainActivityViewModel
     private lateinit var appBarConfiguration: AppBarConfiguration
     private var actionBarDrawerToggle: ActionBarDrawerToggle? = null
 
@@ -22,8 +26,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        binding.lifecycleOwner = this
+
+        viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+        binding.viewModel = viewModel
 
         setupDrawer()
+        setupNavController()
     }
 
 
@@ -66,6 +75,23 @@ class MainActivity : AppCompatActivity() {
 
 
 
+    }
+
+
+    /**
+     * Set up [NavController.addOnDestinationChangedListener] to record the current fragment, it better than another design
+     * which is change the [CurrentFragmentType] enum value by [MainViewModel] at [onCreateView]
+     */
+    private fun setupNavController() {
+        findNavController(R.id.navHostFragment).addOnDestinationChangedListener { navController: NavController, navDestination: NavDestination, _: Bundle? ->
+//            viewModel.currentFragmentType.value = when (navController.currentDestination?.id) {
+//                R.id.tripDetailFragment -> PageManager.pageName
+//                else -> resources.getString(R.string.app_name)
+//            }
+
+            if (navDestination.id != R.id.tripDetailFragment)
+                viewModel.currentFragmentType.value = "TripTrip"
+        }
     }
 }
 
