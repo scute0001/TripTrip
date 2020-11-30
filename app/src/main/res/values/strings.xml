@@ -15,5 +15,6 @@
     <string name="cancel">取消</string>
     <string name="upload_trip_background">上傳底圖</string>
     <string name="add_attend_user">加入參與者</string>
-    <string name="add_new_trip">新增旅程</string>
+    <string name="add_new_trip">Add Your Trip</string>
+    <string name="add_new_spot">Add New Spot</string>
 </resources>

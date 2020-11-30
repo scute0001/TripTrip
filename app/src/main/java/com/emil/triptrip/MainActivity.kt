@@ -86,6 +86,7 @@ class MainActivity : AppCompatActivity() {
         findNavController(R.id.navHostFragment).addOnDestinationChangedListener { navController: NavController, navDestination: NavDestination, _: Bundle? ->
             viewModel.currentFragmentType.value = when (navController.currentDestination?.id) {
                 R.id.addTripFragment -> resources.getString(R.string.add_new_trip)
+                R.id.addSpotFragment -> resources.getString(R.string.add_new_spot)
                 else -> resources.getString(R.string.app_name)
             }
 
