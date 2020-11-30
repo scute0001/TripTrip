@@ -68,6 +68,14 @@ class TripDetailFragment : Fragment() {
 //        test submit
         selectDayAdapter.submitList(tripData.dayKeyList)
 
+        // set selected day view
+        viewModel.refreshSelectedDayAdapter.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                selectDayAdapter.notifyDataSetChanged()
+                viewModel.onSelectDayAdapterRefreshed()
+            }
+        })
+
 
 
         //set select time recyclerView adapter
@@ -77,6 +85,14 @@ class TripDetailFragment : Fragment() {
         //set data to time recyclerView
         viewModel.spotsData.observe(viewLifecycleOwner, Observer {
             selectTimeAdapter.submitList(it)
+        })
+
+        // set selected time view
+        viewModel.refreshSelectedTimeAdapter.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                selectTimeAdapter.notifyDataSetChanged()
+                viewModel.onSelectTimeAdapterRefreshed()
+            }
         })
 
 

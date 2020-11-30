@@ -19,6 +19,7 @@
         android:layout_marginRight="16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_time"
             android:layout_width="80dp"
             android:layout_height="match_parent"
             android:background="@drawable/shape_trip_day_card"

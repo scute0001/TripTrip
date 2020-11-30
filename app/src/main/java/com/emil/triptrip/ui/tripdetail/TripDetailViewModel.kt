@@ -13,10 +13,28 @@ class TripDetailViewModel(app: Application, tripData: Trip) : AndroidViewModel(a
     val spotsData: LiveData<List<SpotTag>>
         get() = _spotsData
 
+    // record selected day data
+    val selectedDay = MutableLiveData<String>()
+    var selectedDayPosition = -1
+    val refreshSelectedDayAdapter = MutableLiveData<Boolean>()
+
+    // record selected day data
+    val selectedTime = MutableLiveData<Long>()
+    var selectedTimePosition = -1
+    val refreshSelectedTimeAdapter = MutableLiveData<Boolean>()
+
 
     init {
         _spotsData.value = null
         generateFakeSpot()
+    }
+
+    fun onSelectDayAdapterRefreshed() {
+        refreshSelectedDayAdapter.value = null
+    }
+
+    fun onSelectTimeAdapterRefreshed() {
+        refreshSelectedTimeAdapter.value = null
     }
 
 

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.emil.triptrip.R
 import com.emil.triptrip.database.SpotTag
 import com.emil.triptrip.databinding.ListOneDayTimeBinding
 
@@ -27,6 +28,24 @@ class SpotViewHolder(val binding: ListOneDayTimeBinding): RecyclerView.ViewHolde
     fun bind(viewModel: TripDetailViewModel, item: SpotTag) {
         Log.i("item", "item is $item")
         binding.spotData = item
+
+        binding.viewModel = viewModel
+
+        binding.root.setOnClickListener {
+            //record selected position
+            viewModel.selectedTimePosition = adapterPosition
+            viewModel.selectedTime.value = item.startTime
+            viewModel.refreshSelectedTimeAdapter.value = true
+        }
+
+        if (adapterPosition == viewModel.selectedTimePosition) {
+            binding.constraintTime.setBackgroundResource(R.drawable.shape_selected_card)
+
+        } else {
+            binding.constraintTime.setBackgroundResource(R.drawable.shape_trip_day_card)
+        }
+
+        binding.executePendingBindings()
 
     }
     companion object {
