@@ -41,7 +41,7 @@ class MyTripsViewModel(app: Application) : AndroidViewModel(app) {
             stopTime = 1605850702139,
             status = 0,
             attendUserList = mutableListOf(AttendUser(userId = "Emil"), AttendUser(userId = "Nori"), AttendUser(userId = "Rukka")),
-            dayKeyList = mutableListOf(DayKey("Day1QQ","Day2QQ"),DayKey("Day3QQ")),
+            dayKeyList = mutableListOf(DayKey("Day1","Day1QQ"),DayKey("Day2","Day2QQ"),DayKey("Day3")),
             private = true,
             mainImg = "https://www.taiwan.net.tw/att/1/big_scenic_spots/pic_R29_12.jpg"
         )
@@ -52,7 +52,7 @@ class MyTripsViewModel(app: Application) : AndroidViewModel(app) {
             stopTime = System.currentTimeMillis(),
             status = 0,
             attendUserList = mutableListOf(AttendUser(userId = "TEAR"), AttendUser(userId = "MAMAMIYA"), AttendUser(userId = "ARARA")),
-            dayKeyList = mutableListOf(DayKey("Day1GG","Day2GG"),DayKey("Day3GG")),
+            dayKeyList = mutableListOf(DayKey("Day1","Day1YY"),DayKey("Day2","Day2YY"),DayKey("Day3")),
             private = true,
             mainImg = "https://i.imgur.com/PfFPryx.jpg"
         )
@@ -63,7 +63,7 @@ class MyTripsViewModel(app: Application) : AndroidViewModel(app) {
             stopTime = 1606859702139,
             status = 0,
             attendUserList = mutableListOf(AttendUser(userId = "Gary"), AttendUser(userId = "BigGuy"), AttendUser(userId = "Moto")),
-            dayKeyList = mutableListOf(DayKey("Day1GG","Day2GG"),DayKey("Day3GG")),
+            dayKeyList = mutableListOf(DayKey("Day1","Day1GG"),DayKey("Day2","Day2GG"),DayKey("Day3")),
             private = true,
             mainImg = "https://api.appworks-school.tw/assets/201807242232/0.jpg"
         )

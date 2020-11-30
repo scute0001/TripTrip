@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.emil.triptrip.MainActivityViewModel
@@ -59,6 +60,26 @@ class TripDetailFragment : Fragment() {
         val viewModelFactory = TripDetailViewModelFactory(app, tripData)
         viewModel = ViewModelProvider(this, viewModelFactory).get(TripDetailViewModel::class.java)
         binding.viewModel = viewModel
+
+
+        //set select day recyclerView adapter
+        val selectDayAdapter = SelectDayAdapter(viewModel)
+        binding.recyclerTripSelectDays.adapter = selectDayAdapter
+//        test submit
+        selectDayAdapter.submitList(tripData.dayKeyList)
+
+
+
+        //set select time recyclerView adapter
+        val selectTimeAdapter = SelectTimeAdapter(viewModel)
+        binding.recyclerTripSelectTime.adapter = selectTimeAdapter
+
+        //set data to time recyclerView
+        viewModel.spotsData.observe(viewLifecycleOwner, Observer {
+            selectTimeAdapter.submitList(it)
+        })
+
+
 
 
         // click add spot and navigation add spot page

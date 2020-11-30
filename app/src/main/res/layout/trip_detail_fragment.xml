@@ -15,26 +15,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.tripdetail.TripDetailFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_trip_select_days"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:paddingLeft="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
 
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_trip_select_time"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:paddingLeft="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.275"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recycler_trip_select_days" />
 
         <fragment
             android:id="@+id/map"
@@ -44,7 +25,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recycler_trip_select_time"
+            app:layout_constraintTop_toTopOf="@+id/recycler_trip_select_days"
             tools:context=".ui.tripdetail.TripDetailFragment" />
 
 
@@ -62,6 +43,34 @@
             app:layout_constraintStart_toStartOf="parent"
             android:src="@drawable/ic_spot_add"
             android:background="@drawable/shape_circle_btn"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_trip_select_days"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:background="@android:color/transparent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_trip_select_time"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:paddingLeft="16dp"
+            android:background="@android:color/transparent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.275"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recycler_trip_select_days" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
