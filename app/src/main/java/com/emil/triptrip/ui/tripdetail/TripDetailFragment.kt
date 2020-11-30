@@ -1,5 +1,9 @@
 package com.emil.triptrip.ui.tripdetail
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
@@ -7,23 +11,37 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.emil.triptrip.MainActivityViewModel
 import com.emil.triptrip.R
 import com.emil.triptrip.databinding.TripDetailFragmentBinding
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.*
 
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 
 class TripDetailFragment : Fragment() {
     private lateinit var viewModel: TripDetailViewModel
 
+    // permission request code, just is a Int and unique.
+    var PERMISSION_ID = 1010
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private var locationPermission = false
+    private var myMap: GoogleMap? = null
+    private var lastKnownLocation: Location? = null
+
+
     private val callback = OnMapReadyCallback { googleMap ->
+        myMap = googleMap
+        getLocationPermission()
+
+
         /**
          * Manipulates the map once available.
          * This callback is triggered when the map is ready to be used.
@@ -33,12 +51,59 @@ class TripDetailFragment : Fragment() {
          * install it inside the SupportMapFragment. This method will only be triggered once the
          * user has installed Google Play services and returned to the app.
          */
-        val sydney = LatLng(-34.0, 151.0)
+        /*val sydney = LatLng(-34.0, 151.0)
         googleMap.addMarker(MarkerOptions()
             .position(sydney)
             .title("Marker in Sydney")
             .snippet("This is a pen"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))*/
+
+        val spotA = LatLng(25.0424825, 121.5626907)
+        val spotB = LatLng(25.0476935, 121.5152081)
+        val spotC = LatLng(25.0774806, 121.2331741)
+        val spotD = LatLng(25.1763029, 121.5462675)
+        val spotList = listOf(spotA, spotB, spotC, spotD)
+
+        googleMap?.apply {
+            for (spot in spotList) {
+                addMarker(MarkerOptions()
+                    .position(spot)
+                    .title("Spot")
+                    .snippet("${spot.latitude}, ${spot.longitude}")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker)))
+            }
+            addPolyline(PolylineOptions()
+                .add(spotA, spotB)
+                .color(0xFF2286c3.toInt())
+                .width(10F)
+                .pattern(listOf(Dot(),Gap(20F), Dash(40F), Gap(20F)))
+                .endCap(CustomCap(BitmapDescriptorFactory.fromResource(R.drawable.ic_triangle_up))))
+
+            addPolyline(PolylineOptions()
+                .add(spotB, spotC)
+                .color(0xFF2286c3.toInt())
+                .width(10F)
+                .pattern(listOf(Dot(),Gap(20F), Dash(40F), Gap(20F)))
+                .endCap(CustomCap(BitmapDescriptorFactory.fromResource(R.drawable.ic_triangle_up))))
+
+            addPolyline(PolylineOptions()
+                .add(spotC, spotD)
+                .color(0xFF2286c3.toInt())
+                .width(10F)
+                .pattern(listOf(Dot(),Gap(20F), Dash(40F), Gap(20F)))
+                .endCap(CustomCap(BitmapDescriptorFactory.fromResource(R.drawable.ic_triangle_up))))
+
+            moveCamera(CameraUpdateFactory.newLatLngZoom(spotA, 10F))
+
+            uiSettings.isMyLocationButtonEnabled = true
+
+
+
+        }
+
+
+
+
     }
 
     override fun onCreateView(
@@ -104,6 +169,15 @@ class TripDetailFragment : Fragment() {
         }
 
 
+        /////////////////////////
+        binding.buttenForTest.setOnClickListener {
+            getDeviceLocation()
+        }
+
+
+        //////////////////////////
+
+
         return binding.root
 
     }
@@ -112,6 +186,9 @@ class TripDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
+
+        // 2. init fusedLocationProviderClient and set LocationServices object
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -123,5 +200,85 @@ class TripDetailFragment : Fragment() {
             }
         }
     }
+
+
+
+    // 1. check Permission and get user get permission
+    private fun getLocationPermission() {
+        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            locationPermission = false
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), PERMISSION_ID)
+        } else {
+            locationPermission = true
+        }
+    }
+
+    // 3. set map UI isMyLocationButton Enabled
+    private fun updateLocationUI() {
+        myMap?.apply {
+            try {
+                if (locationPermission) {
+                    isMyLocationEnabled = true
+                    uiSettings.isMyLocationButtonEnabled = true
+                } else {
+                    isMyLocationEnabled = false
+                    uiSettings.isMyLocationButtonEnabled = false
+                }
+            } catch (e: SecurityException) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    // 4. get permission and update LocationUI: set map UI isMyLocationButton Enabled
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            PERMISSION_ID -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    locationPermission = true
+                    // set map UI isMyLocationButton Enabled
+                    updateLocationUI()
+                }
+            }
+        }
+    }
+
+    // 5. getDeviceLocation
+    private fun getDeviceLocation() {
+        try {
+            if (locationPermission) {
+                val locationRequest = fusedLocationProviderClient.lastLocation
+                locationRequest.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        lastKnownLocation = task.result
+                        if (lastKnownLocation != null) {
+
+                            myMap?.apply {
+                                addMarker(MarkerOptions()
+                                    .position(LatLng(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude))
+                                    .title("It's ME!!")
+                                    .snippet("${lastKnownLocation!!.latitude}, ${lastKnownLocation!!.longitude}")
+                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location_self_64)))
+
+                                moveCamera(
+                                    CameraUpdateFactory.newLatLngZoom(
+                                        LatLng(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude), 10f))
+                            }
+                        }
+                    } else {
+                        myMap?.uiSettings?.isMyLocationButtonEnabled = false
+                    }
+                }
+            }
+        } catch (e: SecurityException) {
+            e.printStackTrace()
+        }
+    }
+
+
 
 }
