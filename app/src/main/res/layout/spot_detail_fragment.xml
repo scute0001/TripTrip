@@ -1,274 +1,280 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/design_bottom_sheet"
-    android:background="@drawable/shape_spot_detail_border"
-    app:behavior_hideable="false"
-    app:behavior_peekHeight="30dp"
-    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.emil.triptrip.ui.tripdetail.TripDetailViewModel" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_spot_detail_left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="17dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_spot_detail_right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="21dp" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint_spot_detail_title"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:elevation="4dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_spot_detail_right"
-        app:layout_constraintStart_toStartOf="@+id/guideline_spot_detail_left"
-        app:layout_constraintTop_toTopOf="parent">
+        android:id="@+id/design_bottom_sheet"
+        android:background="@drawable/shape_spot_detail_border"
+        app:behavior_hideable="false"
+        app:behavior_peekHeight="30dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
 
-        <EditText
-            android:id="@+id/editText_spot_detail_title"
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/shape_underline"
-            android:ems="10"
-            android:enabled="false"
-            android:hint="Input spot name here."
-            android:inputType="textPersonName"
-            android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/editText_spot_detail_start_time"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_weight="3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <EditText
-            android:id="@+id/editText_spot_detail_start_time"
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:enabled="false"
-            android:background="@drawable/shape_underline"
-            android:ems="10"
-            android:hint="10:00"
-            android:inputType="textPersonName"
-            android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toEndOf="@+id/editText_spot_detail_title"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:elevation="4dp"
-        app:layout_constraintStart_toStartOf="@+id/guideline_spot_detail_left"
-        app:layout_constraintTop_toBottomOf="@+id/constraint_spot_detail_title">
-
-        <ImageButton
-            android:id="@+id/button_spot_detail_food"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:tint="@color/grayUnderline"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_spot_food"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button_spot_detail_scene"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/button_spot_detail_scene"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="16dp"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:tint="@color/grayUnderline"
-            android:src="@drawable/ic_spot_scene_64"
-            app:layout_constraintBottom_toBottomOf="@+id/button_spot_detail_food"
-            app:layout_constraintEnd_toStartOf="@+id/button_spot_detail_trans"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button_spot_detail_food"
-            app:layout_constraintTop_toTopOf="@+id/button_spot_detail_food" />
-
-        <ImageButton
-            android:id="@+id/button_spot_detail_trans"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="16dp"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:tint="@color/grayUnderline"
-            android:src="@drawable/ic_spot_trans"
-            app:layout_constraintBottom_toBottomOf="@+id/button_spot_detail_scene"
-            app:layout_constraintEnd_toStartOf="@+id/button_spot_detail_hotel"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button_spot_detail_scene"
-            app:layout_constraintTop_toTopOf="@+id/button_spot_detail_scene" />
-
-        <ImageButton
-            android:id="@+id/button_spot_detail_hotel"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:tint="@color/grayUnderline"
-            android:src="@drawable/ic_spot_hotel"
-            app:layout_constraintBottom_toBottomOf="@+id/button_spot_detail_trans"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button_spot_detail_trans"
-            app:layout_constraintTop_toTopOf="@+id/button_spot_detail_trans" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint_spot_detail_stay_time"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout2"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_spot_detail_right"
-        app:layout_constraintStart_toEndOf="@+id/constraintLayout2"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout2">
-
-        <TextView
-            android:id="@+id/text_spot_detail_stay_period_title"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_spot_detail_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/shape_add_spot_title"
-            android:fontFamily="@font/architects_daughter"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:text="Stay"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="17dp" />
 
-        <EditText
-            android:id="@+id/editText_spot_detail__stay_time"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_spot_detail_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="21dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_spot_detail_title"
             android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="16dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:elevation="4dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_spot_detail_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_spot_detail_left"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <EditText
+                android:id="@+id/editText_spot_detail_title"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/shape_underline"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="Input spot name here."
+                android:inputType="textPersonName"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/editText_spot_detail_start_time"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_weight="3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <EditText
+                android:id="@+id/editText_spot_detail_start_time"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:enabled="false"
+                android:background="@drawable/shape_underline"
+                android:ems="10"
+                android:hint="10:00"
+                android:inputType="textPersonName"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/editText_spot_detail_title"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:elevation="4dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline_spot_detail_left"
+            app:layout_constraintTop_toBottomOf="@+id/constraint_spot_detail_title">
+
+            <ImageButton
+                android:id="@+id/button_spot_detail_food"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="24dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_spot_food"
+                android:tint="@color/grayUnderline"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button_spot_detail_scene"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/button_spot_detail_scene"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_spot_scene_64"
+                android:tint="@color/grayUnderline"
+                app:layout_constraintBottom_toBottomOf="@+id/button_spot_detail_food"
+                app:layout_constraintEnd_toStartOf="@+id/button_spot_detail_trans"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/button_spot_detail_food"
+                app:layout_constraintTop_toTopOf="@+id/button_spot_detail_food" />
+
+            <ImageButton
+                android:id="@+id/button_spot_detail_trans"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_spot_trans"
+                android:tint="@color/grayUnderline"
+                app:layout_constraintBottom_toBottomOf="@+id/button_spot_detail_scene"
+                app:layout_constraintEnd_toStartOf="@+id/button_spot_detail_hotel"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/button_spot_detail_scene"
+                app:layout_constraintTop_toTopOf="@+id/button_spot_detail_scene" />
+
+            <ImageButton
+                android:id="@+id/button_spot_detail_hotel"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_spot_hotel"
+                android:tint="@color/grayUnderline"
+                app:layout_constraintBottom_toBottomOf="@+id/button_spot_detail_trans"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/button_spot_detail_trans"
+                app:layout_constraintTop_toTopOf="@+id/button_spot_detail_trans" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_spot_detail_stay_time"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout2"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_spot_detail_right"
+            app:layout_constraintStart_toEndOf="@+id/constraintLayout2"
+            app:layout_constraintTop_toTopOf="@+id/constraintLayout2">
+
+            <TextView
+                android:id="@+id/text_spot_detail_stay_period_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/shape_add_spot_title"
+                android:fontFamily="@font/architects_daughter"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="Stay"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/editText_spot_detail__stay_time"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/shape_underline"
+                android:ems="10"
+                android:enabled="false"
+                android:gravity="center"
+                android:hint="1HR"
+                android:inputType="text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/text_spot_detail_stay_period_title"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_spot_detail_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:elevation="4dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_spot_detail_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_spot_detail_left"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+            <EditText
+                android:id="@+id/editText_spot_detail_content"
+                android:layout_width="0dp"
+                android:layout_height="180dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:enabled="false"
+                android:background="@drawable/shape_border_corner_solid_black"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="Add your travel detail here."
+                android:inputType="textMultiLine"
+                android:padding="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_pictures"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_spot_detail_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_spot_detail_left"
+            app:layout_constraintTop_toBottomOf="@+id/constraint_spot_detail_content"
+            android:elevation="4dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_spot_detail_pictures"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/image_edit"
+            android:layout_width="24dp"
+            android:layout_height="24sp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:enabled="false"
-            android:background="@drawable/shape_underline"
-            android:ems="10"
-            android:gravity="center"
-            android:hint="1HR"
-            android:inputType="text"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/ic_pen"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/text_spot_detail_stay_period_title"
             app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint_spot_detail_content"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginRight="1dp"
-        android:elevation="4dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_spot_detail_right"
-        app:layout_constraintStart_toStartOf="@+id/guideline_spot_detail_left"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
-
-        <EditText
-            android:id="@+id/editText_spot_detail_content"
-            android:layout_width="0dp"
-            android:layout_height="180dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:enabled="false"
-            android:background="@drawable/shape_border_corner_solid_black"
-            android:ems="10"
-            android:gravity="start|top"
-            android:hint="Add your travel detail here."
-            android:inputType="textMultiLine"
-            android:padding="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint_pictures"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_spot_detail_right"
-        app:layout_constraintStart_toStartOf="@+id/guideline_spot_detail_left"
-        app:layout_constraintTop_toBottomOf="@+id/constraint_spot_detail_content"
-        android:elevation="4dp">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_spot_detail_pictures"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ImageView
-        android:id="@+id/image_edit"
-        android:layout_width="24dp"
-        android:layout_height="24sp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:src="@drawable/ic_pen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

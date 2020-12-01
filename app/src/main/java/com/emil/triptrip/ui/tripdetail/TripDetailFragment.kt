@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.emil.triptrip.MainActivityViewModel
 import com.emil.triptrip.R
+import com.emil.triptrip.databinding.SpotDetailFragmentBinding
 import com.emil.triptrip.databinding.TripDetailFragmentBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -118,16 +119,22 @@ class TripDetailFragment : Fragment() {
         val binding = TripDetailFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
 
+        // link binding to spot detail
+        val bindingSpotDetail = SpotDetailFragmentBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+
+
         // get data from safe args
         val tripData = TripDetailFragmentArgs.fromBundle(requireArguments()).tripData
         Log.i("tripData", "tripData is $tripData")
 
         val app = requireNotNull(activity).application
 
-        //set data and create to viewModel
+        //set data and create to xml
         val viewModelFactory = TripDetailViewModelFactory(app, tripData)
         viewModel = ViewModelProvider(this, viewModelFactory).get(TripDetailViewModel::class.java)
         binding.viewModel = viewModel
+        bindingSpotDetail.viewModel = viewModel
 
 
         //set select day recyclerView adapter
@@ -176,8 +183,6 @@ class TripDetailFragment : Fragment() {
         binding.buttenForTest.setOnClickListener {
             getDeviceLocation()
         }
-
-
         //////////////////////////
 
 

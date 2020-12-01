@@ -8,6 +8,8 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawable
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import java.text.SimpleDateFormat
@@ -18,17 +20,16 @@ import java.text.SimpleDateFormat
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
     imgUrl?.let {
-        val imgUri = it.toUri().buildUpon().build()
+//        imgView.setBackgroundResource(R.drawable.shape_circle_btn)
+
         Glide.with(imgView.context)
-            .load(imgUri)
+            .load(imgUrl)
+            .placeholder(R.drawable.ic_placeholder)
+            .error(R.drawable.ic_placeholder)
             .apply(
-                RequestOptions.bitmapTransform(RoundedCorners(20))
-
-//                    .placeholder(R.drawable.ic_placeholder)
-//                    .error(R.drawable.ic_placeholder)
-
-//                    (RequestOptions.bitmapTransform(new RoundedCorners(20)))
-                    )
+                RequestOptions().transform(CenterCrop(), RoundedCorners(50))
+//                RequestOptions.bitmapTransform(RoundedCorners(20))
+            )
             .into(imgView)
     }
 }
