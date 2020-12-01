@@ -102,6 +102,9 @@ class TripDetailFragment : Fragment() {
         }
 
 
+        //set friends Location
+        getUsersLocation()
+        getDeviceLocation()
 
 
     }
@@ -279,6 +282,34 @@ class TripDetailFragment : Fragment() {
         }
     }
 
+    private fun getUsersLocation() {
+        myMap?.apply {
+            val userA = LatLng(25.0250383, 121.5327086)
+            val userB = LatLng(25.1714657, 121.4359783)
+            val userC = LatLng(25.0669043, 121.469388)
+            val userList = listOf(userA, userB, userC)
+
+            addMarker(MarkerOptions()
+                .position(userA)
+                .title("匿名蠑螈")
+                .snippet("${userA.latitude}, ${userA.longitude}")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_location_64)))
+
+            addMarker(MarkerOptions()
+                .position(userB)
+                .title("匿名海豹")
+                .snippet("${userB.latitude}, ${userB.longitude}")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_location_64)))
+
+            addMarker(MarkerOptions()
+                .position(userC)
+                .title("匿名喵喵")
+                .snippet("${userC.latitude}, ${userC.longitude}")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_location_64)))
+        }
+
+
+    }
 
 
 }

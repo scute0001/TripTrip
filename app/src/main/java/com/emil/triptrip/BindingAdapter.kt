@@ -1,6 +1,7 @@
 package com.emil.triptrip
 
 import android.graphics.drawable.BitmapDrawable
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.graphics.drawable.RoundedBitmapDrawable
