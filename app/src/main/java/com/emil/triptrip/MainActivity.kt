@@ -2,10 +2,12 @@ package com.emil.triptrip
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -30,6 +32,9 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
         binding.viewModel = viewModel
+
+
+
 
         setupDrawer()
         setupNavController()
@@ -68,7 +73,13 @@ class MainActivity : AppCompatActivity() {
         val bindingNavHeader = NavHeaderDrawerBinding.inflate(
                 LayoutInflater.from(this), binding.drawerNavView, false)
         bindingNavHeader.lifecycleOwner = this
+        bindingNavHeader.viewModel = viewModel
         binding.drawerNavView.addHeaderView(bindingNavHeader.root)
+
+        viewModel.user.observe(this, Observer {
+            Log.i("rrrrrrrr", "rrrr $it")
+        })
+
 
         // set toolbar drawer icon
         binding.toolbar.setNavigationIcon(R.drawable.ic_baseline_format_list_bulleted_24)

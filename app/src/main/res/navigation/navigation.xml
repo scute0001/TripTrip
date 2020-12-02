@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/myTripsFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/myTripsFragment"
@@ -36,5 +36,15 @@
     <fragment
         android:id="@+id/addTripFragment"
         android:name="com.emil.triptrip.ui.addtrip.AddTripFragment"
-        android:label="AddTripFragment" />
+        android:label="AddTripFragment"
+        tools:layout="@layout/add_trip_fragment"/>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.emil.triptrip.ui.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/login_fragment">
+        <action
+            android:id="@+id/action_loginFragment_to_myTripsFragment"
+            app:destination="@id/myTripsFragment" />
+    </fragment>
 </navigation>

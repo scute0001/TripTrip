@@ -21,7 +21,6 @@
             android:id="@+id/image_main"
             android:layout_width="0dp"
             android:layout_height="160dp"
-            android:padding="1dp"
             android:alpha="0.5"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"

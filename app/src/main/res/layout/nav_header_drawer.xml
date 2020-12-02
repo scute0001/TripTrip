@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="viewModel"
+            type="com.emil.triptrip.MainActivityViewModel" />
 
     </data>
 
@@ -20,7 +23,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_nav_profile"
-            app:tint="@color/white" />
+            app:imageUrl="@{viewModel.user.photoUri}"/>
 
         <TextView
             android:id="@+id/image_drawer_name"
@@ -31,7 +34,7 @@
             android:layout_marginEnd="16dp"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:text="This is name"
+            android:text="@{viewModel.user.name}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_drawer_avatar"/>
