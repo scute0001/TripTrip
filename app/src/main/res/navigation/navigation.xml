@@ -46,5 +46,21 @@
         <action
             android:id="@+id/action_loginFragment_to_myTripsFragment"
             app:destination="@id/myTripsFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_loginSuccessDialogFragment"
+            app:destination="@id/loginSuccessDialogFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
+    <dialog
+        android:id="@+id/loginSuccessDialogFragment"
+        android:name="com.emil.triptrip.ui.dialog.LoginSuccessDialogFragment"
+        android:label="LoginSuccessDialogFragment"
+        tools:layout="@layout/fragment_login_success_dialog">
+        <action
+            android:id="@+id/action_loginSuccessDialogFragment_to_myTripsFragment"
+            app:destination="@id/myTripsFragment"
+            app:popUpTo="@id/myTripsFragment"
+            app:popUpToInclusive="true" />
+    </dialog>
 </navigation>

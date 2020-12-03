@@ -18,4 +18,7 @@
     <string name="add_new_trip">Add Your Trip</string>
     <string name="add_new_spot">Add New Spot</string>
     <string name="profile_information">Logout!!</string>
+    <string name="login_success">登入成功</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

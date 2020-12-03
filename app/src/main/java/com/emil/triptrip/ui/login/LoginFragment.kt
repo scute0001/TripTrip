@@ -1,8 +1,6 @@
 package com.emil.triptrip.ui.login
 
-import android.app.Activity
 import android.content.Intent
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,29 +8,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.emil.triptrip.MainActivity
 import com.emil.triptrip.MainActivityViewModel
 import com.emil.triptrip.R
 import com.emil.triptrip.database.User
 import com.emil.triptrip.databinding.LoginFragmentBinding
-import com.emil.triptrip.ui.tripdetail.TripDetailFragmentArgs
-import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.IdpResponse
-import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.common.api.GoogleApiClient
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.google.rpc.context.AttributeContext
+import kotlinx.android.synthetic.main.activity_main.*
 
 class LoginFragment : Fragment() {
 
@@ -46,22 +36,23 @@ class LoginFragment : Fragment() {
     ): View? {
         val binding = LoginFragmentBinding.inflate(inflater, container, false)
 
+
         auth = Firebase.auth
 
-        binding.signInButton.apply {
-            setSize(SignInButton.SIZE_WIDE)
-        }
+//        binding.signInButton.apply {
+//            setSize(SignInButton.SIZE_WIDE)
+//        }
 
 
         // sign in
-        binding.signInButton.setOnClickListener {
+        binding.constraintLoginLogo.setOnClickListener {
             signIn()
         }
 
 
         // navi to mytrip
         binding.button.setOnClickListener {
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMyTripsFragment())
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToLoginSuccessDialogFragment())
         }
 
 
@@ -131,4 +122,15 @@ class LoginFragment : Fragment() {
         startActivityForResult(signInIntent, GOOGLE_SIGN_IN)
     }
 
+    override fun onStart() {
+        super.onStart()
+        val activity = activity as MainActivity
+        activity.toolbar.visibility = View.GONE
+    }
+
+    override fun onStop() {
+        super.onStop()
+        val activity = activity as MainActivity
+        activity.toolbar.visibility = View.VISIBLE
+    }
 }
