@@ -47,6 +47,11 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
     val usersData: LiveData<List<User>>
         get() = _usersData
 
+    //attend users
+    val _selectedUsers = MutableLiveData<List<User>>()
+    val selectedUsers: LiveData<List<User>>
+        get() = _selectedUsers
+
 
     // uploadUserDataToFirebase
     fun getUsersData() {

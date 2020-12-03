@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.databinding.AddTripFragmentBinding
+import com.emil.triptrip.ui.dialog.SelectUserDialog
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.util.*
 import kotlin.concurrent.fixedRateTimer
@@ -61,6 +62,14 @@ class AddTripFragment : Fragment() {
         })
 
 
+        viewModel.selectedUsers.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            Log.d("DATADATADATA", "Seleted DATA is $it")
+        })
+
+
+        binding.buttonAddAttendUser.setOnClickListener {
+            fragmentManager?.let { it1 -> SelectUserDialog(viewModel.usersData.value!!, viewModel).show(it1, "GOGO") }
+        }
 
 
 
