@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.database.AttendUser
 import com.emil.triptrip.database.DayKey
 import com.emil.triptrip.database.SpotTag
@@ -31,8 +32,8 @@ class MyTripsFragment : Fragment() {
 
         // setup viewModel
         val app = requireNotNull(activity).application
-        val viewModelFactory =
-            MyTripsViewModelFactory(app)
+        val repository = (requireContext().applicationContext as TripTripApplication).repository
+        val viewModelFactory = MyTripsViewModelFactory(app, repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MyTripsViewModel::class.java)
         binding.viewModel = viewModel
 

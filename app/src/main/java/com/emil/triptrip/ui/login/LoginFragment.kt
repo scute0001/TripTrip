@@ -40,7 +40,6 @@ class LoginFragment : Fragment() {
         binding.lifecycleOwner = this
 
         val app = requireNotNull(activity).application
-//        val repository = TripTripApplication.instance.repository
         val repository = (requireContext().applicationContext as TripTripApplication).repository
         val viewModelFactory = LoginViewModelFactory(app, repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(LoginViewModel::class.java)

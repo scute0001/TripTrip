@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.emil.triptrip.R
+import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.databinding.AddTripFragmentBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.util.*
@@ -27,7 +28,8 @@ class AddTripFragment : Fragment() {
         binding.lifecycleOwner = this
 
         val app = requireNotNull(activity).application
-        val viewModelFactory = AddTripViewModelFactory(app)
+        val repository = (requireContext().applicationContext as TripTripApplication).repository
+        val viewModelFactory = AddTripViewModelFactory(app, repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(AddTripViewModel::class.java)
         binding.viewModel = viewModel
 

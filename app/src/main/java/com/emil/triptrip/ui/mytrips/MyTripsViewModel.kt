@@ -9,8 +9,9 @@ import androidx.lifecycle.ViewModel
 import com.emil.triptrip.database.AttendUser
 import com.emil.triptrip.database.DayKey
 import com.emil.triptrip.database.Trip
+import com.emil.triptrip.database.source.TripTripRepository
 
-class MyTripsViewModel(app: Application) : AndroidViewModel(app) {
+class MyTripsViewModel(app: Application, private val repository: TripTripRepository) : AndroidViewModel(app) {
 
     private val _tripsData = MutableLiveData<List<Trip>>()
     val tripsData: LiveData<List<Trip>>

@@ -7,7 +7,8 @@ import com.emil.triptrip.database.source.TripTripRepository
 import java.lang.IllegalArgumentException
 
 
-class LoginViewModelFactory(private val application: Application, private val repository: TripTripRepository): ViewModelProvider.Factory {
+class LoginViewModelFactory(private val application: Application,
+                            private val repository: TripTripRepository): ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
             return LoginViewModel(application, repository) as T
