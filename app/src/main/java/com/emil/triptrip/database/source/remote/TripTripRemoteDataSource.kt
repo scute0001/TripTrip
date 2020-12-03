@@ -1,11 +1,15 @@
 package com.emil.triptrip.database.source.remote
 
 import android.icu.util.Calendar
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.emil.triptrip.R
+import com.emil.triptrip.database.ResultUtil
+import com.emil.triptrip.database.User
 import com.emil.triptrip.database.source.TripTripDataSource
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import okhttp3.internal.notify
 import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -15,8 +19,27 @@ import kotlin.coroutines.suspendCoroutine
  * Implementation of the TripTrip source that from network.
  */
 object TripTripRemoteDataSource : TripTripDataSource {
+    private const val PATH_USER = "user"
 
-//    private const val PATH_ARTICLES = "articles"
+
+    override suspend fun uploadUserDataToFirebase(userData: User): ResultUtil<Boolean> = suspendCoroutine { continuation ->
+
+        FirebaseFirestore.getInstance()
+            .collection(PATH_USER).document("${userData.email}")
+            .set(userData)
+            .addOnSuccessListener {
+                Log.d("Firebase", "Add user data ${it}")
+                continuation.resume(ResultUtil.Success(true))
+            }
+            .addOnFailureListener {
+                Log.d("Firebase", "Add user data error!!!!! ${it.message}")
+                continuation.resume(ResultUtil.Error(it))
+            }
+
+    }
+
+
+    //    private const val PATH_ARTICLES = "articles"
 //    private const val KEY_CREATED_TIME = "createdTime"
 //
 //    override suspend fun login(id: String): Result<Author> {

@@ -1,6 +1,8 @@
 package com.emil.triptrip.database.source
 
 import androidx.lifecycle.MutableLiveData
+import com.emil.triptrip.database.ResultUtil
+import com.emil.triptrip.database.User
 
 /**
  * Interface to the TripTrip layers.
@@ -8,6 +10,7 @@ import androidx.lifecycle.MutableLiveData
 
 interface TripTripRepository {
 
+    suspend fun uploadUserDataToFirebase(userData: User): ResultUtil<Boolean>
 //    suspend fun loginMockData(id: String): Result<Author>
 //
 //    suspend fun getArticles(): Result<List<Article>>

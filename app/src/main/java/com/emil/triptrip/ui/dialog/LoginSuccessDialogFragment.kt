@@ -31,7 +31,7 @@ class LoginSuccessDialogFragment : DialogFragment() {
             {dismiss()
                 findNavController().navigate(LoginSuccessDialogFragmentDirections.actionLoginSuccessDialogFragmentToMyTripsFragment())
             },
-            2000)
+            1000)
 
         return binding.root
     }

@@ -1,6 +1,8 @@
 package com.emil.triptrip.database.source
 
 import androidx.lifecycle.MutableLiveData
+import com.emil.triptrip.database.ResultUtil
+import com.emil.triptrip.database.User
 
 
 /**
@@ -9,8 +11,11 @@ import androidx.lifecycle.MutableLiveData
 class DefaultTripTripRepository(private val remoteDataSource: TripTripDataSource,
                                  private val localDataSource: TripTripDataSource
 ) : TripTripRepository {
+    override suspend fun uploadUserDataToFirebase(userData: User): ResultUtil<Boolean> {
+        return remoteDataSource.uploadUserDataToFirebase(userData)
+    }
 
-//    override suspend fun loginMockData(id: String): Result<Author> {
+    //    override suspend fun loginMockData(id: String): Result<Author> {
 //        return localDataSource.login(id)
 //    }
 //
