@@ -54,6 +54,11 @@ class AddTripFragment : Fragment() {
             }
         }
 
+        // observe all users DATA get from firebase
+        viewModel.usersData.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+
+            Log.d("DATADATADATA", "User DATA is $it")
+        })
 
 
 

@@ -10,6 +10,8 @@ import com.emil.triptrip.database.User
 interface TripTripDataSource {
 
     suspend fun uploadUserDataToFirebase(userData: User): ResultUtil<Boolean>
+
+    suspend fun getUserData(): ResultUtil<List<User>>
 //    suspend fun login(id: String): Result<Author>
 //
 //    suspend fun getArticles(): Result<List<Article>>

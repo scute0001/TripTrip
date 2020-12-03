@@ -7,8 +7,11 @@ import com.emil.triptrip.R
 import com.emil.triptrip.database.ResultUtil
 import com.emil.triptrip.database.User
 import com.emil.triptrip.database.source.TripTripDataSource
+import com.emil.triptrip.ui.login.UserManager
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.Source
+import com.google.firebase.firestore.core.UserData
 import okhttp3.internal.notify
 import java.util.*
 import kotlin.coroutines.resume
@@ -38,6 +41,22 @@ object TripTripRemoteDataSource : TripTripDataSource {
 
     }
 
+    override suspend fun getUserData(): ResultUtil<List<User>> = suspendCoroutine{ continuation ->
+
+        FirebaseFirestore.getInstance()
+            .collection(PATH_USER)
+            .get()
+            .addOnSuccessListener {
+                val items = it.toObjects(User::class.java)
+                Log.d("Firebase", "get users data ${items}")
+                continuation.resume(ResultUtil.Success(items))
+            }
+            .addOnFailureListener {
+                Log.d("Firebase", "get user data error!!!!! ${it.message}")
+                continuation.resume(ResultUtil.Error(it))
+            }
+
+    }
 
     //    private const val PATH_ARTICLES = "articles"
 //    private const val KEY_CREATED_TIME = "createdTime"
