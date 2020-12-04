@@ -101,6 +101,20 @@ class MyTripsViewModel(app: Application, private val repository: TripTripReposit
         viewModelJob.cancel()
     }
 
+    // return query list
+    fun filter(list: List<Trip>, query: String): List<Trip> {
+        val lowerCaseQueryString = query.toLowerCase()
+        val filteredList = mutableListOf<Trip>()
+        for (trip in list) {
+            val tripTitle = trip.title?.toLowerCase()
+            if (tripTitle?.contains(lowerCaseQueryString) as Boolean) {
+                filteredList.add(trip)
+            }
+        }
+        return filteredList
+    }
+
+
     //////////////////////////////////////////////////////////////////////////////////////////////////
     // Create Fake data
     fun fakeData() {
