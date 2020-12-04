@@ -24,6 +24,10 @@ class DefaultTripTripRepository(private val remoteDataSource: TripTripDataSource
         return remoteDataSource.uploadTripToFirebase(trip)
     }
 
+    override suspend fun getTrips(): ResultUtil<List<Trip>> {
+        return remoteDataSource.getTrips()
+    }
+
     //    override suspend fun loginMockData(id: String): Result<Author> {
 //        return localDataSource.login(id)
 //    }

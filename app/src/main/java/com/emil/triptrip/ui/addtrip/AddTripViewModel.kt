@@ -152,9 +152,11 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
 
         // set UserData
         val userList = mutableListOf<AttendUser>()
+        val users = mutableListOf<String>()
         selectedUsers.value?.forEach {
-            val temp = AttendUser(userId = it.email)
+            val temp = AttendUser(userId = it.name)
             userList.add(temp)
+            users.add("${it.email}")
         }
 
 
@@ -187,6 +189,7 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
                 stopTime = endDay.value,
                 startTime = startDay.value,
                 attendUserList = userList,
+                users = users,
                 dayKeyList = dayList
             )
             _tripData.value = data

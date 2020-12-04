@@ -16,6 +16,8 @@ interface TripTripDataSource {
 
     suspend fun uploadTripToFirebase(trip: Trip): ResultUtil<Boolean>
 
+    suspend fun getTrips(): ResultUtil<List<Trip>>
+
 //    suspend fun login(id: String): Result<Author>
 //
 //    suspend fun getArticles(): Result<List<Article>>

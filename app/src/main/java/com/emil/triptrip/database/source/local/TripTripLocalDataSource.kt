@@ -24,4 +24,8 @@ class TripTripLocalDataSource(val context: Context) : TripTripDataSource {
     override suspend fun uploadTripToFirebase(trip: Trip): ResultUtil<Boolean> {
         TODO("Not yet implemented")
     }
+
+    override suspend fun getTrips(): ResultUtil<List<Trip>> {
+        TODO("Not yet implemented")
+    }
 }

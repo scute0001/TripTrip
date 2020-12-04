@@ -40,7 +40,9 @@
         tools:layout="@layout/add_trip_fragment">
         <action
             android:id="@+id/action_addTripFragment_to_myTripsFragment"
-            app:destination="@id/myTripsFragment" />
+            app:destination="@id/myTripsFragment"
+            app:popUpTo="@id/myTripsFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"

@@ -16,6 +16,8 @@ interface TripTripRepository {
     suspend fun getUserData(): ResultUtil<List<User>>
 
     suspend fun uploadTripToFirebase(trip: Trip): ResultUtil<Boolean>
+
+    suspend fun getTrips(): ResultUtil<List<Trip>>
 //    suspend fun loginMockData(id: String): Result<Author>
 //
 //    suspend fun getArticles(): Result<List<Article>>

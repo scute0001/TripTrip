@@ -11,6 +11,7 @@ data class Trip(
     var stopTime: Long? = -1L,
     var status: Int? = -1,
     var attendUserList: MutableList<AttendUser>? = null,
+    var users: MutableList<String>? = null,
     var dayKeyList: MutableList<DayKey>? = null,
     // route line class, wait addition
     var private: Boolean? = true,
