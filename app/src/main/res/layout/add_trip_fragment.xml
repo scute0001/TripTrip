@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="com.emil.triptrip.ui.addtrip.AddTripViewModel" />
@@ -203,6 +204,19 @@
                     app:layout_constraintStart_toStartOf="@+id/guideline_add_trip_left"
                     app:layout_constraintTop_toBottomOf="@+id/constraint_content">
 
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_add_attend_user"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/button_add_attend_user"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_add_attend_user_title" />
+
                     <TextView
                         android:id="@+id/text_add_attend_user_title"
                         style="@style/add_spot_title_description"
@@ -220,10 +234,11 @@
                         android:background="@drawable/shape_circle_btn"
                         android:scaleType="fitCenter"
                         android:src="@drawable/ic_baseline_add_circle_24"
-                        app:layout_constraintBottom_toBottomOf="@+id/text_add_attend_user"
+                        app:layout_constraintBottom_toBottomOf="@+id/recycler_add_attend_user"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/text_add_attend_user"
+                        app:layout_constraintTop_toTopOf="@+id/recycler_add_attend_user"
                         app:layout_constraintVertical_bias="0.0" />
+
 
                     <TextView
                         android:id="@+id/text_add_attend_user"
@@ -234,12 +249,13 @@
                         android:background="@drawable/shape_underline"
                         android:gravity="center"
                         android:hint="選擇參與者"
+                        android:visibility="@{viewModel.selectedUsers != null ? View.GONE : View.VISIBLE}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/button_add_attend_user"
                         app:layout_constraintHorizontal_chainStyle="packed"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/text_add_attend_user_title"
-                        tools:text="選擇參與者" />
+                        tools:text="@string/select_attend_user" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

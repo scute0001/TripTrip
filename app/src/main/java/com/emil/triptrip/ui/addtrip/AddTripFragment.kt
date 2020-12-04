@@ -55,6 +55,10 @@ class AddTripFragment : Fragment() {
             }
         }
 
+        // set attend users adapter
+        val adapter = AttendUsersAdapter()
+        binding.recyclerAddAttendUser.adapter = adapter
+
         // observe all users DATA get from firebase
         viewModel.usersData.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
 
@@ -64,6 +68,7 @@ class AddTripFragment : Fragment() {
 
         viewModel.selectedUsers.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             Log.d("DATADATADATA", "Seleted DATA is $it")
+            adapter.submitList(it)
         })
 
 
