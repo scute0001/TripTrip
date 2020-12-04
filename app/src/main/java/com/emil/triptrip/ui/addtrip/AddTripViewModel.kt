@@ -1,16 +1,15 @@
 package com.emil.triptrip.ui.addtrip
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
-import com.emil.triptrip.database.ResultUtil
-import com.emil.triptrip.database.User
+import com.emil.triptrip.database.*
 import com.emil.triptrip.database.source.TripTripRepository
-import com.emil.triptrip.database.succeeded
 import com.emil.triptrip.util.LoadApiStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -47,10 +46,24 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
     val usersData: LiveData<List<User>>
         get() = _usersData
 
-    //attend users
+    //for attend selected users data
     val _selectedUsers = MutableLiveData<List<User>>()
     val selectedUsers: LiveData<List<User>>
         get() = _selectedUsers
+
+    val _tripTitle = MutableLiveData<String?>()
+    val _tripDescription = MutableLiveData<String?>()
+    val _tripPhoto = MutableLiveData<String?>()
+
+    // tripData for upload to firebase after click
+    val _tripData = MutableLiveData<Trip>()
+    val tripData: LiveData<Trip>
+        get() = _tripData
+
+    // data check flag
+    val _checkDataFlag = MutableLiveData<Boolean>()
+    val checkDataFlag: LiveData<Boolean>
+        get() = _checkDataFlag
 
 
     // uploadUserDataToFirebase
@@ -87,9 +100,37 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
 
 
 
+    // set add tripData for upload to firebase
+    fun setTripData() {
+
+        val userList = mutableListOf<AttendUser>()
+        selectedUsers.value?.forEach {
+            val temp = AttendUser(userId = it.email)
+            Log.i("Trip", "temp is $temp")
+            userList.add(temp)
+        }
+
+        Log.i("Trip", "$userList")
+
+        if ( _tripTitle.value != null && startDay.value != null && endDay.value != null && selectedUsers.value != null) {
+            val data = Trip(
+                title = _tripTitle.value,
+                stopTime = endDay.value,
+                startTime = startDay.value,
+                attendUserList = userList
+            )
+            _tripData.value = data
+        } else {
+            _checkDataFlag.value = false
+        }
+
+    }
 
 
 
+    fun clearCheckDataFlag() {
+        _checkDataFlag.value = null
+    }
 
 
 

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
@@ -62,19 +63,41 @@ class AddTripFragment : Fragment() {
         // observe all users DATA get from firebase
         viewModel.usersData.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
 
-            Log.d("DATADATADATA", "User DATA is $it")
         })
 
 
+        // observe selected users data and to adapter
         viewModel.selectedUsers.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            Log.d("DATADATADATA", "Seleted DATA is $it")
             adapter.submitList(it)
+        })
+
+        // observe tripData
+        viewModel.tripData.observe(viewLifecycleOwner, androidx.lifecycle.Observer { tripData ->
+            Log.d("TripData", "TripData is $tripData")
+            if (tripData != null) {
+                // submit data to firebase here
+            }
+        })
+
+        //
+        viewModel.checkDataFlag.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            if (it == false) {
+                Toast.makeText(requireContext(), "你輸入的資料有缺喔!", Toast.LENGTH_SHORT).show()
+                viewModel.clearCheckDataFlag()
+            }
         })
 
 
         binding.buttonAddAttendUser.setOnClickListener {
             fragmentManager?.let { it1 -> SelectUserDialog(viewModel.usersData.value!!, viewModel).show(it1, "GOGO") }
         }
+
+        // set trip data and submit to firebase
+        binding.buttonSubmitTrip.setOnClickListener {
+            viewModel.setTripData()
+        }
+
+
 
 
 

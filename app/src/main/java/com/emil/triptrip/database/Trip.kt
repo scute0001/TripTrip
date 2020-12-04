@@ -14,7 +14,7 @@ data class Trip(
     var dayKeyList: MutableList<DayKey>? = null,
     // route line class, wait addition
     var private: Boolean? = true,
-    var mainImg: String? = null
+    var mainImg: String? = "https://i.imgur.com/QZdKyq8.jpg"
 ): Parcelable {
 
 }
