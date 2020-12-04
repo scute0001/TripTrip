@@ -1,7 +1,10 @@
 package com.emil.triptrip.ui.addtrip
 
 import android.app.Application
+import android.icu.util.Calendar
+import android.icu.util.TimeUnit
 import android.util.Log
+import android.util.TimeUtils
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,6 +18,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.sql.Timestamp
+import java.text.SimpleDateFormat
 
 class AddTripViewModel(app: Application, private val repository: TripTripRepository) : AndroidViewModel(app) {
 
@@ -103,21 +108,44 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
     // set add tripData for upload to firebase
     fun setTripData() {
 
+        // set UserData
         val userList = mutableListOf<AttendUser>()
         selectedUsers.value?.forEach {
             val temp = AttendUser(userId = it.email)
-            Log.i("Trip", "temp is $temp")
             userList.add(temp)
         }
 
-        Log.i("Trip", "$userList")
 
+        // set day list  ///////////////////
+        val dayList = mutableListOf<DayKey>()
+        startDay.value?.let { startDay ->
+
+            var timeCounter = startDay
+            val oneDaySec = (60 * 60 * 24 * 1000).toLong()
+            val simpleDateFormat = SimpleDateFormat("MM/dd")
+            var counter = 0
+
+            while ( timeCounter <= endDay.value!!) {
+
+                var date = startDay + ( oneDaySec * counter )
+                val dayKey = DayKey (dayCount = "Day${counter+1}", date = simpleDateFormat.format(date))
+
+                dayList.add(dayKey)
+                timeCounter += oneDaySec
+                counter++
+            }
+            Log.i("TimeTime", "Start time $dayList")
+        }
+        ///////////////////////////////////
+
+        // check data source and set trip data
         if ( _tripTitle.value != null && startDay.value != null && endDay.value != null && selectedUsers.value != null) {
             val data = Trip(
                 title = _tripTitle.value,
                 stopTime = endDay.value,
                 startTime = startDay.value,
-                attendUserList = userList
+                attendUserList = userList,
+                dayKeyList = dayList
             )
             _tripData.value = data
         } else {
