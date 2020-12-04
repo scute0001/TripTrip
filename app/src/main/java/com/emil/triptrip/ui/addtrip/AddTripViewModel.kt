@@ -56,12 +56,12 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
     val selectedUsers: LiveData<List<User>>
         get() = _selectedUsers
 
+    // set data for XML editTEXT
     val _tripTitle = MutableLiveData<String?>()
-    val _tripDescription = MutableLiveData<String?>()
     val _tripPhoto = MutableLiveData<String?>()
 
     // tripData for upload to firebase after click
-    val _tripData = MutableLiveData<Trip>()
+    private val _tripData = MutableLiveData<Trip>()
     val tripData: LiveData<Trip>
         get() = _tripData
 
@@ -70,6 +70,16 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
     val checkDataFlag: LiveData<Boolean>
         get() = _checkDataFlag
 
+    // for add trip data finished navigation back to myTrips page
+    private val _addTripFinishedNavToMyTrips = MutableLiveData<Boolean>()
+    val addTripFinishedNavToMyTrips: LiveData<Boolean>
+        get() = _addTripFinishedNavToMyTrips
+
+
+    // for Navigation to myTrips page finished clear
+    fun clearAddTripFinishedNavToMyTrips() {
+        _addTripFinishedNavToMyTrips.value = false
+    }
 
     // uploadUserDataToFirebase
     fun getUsersData() {
@@ -115,6 +125,9 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
                     leave(true)
+
+                    // set nav to mytrips
+                    _addTripFinishedNavToMyTrips.value = true
                 }
                 is ResultUtil.Fail -> {
                     _error.value = result.error

@@ -37,7 +37,11 @@
         android:id="@+id/addTripFragment"
         android:name="com.emil.triptrip.ui.addtrip.AddTripFragment"
         android:label="AddTripFragment"
-        tools:layout="@layout/add_trip_fragment"/>
+        tools:layout="@layout/add_trip_fragment">
+        <action
+            android:id="@+id/action_addTripFragment_to_myTripsFragment"
+            app:destination="@id/myTripsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.emil.triptrip.ui.login.LoginFragment"
