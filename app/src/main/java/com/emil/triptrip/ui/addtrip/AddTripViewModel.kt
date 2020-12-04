@@ -104,6 +104,35 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
     }
 
 
+    // add trip to firebase
+    fun uploadTripToFirebase(trip: Trip) {
+
+        coroutineScope.launch {
+            _status.value = LoadApiStatus.LOADING
+
+            when (val result = repository.uploadTripToFirebase(trip)) {
+                is ResultUtil.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                    leave(true)
+                }
+                is ResultUtil.Fail -> {
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                }
+                is ResultUtil.Error -> {
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                }
+                else -> {
+                    _error.value = TripTripApplication.instance.getString(R.string.Unknown_error)
+                    _status.value = LoadApiStatus.ERROR
+                }
+            }
+        }
+    }
+
+
 
     // set add tripData for upload to firebase
     fun setTripData() {

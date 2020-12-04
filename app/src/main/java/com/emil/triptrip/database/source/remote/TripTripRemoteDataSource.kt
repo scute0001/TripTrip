@@ -1,19 +1,11 @@
 package com.emil.triptrip.database.source.remote
 
-import android.icu.util.Calendar
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import com.emil.triptrip.R
 import com.emil.triptrip.database.ResultUtil
+import com.emil.triptrip.database.Trip
 import com.emil.triptrip.database.User
 import com.emil.triptrip.database.source.TripTripDataSource
-import com.emil.triptrip.ui.login.UserManager
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.Source
-import com.google.firebase.firestore.core.UserData
-import okhttp3.internal.notify
-import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -23,6 +15,7 @@ import kotlin.coroutines.suspendCoroutine
  */
 object TripTripRemoteDataSource : TripTripDataSource {
     private const val PATH_USER = "user"
+    private const val PATH_TRIPS = "trips"
 
 
     override suspend fun uploadUserDataToFirebase(userData: User): ResultUtil<Boolean> = suspendCoroutine { continuation ->
@@ -58,7 +51,41 @@ object TripTripRemoteDataSource : TripTripDataSource {
 
     }
 
-    //    private const val PATH_ARTICLES = "articles"
+    // add Trip data to firebase
+    override suspend fun uploadTripToFirebase(trip: Trip): ResultUtil<Boolean> = suspendCoroutine { continuation ->
+
+        FirebaseFirestore.getInstance()
+            .collection(PATH_TRIPS)
+            .add(trip)
+            .addOnSuccessListener { documentReference ->
+                Log.d("Firebase", "Add trip data ${documentReference}")
+
+                // updata dayKey
+                val newDayKey = trip.dayKeyList
+                trip.dayKeyList?.let {
+                    newDayKey?.forEach {
+                        it.daySpotsKey = "${it.dayCount}${documentReference.id}"
+                    }
+                    trip.dayKeyList = newDayKey
+                }
+
+
+                // auto update trip ID
+                documentReference.update("id" , documentReference.id)
+                documentReference.update("dayKeyList", newDayKey)
+
+                continuation.resume(ResultUtil.Success(true))
+            }
+            .addOnFailureListener {
+                Log.d("Firebase", "Add trip data error!!!!! ${it.message}")
+                continuation.resume(ResultUtil.Error(it))
+            }
+    }
+
+
+
+
+//    private const val PATH_ARTICLES = "articles"
 //    private const val KEY_CREATED_TIME = "createdTime"
 //
 //    override suspend fun login(id: String): Result<Author> {

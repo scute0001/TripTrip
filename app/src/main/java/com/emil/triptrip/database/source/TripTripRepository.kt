@@ -2,6 +2,7 @@ package com.emil.triptrip.database.source
 
 import androidx.lifecycle.MutableLiveData
 import com.emil.triptrip.database.ResultUtil
+import com.emil.triptrip.database.Trip
 import com.emil.triptrip.database.User
 
 /**
@@ -13,6 +14,8 @@ interface TripTripRepository {
     suspend fun uploadUserDataToFirebase(userData: User): ResultUtil<Boolean>
 
     suspend fun getUserData(): ResultUtil<List<User>>
+
+    suspend fun uploadTripToFirebase(trip: Trip): ResultUtil<Boolean>
 //    suspend fun loginMockData(id: String): Result<Author>
 //
 //    suspend fun getArticles(): Result<List<Article>>

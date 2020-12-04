@@ -76,6 +76,7 @@ class AddTripFragment : Fragment() {
             Log.d("TripData", "TripData is $tripData")
             if (tripData != null) {
                 // submit data to firebase here
+                viewModel.uploadTripToFirebase(tripData)
             }
         })
 

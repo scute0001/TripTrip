@@ -3,6 +3,7 @@ package com.emil.triptrip.database.source.local
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.emil.triptrip.database.ResultUtil
+import com.emil.triptrip.database.Trip
 import com.emil.triptrip.database.User
 import com.emil.triptrip.database.source.TripTripDataSource
 
@@ -20,4 +21,7 @@ class TripTripLocalDataSource(val context: Context) : TripTripDataSource {
         TODO("Not yet implemented")
     }
 
+    override suspend fun uploadTripToFirebase(trip: Trip): ResultUtil<Boolean> {
+        TODO("Not yet implemented")
+    }
 }
