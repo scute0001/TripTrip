@@ -26,6 +26,9 @@ class TripDetailViewModel(app: Application, tripData: Trip, repository: TripTrip
     val spotDetail: LiveData<SpotTag>
         get() = _spotDetail
 
+    // for move camera
+    val _moveToSelectedSpot = MutableLiveData<LatLng>()
+
     // record selected day data
     val selectedDay = MutableLiveData<String>()
     var selectedDayPosition = -1
@@ -59,7 +62,6 @@ class TripDetailViewModel(app: Application, tripData: Trip, repository: TripTrip
                     MarkerOptions()
                         .position(LatLng(spot.latitude!!, spot.longitude!!))
                         .title(spot.positionName)
-                        .snippet(spot.startTime.toString())
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker)))
                     .tag = spot.positionName
             }
@@ -85,6 +87,11 @@ class TripDetailViewModel(app: Application, tripData: Trip, repository: TripTrip
                 _spotDetail.value = it
             }
         }
+    }
+
+    // clear moveToSelectedSpot
+    fun clearMoveToSelectedSpot() {
+        _moveToSelectedSpot.value = null
     }
 
 

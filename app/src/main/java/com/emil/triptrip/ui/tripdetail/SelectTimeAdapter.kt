@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.emil.triptrip.R
 import com.emil.triptrip.database.SpotTag
 import com.emil.triptrip.databinding.ListOneDayTimeBinding
+import com.google.android.gms.maps.model.LatLng
 
 
 class SelectTimeAdapter(val viewModel: TripDetailViewModel): ListAdapter<SpotTag, SpotViewHolder>(SpotDiffCallback()) {
@@ -36,6 +37,12 @@ class SpotViewHolder(val binding: ListOneDayTimeBinding): RecyclerView.ViewHolde
             viewModel.selectedTimePosition = adapterPosition
             viewModel.selectedTime.value = item.startTime
             viewModel.refreshSelectedTimeAdapter.value = true
+
+            // set spot data
+            item.positionName?.let { it1 -> viewModel.setSpotDetailData(it1) }
+
+            // move camera flag
+            viewModel._moveToSelectedSpot.value = LatLng(item.latitude!!, item.longitude!!)
         }
 
         if (adapterPosition == viewModel.selectedTimePosition) {

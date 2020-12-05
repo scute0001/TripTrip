@@ -18,7 +18,6 @@ import androidx.navigation.fragment.findNavController
 import com.emil.triptrip.MainActivityViewModel
 import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
-import com.emil.triptrip.databinding.SpotDetailFragmentBinding
 import com.emil.triptrip.databinding.TripDetailFragmentBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -46,16 +45,12 @@ class TripDetailFragment : Fragment() {
 
         //set marker click event
         googleMap.setOnMarkerClickListener {
-//            Toast.makeText(requireContext(), "id ${it.id} , tag ${it.tag}", Toast.LENGTH_SHORT).show()
             // call get spot detail api here
 
             // set fake data
             viewModel.setSpotDetailData(it.tag.toString())
             false
         }
-
-
-
 
         /**
          * Manipulates the map once available.
@@ -128,6 +123,7 @@ class TripDetailFragment : Fragment() {
         // set selected time view
         viewModel.refreshSelectedTimeAdapter.observe(viewLifecycleOwner, Observer {
             it?.let {
+                bottomBehavior.state = BottomSheetBehavior.STATE_EXPANDED
                 selectTimeAdapter.notifyDataSetChanged()
                 viewModel.onSelectTimeAdapterRefreshed()
             }
@@ -152,7 +148,12 @@ class TripDetailFragment : Fragment() {
         }
         //////////////////////////
 
-
+        viewModel._moveToSelectedSpot.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                myMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(it, 12F))
+                viewModel.clearMoveToSelectedSpot()
+            }
+        })
 
 
 
@@ -278,19 +279,16 @@ class TripDetailFragment : Fragment() {
             addMarker(MarkerOptions()
                 .position(userA)
                 .title("匿名蠑螈")
-                .snippet("${userA.latitude}, ${userA.longitude}")
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_location_64)))
 
             addMarker(MarkerOptions()
                 .position(userB)
                 .title("匿名海豹")
-                .snippet("${userB.latitude}, ${userB.longitude}")
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_location_64)))
 
             addMarker(MarkerOptions()
                 .position(userC)
                 .title("匿名喵喵")
-                .snippet("${userC.latitude}, ${userC.longitude}")
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_location_64)))
         }
 
