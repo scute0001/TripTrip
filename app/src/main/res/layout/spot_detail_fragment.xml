@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="viewModelSheet"
             type="com.emil.triptrip.ui.tripdetail.TripDetailViewModel" />
@@ -110,7 +111,7 @@
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_spot_food"
-                android:tint="@color/grayUnderline"
+                android:tint="@{spotSheet.property == 0 ? @color/colorPrimaryDark : @color/grayUnderline}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button_spot_detail_scene"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -125,7 +126,7 @@
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_spot_scene_64"
-                android:tint="@color/grayUnderline"
+                android:tint="@{spotSheet.property == 1 ? @color/colorPrimaryDark : @color/grayUnderline}"
                 app:layout_constraintBottom_toBottomOf="@+id/button_spot_detail_food"
                 app:layout_constraintEnd_toStartOf="@+id/button_spot_detail_trans"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -140,7 +141,7 @@
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_spot_trans"
-                android:tint="@color/grayUnderline"
+                android:tint="@{spotSheet.property == 2 ? @color/colorPrimaryDark : @color/grayUnderline}"
                 app:layout_constraintBottom_toBottomOf="@+id/button_spot_detail_scene"
                 app:layout_constraintEnd_toStartOf="@+id/button_spot_detail_hotel"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -156,7 +157,7 @@
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_spot_hotel"
-                android:tint="@color/grayUnderline"
+                android:tint="@{spotSheet.property == 3 ? @color/colorPrimaryDark : @color/grayUnderline}"
                 app:layout_constraintBottom_toBottomOf="@+id/button_spot_detail_trans"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -202,7 +203,7 @@
                 android:enabled="false"
                 android:gravity="center"
                 android:hint="1HR"
-                android:text="@{}"
+                android:text="@{spotSheet.stayTime}"
                 android:inputType="text"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -235,7 +236,7 @@
                 android:enabled="false"
                 android:background="@drawable/shape_border_corner_solid_black"
                 android:ems="10"
-                android:text="@{}"
+                android:text="@{spotSheet.content}"
                 android:gravity="start|top"
                 android:hint="Add your travel detail here."
                 android:inputType="textMultiLine"

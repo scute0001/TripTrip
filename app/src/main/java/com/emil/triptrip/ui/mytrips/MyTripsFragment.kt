@@ -65,7 +65,7 @@ class MyTripsFragment : Fragment() {
 
 
         // set search bar
-        binding.searchBar.setIconified(false);
+//        binding.searchBar.setIconified(false);
         binding.searchBar.setOnQueryTextListener( object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean = false
 
@@ -92,57 +92,6 @@ class MyTripsFragment : Fragment() {
     }
 
 
-
-    private fun testFirebase() {
-        // Access a Cloud Firestore instance from your Activity
-        val db = FirebaseFirestore.getInstance()
-
-        val dayKeyList = mutableListOf<DayKey>()
-        for (item in 1..5) {
-            dayKeyList.add(DayKey(dayCount = "Day$item",daySpotsKey = "DAY$item${item.hashCode()}"))
-        }
-        val attendUsers = mutableListOf<AttendUser>()
-        attendUsers.add(AttendUser("QQ"))
-        attendUsers.add(AttendUser("GG"))
-        attendUsers.add(AttendUser("PP"))
-
-        val testData = Trip(
-            title = "",
-            startTime = System.currentTimeMillis(),
-            stopTime = System.currentTimeMillis(),
-            status = 0,
-            attendUserList = attendUsers,
-            dayKeyList = dayKeyList,
-            private = true
-        )
-
-        val testSpot = SpotTag(positionName = "this is a pen")
-
-
-
-
-        db.collection("trips")
-            .add(testData)
-            .addOnSuccessListener { documentReference ->
-                Log.d("Test", "DocumentSnapshot added with ID: ${documentReference.id}")
-                documentReference.update("id", documentReference.id)
-
-                val tempDayKeyList = mutableListOf<DayKey>()
-                for (item in 1..testData.dayKeyList!!.size) {
-                    val tempkey = "Day${item}${documentReference.id}"
-                    tempDayKeyList.add(DayKey("Day$item", tempkey))
-                }
-
-                testData.dayKeyList = tempDayKeyList
-                documentReference.update("dayKeyList", testData.dayKeyList)
-            }
-            .addOnFailureListener { e ->
-                Log.w("test", "Error adding document", e)
-            }
-
-
-
-    }
 
     private fun testFirebaseSPOTTAG() {
         // Access a Cloud Firestore instance from your Activity
