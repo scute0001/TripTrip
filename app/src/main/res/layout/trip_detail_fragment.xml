@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -8,6 +9,9 @@
         <variable
             name="viewModel"
             type="com.emil.triptrip.ui.tripdetail.TripDetailViewModel" />
+        <variable
+            name="spot"
+            type="com.emil.triptrip.database.SpotTag" />
 
     </data>
 
@@ -99,7 +103,10 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <include layout="@layout/spot_detail_fragment"/>
+        <include layout="@layout/spot_detail_fragment"
+            android:id="@+id/spot_detail_sheet"
+            app:viewModelSheet="@{viewModel}"
+            app:spotSheet="@{spot}"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -5,8 +5,11 @@
 
     <data>
         <variable
-            name="viewModel"
+            name="viewModelSheet"
             type="com.emil.triptrip.ui.tripdetail.TripDetailViewModel" />
+        <variable
+            name="spotSheet"
+            type="com.emil.triptrip.database.SpotTag" />
 
     </data>
 
@@ -56,6 +59,7 @@
                 android:ems="10"
                 android:enabled="false"
                 android:hint="Input spot name here."
+                android:text="@{spotSheet.positionName}"
                 android:inputType="textPersonName"
                 android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -83,7 +87,8 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/editText_spot_detail_title"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:timeTransferHHmm="@{spotSheet.startTime}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -197,6 +202,7 @@
                 android:enabled="false"
                 android:gravity="center"
                 android:hint="1HR"
+                android:text="@{}"
                 android:inputType="text"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -229,6 +235,7 @@
                 android:enabled="false"
                 android:background="@drawable/shape_border_corner_solid_black"
                 android:ems="10"
+                android:text="@{}"
                 android:gravity="start|top"
                 android:hint="Add your travel detail here."
                 android:inputType="textMultiLine"

@@ -1,17 +1,30 @@
 package com.emil.triptrip.ui.tripdetail
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.emil.triptrip.R
 import com.emil.triptrip.database.SpotTag
 import com.emil.triptrip.database.Trip
+import com.emil.triptrip.database.source.TripTripRepository
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.*
+import okhttp3.internal.notifyAll
 
-class TripDetailViewModel(app: Application, tripData: Trip) : AndroidViewModel(app) {
+class TripDetailViewModel(app: Application, tripData: Trip, repository: TripTripRepository
+) : AndroidViewModel(app) {
+
 
     private val _spotsData = MutableLiveData<List<SpotTag>>()
     val spotsData: LiveData<List<SpotTag>>
         get() = _spotsData
+
+    private val _spotDetail = MutableLiveData<SpotTag>()
+    val spotDetail: LiveData<SpotTag>
+        get() = _spotDetail
 
     // record selected day data
     val selectedDay = MutableLiveData<String>()
@@ -37,6 +50,43 @@ class TripDetailViewModel(app: Application, tripData: Trip) : AndroidViewModel(a
         refreshSelectedTimeAdapter.value = null
     }
 
+    fun drawSpotPosition(map: GoogleMap, spot: List<SpotTag>) {
+
+        map?.apply {
+            var startSpotLocation: LatLng? = LatLng(spot[0].latitude!!, spot[0].longitude!!)
+            spot.forEach { spot ->
+                addMarker(
+                    MarkerOptions()
+                        .position(LatLng(spot.latitude!!, spot.longitude!!))
+                        .title(spot.positionName)
+                        .snippet(spot.startTime.toString())
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker)))
+                    .tag = spot.positionName
+            }
+
+            for (index in 0..spot.size - 2) {
+                addPolyline(
+                    PolylineOptions()
+                        .add(LatLng(spot[index].latitude!!, spot[index].longitude!!), LatLng(spot[index + 1].latitude!!, spot[index + 1].longitude!!))
+                        .color(0xFF2286c3.toInt())
+                        .width(10F)
+                        .pattern(listOf(Dot(), Gap(20F), Dash(40F), Gap(20F)))
+                        .endCap(CustomCap(BitmapDescriptorFactory.fromResource(R.drawable.ic_triangle_up))))
+            }
+
+            moveCamera(CameraUpdateFactory.newLatLngZoom(startSpotLocation, 10F))
+        }
+    }
+
+    // click and set spot detail data to under page
+    fun setSpotDetailData(spotName: String) {
+        spotsData.value?.forEach {
+            if (it.positionName == spotName) {
+                _spotDetail.value = it
+            }
+        }
+    }
+
 
     private fun generateFakeSpot() {
         val fakeSpots = mutableListOf<SpotTag>()
@@ -48,12 +98,12 @@ class TripDetailViewModel(app: Application, tripData: Trip) : AndroidViewModel(a
             startTime = 1605850702139,
             stayTime = "1HR",
             property = 1,
-            longitude = 143.321,
-            latitude = -35.016,
+            longitude = 121.5626907,
+            latitude = 25.0424825,
             content = "金幣黃黃的",
-            lastEditor = "阿土伯",
+            lastEditor = "匿名蠑螈",
             lastEditTime = 1605850702139,
-            photoList = mutableListOf("https://i.imgur.com/PfFPryx.jpg", "https://i.imgur.com/PfFPryx.jpg", "https://i.imgur.com/PfFPryx.jpg"),
+            photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg", "https://i.imgur.com/QZdKyq8.jpg", "https://i.imgur.com/QZdKyq8.jpg"),
             messages = null
         )
 
@@ -64,12 +114,12 @@ class TripDetailViewModel(app: Application, tripData: Trip) : AndroidViewModel(a
             startTime = 1616058640180,
             stayTime = "1HR",
             property = 1,
-            longitude = 145.592,
-            latitude = -34.747,
+            longitude = 121.5152081,
+            latitude = 25.0476935,
             content = "豬肉滿福堡，大大滿足，大大開心",
-            lastEditor = "肥肥",
+            lastEditor = "Tzi scute",
             lastEditTime = 1605850702139,
-            photoList = mutableListOf("https://i.imgur.com/PfFPryx.jpg", "https://i.imgur.com/PfFPryx.jpg", "https://i.imgur.com/PfFPryx.jpg"),
+            photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg", "https://i.imgur.com/QZdKyq8.jpg", "https://i.imgur.com/QZdKyq8.jpg"),
             messages = null
         )
 
@@ -80,18 +130,35 @@ class TripDetailViewModel(app: Application, tripData: Trip) : AndroidViewModel(a
             startTime = 16858528993988,
             stayTime = "1HR",
             property = 1,
-            longitude = 143.321,
-            latitude = -35.016,
+            longitude = 121.2331741,
+            latitude = 25.0774806,
             content = "似乎要從這裡移動",
             lastEditor = "匿名蠑螈",
             lastEditTime = 1605850702139,
-            photoList = mutableListOf("https://i.imgur.com/PfFPryx.jpg", "https://i.imgur.com/PfFPryx.jpg", "https://i.imgur.com/PfFPryx.jpg"),
+            photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg"),
+            messages = null
+        )
+
+        val spotD = SpotTag(
+            id = "ZXCV",
+            positionName = "山頂黑洞",
+            daySpotsKey = "",
+            startTime = 16858529993988,
+            stayTime = "1HR",
+            property = 1,
+            longitude = 121.5462675,
+            latitude = 25.1763029,
+            content = "重置人生(?)",
+            lastEditor = "匿名蠑螈",
+            lastEditTime = 1605850702139,
+            photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg"),
             messages = null
         )
 
         fakeSpots.add(spotA)
         fakeSpots.add(spotB)
         fakeSpots.add(spotC)
+        fakeSpots.add(spotD)
 
         _spotsData.value = fakeSpots
 
