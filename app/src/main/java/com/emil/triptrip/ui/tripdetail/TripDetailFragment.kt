@@ -129,6 +129,11 @@ class TripDetailFragment : Fragment() {
         })
 
 
+        // set detail spot pics
+        val spotPicsAdapter = SpotPicAdapter(viewModel)
+        binding.spotDetailSheet.recyclerSpotDetailPictures.adapter = spotPicsAdapter
+
+
 
 
         // click add spot and navigation add spot page
@@ -146,6 +151,7 @@ class TripDetailFragment : Fragment() {
         // show spot detail
         viewModel.spotDetail.observe(viewLifecycleOwner, Observer { spot ->
             binding.spot = spot
+            spotPicsAdapter.submitList(spot.photoList)
         })
 
         return binding.root

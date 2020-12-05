@@ -46,3 +46,9 @@ fun convertTimeHHmmToString(textView: TextView, systemTime: Long){
     textView.text = SimpleDateFormat("HH:mm")
         .format(systemTime).toString()
 }
+
+@BindingAdapter("timeTransferMMddHHmm")
+fun convertTimeMMddHHmmToString(textView: TextView, systemTime: Long){
+    textView.text = SimpleDateFormat("MM/dd HH:mm")
+        .format(systemTime).toString()
+}
