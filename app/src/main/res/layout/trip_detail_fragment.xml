@@ -104,7 +104,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <include layout="@layout/spot_detail_fragment"
-            android:id="@+id/spot_detail_sheet"
+            android:id="@+id/spot_sheet"
             app:viewModelSheet="@{viewModel}"
             app:spotSheet="@{spot}"/>
 

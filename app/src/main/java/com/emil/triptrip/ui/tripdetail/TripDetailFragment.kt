@@ -25,6 +25,8 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 
 import com.google.android.gms.maps.model.*
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import kotlinx.android.synthetic.main.spot_detail_fragment.*
 
 class TripDetailFragment : Fragment() {
     private lateinit var viewModel: TripDetailViewModel
@@ -94,6 +96,9 @@ class TripDetailFragment : Fragment() {
         //set data and create to xml
         binding.viewModel = viewModel
 
+        //set bottom sheet controller
+        val bottomBehavior = BottomSheetBehavior.from(binding.spotSheet.spotDetailSheet)
+
 
         //set select day recyclerView adapter
         val selectDayAdapter = SelectDayAdapter(viewModel)
@@ -131,7 +136,7 @@ class TripDetailFragment : Fragment() {
 
         // set detail spot pics
         val spotPicsAdapter = SpotPicAdapter(viewModel)
-        binding.spotDetailSheet.recyclerSpotDetailPictures.adapter = spotPicsAdapter
+        binding.spotSheet.recyclerSpotDetailPictures.adapter = spotPicsAdapter
 
 
 
@@ -148,10 +153,16 @@ class TripDetailFragment : Fragment() {
         //////////////////////////
 
 
+
+
+
+
         // show spot detail
         viewModel.spotDetail.observe(viewLifecycleOwner, Observer { spot ->
             binding.spot = spot
             spotPicsAdapter.submitList(spot.photoList)
+            binding.spotSheet.spotDetailSheet
+            bottomBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         })
 
         return binding.root

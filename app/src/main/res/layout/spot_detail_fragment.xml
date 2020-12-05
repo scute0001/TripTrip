@@ -17,10 +17,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/design_bottom_sheet"
+        android:id="@+id/spot_detail_sheet"
         android:background="@drawable/shape_spot_detail_border"
         app:behavior_hideable="false"
-        app:behavior_peekHeight="30dp"
+        app:behavior_peekHeight="0dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
 
