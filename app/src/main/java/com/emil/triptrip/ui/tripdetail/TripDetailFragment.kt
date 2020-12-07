@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -180,18 +181,30 @@ class TripDetailFragment : Fragment() {
 
         //get my position
         binding.buttenForTest.setOnClickListener {
-//            val mapView = mapFragment?.view?.rootView
-//            @SuppressLint("ResourceType")
-//            locationButton = mapView?.findViewById<View>(2)!!
-//            // Change the visibility of my location button
-//            locationButton?.let {
-//                it.setVisibility(View.GONE)
-//            }
-
             locationButton?.callOnClick()
-//            getDeviceLocation()
         }
-        //////////////////////////
+
+        // edit spot position
+        binding.spotSheet.imageEdit.setOnClickListener {
+            binding.spotSheet.editTextSpotDetailTitle.isEnabled = true
+            binding.spotSheet.editTextSpotDetailContent.isEnabled = true
+            binding.spotSheet.editTextSpotDetailStartTime.isEnabled = true
+            binding.spotSheet.editTextSpotDetailStayTime.isEnabled = true
+            binding.spotSheet.imageEditDone.visibility = View.VISIBLE
+            binding.spotSheet.imageEdit.visibility = View.GONE
+        }
+
+        binding.spotSheet.imageEditDone.setOnClickListener {
+            binding.spotSheet.editTextSpotDetailTitle.isEnabled = false
+            binding.spotSheet.editTextSpotDetailContent.isEnabled = false
+            binding.spotSheet.editTextSpotDetailStartTime.isEnabled = false
+            binding.spotSheet.editTextSpotDetailStayTime.isEnabled = false
+            binding.spotSheet.imageEditDone.visibility = View.GONE
+            binding.spotSheet.imageEdit.visibility = View.VISIBLE
+            Toast.makeText(requireContext(), "更新資料成功", Toast.LENGTH_SHORT).show()
+        }
+
+
 
         viewModel._moveToSelectedSpot.observe(viewLifecycleOwner, Observer {
             if (it != null) {
