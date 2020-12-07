@@ -19,8 +19,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/spot_detail_sheet"
         android:background="@drawable/shape_spot_detail_border"
-        app:behavior_hideable="false"
-        app:behavior_peekHeight="0dp"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="144dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
 

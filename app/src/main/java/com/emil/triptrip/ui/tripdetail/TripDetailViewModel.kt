@@ -26,6 +26,16 @@ class TripDetailViewModel(app: Application, tripData: Trip, repository: TripTrip
     val spotDetail: LiveData<SpotTag>
         get() = _spotDetail
 
+    // for selected diff day show different Spot's Marker
+    private val _markerList = MutableLiveData<List<Marker>>()
+    val markerList: LiveData<List<Marker>>
+        get() = _markerList
+
+    // for selected diff day show different Spot's polyline
+    private val _polyLineList = MutableLiveData<List<Polyline>>()
+    val polyLineList: LiveData<List<Polyline>>
+        get() = _polyLineList
+
     // for move camera
     val _moveToSelectedSpot = MutableLiveData<LatLng>()
 
@@ -57,26 +67,42 @@ class TripDetailViewModel(app: Application, tripData: Trip, repository: TripTrip
 
         map?.apply {
             var startSpotLocation: LatLng? = LatLng(spot[0].latitude!!, spot[0].longitude!!)
+            val markerList = mutableListOf<Marker>()
+            val polylineList = mutableListOf<Polyline>()
             spot.forEach { spot ->
-                addMarker(
-                    MarkerOptions()
-                        .position(LatLng(spot.latitude!!, spot.longitude!!))
-                        .title(spot.positionName)
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker)))
-                    .tag = spot.positionName
+                val marker = addMarker(MarkerOptions()
+                    .position(LatLng(spot.latitude!!, spot.longitude!!))
+                    .title(spot.positionName)
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker)))
+                marker.tag = spot.positionName
+                markerList.add(marker)
             }
 
             for (index in 0..spot.size - 2) {
-                addPolyline(
-                    PolylineOptions()
+
+                val polyline = addPolyline(PolylineOptions()
                         .add(LatLng(spot[index].latitude!!, spot[index].longitude!!), LatLng(spot[index + 1].latitude!!, spot[index + 1].longitude!!))
                         .color(0xFF2286c3.toInt())
                         .width(10F)
                         .pattern(listOf(Dot(), Gap(20F), Dash(40F), Gap(20F)))
                         .endCap(CustomCap(BitmapDescriptorFactory.fromResource(R.drawable.ic_triangle_up))))
+                polylineList.add(polyline)
             }
 
+            // record current markers and polyLines
+            _markerList.value = markerList
+            _polyLineList.value = polylineList
+
             moveCamera(CameraUpdateFactory.newLatLngZoom(startSpotLocation, 10F))
+        }
+    }
+
+    fun clearBeforeMarker() {
+        markerList.value?.forEach {
+            it.remove()
+        }
+        polyLineList.value?.forEach {
+            it.remove()
         }
     }
 
@@ -95,7 +121,7 @@ class TripDetailViewModel(app: Application, tripData: Trip, repository: TripTrip
     }
 
 
-    private fun generateFakeSpot() {
+    fun generateFakeSpot() {
         val fakeSpots = mutableListOf<SpotTag>()
 
         val spotA = SpotTag(
@@ -164,6 +190,92 @@ class TripDetailViewModel(app: Application, tripData: Trip, repository: TripTrip
 
         fakeSpots.add(spotA)
         fakeSpots.add(spotB)
+        fakeSpots.add(spotC)
+        fakeSpots.add(spotD)
+
+        _spotsData.value = fakeSpots
+
+    }
+
+
+    fun generateFakeSpot2() {
+        val fakeSpots = mutableListOf<SpotTag>()
+
+        val spotC = SpotTag(
+            id = "ZXCV",
+            positionName = "台中車站",
+            daySpotsKey = "",
+            startTime = 16858528993988,
+            stayTime = "1HR",
+            property = 2,
+            longitude = 120.6844719,
+            latitude = 24.1372593,
+            content = "轉程豐原客運 C8763 路線",
+            lastEditor = "匿名蠑螈",
+            lastEditTime = 1605850702139,
+            photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg"),
+            messages = null
+        )
+
+        val spotD = SpotTag(
+            id = "ZXCV",
+            positionName = "大坑",
+            daySpotsKey = "",
+            startTime = 16858529666688,
+            stayTime = "1HR",
+            property = 3,
+            longitude = 120.7318791,
+            latitude = 24.1802453,
+            content = "再怎麼累也要注意不能思考為什麼要來這裡!!",
+            lastEditor = "匿名蠑螈",
+            lastEditTime = 1605850702139,
+            photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg"),
+            messages = null
+        )
+
+        fakeSpots.add(spotC)
+        fakeSpots.add(spotD)
+
+        _spotsData.value = fakeSpots
+
+    }
+
+
+    fun generateFakeSpot3() {
+        val fakeSpots = mutableListOf<SpotTag>()
+
+        val spotC = SpotTag(
+            id = "ZXCV",
+            positionName = "關西空港",
+            daySpotsKey = "",
+            startTime = 16858528993988,
+            stayTime = "1HR",
+            property = 2,
+            longitude = 135.2281999,
+            latitude = 34.4320024,
+            content = "一不小心就到這裡了",
+            lastEditor = "匿名蠑螈",
+            lastEditTime = 1605850702139,
+            photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg"),
+            messages = null
+        )
+
+        val spotD = SpotTag(
+            id = "ZXCV",
+            positionName = "環球影城",
+            daySpotsKey = "",
+            startTime = 16858529993988,
+            stayTime = "1HR",
+            property = 3,
+            longitude = 135.4301442,
+            latitude = 34.665442,
+            content = "睡吧，夢裡甚麼都有。",
+            lastEditor = "匿名蠑螈",
+            lastEditTime = 1605850702139,
+            photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg"),
+            messages = null
+        )
+
         fakeSpots.add(spotC)
         fakeSpots.add(spotD)
 

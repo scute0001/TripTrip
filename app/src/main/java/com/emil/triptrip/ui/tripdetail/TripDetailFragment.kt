@@ -10,7 +10,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -25,7 +24,6 @@ import com.google.android.gms.maps.*
 
 import com.google.android.gms.maps.model.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import kotlinx.android.synthetic.main.spot_detail_fragment.*
 
 class TripDetailFragment : Fragment() {
     private lateinit var viewModel: TripDetailViewModel
@@ -42,13 +40,28 @@ class TripDetailFragment : Fragment() {
     private val callback = OnMapReadyCallback { googleMap ->
         myMap = googleMap
         getLocationPermission()
-
         //set marker click event
         googleMap.setOnMarkerClickListener {
             // call get spot detail api here
 
             // set fake data
             viewModel.setSpotDetailData(it.tag.toString())
+
+
+//            val bounds = googleMap.projection.visibleRegion.latLngBounds
+//            var up: Double = bounds.northeast.latitude
+//            var down: Double = bounds.southwest.latitude
+//            var right: Double = bounds.northeast.longitude
+//            var left: Double = bounds.southwest.longitude
+//
+//            var newUp = up - ((abs(up - down)) / 4 )
+//            var newDown = down - ((abs(up - down)) / 4 )
+//            val newBound = LatLngBounds(LatLng(newDown, left), LatLng(newUp, right))
+//
+//            Log.d("BBBBBB", "${bounds.southwest} ${bounds.northeast}")
+//            Log.d("BBBBBB", "${newBound.southwest} ${newBound.northeast}")
+//            googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(newBound, 0))
+
             false
         }
 
@@ -65,8 +78,6 @@ class TripDetailFragment : Fragment() {
         //set friends Location
         getUsersLocation()
         getDeviceLocation()
-        viewModel.drawSpotPosition(googleMap, viewModel.spotsData.value!!)
-
 
     }
 
@@ -93,6 +104,7 @@ class TripDetailFragment : Fragment() {
 
         //set bottom sheet controller
         val bottomBehavior = BottomSheetBehavior.from(binding.spotSheet.spotDetailSheet)
+        bottomBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
 
         //set select day recyclerView adapter
@@ -110,20 +122,41 @@ class TripDetailFragment : Fragment() {
         })
 
 
+        // observe selected Day and set spotsList for map
+        viewModel.selectedDay.observe(viewLifecycleOwner, Observer {
+            // call get spots api here
+
+            //
+
+            // this is generated fake Data
+            when (it) {
+                "Day1" -> viewModel.generateFakeSpot()
+                "Day2" -> viewModel.generateFakeSpot2()
+                "Day3" -> viewModel.generateFakeSpot3()
+            }
+        })
 
         //set select time recyclerView adapter
         val selectTimeAdapter = SelectTimeAdapter(viewModel)
         binding.recyclerTripSelectTime.adapter = selectTimeAdapter
 
-        //set data to time recyclerView
+        //set data to time recyclerView and draw markers on the map
         viewModel.spotsData.observe(viewLifecycleOwner, Observer {
+
             selectTimeAdapter.submitList(it)
+
+            // clean before markers
+            viewModel.clearBeforeMarker()
+
+            // set spot marker data
+            myMap?.let { it1 -> viewModel.drawSpotPosition(it1, it) }
         })
 
         // set selected time view
         viewModel.refreshSelectedTimeAdapter.observe(viewLifecycleOwner, Observer {
             it?.let {
-                bottomBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                bottomBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+//                bottomBehavior.state = BottomSheetBehavior.STATE_EXPANDED
                 selectTimeAdapter.notifyDataSetChanged()
                 viewModel.onSelectTimeAdapterRefreshed()
             }
@@ -163,7 +196,8 @@ class TripDetailFragment : Fragment() {
             binding.spot = spot
             spotPicsAdapter.submitList(spot.photoList)
             binding.spotSheet.spotDetailSheet
-            bottomBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+//            bottomBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            bottomBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         })
 
         return binding.root
