@@ -1,16 +1,17 @@
 package com.emil.triptrip.ui.tripdetail
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.location.Location
-import androidx.fragment.app.Fragment
-
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -20,10 +21,15 @@ import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.databinding.TripDetailFragmentBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.*
-
-import com.google.android.gms.maps.model.*
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+
 
 class TripDetailFragment : Fragment() {
     private lateinit var viewModel: TripDetailViewModel
@@ -35,9 +41,13 @@ class TripDetailFragment : Fragment() {
     private var myMap: GoogleMap? = null
     private var lastKnownLocation: Location? = null
     var mapFragment: SupportMapFragment? = null
+    private lateinit var locationButton:View
 
 
     private val callback = OnMapReadyCallback { googleMap ->
+        // map UI setting
+        googleMap.setPadding(0 , 240, 0 , 200)
+
         myMap = googleMap
         getLocationPermission()
         //set marker click event
@@ -46,22 +56,6 @@ class TripDetailFragment : Fragment() {
 
             // set fake data
             viewModel.setSpotDetailData(it.tag.toString())
-
-
-//            val bounds = googleMap.projection.visibleRegion.latLngBounds
-//            var up: Double = bounds.northeast.latitude
-//            var down: Double = bounds.southwest.latitude
-//            var right: Double = bounds.northeast.longitude
-//            var left: Double = bounds.southwest.longitude
-//
-//            var newUp = up - ((abs(up - down)) / 4 )
-//            var newDown = down - ((abs(up - down)) / 4 )
-//            val newBound = LatLngBounds(LatLng(newDown, left), LatLng(newUp, right))
-//
-//            Log.d("BBBBBB", "${bounds.southwest} ${bounds.northeast}")
-//            Log.d("BBBBBB", "${newBound.southwest} ${newBound.northeast}")
-//            googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(newBound, 0))
-
             false
         }
 
@@ -76,8 +70,17 @@ class TripDetailFragment : Fragment() {
          */
 
         //set friends Location
+        updateLocationUI()
         getUsersLocation()
         getDeviceLocation()
+
+        // set My location btn gone
+        @SuppressLint("ResourceType")
+        locationButton = mapFragment?.view?.rootView?.findViewById<View>(2)!!
+        // Change the visibility of my location button
+        locationButton?.let {
+            it.setVisibility(View.GONE)
+        }
 
     }
 
@@ -177,7 +180,16 @@ class TripDetailFragment : Fragment() {
 
         //get my position
         binding.buttenForTest.setOnClickListener {
-            getDeviceLocation()
+//            val mapView = mapFragment?.view?.rootView
+//            @SuppressLint("ResourceType")
+//            locationButton = mapView?.findViewById<View>(2)!!
+//            // Change the visibility of my location button
+//            locationButton?.let {
+//                it.setVisibility(View.GONE)
+//            }
+
+            locationButton?.callOnClick()
+//            getDeviceLocation()
         }
         //////////////////////////
 
@@ -242,7 +254,6 @@ class TripDetailFragment : Fragment() {
             try {
                 if (locationPermission) {
                     isMyLocationEnabled = true
-//                    isMyLocationEnabled = true
 //                    uiSettings.isMyLocationButtonEnabled = true
                 } else {
 //                    isMyLocationEnabled = false
@@ -282,15 +293,15 @@ class TripDetailFragment : Fragment() {
                         if (lastKnownLocation != null) {
 
                             myMap?.apply {
-                                addMarker(MarkerOptions()
-                                    .position(LatLng(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude))
-                                    .title("It's ME!!")
-                                    .snippet("${lastKnownLocation!!.latitude}, ${lastKnownLocation!!.longitude}")
-                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location_self_64)))
+//                                addMarker(MarkerOptions()
+//                                    .position(LatLng(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude))
+//                                    .title("It's ME!!")
+//                                    .snippet("${lastKnownLocation!!.latitude}, ${lastKnownLocation!!.longitude}")
+//                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location_self_64)))
 
                                 moveCamera(
                                     CameraUpdateFactory.newLatLngZoom(
-                                        LatLng(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude), 10f))
+                                        LatLng(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude), 11f))
                             }
                         }
                     } else {
@@ -376,3 +387,18 @@ class TripDetailFragment : Fragment() {
 //
 //
 //        }
+
+
+//            val bounds = googleMap.projection.visibleRegion.latLngBounds
+//            var up: Double = bounds.northeast.latitude
+//            var down: Double = bounds.southwest.latitude
+//            var right: Double = bounds.northeast.longitude
+//            var left: Double = bounds.southwest.longitude
+//
+//            var newUp = up - ((abs(up - down)) / 4 )
+//            var newDown = down - ((abs(up - down)) / 4 )
+//            val newBound = LatLngBounds(LatLng(newDown, left), LatLng(newUp, right))
+//
+//            Log.d("BBBBBB", "${bounds.southwest} ${bounds.northeast}")
+//            Log.d("BBBBBB", "${newBound.southwest} ${newBound.northeast}")
+//            googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(newBound, 0))
