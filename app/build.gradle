@@ -95,5 +95,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
 
+    // google map place api
+    implementation 'com.google.android.libraries.places:places:2.4.0'
+
 
 }

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.emil.triptrip.R
@@ -16,6 +17,7 @@ import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.databinding.AddSpotFragmentBinding
 import com.emil.triptrip.ui.addtrip.AddTripViewModel
 import com.emil.triptrip.ui.addtrip.AddTripViewModelFactory
+import com.emil.triptrip.ui.location.SelectMapFragment
 import com.google.android.material.datepicker.MaterialCalendar
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.datepicker.MaterialTextInputPicker
@@ -53,10 +55,13 @@ class AddSpotFragment : Fragment() {
 
         //set test for navigation to select map and set spot location
         binding.buttonChoiceFromMap.setOnClickListener {
-            findNavController().navigate(AddSpotFragmentDirections.actionAddSpotFragmentToSelectMapFragment())
+            fragmentManager?.let { it1 -> SelectMapFragment(viewModel).show(it1, "select") }
         }
 
 
+        viewModel._selectLocation.observe(viewLifecycleOwner, Observer {
+            Log.i("TTTTT", "$it")
+        })
 
 
         return binding.root

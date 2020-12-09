@@ -33,9 +33,6 @@
         android:name="com.emil.triptrip.ui.addspot.AddSpotFragment"
         android:label="add_spot_fragment"
         tools:layout="@layout/add_spot_fragment" >
-        <action
-            android:id="@+id/action_addSpotFragment_to_selectMapFragment"
-            app:destination="@id/selectMapFragment" />
     </fragment>
     <fragment
         android:id="@+id/addTripFragment"
@@ -70,9 +67,5 @@
             app:popUpTo="@id/myTripsFragment"
             app:popUpToInclusive="true" />
     </dialog>
-    <fragment
-        android:id="@+id/selectMapFragment"
-        android:name="com.emil.triptrip.ui.location.SelectMapFragment"
-        android:label="SelectMapFragment"
-        tools:layout="@layout/fragment_select_map"/>
+
 </navigation>
