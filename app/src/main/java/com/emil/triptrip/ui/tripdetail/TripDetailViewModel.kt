@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.emil.triptrip.R
+import com.emil.triptrip.database.DayKey
 import com.emil.triptrip.database.SpotTag
 import com.emil.triptrip.database.Trip
 import com.emil.triptrip.database.source.TripTripRepository
@@ -14,7 +15,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.*
 import okhttp3.internal.notifyAll
 
-class TripDetailViewModel(app: Application, tripData: Trip, repository: TripTripRepository
+class TripDetailViewModel(app: Application,val tripData: Trip, repository: TripTripRepository
 ) : AndroidViewModel(app) {
 
 
@@ -43,6 +44,10 @@ class TripDetailViewModel(app: Application, tripData: Trip, repository: TripTrip
     val selectedDay = MutableLiveData<String>()
     var selectedDayPosition = -1
     val refreshSelectedDayAdapter = MutableLiveData<Boolean>()
+
+    // for navigation to add spot page data
+    val selectedDayKey = MutableLiveData<DayKey>()
+
 
     // record selected day data
     val selectedTime = MutableLiveData<Long>()

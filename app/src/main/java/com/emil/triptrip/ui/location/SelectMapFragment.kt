@@ -11,9 +11,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.emil.triptrip.R
 import com.emil.triptrip.databinding.FragmentSelectMapBinding
 import com.emil.triptrip.ui.addspot.AddSpotViewModel
@@ -77,7 +74,7 @@ class SelectMapFragment(val viewModel: AddSpotViewModel) : DialogFragment() {
 
         binding.buttonSubmit.setOnClickListener {
             if (marker?.position != null) {
-                viewModel._selectLocation.value = marker?.position
+                viewModel.selectLocation.value = marker?.position
                 dismiss()
                 Toast.makeText(requireContext(), "新增成功", Toast.LENGTH_SHORT).show()
             } else {

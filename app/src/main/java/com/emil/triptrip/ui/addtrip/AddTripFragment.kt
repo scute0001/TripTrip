@@ -1,5 +1,6 @@
 package com.emil.triptrip.ui.addtrip
 
+import android.icu.text.SimpleDateFormat
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +16,7 @@ import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.databinding.AddTripFragmentBinding
 import com.emil.triptrip.ui.dialog.SelectUserDialog
 import com.google.android.material.datepicker.MaterialDatePicker
+import java.time.ZoneId
 import java.util.*
 import kotlin.concurrent.fixedRateTimer
 
@@ -43,7 +45,6 @@ class AddTripFragment : Fragment() {
         val now = Calendar.getInstance()
         builder.setSelection(androidx.core.util.Pair(now.timeInMillis, now.timeInMillis))
         val picker = builder.build()
-
 
         // select date and set data to viewModel
         binding.constraintAddTripRange.setOnClickListener {

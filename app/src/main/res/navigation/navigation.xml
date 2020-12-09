@@ -33,6 +33,12 @@
         android:name="com.emil.triptrip.ui.addspot.AddSpotFragment"
         android:label="add_spot_fragment"
         tools:layout="@layout/add_spot_fragment" >
+        <argument
+            android:name="tripId"
+            app:argType="string" />
+        <argument
+            android:name="dayKey"
+            app:argType="com.emil.triptrip.database.DayKey"/>
     </fragment>
     <fragment
         android:id="@+id/addTripFragment"

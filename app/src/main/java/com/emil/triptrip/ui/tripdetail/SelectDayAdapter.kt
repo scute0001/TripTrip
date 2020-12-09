@@ -34,6 +34,7 @@ class DayViewHolder(val binding: ListTripDaysBinding): RecyclerView.ViewHolder(b
             //record selected position
             viewModel.selectedDayPosition = adapterPosition
             viewModel.selectedDay.value = item.dayCount
+            viewModel.selectedDayKey.value = item
             viewModel.refreshSelectedDayAdapter.value = true
         }
 

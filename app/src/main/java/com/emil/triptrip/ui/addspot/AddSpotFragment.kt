@@ -2,7 +2,6 @@ package com.emil.triptrip.ui.addspot
 
 import android.app.TimePickerDialog
 import android.icu.util.Calendar
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,16 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.databinding.AddSpotFragmentBinding
-import com.emil.triptrip.ui.addtrip.AddTripViewModel
-import com.emil.triptrip.ui.addtrip.AddTripViewModelFactory
 import com.emil.triptrip.ui.location.SelectMapFragment
-import com.google.android.material.datepicker.MaterialCalendar
-import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.datepicker.MaterialTextInputPicker
 
 class AddSpotFragment : Fragment() {
 
@@ -35,7 +27,10 @@ class AddSpotFragment : Fragment() {
 
         val app = requireNotNull(activity).application
         val repository = (requireContext().applicationContext as TripTripApplication).repository
-        val viewModelFactory = AddSpotViewModelFactory(app, repository)
+        val tripId = AddSpotFragmentArgs.fromBundle(requireArguments()).tripId
+        val dayKey = AddSpotFragmentArgs.fromBundle(requireArguments()).dayKey
+
+        val viewModelFactory = AddSpotViewModelFactory(app, repository, tripId, dayKey)
         viewModel = ViewModelProvider(this, viewModelFactory).get(AddSpotViewModel::class.java)
         binding.viewModel = viewModel
 
@@ -46,7 +41,7 @@ class AddSpotFragment : Fragment() {
             TimePickerDialog(
                 requireContext(),
                 { timePicker, hour, minute->
-                    Log.i("TTTTTTT", "$timePicker , $hour, $minute")
+                    viewModel.setStartTime(hour, minute)
                 },
                 hour,
                 minute,
@@ -59,8 +54,24 @@ class AddSpotFragment : Fragment() {
         }
 
 
-        viewModel._selectLocation.observe(viewLifecycleOwner, Observer {
+        // set select spot type
+        binding.buttonFood.setOnClickListener {
+            viewModel.setTypeFood()
+        }
+        binding.buttonScene.setOnClickListener {
+            viewModel.setTypeScene()
+        }
+        binding.buttonTrans.setOnClickListener {
+            viewModel.setTypeTrans()
+        }
+        binding.buttonHotel.setOnClickListener {
+            viewModel.setTypeHotel()
+        }
+
+
+        viewModel.selectLocation.observe(viewLifecycleOwner, Observer {
             Log.i("TTTTT", "$it")
+            viewModel.setOnSelectLocationFlag()
         })
 
 

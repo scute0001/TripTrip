@@ -176,7 +176,12 @@ class TripDetailFragment : Fragment() {
 
         // click add spot and navigation add spot page
         binding.buttenAddSpot.setOnClickListener {
-            findNavController().navigate(TripDetailFragmentDirections.actionTripDetailFragmentToAddSpotFragment())
+            if (viewModel.tripData.id != null && viewModel.selectedDayKey.value != null) {
+                findNavController().navigate(TripDetailFragmentDirections.actionTripDetailFragmentToAddSpotFragment(
+                    viewModel.tripData.id!!, viewModel.selectedDayKey.value!! ))
+            } else {
+                Toast.makeText(requireContext(), "請先選擇日期", Toast.LENGTH_SHORT).show()
+            }
         }
 
         //get my position
