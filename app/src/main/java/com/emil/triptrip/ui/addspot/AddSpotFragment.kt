@@ -10,11 +10,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.databinding.AddSpotFragmentBinding
 import com.emil.triptrip.ui.addtrip.AddTripViewModel
 import com.emil.triptrip.ui.addtrip.AddTripViewModelFactory
+import com.google.android.material.datepicker.MaterialCalendar
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.datepicker.MaterialTextInputPicker
 
 class AddSpotFragment : Fragment() {
 
@@ -33,7 +37,6 @@ class AddSpotFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(AddSpotViewModel::class.java)
         binding.viewModel = viewModel
 
-
         binding.textStartTime.setOnClickListener {
             val calendar = Calendar.getInstance()
             val hour = calendar.get(Calendar.HOUR_OF_DAY)
@@ -46,6 +49,11 @@ class AddSpotFragment : Fragment() {
                 hour,
                 minute,
                 true).show()
+        }
+
+        //set test for navigation to select map and set spot location
+        binding.buttonChoiceFromMap.setOnClickListener {
+            findNavController().navigate(AddSpotFragmentDirections.actionAddSpotFragmentToSelectMapFragment())
         }
 
 

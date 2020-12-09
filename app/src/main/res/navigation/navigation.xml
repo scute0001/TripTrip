@@ -32,7 +32,11 @@
         android:id="@+id/addSpotFragment"
         android:name="com.emil.triptrip.ui.addspot.AddSpotFragment"
         android:label="add_spot_fragment"
-        tools:layout="@layout/add_spot_fragment" />
+        tools:layout="@layout/add_spot_fragment" >
+        <action
+            android:id="@+id/action_addSpotFragment_to_selectMapFragment"
+            app:destination="@id/selectMapFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addTripFragment"
         android:name="com.emil.triptrip.ui.addtrip.AddTripFragment"
@@ -50,9 +54,6 @@
         android:label="LoginFragment"
         tools:layout="@layout/login_fragment">
         <action
-            android:id="@+id/action_loginFragment_to_myTripsFragment"
-            app:destination="@id/myTripsFragment" />
-        <action
             android:id="@+id/action_loginFragment_to_loginSuccessDialogFragment"
             app:destination="@id/loginSuccessDialogFragment"
             app:popUpTo="@id/loginFragment"
@@ -69,4 +70,9 @@
             app:popUpTo="@id/myTripsFragment"
             app:popUpToInclusive="true" />
     </dialog>
+    <fragment
+        android:id="@+id/selectMapFragment"
+        android:name="com.emil.triptrip.ui.location.SelectMapFragment"
+        android:label="SelectMapFragment"
+        tools:layout="@layout/fragment_select_map"/>
 </navigation>

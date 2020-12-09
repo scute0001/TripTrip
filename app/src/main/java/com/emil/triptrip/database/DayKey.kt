@@ -7,6 +7,7 @@ import kotlinx.android.parcel.Parcelize
 data class DayKey(
     var dayCount: String? = "",
     var date: String? = "",
+    var dateTimeStamp: Long? = 0L,
     var daySpotsKey: String? = ""
 ): Parcelable {
 

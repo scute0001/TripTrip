@@ -172,7 +172,7 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
             while ( timeCounter <= endDay.value!!) {
 
                 var date = startDay + ( oneDaySec * counter )
-                val dayKey = DayKey (dayCount = "Day${counter+1}", date = simpleDateFormat.format(date))
+                val dayKey = DayKey (dayCount = "Day${counter+1}", date = simpleDateFormat.format(date), dateTimeStamp = date)
 
                 dayList.add(dayKey)
                 timeCounter += oneDaySec
