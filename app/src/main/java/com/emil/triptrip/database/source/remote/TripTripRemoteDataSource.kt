@@ -1,10 +1,7 @@
 package com.emil.triptrip.database.source.remote
 
 import android.util.Log
-import com.emil.triptrip.database.ResultUtil
-import com.emil.triptrip.database.SpotTag
-import com.emil.triptrip.database.Trip
-import com.emil.triptrip.database.User
+import com.emil.triptrip.database.*
 import com.emil.triptrip.database.source.TripTripDataSource
 import com.emil.triptrip.ui.login.UserManager
 import com.google.firebase.firestore.FirebaseFirestore
@@ -21,6 +18,7 @@ object TripTripRemoteDataSource : TripTripDataSource {
     private const val PATH_TRIPS = "trips"
     private const val PATH_SPOTS = "spots"
     private const val QUERY_MY_TRIPS = "users"
+    private const val QUERY_SPOTS = "daySpotsKey"
 
 
     override suspend fun uploadUserDataToFirebase(userData: User): ResultUtil<Boolean> = suspendCoroutine { continuation ->
@@ -122,6 +120,25 @@ object TripTripRemoteDataSource : TripTripDataSource {
                 Log.d("Firebase", "Add Spot data error!!!!! ${it.message}")
                 continuation.resume(ResultUtil.Error(it))
             }
+    }
+
+    override suspend fun getSpots(dayKey: DayKey, tripId: String): ResultUtil<List<SpotTag>> = suspendCoroutine { continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_TRIPS).document(tripId).collection(PATH_SPOTS)
+            .whereEqualTo(QUERY_SPOTS, "${dayKey.daySpotsKey}")
+            .get()
+            .addOnSuccessListener {
+
+                val spots = it.toObjects(SpotTag::class.java)
+                Log.d("Firebase", "Spots data is $spots")
+                continuation.resume(ResultUtil.Success(spots))
+
+            }
+            .addOnFailureListener {
+                Log.d("Firebase", "get Spots data error!!!!! ${it.message}")
+                continuation.resume(ResultUtil.Error(it))
+            }
+
     }
 
     //    private const val PATH_ARTICLES = "articles"

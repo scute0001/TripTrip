@@ -1,10 +1,7 @@
 package com.emil.triptrip.database.source
 
 import androidx.lifecycle.MutableLiveData
-import com.emil.triptrip.database.ResultUtil
-import com.emil.triptrip.database.SpotTag
-import com.emil.triptrip.database.Trip
-import com.emil.triptrip.database.User
+import com.emil.triptrip.database.*
 
 /**
  * Interface to the TripTrip layers.
@@ -21,6 +18,9 @@ interface TripTripRepository {
     suspend fun getTrips(): ResultUtil<List<Trip>>
 
     suspend fun uploadSpotToFirebase(tripId: String, spotTag: SpotTag): ResultUtil<Boolean>
+
+    suspend fun getSpots(dayKey: DayKey, tripId: String): ResultUtil<List<SpotTag>>
+
 //    suspend fun loginMockData(id: String): Result<Author>
 //
 //    suspend fun getArticles(): Result<List<Article>>

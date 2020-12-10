@@ -126,7 +126,7 @@ class TripDetailFragment : Fragment() {
         })
 
 
-        // observe selected Day and set spotsList for map
+        // observe selected Day and set spotsList for map  // for fake data
         viewModel.selectedDay.observe(viewLifecycleOwner, Observer {
             // call get spots api here
 
@@ -139,6 +139,16 @@ class TripDetailFragment : Fragment() {
                 "Day3" -> viewModel.generateFakeSpot3()
             }
         })
+        ////////////////////////////////////////////////////////////////////
+
+        // observe selected DayKey and set spotsList for map
+        viewModel.selectedDayKey.observe(viewLifecycleOwner, Observer { dayKey ->
+            // call query selected day spots API here
+            viewModel.getSpotsData(dayKey)
+        })
+
+
+
 
         //set select time recyclerView adapter
         val selectTimeAdapter = SelectTimeAdapter(viewModel)
@@ -147,13 +157,16 @@ class TripDetailFragment : Fragment() {
         //set data to time recyclerView and draw markers on the map
         viewModel.spotsData.observe(viewLifecycleOwner, Observer {
 
-            selectTimeAdapter.submitList(it)
+            it?.let {
+                selectTimeAdapter.submitList(it)
 
-            // clean before markers
-            viewModel.clearBeforeMarker()
+                // clean before markers
+                viewModel.clearBeforeMarker()
 
-            // set spot marker data
-            myMap?.let { it1 -> viewModel.drawSpotPosition(it1, it) }
+                // set spot marker data
+                myMap?.let { it1 -> viewModel.drawSpotPosition(it1, it) }
+            }
+
         })
 
         // set selected time view

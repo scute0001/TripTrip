@@ -6,18 +6,44 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.emil.triptrip.R
+import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.database.DayKey
+import com.emil.triptrip.database.ResultUtil
 import com.emil.triptrip.database.SpotTag
 import com.emil.triptrip.database.Trip
 import com.emil.triptrip.database.source.TripTripRepository
+import com.emil.triptrip.util.LoadApiStatus
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import okhttp3.internal.notifyAll
 
-class TripDetailViewModel(app: Application,val tripData: Trip, repository: TripTripRepository
+class TripDetailViewModel(app: Application,val tripData: Trip,private val repository: TripTripRepository
 ) : AndroidViewModel(app) {
 
+    // status: The internal MutableLiveData that stores the status of the most recent request
+    private val _status = MutableLiveData<LoadApiStatus>()
+    val status: LiveData<LoadApiStatus>
+        get() = _status
+
+    // error: The internal MutableLiveData that stores the error of the most recent request
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String>
+        get() = _error
+
+    private val _leave = MutableLiveData<Boolean>()
+    val leave: LiveData<Boolean>
+        get() = _leave
+
+    // Create a Coroutine scope using a job to be able to cancel when needed
+    private var viewModelJob = Job()
+
+    // the Coroutine runs using the Main (UI) dispatcher
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     private val _spotsData = MutableLiveData<List<SpotTag>>()
     val spotsData: LiveData<List<SpotTag>>
@@ -70,35 +96,49 @@ class TripDetailViewModel(app: Application,val tripData: Trip, repository: TripT
 
     fun drawSpotPosition(map: GoogleMap, spot: List<SpotTag>) {
 
+        var startSpotLocation: LatLng? = null
+
         map?.apply {
-            var startSpotLocation: LatLng? = LatLng(spot[0].latitude!!, spot[0].longitude!!)
-            val markerList = mutableListOf<Marker>()
-            val polylineList = mutableListOf<Polyline>()
-            spot.forEach { spot ->
-                val marker = addMarker(MarkerOptions()
-                    .position(LatLng(spot.latitude!!, spot.longitude!!))
-                    .title(spot.positionName)
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker)))
-                marker.tag = spot.positionName
-                markerList.add(marker)
+            if (spot.isNotEmpty()) {
+                startSpotLocation = LatLng(spot[0].latitude!!, spot[0].longitude!!)
             }
 
-            for (index in 0..spot.size - 2) {
+            val markerList = mutableListOf<Marker>()
+            val polylineList = mutableListOf<Polyline>()
 
-                val polyline = addPolyline(PolylineOptions()
+            if (spot.isNotEmpty()) {
+                spot.forEach { spot ->
+                    val marker = addMarker(MarkerOptions()
+                        .position(LatLng(spot.latitude!!, spot.longitude!!))
+                        .title(spot.positionName)
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker)))
+                    marker.tag = spot.positionName
+                    markerList.add(marker)
+                }
+            }
+
+            if (spot.size >= 2) {
+                for (index in 0..spot.size - 2) {
+
+                    val polyline = addPolyline(PolylineOptions()
                         .add(LatLng(spot[index].latitude!!, spot[index].longitude!!), LatLng(spot[index + 1].latitude!!, spot[index + 1].longitude!!))
                         .color(0xFF2286c3.toInt())
                         .width(10F)
                         .pattern(listOf(Dot(), Gap(20F), Dash(40F), Gap(20F)))
                         .endCap(CustomCap(BitmapDescriptorFactory.fromResource(R.drawable.ic_triangle_up))))
-                polylineList.add(polyline)
+                    polylineList.add(polyline)
+                }
             }
+
+
 
             // record current markers and polyLines
             _markerList.value = markerList
             _polyLineList.value = polylineList
 
-            moveCamera(CameraUpdateFactory.newLatLngZoom(startSpotLocation, 10F))
+            if (startSpotLocation != null) {
+                moveCamera(CameraUpdateFactory.newLatLngZoom(startSpotLocation, 10F))
+            }
         }
     }
 
@@ -123,6 +163,50 @@ class TripDetailViewModel(app: Application,val tripData: Trip, repository: TripT
     // clear moveToSelectedSpot
     fun clearMoveToSelectedSpot() {
         _moveToSelectedSpot.value = null
+    }
+
+
+    // get selected day spots data form firebase
+    fun getSpotsData(dayKey: DayKey) {
+
+        tripData.id?.let {
+            coroutineScope.launch {
+                _status.value = LoadApiStatus.LOADING
+
+                when (val result = repository.getSpots(dayKey, tripData.id)) {
+                    is ResultUtil.Success -> {
+                        _error.value = null
+                        _status.value = LoadApiStatus.DONE
+                        leave(true)
+                        _spotsData.value = result.data
+                    }
+                    is ResultUtil.Fail -> {
+                        _error.value = result.error
+                        _status.value = LoadApiStatus.ERROR
+                    }
+                    is ResultUtil.Error -> {
+                        _error.value = result.exception.toString()
+                        _status.value = LoadApiStatus.ERROR
+                    }
+                    else -> {
+                        _error.value = TripTripApplication.instance.getString(R.string.Unknown_error)
+                        _status.value = LoadApiStatus.ERROR
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    fun leave(needRefresh: Boolean = false) {
+        _leave.value = needRefresh
+    }
+
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
     }
 
 
@@ -265,24 +349,24 @@ class TripDetailViewModel(app: Application,val tripData: Trip, repository: TripT
             messages = null
         )
 
-        val spotD = SpotTag(
-            id = "ZXCV",
-            positionName = "環球影城",
-            daySpotsKey = "",
-            startTime = 16858529993988,
-            stayTime = "1HR",
-            property = 3,
-            longitude = 135.4301442,
-            latitude = 34.665442,
-            content = "睡吧，夢裡甚麼都有。",
-            lastEditor = "匿名蠑螈",
-            lastEditTime = 1605850702139,
-            photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg"),
-            messages = null
-        )
+//        val spotD = SpotTag(
+//            id = "ZXCV",
+//            positionName = "環球影城",
+//            daySpotsKey = "",
+//            startTime = 16858529993988,
+//            stayTime = "1HR",
+//            property = 3,
+//            longitude = 135.4301442,
+//            latitude = 34.665442,
+//            content = "睡吧，夢裡甚麼都有。",
+//            lastEditor = "匿名蠑螈",
+//            lastEditTime = 1605850702139,
+//            photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg"),
+//            messages = null
+//        )
 
         fakeSpots.add(spotC)
-        fakeSpots.add(spotD)
+//        fakeSpots.add(spotD)
 
         _spotsData.value = fakeSpots
 
