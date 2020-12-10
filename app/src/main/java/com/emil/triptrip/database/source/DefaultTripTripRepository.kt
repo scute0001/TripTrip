@@ -2,6 +2,7 @@ package com.emil.triptrip.database.source
 
 import androidx.lifecycle.MutableLiveData
 import com.emil.triptrip.database.ResultUtil
+import com.emil.triptrip.database.SpotTag
 import com.emil.triptrip.database.Trip
 import com.emil.triptrip.database.User
 
@@ -26,6 +27,13 @@ class DefaultTripTripRepository(private val remoteDataSource: TripTripDataSource
 
     override suspend fun getTrips(): ResultUtil<List<Trip>> {
         return remoteDataSource.getTrips()
+    }
+
+    override suspend fun uploadSpotToFirebase(
+        tripId: String,
+        spotTag: SpotTag
+    ): ResultUtil<Boolean> {
+        return remoteDataSource.uploadSpotToFirebase(tripId, spotTag)
     }
 
     //    override suspend fun loginMockData(id: String): Result<Author> {

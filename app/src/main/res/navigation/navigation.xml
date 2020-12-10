@@ -73,5 +73,10 @@
             app:popUpTo="@id/myTripsFragment"
             app:popUpToInclusive="true" />
     </dialog>
+    <dialog
+        android:id="@+id/addSpotSuccessDialogFragment"
+        android:name="com.emil.triptrip.ui.dialog.AddSpotSuccessDialogFragment"
+        android:label="AddSpotSuccessDialogFragment"
+        tools:layout="@layout/fragment_login_success_dialog"/>
 
 </navigation>

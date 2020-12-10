@@ -8,10 +8,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.databinding.AddSpotFragmentBinding
+import com.emil.triptrip.ui.dialog.AddSpotSuccessDialogFragment
 import com.emil.triptrip.ui.location.SelectMapFragment
 
 class AddSpotFragment : Fragment() {
@@ -68,10 +71,36 @@ class AddSpotFragment : Fragment() {
             viewModel.setTypeHotel()
         }
 
+        // set spot data
+        binding.buttonSubmitSpot.setOnClickListener {
+            viewModel.setSpotData()
+        }
+
 
         viewModel.selectLocation.observe(viewLifecycleOwner, Observer {
-            Log.i("TTTTT", "$it")
             viewModel.setOnSelectLocationFlag()
+        })
+
+        // upload spot to firebase
+        viewModel.toFirebaseSpotData.observe(viewLifecycleOwner, Observer { spotData ->
+            if (spotData != null) {
+                // call update firebase here
+                viewModel.sendSpotData(spotData)
+
+            } else if (spotData == null && viewModel.navUploadSpotSuccess.value == false){
+                Toast.makeText(requireContext(), "請輸入景點資訊", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        // upload spot success and nav back to detail
+        viewModel.navUploadSpotSuccess.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                // nav at here
+
+                //show success dialog
+                fragmentManager?.let { it1 -> AddSpotSuccessDialogFragment().show(it1, "success add spot") }
+                viewModel.navUploadSpotSuccessFinished()
+            }
         })
 
 

@@ -2,6 +2,7 @@ package com.emil.triptrip.database.source.remote
 
 import android.util.Log
 import com.emil.triptrip.database.ResultUtil
+import com.emil.triptrip.database.SpotTag
 import com.emil.triptrip.database.Trip
 import com.emil.triptrip.database.User
 import com.emil.triptrip.database.source.TripTripDataSource
@@ -18,6 +19,7 @@ import kotlin.coroutines.suspendCoroutine
 object TripTripRemoteDataSource : TripTripDataSource {
     private const val PATH_USER = "user"
     private const val PATH_TRIPS = "trips"
+    private const val PATH_SPOTS = "spots"
     private const val QUERY_MY_TRIPS = "users"
 
 
@@ -101,7 +103,28 @@ object TripTripRemoteDataSource : TripTripDataSource {
 
     }
 
-//    private const val PATH_ARTICLES = "articles"
+    override suspend fun uploadSpotToFirebase(
+        tripId: String,
+        spotTag: SpotTag
+    ): ResultUtil<Boolean> = suspendCoroutine { continuation->
+
+        FirebaseFirestore.getInstance()
+            .collection(PATH_TRIPS).document(tripId).collection(PATH_SPOTS)
+            .add(spotTag)
+            .addOnSuccessListener { documentReference ->
+
+                // auto update id
+                documentReference.update("id" , documentReference.id)
+
+                continuation.resume(ResultUtil.Success(true))
+            }
+            .addOnFailureListener {
+                Log.d("Firebase", "Add Spot data error!!!!! ${it.message}")
+                continuation.resume(ResultUtil.Error(it))
+            }
+    }
+
+    //    private const val PATH_ARTICLES = "articles"
 //    private const val KEY_CREATED_TIME = "createdTime"
 //
 //    override suspend fun login(id: String): Result<Author> {

@@ -13,6 +13,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Uses the Glide library to load an image by URL into an [ImageView]
@@ -51,4 +52,11 @@ fun convertTimeHHmmToString(textView: TextView, systemTime: Long){
 fun convertTimeMMddHHmmToString(textView: TextView, systemTime: Long){
     textView.text = SimpleDateFormat("MM/dd HH:mm")
         .format(systemTime).toString()
+}
+
+@BindingAdapter("timeTransferHHmmGMT")
+fun convertTimeHHmmToStringGMT(textView: TextView, systemTime: Long){
+    val sdf = SimpleDateFormat("HH:mm")
+    sdf.setTimeZone(TimeZone.getTimeZone("GMT"))
+    textView.text = sdf.format(systemTime).toString()
 }

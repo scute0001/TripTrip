@@ -116,7 +116,8 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/text_start_time_title"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:text="10:00" />
+                        tools:text="10:00"
+                        app:timeTransferHHmmGMT="@{viewModel.startTime}"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

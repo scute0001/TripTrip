@@ -22,8 +22,8 @@
     <string name="login_success">登入成功</string>
     <string name="Unknown_error">Unknown error!!!!!!!!!!!!!</string>
     <string name="input_data_lack">你輸入的資料有缺喔!</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="select_attend_user">選擇參與者</string>
     <string name="last_edit">最後編輯:</string>
+    <string name="add_success">新增成功</string>
 </resources>
