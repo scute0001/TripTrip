@@ -1,17 +1,14 @@
 package com.emil.triptrip.ui.tripdetail
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
-import com.emil.triptrip.database.DayKey
-import com.emil.triptrip.database.ResultUtil
-import com.emil.triptrip.database.SpotTag
-import com.emil.triptrip.database.Trip
+import com.emil.triptrip.database.*
 import com.emil.triptrip.database.source.TripTripRepository
+import com.emil.triptrip.ui.login.UserManager
 import com.emil.triptrip.util.LoadApiStatus
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -20,7 +17,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import okhttp3.internal.notifyAll
 
 class TripDetailViewModel(app: Application,val tripData: Trip,private val repository: TripTripRepository
 ) : AndroidViewModel(app) {
@@ -79,6 +75,11 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
     val selectedTime = MutableLiveData<Long>()
     var selectedTimePosition = -1
     val refreshSelectedTimeAdapter = MutableLiveData<Boolean>()
+
+    // for first update self location to firebase
+    val _myLocation = MutableLiveData<MyLocation>()
+    val myLocation: LiveData<MyLocation>
+        get() = _myLocation
 
 
     init {
@@ -198,6 +199,59 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
 
 
     }
+
+    // set my Location data for upload to firebase
+    fun setMyLocationData(latitude: Double?, longitude: Double?) {
+
+        if (latitude != null && longitude != null) {
+
+            val myLocation = MyLocation(
+                name = UserManager.user.value?.name,
+                email = UserManager.user.value?.email,
+                photoUri = UserManager.user.value?.photoUri,
+                longitude = longitude,
+                latitude = latitude
+            )
+            _myLocation.value = myLocation
+        }
+    }
+
+    // update my location to firebase
+    fun uploadMyLocationData(myLocation: MyLocation) {
+
+        tripData.id?.let {
+            coroutineScope.launch {
+                _status.value = LoadApiStatus.LOADING
+
+                when (val result = repository.uploadMyLocation(tripData.id, myLocation)) {
+                    is ResultUtil.Success -> {
+                        _error.value = null
+                        _status.value = LoadApiStatus.DONE
+                        leave(true)
+                    }
+                    is ResultUtil.Fail -> {
+                        _error.value = result.error
+                        _status.value = LoadApiStatus.ERROR
+                    }
+                    is ResultUtil.Error -> {
+                        _error.value = result.exception.toString()
+                        _status.value = LoadApiStatus.ERROR
+                    }
+                    else -> {
+                        _error.value = TripTripApplication.instance.getString(R.string.Unknown_error)
+                        _status.value = LoadApiStatus.ERROR
+                    }
+                }
+            }
+        }
+
+    }
+
+    // update my location to firebase done and clear data.
+    fun uploadMyLocationDataFinished() {
+        _myLocation.value = null
+    }
+
 
     fun leave(needRefresh: Boolean = false) {
         _leave.value = needRefresh

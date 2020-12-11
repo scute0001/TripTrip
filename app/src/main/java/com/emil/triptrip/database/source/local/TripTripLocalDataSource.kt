@@ -17,6 +17,13 @@ class TripTripLocalDataSource(val context: Context) : TripTripDataSource {
         TODO("Not yet implemented")
     }
 
+    override suspend fun uploadMyLocation(
+        tripId: String,
+        myLocation: MyLocation
+    ): ResultUtil<Boolean> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getSpots(dayKey: DayKey, tripId: String): ResultUtil<List<SpotTag>> {
         TODO("Not yet implemented")
     }

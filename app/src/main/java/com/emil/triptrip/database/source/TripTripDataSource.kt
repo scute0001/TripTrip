@@ -20,6 +20,8 @@ interface TripTripDataSource {
 
     suspend fun getSpots(dayKey: DayKey, tripId: String): ResultUtil<List<SpotTag>>
 
+    suspend fun uploadMyLocation(tripId: String, myLocation: MyLocation): ResultUtil<Boolean>
+
 //    suspend fun login(id: String): Result<Author>
 //
 //    suspend fun getArticles(): Result<List<Article>>
