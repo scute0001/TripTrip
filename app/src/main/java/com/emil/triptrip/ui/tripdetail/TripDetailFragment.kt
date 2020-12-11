@@ -3,6 +3,8 @@ package com.emil.triptrip.ui.tripdetail
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
@@ -12,14 +14,24 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.graphics.drawable.RoundedBitmapDrawable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.GlideContext
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.CenterInside
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.transition.Transition
 import com.emil.triptrip.MainActivityViewModel
 import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.databinding.TripDetailFragmentBinding
+import com.emil.triptrip.util.GlideCircleBorderTransform
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -334,6 +346,8 @@ class TripDetailFragment : Fragment() {
                                     CameraUpdateFactory.newLatLngZoom(
                                         LatLng(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude), 11f))
                             }
+                            // update my location to firebase here 
+
                         }
                     } else {
                         myMap?.uiSettings?.isMyLocationButtonEnabled = false
@@ -346,27 +360,60 @@ class TripDetailFragment : Fragment() {
     }
 
     private fun getUsersLocation() {
-        myMap?.apply {
-            val userA = LatLng(25.0250383, 121.5327086)
-            val userB = LatLng(25.1714657, 121.4359783)
-            val userC = LatLng(25.0669043, 121.469388)
-            val userList = listOf(userA, userB, userC)
 
-            addMarker(MarkerOptions()
-                .position(userA)
-                .title("匿名蠑螈")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_location_64)))
+        val userA = LatLng(25.0250383, 121.5327086)
+        val userB = LatLng(25.1714657, 121.4359783)
+        val userC = LatLng(25.0669043, 121.469388)
+        val userList = listOf(userA, userB, userC)
 
-            addMarker(MarkerOptions()
-                .position(userB)
-                .title("匿名海豹")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_location_64)))
+        userList.forEach {
 
-            addMarker(MarkerOptions()
-                .position(userC)
-                .title("匿名喵喵")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_location_64)))
+            Glide.with(requireActivity())
+                .asBitmap()
+                .load("https://lh3.googleusercontent.com/a-/AOh14GiTzookZLQ8BzSdQs_lRfoczt6DpfEBMYXg6erEtQ=s96-c")
+                .apply(
+//                    RequestOptions().transform(CenterCrop(), RoundedCorners(50), GlideCircleBorderTransform(100f, 10))
+//                    RequestOptions().transform(GlideCircleBorderTransform(100f, 10))
+                    RequestOptions().transform(GlideCircleBorderTransform(135f, 0))
+                )
+                .into( object : SimpleTarget<Bitmap>(150, 150) {
+                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                        myMap?.apply {
+                            addMarker(MarkerOptions()
+                                .title("匿名蠑螈")
+                                .position(it)
+                                .icon(BitmapDescriptorFactory.fromBitmap(resource)))
+                        }
+
+                    }
+                })
+
         }
+
+
+
+//        myMap?.apply {
+//            val userA = LatLng(25.0250383, 121.5327086)
+//            val userB = LatLng(25.1714657, 121.4359783)
+//            val userC = LatLng(25.0669043, 121.469388)
+//            val userList = listOf(userA, userB, userC)
+//
+//
+//            addMarker(MarkerOptions()
+//                .position(userA)
+//                .title("匿名蠑螈")
+//                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_location_64)))
+//
+//            addMarker(MarkerOptions()
+//                .position(userB)
+//                .title("匿名海豹")
+//                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_location_64)))
+//
+//            addMarker(MarkerOptions()
+//                .position(userC)
+//                .title("匿名喵喵")
+//                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_location_64)))
+//        }
 
 
     }
