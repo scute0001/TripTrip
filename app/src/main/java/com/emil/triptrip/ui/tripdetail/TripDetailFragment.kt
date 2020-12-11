@@ -77,7 +77,6 @@ class TripDetailFragment : Fragment() {
 
         //set friends Location
         updateLocationUI()
-        getUsersLocation()
         getDeviceLocation()
 
         // set My location btn gone
@@ -128,6 +127,11 @@ class TripDetailFragment : Fragment() {
                 selectDayAdapter.notifyDataSetChanged()
                 viewModel.onSelectDayAdapterRefreshed()
             }
+        })
+
+        // observe users Location and draw at map
+        viewModel.usersLocation.observe(viewLifecycleOwner, Observer { usersLocationList ->
+            myMap?.let { viewModel.drawUsersLocation(it, usersLocationList) }
         })
 
 
@@ -361,68 +365,70 @@ class TripDetailFragment : Fragment() {
             e.printStackTrace()
         }
     }
-
-    private fun getUsersLocation() {
-
-        val userA = LatLng(25.0250383, 121.5327086)
-        val userB = LatLng(25.1714657, 121.4359783)
-        val userC = LatLng(25.0669043, 121.469388)
-        val userList = listOf(userA, userB, userC)
-
-        userList.forEach {
-
-            Glide.with(requireActivity())
-                .asBitmap()
-                .load("https://lh3.googleusercontent.com/a-/AOh14GiTzookZLQ8BzSdQs_lRfoczt6DpfEBMYXg6erEtQ=s96-c")
-                .apply(
-//                    RequestOptions().transform(CenterCrop(), RoundedCorners(50), GlideCircleBorderTransform(100f, 10))
-//                    RequestOptions().transform(GlideCircleBorderTransform(100f, 10))
-                    RequestOptions().transform(GlideCircleBorderTransform(135f, 0))
-                )
-                .into( object : SimpleTarget<Bitmap>(150, 150) {
-                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                        myMap?.apply {
-                            addMarker(MarkerOptions()
-                                .title("匿名蠑螈")
-                                .position(it)
-                                .icon(BitmapDescriptorFactory.fromBitmap(resource)))
-                        }
-
-                    }
-                })
-
-        }
-
-
-
-//        myMap?.apply {
-//            val userA = LatLng(25.0250383, 121.5327086)
-//            val userB = LatLng(25.1714657, 121.4359783)
-//            val userC = LatLng(25.0669043, 121.469388)
-//            val userList = listOf(userA, userB, userC)
-//
-//
-//            addMarker(MarkerOptions()
-//                .position(userA)
-//                .title("匿名蠑螈")
-//                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_location_64)))
-//
-//            addMarker(MarkerOptions()
-//                .position(userB)
-//                .title("匿名海豹")
-//                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_location_64)))
-//
-//            addMarker(MarkerOptions()
-//                .position(userC)
-//                .title("匿名喵喵")
-//                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_location_64)))
-//        }
-
-
-    }
-
-
 }
+
+
+//    private fun getUsersLocation() {
+//
+//        val userA = LatLng(25.0250383, 121.5327086)
+//        val userB = LatLng(25.1714657, 121.4359783)
+//        val userC = LatLng(25.0669043, 121.469388)
+//        val userList = listOf(userA, userB, userC)
+//
+//        userList.forEach {
+//
+//            Glide.with(requireActivity())
+//                .asBitmap()
+//                .load("https://lh3.googleusercontent.com/a-/AOh14GiTzookZLQ8BzSdQs_lRfoczt6DpfEBMYXg6erEtQ=s96-c")
+//                .apply(
+////                    RequestOptions().transform(CenterCrop(), RoundedCorners(50), GlideCircleBorderTransform(100f, 10))
+////                    RequestOptions().transform(GlideCircleBorderTransform(100f, 10))
+//                    RequestOptions().transform(GlideCircleBorderTransform(135f, 0))
+//                )
+//                .into( object : SimpleTarget<Bitmap>(150, 150) {
+//                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+//                        myMap?.apply {
+//                            addMarker(MarkerOptions()
+//                                .title("匿名蠑螈")
+//                                .position(it)
+//                                .icon(BitmapDescriptorFactory.fromBitmap(resource)))
+//                        }
+//
+//                    }
+//                })
+//
+//        }
+//
+//
+//
+////        myMap?.apply {
+////            val userA = LatLng(25.0250383, 121.5327086)
+////            val userB = LatLng(25.1714657, 121.4359783)
+////            val userC = LatLng(25.0669043, 121.469388)
+////            val userList = listOf(userA, userB, userC)
+////
+////
+////            addMarker(MarkerOptions()
+////                .position(userA)
+////                .title("匿名蠑螈")
+////                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_location_64)))
+////
+////            addMarker(MarkerOptions()
+////                .position(userB)
+////                .title("匿名海豹")
+////                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_location_64)))
+////
+////            addMarker(MarkerOptions()
+////                .position(userC)
+////                .title("匿名喵喵")
+////                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_location_64)))
+////        }
+//
+//
+//    }
+
+
+
 
 
 

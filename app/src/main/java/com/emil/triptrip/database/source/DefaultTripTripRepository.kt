@@ -44,6 +44,12 @@ class DefaultTripTripRepository(private val remoteDataSource: TripTripDataSource
         return remoteDataSource.uploadMyLocation(tripId, myLocation)
     }
 
+    override suspend fun getUsersLocation(
+        tripId: String,
+        myEmail: String
+    ): ResultUtil<List<MyLocation>> {
+        return remoteDataSource.getUsersLocation(tripId, myEmail)
+    }
     //    override suspend fun loginMockData(id: String): Result<Author> {
 //        return localDataSource.login(id)
 //    }

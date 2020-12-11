@@ -161,6 +161,28 @@ object TripTripRemoteDataSource : TripTripDataSource {
             }
     }
 
+    override suspend fun getUsersLocation(
+        tripId: String,
+        myEmail: String
+    ): ResultUtil<List<MyLocation>> = suspendCoroutine{ continuation ->
+
+        FirebaseFirestore.getInstance()
+            .collection(PATH_TRIPS).document(tripId).collection(PATH_MYLOCATIONS).whereNotEqualTo("email", myEmail)
+            .get()
+            .addOnSuccessListener {
+                val usersLocationList = it.toObjects(MyLocation::class.java)
+                usersLocationList.forEach {
+                    Log.d("Firebase", "usersLocationList is $it")
+                }
+                continuation.resume(ResultUtil.Success(usersLocationList))
+            }
+            .addOnFailureListener {
+                Log.d("Firebase", "get usersLocation data error!!!!! ${it.message}")
+                continuation.resume(ResultUtil.Error(it))
+            }
+
+    }
+
     //    private const val PATH_ARTICLES = "articles"
 //    private const val KEY_CREATED_TIME = "createdTime"
 //

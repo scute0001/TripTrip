@@ -23,6 +23,8 @@ interface TripTripRepository {
 
     suspend fun uploadMyLocation(tripId: String, myLocation: MyLocation): ResultUtil<Boolean>
 
+    suspend fun getUsersLocation(tripId: String, myEmail: String): ResultUtil<List<MyLocation>>
+
 //    suspend fun loginMockData(id: String): Result<Author>
 //
 //    suspend fun getArticles(): Result<List<Article>>

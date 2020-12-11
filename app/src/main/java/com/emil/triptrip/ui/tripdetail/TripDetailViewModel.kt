@@ -1,14 +1,23 @@
 package com.emil.triptrip.ui.tripdetail
 
 import android.app.Application
+import android.graphics.Bitmap
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.CenterInside
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.transition.Transition
 import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.database.*
 import com.emil.triptrip.database.source.TripTripRepository
 import com.emil.triptrip.ui.login.UserManager
+import com.emil.triptrip.util.GlideCircleBorderTransform
 import com.emil.triptrip.util.LoadApiStatus
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -81,10 +90,16 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
     val myLocation: LiveData<MyLocation>
         get() = _myLocation
 
+    // for draw users Location
+    val _usersLocation = MutableLiveData<List<MyLocation>>()
+    val usersLocation: LiveData<List<MyLocation>>
+        get() = _usersLocation
+
 
     init {
         _spotsData.value = null
         generateFakeSpot()
+        getUsersLocation()
     }
 
     fun onSelectDayAdapterRefreshed() {
@@ -141,6 +156,40 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
                 moveCamera(CameraUpdateFactory.newLatLngZoom(startSpotLocation, 10F))
             }
         }
+    }
+
+
+    fun drawUsersLocation(map: GoogleMap, usersLocationList: List<MyLocation>) {
+
+        val markerList = mutableListOf<Marker>()
+
+        if (usersLocationList.isNotEmpty()) {
+            usersLocationList.forEach {myLocation ->
+
+                Glide.with(TripTripApplication.instance.applicationContext)
+                    .asBitmap()
+                    .load(myLocation.photoUri)
+                    .apply(
+//                    RequestOptions().transform(CenterCrop(), RoundedCorners(50), GlideCircleBorderTransform(100f, 10))
+                    RequestOptions().transform(CenterCrop(), GlideCircleBorderTransform(135f, 0))
+//                        RequestOptions().transform(GlideCircleBorderTransform(135f, 0))
+                    )
+                    .into( object : SimpleTarget<Bitmap>(150, 150) {
+                        override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                            map?.apply {
+                                val marker = addMarker(MarkerOptions()
+                                    .title(myLocation.name)
+                                    .position(LatLng(myLocation.latitude!!, myLocation.longitude!!))
+                                    .icon(BitmapDescriptorFactory.fromBitmap(resource)))
+                                marker.tag = myLocation.name
+                                markerList.add(marker)
+                            }
+                        }
+                    })
+            }
+        }
+        Log.d("TTTTT", "markerList is $markerList")
+
     }
 
     fun clearBeforeMarker() {
@@ -245,6 +294,39 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
             }
         }
 
+    }
+
+    // get Users location list
+    fun getUsersLocation() {
+        tripData.id?.let {
+            UserManager.user.value?.email?.let {email ->
+
+                coroutineScope.launch {
+                    _status.value = LoadApiStatus.LOADING
+
+                    when (val result = repository.getUsersLocation(tripData.id, email)) {
+                        is ResultUtil.Success -> {
+                            _error.value = null
+                            _status.value = LoadApiStatus.DONE
+                            leave(true)
+                            _usersLocation.value = result.data
+                        }
+                        is ResultUtil.Fail -> {
+                            _error.value = result.error
+                            _status.value = LoadApiStatus.ERROR
+                        }
+                        is ResultUtil.Error -> {
+                            _error.value = result.exception.toString()
+                            _status.value = LoadApiStatus.ERROR
+                        }
+                        else -> {
+                            _error.value = TripTripApplication.instance.getString(R.string.Unknown_error)
+                            _status.value = LoadApiStatus.ERROR
+                        }
+                    }
+                }
+            }
+        }
     }
 
     // update my location to firebase done and clear data.

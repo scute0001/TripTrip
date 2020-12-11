@@ -43,4 +43,11 @@ class TripTripLocalDataSource(val context: Context) : TripTripDataSource {
     override suspend fun getTrips(): ResultUtil<List<Trip>> {
         TODO("Not yet implemented")
     }
+
+    override suspend fun getUsersLocation(
+        tripId: String,
+        myEmail: String
+    ): ResultUtil<List<MyLocation>> {
+        TODO("Not yet implemented")
+    }
 }
