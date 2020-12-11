@@ -98,7 +98,6 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
 
     init {
         _spotsData.value = null
-        generateFakeSpot()
         getUsersLocation()
     }
 
@@ -345,170 +344,175 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
         viewModelJob.cancel()
     }
 
-
-    fun generateFakeSpot() {
-        val fakeSpots = mutableListOf<SpotTag>()
-
-        val spotA = SpotTag(
-            id = "QWER",
-            positionName = "金幣灰黃",
-            daySpotsKey = "",
-            startTime = 1605850702139,
-            stayTime = "1HR",
-            property = 1,
-            longitude = 121.5626907,
-            latitude = 25.0424825,
-            content = "金幣黃黃的",
-            lastEditor = "匿名蠑螈",
-            lastEditTime = 1605850702139,
-            photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg", "https://i.imgur.com/QZdKyq8.jpg", "https://i.imgur.com/QZdKyq8.jpg"),
-            messages = null
-        )
-
-        val spotB = SpotTag(
-            id = "ASDF",
-            positionName = "賣噹噹",
-            daySpotsKey = "",
-            startTime = 1616058640180,
-            stayTime = "1HR",
-            property = 0,
-            longitude = 121.5152081,
-            latitude = 25.0476935,
-            content = "豬肉滿福堡，大大滿足，大大開心",
-            lastEditor = "Tzi scute",
-            lastEditTime = 1605850702139,
-            photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg", "https://i.imgur.com/QZdKyq8.jpg", "https://i.imgur.com/QZdKyq8.jpg"),
-            messages = null
-        )
-
-        val spotC = SpotTag(
-            id = "ZXCV",
-            positionName = "喵空懶車",
-            daySpotsKey = "",
-            startTime = 16858528993988,
-            stayTime = "1HR",
-            property = 2,
-            longitude = 121.2331741,
-            latitude = 25.0774806,
-            content = "似乎要從這裡移動",
-            lastEditor = "匿名蠑螈",
-            lastEditTime = 1605850702139,
-            photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg"),
-            messages = null
-        )
-
-        val spotD = SpotTag(
-            id = "ZXCV",
-            positionName = "山頂黑洞",
-            daySpotsKey = "",
-            startTime = 16858529993988,
-            stayTime = "1HR",
-            property = 3,
-            longitude = 121.5462675,
-            latitude = 25.1763029,
-            content = "重置人生(?)",
-            lastEditor = "匿名蠑螈",
-            lastEditTime = 1605850702139,
-            photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg"),
-            messages = null
-        )
-
-        fakeSpots.add(spotA)
-        fakeSpots.add(spotB)
-        fakeSpots.add(spotC)
-        fakeSpots.add(spotD)
-
-        _spotsData.value = fakeSpots
-
-    }
-
-
-    fun generateFakeSpot2() {
-        val fakeSpots = mutableListOf<SpotTag>()
-
-        val spotC = SpotTag(
-            id = "ZXCV",
-            positionName = "台中車站",
-            daySpotsKey = "",
-            startTime = 16858528993988,
-            stayTime = "1HR",
-            property = 2,
-            longitude = 120.6844719,
-            latitude = 24.1372593,
-            content = "轉程豐原客運 C8763 路線",
-            lastEditor = "匿名蠑螈",
-            lastEditTime = 1605850702139,
-            photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg"),
-            messages = null
-        )
-
-        val spotD = SpotTag(
-            id = "ZXCV",
-            positionName = "大坑",
-            daySpotsKey = "",
-            startTime = 16858529666688,
-            stayTime = "1HR",
-            property = 3,
-            longitude = 120.7318791,
-            latitude = 24.1802453,
-            content = "再怎麼累也要注意不能思考為什麼要來這裡!!",
-            lastEditor = "匿名蠑螈",
-            lastEditTime = 1605850702139,
-            photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg"),
-            messages = null
-        )
-
-        fakeSpots.add(spotC)
-        fakeSpots.add(spotD)
-
-        _spotsData.value = fakeSpots
-
-    }
-
-
-    fun generateFakeSpot3() {
-        val fakeSpots = mutableListOf<SpotTag>()
-
-        val spotC = SpotTag(
-            id = "ZXCV",
-            positionName = "關西空港",
-            daySpotsKey = "",
-            startTime = 16858528993988,
-            stayTime = "1HR",
-            property = 2,
-            longitude = 135.2281999,
-            latitude = 34.4320024,
-            content = "一不小心就到這裡了",
-            lastEditor = "匿名蠑螈",
-            lastEditTime = 1605850702139,
-            photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg"),
-            messages = null
-        )
-
-//        val spotD = SpotTag(
-//            id = "ZXCV",
-//            positionName = "環球影城",
-//            daySpotsKey = "",
-//            startTime = 16858529993988,
-//            stayTime = "1HR",
-//            property = 3,
-//            longitude = 135.4301442,
-//            latitude = 34.665442,
-//            content = "睡吧，夢裡甚麼都有。",
-//            lastEditor = "匿名蠑螈",
-//            lastEditTime = 1605850702139,
-//            photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg"),
-//            messages = null
-//        )
-
-        fakeSpots.add(spotC)
-//        fakeSpots.add(spotD)
-
-        _spotsData.value = fakeSpots
-
-    }
-
 }
+
+
+
+
+
+
+//fun generateFakeSpot() {
+//    val fakeSpots = mutableListOf<SpotTag>()
+//
+//    val spotA = SpotTag(
+//        id = "QWER",
+//        positionName = "金幣灰黃",
+//        daySpotsKey = "",
+//        startTime = 1605850702139,
+//        stayTime = "1HR",
+//        property = 1,
+//        longitude = 121.5626907,
+//        latitude = 25.0424825,
+//        content = "金幣黃黃的",
+//        lastEditor = "匿名蠑螈",
+//        lastEditTime = 1605850702139,
+//        photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg", "https://i.imgur.com/QZdKyq8.jpg", "https://i.imgur.com/QZdKyq8.jpg"),
+//        messages = null
+//    )
+//
+//    val spotB = SpotTag(
+//        id = "ASDF",
+//        positionName = "賣噹噹",
+//        daySpotsKey = "",
+//        startTime = 1616058640180,
+//        stayTime = "1HR",
+//        property = 0,
+//        longitude = 121.5152081,
+//        latitude = 25.0476935,
+//        content = "豬肉滿福堡，大大滿足，大大開心",
+//        lastEditor = "Tzi scute",
+//        lastEditTime = 1605850702139,
+//        photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg", "https://i.imgur.com/QZdKyq8.jpg", "https://i.imgur.com/QZdKyq8.jpg"),
+//        messages = null
+//    )
+//
+//    val spotC = SpotTag(
+//        id = "ZXCV",
+//        positionName = "喵空懶車",
+//        daySpotsKey = "",
+//        startTime = 16858528993988,
+//        stayTime = "1HR",
+//        property = 2,
+//        longitude = 121.2331741,
+//        latitude = 25.0774806,
+//        content = "似乎要從這裡移動",
+//        lastEditor = "匿名蠑螈",
+//        lastEditTime = 1605850702139,
+//        photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg"),
+//        messages = null
+//    )
+//
+//    val spotD = SpotTag(
+//        id = "ZXCV",
+//        positionName = "山頂黑洞",
+//        daySpotsKey = "",
+//        startTime = 16858529993988,
+//        stayTime = "1HR",
+//        property = 3,
+//        longitude = 121.5462675,
+//        latitude = 25.1763029,
+//        content = "重置人生(?)",
+//        lastEditor = "匿名蠑螈",
+//        lastEditTime = 1605850702139,
+//        photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg"),
+//        messages = null
+//    )
+//
+//    fakeSpots.add(spotA)
+//    fakeSpots.add(spotB)
+//    fakeSpots.add(spotC)
+//    fakeSpots.add(spotD)
+//
+//    _spotsData.value = fakeSpots
+//
+//}
+//
+//
+//fun generateFakeSpot2() {
+//    val fakeSpots = mutableListOf<SpotTag>()
+//
+//    val spotC = SpotTag(
+//        id = "ZXCV",
+//        positionName = "台中車站",
+//        daySpotsKey = "",
+//        startTime = 16858528993988,
+//        stayTime = "1HR",
+//        property = 2,
+//        longitude = 120.6844719,
+//        latitude = 24.1372593,
+//        content = "轉程豐原客運 C8763 路線",
+//        lastEditor = "匿名蠑螈",
+//        lastEditTime = 1605850702139,
+//        photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg"),
+//        messages = null
+//    )
+//
+//    val spotD = SpotTag(
+//        id = "ZXCV",
+//        positionName = "大坑",
+//        daySpotsKey = "",
+//        startTime = 16858529666688,
+//        stayTime = "1HR",
+//        property = 3,
+//        longitude = 120.7318791,
+//        latitude = 24.1802453,
+//        content = "再怎麼累也要注意不能思考為什麼要來這裡!!",
+//        lastEditor = "匿名蠑螈",
+//        lastEditTime = 1605850702139,
+//        photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg"),
+//        messages = null
+//    )
+//
+//    fakeSpots.add(spotC)
+//    fakeSpots.add(spotD)
+//
+//    _spotsData.value = fakeSpots
+//
+//}
+//
+//
+//fun generateFakeSpot3() {
+//    val fakeSpots = mutableListOf<SpotTag>()
+//
+//    val spotC = SpotTag(
+//        id = "ZXCV",
+//        positionName = "關西空港",
+//        daySpotsKey = "",
+//        startTime = 16858528993988,
+//        stayTime = "1HR",
+//        property = 2,
+//        longitude = 135.2281999,
+//        latitude = 34.4320024,
+//        content = "一不小心就到這裡了",
+//        lastEditor = "匿名蠑螈",
+//        lastEditTime = 1605850702139,
+//        photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg"),
+//        messages = null
+//    )
+//
+////        val spotD = SpotTag(
+////            id = "ZXCV",
+////            positionName = "環球影城",
+////            daySpotsKey = "",
+////            startTime = 16858529993988,
+////            stayTime = "1HR",
+////            property = 3,
+////            longitude = 135.4301442,
+////            latitude = 34.665442,
+////            content = "睡吧，夢裡甚麼都有。",
+////            lastEditor = "匿名蠑螈",
+////            lastEditTime = 1605850702139,
+////            photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg"),
+////            messages = null
+////        )
+//
+//    fakeSpots.add(spotC)
+////        fakeSpots.add(spotD)
+//
+//    _spotsData.value = fakeSpots
+//
+//}
+
 
 
 

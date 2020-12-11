@@ -135,21 +135,6 @@ class TripDetailFragment : Fragment() {
         })
 
 
-        // observe selected Day and set spotsList for map  // for fake data
-        viewModel.selectedDay.observe(viewLifecycleOwner, Observer {
-            // call get spots api here
-
-            //
-
-            // this is generated fake Data
-            when (it) {
-                "Day1" -> viewModel.generateFakeSpot()
-                "Day2" -> viewModel.generateFakeSpot2()
-                "Day3" -> viewModel.generateFakeSpot3()
-            }
-        })
-        ////////////////////////////////////////////////////////////////////
-
         // observe selected DayKey and set spotsList for map
         viewModel.selectedDayKey.observe(viewLifecycleOwner, Observer { dayKey ->
             // call query selected day spots API here
