@@ -4,8 +4,6 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.icu.text.SimpleDateFormat
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,16 +13,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.emil.triptrip.MainActivity
 import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.databinding.AddTripFragmentBinding
 import com.emil.triptrip.ui.dialog.SelectUserDialog
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.datepicker.MaterialDatePicker
-import java.time.ZoneId
 import java.util.*
-import kotlin.concurrent.fixedRateTimer
 
 class AddTripFragment : Fragment() {
     private val REQ_CODE_PIC_CAMERA = 9999
@@ -103,6 +98,10 @@ class AddTripFragment : Fragment() {
                 Toast.makeText(requireContext(), resources.getText(R.string.input_data_lack), Toast.LENGTH_SHORT).show()
                 viewModel.clearCheckDataFlag()
             }
+        })
+
+        viewModel.selectPicUri.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            viewModel.uploadPicToStorage(it)
         })
 
 

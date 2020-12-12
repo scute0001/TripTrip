@@ -1,11 +1,15 @@
 package com.emil.triptrip.database.source.remote
 
+import android.net.Uri
 import android.util.Log
 import com.emil.triptrip.database.*
 import com.emil.triptrip.database.source.TripTripDataSource
 import com.emil.triptrip.ui.login.UserManager
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import java.io.File
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -179,6 +183,37 @@ object TripTripRemoteDataSource : TripTripDataSource {
             .addOnFailureListener {
                 Log.d("Firebase", "get usersLocation data error!!!!! ${it.message}")
                 continuation.resume(ResultUtil.Error(it))
+            }
+
+    }
+
+    override suspend fun uploadTripMainPic(localPath: String): ResultUtil<String> = suspendCoroutine {continuation ->
+
+        // Create a storage reference from our app
+        var storageRef = FirebaseStorage.getInstance().getReference()
+
+        var file = Uri.fromFile(File(localPath))
+        var imagesRef= storageRef.child("images/${file.lastPathSegment}")
+        val uploadTask = imagesRef.putFile(file)
+
+        // Register observers to listen for when the download is done or if it fails
+        uploadTask
+            .addOnSuccessListener { taskSnapshot ->
+                // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
+                val storagePath = taskSnapshot.metadata?.path as String
+                storageRef.child(storagePath).downloadUrl
+                    .addOnSuccessListener {
+                        val uri = it
+                        Log.d("Firebase", "picture uri $uri")
+                        continuation.resume(ResultUtil.Success(uri.toString()))
+                    }
+                    .addOnFailureListener {
+                        continuation.resume(ResultUtil.Error(it))
+                    }
+            }
+            .addOnFailureListener {
+            // Handle unsuccessful uploads
+            continuation.resume(ResultUtil.Error(it))
             }
 
     }

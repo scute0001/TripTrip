@@ -50,4 +50,8 @@ class TripTripLocalDataSource(val context: Context) : TripTripDataSource {
     ): ResultUtil<List<MyLocation>> {
         TODO("Not yet implemented")
     }
+
+    override suspend fun uploadTripMainPic(localPath: String): ResultUtil<String> {
+        TODO("Not yet implemented")
+    }
 }

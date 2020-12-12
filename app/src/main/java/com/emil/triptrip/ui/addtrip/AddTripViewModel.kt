@@ -77,6 +77,8 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
 
     // local select pic uri
     val selectPicUri = MutableLiveData<String>()
+    // firebase storage pic uri
+    private val firebaseStoragePicUri = MutableLiveData<String>()
 
 
     init {
@@ -109,6 +111,34 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
 
                     // set got userData to LiveData
                     _usersData.value = result.data
+                }
+                is ResultUtil.Fail -> {
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                }
+                is ResultUtil.Error -> {
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                }
+                else -> {
+                    _error.value = TripTripApplication.instance.getString(R.string.Unknown_error)
+                    _status.value = LoadApiStatus.ERROR
+                }
+            }
+        }
+    }
+
+    // upload pic to storage
+    fun uploadPicToStorage(path: String) {
+        coroutineScope.launch {
+            _status.value = LoadApiStatus.LOADING
+
+            when (val result = repository.uploadTripMainPic(path)) {
+                is ResultUtil.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                    leave(true)
+                    firebaseStoragePicUri.value = result.data
                 }
                 is ResultUtil.Fail -> {
                     _error.value = result.error
@@ -203,7 +233,8 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
                 startTime = startDay.value,
                 attendUserList = userList,
                 users = users,
-                dayKeyList = dayList
+                dayKeyList = dayList,
+                mainImg = firebaseStoragePicUri.value ?: "https://i.imgur.com/QZdKyq8.jpg"
             )
             _tripData.value = data
         } else {
