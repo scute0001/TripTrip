@@ -100,7 +100,6 @@ class TripDetailFragment : Fragment() {
 
         // get data from safe args
         val tripData = TripDetailFragmentArgs.fromBundle(requireArguments()).tripData
-        Log.i("tripData", "tripData is $tripData")
 
         val app = requireNotNull(activity).application
         val repository = (requireContext().applicationContext as TripTripApplication).repository
@@ -176,7 +175,6 @@ class TripDetailFragment : Fragment() {
         // set myLocation data and update to firebase
         viewModel.myLocation.observe(viewLifecycleOwner, Observer { myLocation ->
             if (myLocation != null) {
-                Log.d("TTTT", "$myLocation")
                 viewModel.uploadMyLocationData(myLocation)
                 viewModel.uploadMyLocationDataFinished()
             }

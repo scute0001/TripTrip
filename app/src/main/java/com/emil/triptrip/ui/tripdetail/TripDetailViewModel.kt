@@ -187,7 +187,6 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
                     })
             }
         }
-        Log.d("TTTTT", "markerList is $markerList")
 
     }
 
