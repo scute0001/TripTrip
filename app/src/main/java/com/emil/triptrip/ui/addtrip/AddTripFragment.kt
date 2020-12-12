@@ -1,5 +1,9 @@
 package com.emil.triptrip.ui.addtrip
 
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.icu.text.SimpleDateFormat
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -11,17 +15,19 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.emil.triptrip.MainActivity
 import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.databinding.AddTripFragmentBinding
 import com.emil.triptrip.ui.dialog.SelectUserDialog
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.time.ZoneId
 import java.util.*
 import kotlin.concurrent.fixedRateTimer
 
 class AddTripFragment : Fragment() {
-
+    private val REQ_CODE_PIC_CAMERA = 9999
     private lateinit var viewModel: AddTripViewModel
 
     override fun onCreateView(
@@ -110,10 +116,63 @@ class AddTripFragment : Fragment() {
         }
 
 
+        // test imager picker select photo
+        //
+        binding.buttonAddPic.setOnClickListener {
+            val permission = requireActivity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            if (permission != PackageManager.PERMISSION_GRANTED) {
+                requireActivity().requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), REQ_CODE_PIC_CAMERA)
+            }
+            getLocalImg()
+        }
+
+
 
 
 
         return binding.root
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when(resultCode) {
+            Activity.RESULT_OK -> {
+                val filePath = ImagePicker.getFilePath(data) ?: ""
+                filePath?.let {
+                    // save file path here
+                    viewModel.setSelectedPicUri(filePath)
+                    Toast.makeText(requireContext(), "Load picture success.", Toast.LENGTH_SHORT).show()
+                }
+            }
+            ImagePicker.RESULT_ERROR -> {
+                Toast.makeText(requireContext(), "Load picture fail.", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+    }
+
+
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when(requestCode) {
+            REQ_CODE_PIC_CAMERA -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getLocalImg()
+                } else {
+
+                }
+            }
+        }
+    }
+
+    private fun getLocalImg() {
+        ImagePicker.with(this)
+            .crop()
+            .start()
     }
 
 

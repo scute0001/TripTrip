@@ -36,6 +36,23 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
 }
 
 
+@BindingAdapter("imagePathUrl")
+fun bindSelectImage(imgView: ImageView, imgUrl: String?) {
+    if (imgUrl == "" || imgUrl == null) {
+
+    } else {
+        Glide.with(imgView.context)
+            .load(imgUrl)
+            .placeholder(R.drawable.ic_placeholder)
+            .error(R.drawable.ic_placeholder)
+            .apply(
+                RequestOptions().transform(CenterCrop(), RoundedCorners(50))
+            )
+            .into(imgView)
+    }
+}
+
+
 @BindingAdapter("timeTransfer")
 fun convertLongToDateString(textView: TextView, systemTime: Long){
     textView.text = SimpleDateFormat("yyyy.MM.dd")

@@ -75,6 +75,19 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
     val addTripFinishedNavToMyTrips: LiveData<Boolean>
         get() = _addTripFinishedNavToMyTrips
 
+    // local select pic uri
+    val selectPicUri = MutableLiveData<String>()
+
+
+    init {
+        selectPicUri.value = ""
+    }
+
+    // set select local pic uri
+    fun setSelectedPicUri(uri: String) {
+        selectPicUri.value = uri
+    }
+
 
     // for Navigation to myTrips page finished clear
     fun clearAddTripFinishedNavToMyTrips() {
