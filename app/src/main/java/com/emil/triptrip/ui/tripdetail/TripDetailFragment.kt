@@ -2,8 +2,10 @@ package com.emil.triptrip.ui.tripdetail
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.TimePickerDialog
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.icu.util.Calendar
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
@@ -216,6 +218,9 @@ class TripDetailFragment : Fragment() {
             binding.spotSheet.editTextSpotDetailStayTime.isEnabled = true
             binding.spotSheet.imageEditDone.visibility = View.VISIBLE
             binding.spotSheet.imageEdit.visibility = View.GONE
+            binding.spotSheet.imageEditDel.visibility = View.VISIBLE
+            binding.spotSheet.imageEditCancel.visibility = View.VISIBLE
+            Log.i("TTTTT", "BEFORE ${viewModel.spotDetail.value}")
         }
 
         binding.spotSheet.imageEditDone.setOnClickListener {
@@ -225,8 +230,50 @@ class TripDetailFragment : Fragment() {
             binding.spotSheet.editTextSpotDetailStayTime.isEnabled = false
             binding.spotSheet.imageEditDone.visibility = View.GONE
             binding.spotSheet.imageEdit.visibility = View.VISIBLE
+            binding.spotSheet.imageEditDel.visibility = View.GONE
+            binding.spotSheet.imageEditCancel.visibility = View.GONE
             Toast.makeText(requireContext(), "更新資料成功", Toast.LENGTH_SHORT).show()
+            // sent data to api here
+            // set change data for update
+            viewModel.uploadChangeSpotData()
+
+            Log.i("TTTTT", "DONE ${viewModel.spotDetail.value}")
         }
+
+        binding.spotSheet.imageEditCancel.setOnClickListener {
+            binding.spotSheet.editTextSpotDetailTitle.isEnabled = false
+            binding.spotSheet.editTextSpotDetailContent.isEnabled = false
+            binding.spotSheet.editTextSpotDetailStartTime.isEnabled = false
+            binding.spotSheet.editTextSpotDetailStayTime.isEnabled = false
+            binding.spotSheet.imageEditDone.visibility = View.GONE
+            binding.spotSheet.imageEdit.visibility = View.VISIBLE
+            binding.spotSheet.imageEditDel.visibility = View.GONE
+            binding.spotSheet.imageEditCancel.visibility = View.GONE
+        }
+
+        binding.spotSheet.imageEditDel.setOnClickListener {
+            // toDO
+            // del spot data api here
+            // show dialog
+            // close all edit function here
+        }
+
+
+        // change start time
+        binding.spotSheet.editTextSpotDetailStartTime.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val hour = calendar.get(Calendar.HOUR_OF_DAY)
+            val minute = calendar.get(Calendar.MINUTE)
+            TimePickerDialog(
+                requireContext(),
+                { timePicker, hour, minute->
+                    viewModel.changeStartTime(hour, minute)
+                },
+                hour,
+                minute,
+                true).show()
+        }
+
 
 
 

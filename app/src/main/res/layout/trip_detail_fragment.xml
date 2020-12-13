@@ -44,6 +44,7 @@
                 android:id="@+id/butten_add_spot"
                 android:layout_width="66dp"
                 android:layout_height="60dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/shape_circle_btn"
                 android:clickable="true"
@@ -52,8 +53,7 @@
                 android:scaleType="fitEnd"
                 android:src="@drawable/ic_spot_add"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_trip_select_days"
@@ -97,7 +97,7 @@
                 android:paddingVertical="4dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_focus_64"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/butten_add_spot"
                 app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

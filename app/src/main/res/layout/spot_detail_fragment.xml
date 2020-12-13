@@ -20,7 +20,7 @@
         android:id="@+id/spot_detail_sheet"
         android:background="@drawable/shape_spot_detail_border"
         app:behavior_hideable="true"
-        app:behavior_peekHeight="144dp"
+        app:behavior_peekHeight="168dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
 
@@ -42,7 +42,7 @@
             android:id="@+id/constraint_spot_detail_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="48dp"
             android:elevation="4dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline_spot_detail_right"
             app:layout_constraintStart_toStartOf="@+id/guideline_spot_detail_left"
@@ -51,6 +51,7 @@
 
             <EditText
                 android:id="@+id/editText_spot_detail_title"
+                style="@style/spot_detail"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_marginStart="16dp"
@@ -59,19 +60,18 @@
                 android:background="@drawable/shape_underline"
                 android:ems="10"
                 android:enabled="false"
-                android:textSize="20sp"
                 android:hint="Input spot name here."
-                android:text="@{spotSheet.positionName}"
                 android:inputType="textPersonName"
+                android:text="@={viewModelSheet.spotDetail.positionName}"
                 android:textAlignment="center"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/editText_spot_detail_start_time"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_weight="3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                style="@style/spot_detail" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <EditText
                 android:id="@+id/editText_spot_detail_start_time"
@@ -79,21 +79,21 @@
                 android:layout_height="32dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:enabled="false"
                 android:background="@drawable/shape_underline"
                 android:ems="10"
+                android:enabled="false"
                 android:hint="10:00"
-                android:textStyle="bold"
-                android:textColor="@color/grayUnderline"
                 android:inputType="textPersonName"
                 android:textAlignment="center"
+                android:textColor="@color/grayUnderline"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/editText_spot_detail_title"
                 app:layout_constraintTop_toTopOf="parent"
-                app:timeTransferHHmmGMT="@{spotSheet.startTime}"/>
+                app:timeTransferHHmmGMT="@{spotSheet.startTime}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -209,7 +209,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/grayUnderline"
                 android:hint="1HR"
-                android:text="@{spotSheet.stayTime}"
+                android:text="@={viewModelSheet.spotDetail.stayTime}"
                 android:inputType="text"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -244,7 +244,7 @@
                 android:enabled="false"
                 android:background="@drawable/shape_border_corner_solid_black"
                 android:ems="10"
-                android:text="@{spotSheet.content}"
+                android:text="@={viewModelSheet.spotDetail.content}"
                 android:gravity="start|top"
                 android:hint="Add your travel detail here."
                 android:inputType="textMultiLine"
@@ -353,17 +353,42 @@
 
         <ImageView
             android:id="@+id/image_edit_done"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:scaleType="centerCrop"
             android:visibility="gone"
-            android:src="@drawable/ic_baseline_save_alt_24"
+            android:src="@drawable/ic_save_128"
             app:tint="@color/colorPrimaryDark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/image_edit_del"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toEndOf="@+id/image_edit_cancel"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_delect_128"
+            app:tint="@color/black" />
 
+        <ImageView
+            android:id="@+id/image_edit_cancel"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/quantum_ic_clear_grey600_24"
+            app:tint="@color/black" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

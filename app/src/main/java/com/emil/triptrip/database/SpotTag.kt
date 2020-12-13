@@ -8,6 +8,7 @@ data class SpotTag(
     val id: String? = "",
     var positionName: String? = "",
     var daySpotsKey: String? = "",
+    var startDay: Long? = -1L,
     var startTime: Long? = -1L,
     var stayTime: String? = "",
     var property: Int? = -1,

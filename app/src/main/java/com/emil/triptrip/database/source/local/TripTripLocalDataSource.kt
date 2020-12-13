@@ -58,4 +58,8 @@ class TripTripLocalDataSource(val context: Context) : TripTripDataSource {
     override fun getLiveSpots(tripId: String): MutableLiveData<List<SpotTag>> {
         TODO("Not yet implemented")
     }
+
+    override suspend fun updateSpotInfo(spotData: SpotTag, tripId: String): ResultUtil<Boolean> {
+        TODO("Not yet implemented")
+    }
 }

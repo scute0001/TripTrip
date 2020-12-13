@@ -245,6 +245,20 @@ object TripTripRemoteDataSource : TripTripDataSource {
         return liveData
     }
 
+    override suspend fun updateSpotInfo(spotData: SpotTag, tripId: String): ResultUtil<Boolean> = suspendCoroutine {continuation->
+
+        FirebaseFirestore.getInstance()
+            .collection(PATH_TRIPS).document(tripId).collection(PATH_SPOTS).document(spotData.id!!)
+            .set(spotData)
+            .addOnSuccessListener { documentReference ->
+
+                continuation.resume(ResultUtil.Success(true))
+            }
+            .addOnFailureListener {
+                Log.d("Firebase", "Add Spot data error!!!!! ${it.message}")
+                continuation.resume(ResultUtil.Error(it))
+            }
+    }
 }
 
 //

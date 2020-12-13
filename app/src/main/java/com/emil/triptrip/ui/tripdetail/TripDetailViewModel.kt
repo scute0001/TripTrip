@@ -8,7 +8,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
@@ -54,9 +53,10 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
     val spotsData: LiveData<List<SpotTag>>
         get() = _spotsData
 
-    private val _spotDetail = MutableLiveData<SpotTag>()
-    val spotDetail: LiveData<SpotTag>
-        get() = _spotDetail
+    // need to be change by user editor
+    val spotDetail = MutableLiveData<SpotTag>()
+//    val spotDetail: LiveData<SpotTag>
+//        get() = _spotDetail
 
     // for selected diff day show different Spot's Marker
     private val _markerList = MutableLiveData<List<Marker>>()
@@ -209,7 +209,7 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
     fun setSpotDetailData(spotName: String) {
         spotsData.value?.forEach {
             if (it.positionName == spotName) {
-                _spotDetail.value = it
+                spotDetail.value = it
             }
         }
     }
@@ -347,6 +347,28 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
         if (selectedDayKey.value?.daySpotsKey != null && selectedDayKey.value?.daySpotsKey!= "") {
             val list = liveSpotsData.value?.filter { it.daySpotsKey == selectedDayKey.value?.daySpotsKey}?.sortedBy { it.startTime }?.map { it }
             _spotsData.value = list
+        }
+    }
+
+    // set change spot start time
+    fun changeStartTime(hours: Int, minute: Int) {
+        spotDetail.value?.startDay?.let {
+            spotDetail.value?.startTime =  it + (hours * 60 * 60 * 1000) + (minute * 60 * 1000)
+        }
+    }
+
+    // set change spot data and update to firebase
+    fun uploadChangeSpotData() {
+        val data = spotDetail.value as SpotTag
+        data.lastEditor = UserManager.user.value?.name
+        data.lastEditTime = System.currentTimeMillis()
+        Log.i("TTTT", "$data")
+
+        // upload data to firebase
+        coroutineScope.launch {
+            tripData.id?.let {
+                repository.updateSpotInfo(data, tripData.id)
+            }
         }
     }
 

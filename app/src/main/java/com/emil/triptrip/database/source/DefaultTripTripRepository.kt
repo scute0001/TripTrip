@@ -59,23 +59,12 @@ class DefaultTripTripRepository(private val remoteDataSource: TripTripDataSource
         return remoteDataSource.getLiveSpots(tripId)
     }
 
-    //    override suspend fun loginMockData(id: String): Result<Author> {
-//        return localDataSource.login(id)
-//    }
-//
-//    override suspend fun getArticles(): Result<List<Article>> {
-//        return remoteDataSource.getArticles()
-//    }
-//
+    override suspend fun updateSpotInfo(spotData: SpotTag, tripId: String): ResultUtil<Boolean> {
+        return remoteDataSource.updateSpotInfo(spotData, tripId)
+    }
+
 //    override fun getLiveArticles(): MutableLiveData<List<Article>> {
 //        return remoteDataSource.getLiveArticles()
 //    }
-//
-//    override suspend fun publish(article: Article): Result<Boolean> {
-//        return remoteDataSource.publish(article)
-//    }
-//
-//    override suspend fun delete(article: Article): Result<Boolean> {
-//        return remoteDataSource.delete(article)
-//    }
+
 }

@@ -88,6 +88,7 @@ class AddSpotViewModel(app: Application,
             val spotData = SpotTag(
                 positionName = spotTitle,
                 daySpotsKey = dayKey.daySpotsKey,
+                startDay = dayKey.dateTimeStamp,
                 startTime = startTime.value,
                 stayTime = stayTime,
                 property = selectSpotType.value,
