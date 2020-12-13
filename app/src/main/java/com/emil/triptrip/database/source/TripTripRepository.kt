@@ -27,13 +27,9 @@ interface TripTripRepository {
 
     suspend fun uploadTripMainPic(localPath: String): ResultUtil<String>
 
-//    suspend fun loginMockData(id: String): Result<Author>
-//
-//    suspend fun getArticles(): Result<List<Article>>
-//
+    fun getLiveSpots(tripId: String): MutableLiveData<List<SpotTag>>
+
+
 //    fun getLiveArticles(): MutableLiveData<List<Article>>
-//
-//    suspend fun publish(article: Article): Result<Boolean>
-//
-//    suspend fun delete(article: Article): Result<Boolean>
+
 }

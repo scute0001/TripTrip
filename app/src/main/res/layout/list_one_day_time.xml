@@ -42,7 +42,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="10:00"
-                app:timeTransferHHmm="@{spotData.startTime}"/>
+                app:timeTransferHHmmGMT="@{spotData.startTime}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

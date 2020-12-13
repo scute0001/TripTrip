@@ -140,6 +140,11 @@ class TripDetailFragment : Fragment() {
             viewModel.getSpotsData(dayKey)
         })
 
+        // observe other users add spot
+        viewModel.liveSpotsData.observe(viewLifecycleOwner, Observer {
+            viewModel.setLiveSpotsToLocal()
+        })
+
 
 
 

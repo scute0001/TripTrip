@@ -95,10 +95,16 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
     val usersLocation: LiveData<List<MyLocation>>
         get() = _usersLocation
 
+    // get live spots data change by other users
+    var liveSpotsData = MutableLiveData<List<SpotTag>>()
+
 
     init {
         _spotsData.value = null
         getUsersLocation()
+
+        // set live spots listener
+        getLiveSpots()
     }
 
     fun onSelectDayAdapterRefreshed() {
@@ -324,6 +330,23 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
                     }
                 }
             }
+        }
+    }
+
+    //get live spot data when other users add spots
+    private fun getLiveSpots() {
+        tripData.id?.let {
+            liveSpotsData = repository.getLiveSpots(tripData.id)
+            _status.value = LoadApiStatus.DONE
+        }
+
+    }
+
+    // set live spots to local spots list
+    fun setLiveSpotsToLocal() {
+        if (selectedDayKey.value?.daySpotsKey != null && selectedDayKey.value?.daySpotsKey!= "") {
+            val list = liveSpotsData.value?.filter { it.daySpotsKey == selectedDayKey.value?.daySpotsKey}?.sortedBy { it.startTime }?.map { it }
+            _spotsData.value = list
         }
     }
 

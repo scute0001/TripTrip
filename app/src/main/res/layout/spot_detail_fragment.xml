@@ -93,7 +93,7 @@
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/editText_spot_detail_title"
                 app:layout_constraintTop_toTopOf="parent"
-                app:timeTransferHHmm="@{spotSheet.startTime}"/>
+                app:timeTransferHHmmGMT="@{spotSheet.startTime}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

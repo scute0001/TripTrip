@@ -55,6 +55,10 @@ class DefaultTripTripRepository(private val remoteDataSource: TripTripDataSource
         return remoteDataSource.uploadTripMainPic(localPath)
     }
 
+    override fun getLiveSpots(tripId: String): MutableLiveData<List<SpotTag>> {
+        return remoteDataSource.getLiveSpots(tripId)
+    }
+
     //    override suspend fun loginMockData(id: String): Result<Author> {
 //        return localDataSource.login(id)
 //    }

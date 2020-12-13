@@ -54,4 +54,8 @@ class TripTripLocalDataSource(val context: Context) : TripTripDataSource {
     override suspend fun uploadTripMainPic(localPath: String): ResultUtil<String> {
         TODO("Not yet implemented")
     }
+
+    override fun getLiveSpots(tripId: String): MutableLiveData<List<SpotTag>> {
+        TODO("Not yet implemented")
+    }
 }
