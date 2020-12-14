@@ -63,7 +63,15 @@ class DefaultTripTripRepository(private val remoteDataSource: TripTripDataSource
         return remoteDataSource.updateSpotInfo(spotData, tripId)
     }
 
-//    override fun getLiveArticles(): MutableLiveData<List<Article>> {
+    override suspend fun updateSpotPhoto(
+        photoList: List<String>,
+        tripId: String,
+        spotId: String
+    ): ResultUtil<Boolean> {
+        return remoteDataSource.updateSpotPhoto(photoList, tripId, spotId)
+    }
+
+    //    override fun getLiveArticles(): MutableLiveData<List<Article>> {
 //        return remoteDataSource.getLiveArticles()
 //    }
 

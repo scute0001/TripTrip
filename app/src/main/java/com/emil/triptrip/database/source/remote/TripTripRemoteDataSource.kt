@@ -25,6 +25,7 @@ object TripTripRemoteDataSource : TripTripDataSource {
     private const val PATH_MYLOCATIONS = "myLocations"
     private const val QUERY_MY_TRIPS = "users"
     private const val QUERY_SPOTS = "daySpotsKey"
+    private const val QUERY_PHOTOLIST = "photoList"
 
 
     override suspend fun uploadUserDataToFirebase(userData: User): ResultUtil<Boolean> = suspendCoroutine { continuation ->
@@ -250,6 +251,24 @@ object TripTripRemoteDataSource : TripTripDataSource {
         FirebaseFirestore.getInstance()
             .collection(PATH_TRIPS).document(tripId).collection(PATH_SPOTS).document(spotData.id!!)
             .set(spotData)
+            .addOnSuccessListener { documentReference ->
+
+                continuation.resume(ResultUtil.Success(true))
+            }
+            .addOnFailureListener {
+                Log.d("Firebase", "Add Spot data error!!!!! ${it.message}")
+                continuation.resume(ResultUtil.Error(it))
+            }
+    }
+
+    override suspend fun updateSpotPhoto(
+        photoList: List<String>,
+        tripId: String,
+        spotId: String
+    ): ResultUtil<Boolean> = suspendCoroutine{continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_TRIPS).document(tripId).collection(PATH_SPOTS).document(spotId)
+            .update(QUERY_PHOTOLIST, photoList)
             .addOnSuccessListener { documentReference ->
 
                 continuation.resume(ResultUtil.Success(true))

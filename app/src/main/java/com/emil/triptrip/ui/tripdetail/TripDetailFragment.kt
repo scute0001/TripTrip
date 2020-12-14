@@ -2,7 +2,9 @@ package com.emil.triptrip.ui.tripdetail
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.icu.util.Calendar
@@ -27,6 +29,7 @@ import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.databinding.TripDetailFragmentBinding
 import com.emil.triptrip.util.GlideCircleBorderTransform
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -43,7 +46,8 @@ class TripDetailFragment : Fragment() {
     private lateinit var viewModel: TripDetailViewModel
 
     // permission request code, just is a Int and unique.
-    private var PERMISSION_ID = 1010
+    private val REQ_CODE_PIC_CAMERA = 9999
+    private val PERMISSION_ID = 1010
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var locationPermission = false
     private var myMap: GoogleMap? = null
@@ -275,6 +279,14 @@ class TripDetailFragment : Fragment() {
                 true).show()
         }
 
+        binding.spotSheet.addPics.setOnClickListener {
+            val permission = requireActivity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            if (permission != PackageManager.PERMISSION_GRANTED) {
+                requireActivity().requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), REQ_CODE_PIC_CAMERA)
+            }
+            getLocalImg()
+        }
+
 
 
 
@@ -291,6 +303,7 @@ class TripDetailFragment : Fragment() {
         // show spot detail
         viewModel.spotDetail.observe(viewLifecycleOwner, Observer { spot ->
             binding.spot = spot
+            Log.i("TTTT", "spot.photoList ${spot.photoList}")
             spotPicsAdapter.submitList(spot.photoList)
             binding.spotSheet.spotDetailSheet
 //            bottomBehavior.state = BottomSheetBehavior.STATE_EXPANDED
@@ -364,6 +377,14 @@ class TripDetailFragment : Fragment() {
                     updateLocationUI()
                 }
             }
+
+            REQ_CODE_PIC_CAMERA -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getLocalImg()
+                } else {
+
+                }
+            }
         }
     }
 
@@ -399,6 +420,31 @@ class TripDetailFragment : Fragment() {
             }
         } catch (e: SecurityException) {
             e.printStackTrace()
+        }
+    }
+
+
+    private fun getLocalImg() {
+        ImagePicker.with(this)
+            .crop()
+            .start()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when(resultCode) {
+            Activity.RESULT_OK -> {
+                val filePath = ImagePicker.getFilePath(data) ?: ""
+                filePath?.let {
+                    // save file path here
+                    viewModel.uploadPicToStorage(filePath)
+                    Toast.makeText(requireContext(), "Load picture success.", Toast.LENGTH_SHORT).show()
+                }
+            }
+            ImagePicker.RESULT_ERROR -> {
+                Toast.makeText(requireContext(), "Load picture fail.", Toast.LENGTH_SHORT).show()
+            }
+
         }
     }
 }

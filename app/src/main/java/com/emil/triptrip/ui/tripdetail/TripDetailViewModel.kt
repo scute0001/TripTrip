@@ -375,6 +375,70 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
         spotDetail.value = data
     }
 
+    // upload pic to storage
+    fun uploadPicToStorage(path: String) {
+        coroutineScope.launch {
+            _status.value = LoadApiStatus.LOADING
+
+            when (val result = repository.uploadTripMainPic(path)) {
+                is ResultUtil.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                    leave(true)
+
+                    // get the fire storage download URI here and save to firebase
+                    updateSpotPhotoList(photoUri = result.data)
+
+                }
+                is ResultUtil.Fail -> {
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                }
+                is ResultUtil.Error -> {
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                }
+                else -> {
+                    _error.value = TripTripApplication.instance.getString(R.string.Unknown_error)
+                    _status.value = LoadApiStatus.ERROR
+                }
+            }
+        }
+    }
+
+    fun updateSpotPhotoList(photoUri: String) {
+        // set new photoList
+        val tripId = tripData.id as String
+        val spotId = spotDetail.value?.id as String
+        val list = spotDetail.value?.photoList as MutableList<String>
+        list.add(photoUri)
+        // update data to firebase
+        coroutineScope.launch {
+            _status.value = LoadApiStatus.LOADING
+
+            when (val result = repository.updateSpotPhoto(list, tripId, spotId)) {
+                is ResultUtil.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                    leave(true)
+
+                }
+                is ResultUtil.Fail -> {
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                }
+                is ResultUtil.Error -> {
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                }
+                else -> {
+                    _error.value = TripTripApplication.instance.getString(R.string.Unknown_error)
+                    _status.value = LoadApiStatus.ERROR
+                }
+            }
+        }
+    }
+
     // update my location to firebase done and clear data.
     fun uploadMyLocationDataFinished() {
         _myLocation.value = null
