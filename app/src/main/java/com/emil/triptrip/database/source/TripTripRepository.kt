@@ -33,6 +33,8 @@ interface TripTripRepository {
 
     suspend fun updateSpotPhoto(photoList: List<String>, tripId: String, spotId: String): ResultUtil<Boolean>
 
+    fun getLiveUsersLocation(tripId: String): MutableLiveData<List<MyLocation>>
+
 
 //    fun getLiveArticles(): MutableLiveData<List<Article>>
 

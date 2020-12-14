@@ -70,4 +70,8 @@ class TripTripLocalDataSource(val context: Context) : TripTripDataSource {
     ): ResultUtil<Boolean> {
         TODO("Not yet implemented")
     }
+
+    override fun getLiveUsersLocation(tripId: String): MutableLiveData<List<MyLocation>> {
+        TODO("Not yet implemented")
+    }
 }

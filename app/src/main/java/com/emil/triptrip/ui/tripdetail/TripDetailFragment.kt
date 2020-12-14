@@ -136,7 +136,9 @@ class TripDetailFragment : Fragment() {
 
         // observe users Location and draw at map
         viewModel.usersLocation.observe(viewLifecycleOwner, Observer { usersLocationList ->
-            myMap?.let { viewModel.drawUsersLocation(it, usersLocationList) }
+            myMap?.let {
+                viewModel.clearBeforeUserMarker()
+                viewModel.drawUsersLocation(it, usersLocationList) }
         })
 
 
@@ -190,6 +192,11 @@ class TripDetailFragment : Fragment() {
                 viewModel.uploadMyLocationData(myLocation)
                 viewModel.uploadMyLocationDataFinished()
             }
+        })
+
+        // observe live users location change and set to local users data
+        viewModel.liveUsersLocation.observe(viewLifecycleOwner, Observer { usersLocation ->
+            viewModel.setLiveUsersLocationToLocal()
         })
 
 

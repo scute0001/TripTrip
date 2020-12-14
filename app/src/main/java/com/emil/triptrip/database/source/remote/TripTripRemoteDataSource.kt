@@ -278,6 +278,31 @@ object TripTripRemoteDataSource : TripTripDataSource {
                 continuation.resume(ResultUtil.Error(it))
             }
     }
+
+    override fun getLiveUsersLocation(tripId: String): MutableLiveData<List<MyLocation>> {
+        val liveData = MutableLiveData<List<MyLocation>>()
+
+        FirebaseFirestore.getInstance()
+            .collection(PATH_TRIPS).document(tripId).collection(PATH_MYLOCATIONS)
+            .addSnapshotListener { snapshot, error ->
+                Log.i("Firebase", "add Users SnapshotListener detect")
+
+                error?.let {
+                    Log.w("Firebase", "[${this::class.simpleName}] Error getting documents. ${it.message}")
+                }
+
+                val list = mutableListOf<MyLocation>()
+                for (document in snapshot!!) {
+
+                    val location = document.toObject(MyLocation::class.java)
+                    list.add(location)
+                }
+
+                Log.d("Firebase", "Change Users Location is $list")
+                liveData.value = list
+            }
+        return liveData
+    }
 }
 
 //

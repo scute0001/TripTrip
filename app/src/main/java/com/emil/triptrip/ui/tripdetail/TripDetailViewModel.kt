@@ -63,6 +63,11 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
     val markerList: LiveData<List<Marker>>
         get() = _markerList
 
+    // for users change location Marker
+    private val _userMarkerList = MutableLiveData<List<Marker>>()
+    val userMarkerList: LiveData<List<Marker>>
+        get() = _userMarkerList
+
     // for selected diff day show different Spot's polyline
     private val _polyLineList = MutableLiveData<List<Polyline>>()
     val polyLineList: LiveData<List<Polyline>>
@@ -98,13 +103,17 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
     // get live spots data change by other users
     var liveSpotsData = MutableLiveData<List<SpotTag>>()
 
+    // get live users location change
+    var liveUsersLocation = MutableLiveData<List<MyLocation>>()
+
 
     init {
         _spotsData.value = null
         getUsersLocation()
 
-        // set live spots listener
+        // set live spots and users listener
         getLiveSpots()
+        getLiveUsersLocation()
     }
 
     fun onSelectDayAdapterRefreshed() {
@@ -192,6 +201,7 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
                         }
                     })
             }
+            _userMarkerList.value = markerList
         }
 
     }
@@ -201,6 +211,12 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
             it.remove()
         }
         polyLineList.value?.forEach {
+            it.remove()
+        }
+    }
+
+    fun clearBeforeUserMarker() {
+        userMarkerList.value?.forEach {
             it.remove()
         }
     }
@@ -342,12 +358,28 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
 
     }
 
+
+    //get live Users location data when other users position change
+    private fun getLiveUsersLocation() {
+        tripData.id?.let {
+            liveUsersLocation = repository.getLiveUsersLocation(tripData.id)
+            _status.value = LoadApiStatus.DONE
+        }
+
+    }
+
     // set live spots to local spots list
     fun setLiveSpotsToLocal() {
         if (selectedDayKey.value?.daySpotsKey != null && selectedDayKey.value?.daySpotsKey!= "") {
             val list = liveSpotsData.value?.filter { it.daySpotsKey == selectedDayKey.value?.daySpotsKey}?.sortedBy { it.startTime }?.map { it }
             _spotsData.value = list
         }
+    }
+
+    // set live users location to local users location list
+    fun setLiveUsersLocationToLocal() {
+        val list = liveUsersLocation.value?.filter { it.email != UserManager.user.value?.email }
+        _usersLocation.value = list
     }
 
     // set change spot start time
