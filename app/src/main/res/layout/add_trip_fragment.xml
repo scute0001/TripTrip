@@ -14,6 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/shape_background_gradient_white"
         tools:context=".ui.addtrip.AddTripFragment">
 
 
@@ -229,6 +230,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
                     android:background="@drawable/shape_add_spot_card"
                     android:padding="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -254,10 +256,10 @@
                         android:layout_marginTop="16dp"
                         android:background="@drawable/shape_radius_for_spot_info_input"
                         android:src="@drawable/ic_camera_64"
+                        app:imagePathUrl="@{viewModel.selectPicUri}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/text_add_pic_title"
-                        app:imagePathUrl="@{viewModel.selectPicUri}"/>
+                        app:layout_constraintTop_toBottomOf="@+id/text_add_pic_title" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -267,7 +269,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_add_trip_submit_select"
             android:layout_width="0dp"
-            android:layout_height="56dp"
+            android:layout_height="64dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -276,8 +278,13 @@
                 android:id="@+id/button_submit_trip"
                 style="@style/add_spot_button"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:backgroundTint="@color/colorPrimary"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="8dp"
+                android:paddingTop="2dp"
+                android:background="@drawable/shape_add_spot_title"
                 android:text="@string/ok"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button_cancel_submit_trip"
@@ -289,8 +296,11 @@
                 android:id="@+id/button_cancel_submit_trip"
                 style="@style/add_spot_button"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:backgroundTint="@color/colorPrimary"
+                android:layout_height="48dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="16dp"
+                android:paddingTop="2dp"
+                android:background="@drawable/shape_add_spot_title"
                 android:text="@string/cancel"
                 app:layout_constraintBottom_toBottomOf="@+id/button_submit_trip"
                 app:layout_constraintEnd_toEndOf="parent"

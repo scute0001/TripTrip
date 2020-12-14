@@ -152,10 +152,11 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
 
                     val polyline = addPolyline(PolylineOptions()
                         .add(LatLng(spot[index].latitude!!, spot[index].longitude!!), LatLng(spot[index + 1].latitude!!, spot[index + 1].longitude!!))
-                        .color(0xFF2286c3.toInt())
-                        .width(10F)
-                        .pattern(listOf(Dot(), Gap(20F), Dash(40F), Gap(20F)))
-                        .endCap(CustomCap(BitmapDescriptorFactory.fromResource(R.drawable.ic_triangle_up))))
+//                        .color(0xFF2286c3.toInt())
+                        .color(0xDDff00ac.toInt())
+                        .width(15F)
+                        .pattern(listOf(Dot(), Gap(10F), Dash(80F), Gap(10F)))
+                        .endCap(CustomCap(BitmapDescriptorFactory.fromResource(R.drawable.ic_triangle_up_murasaki))))
                     polylineList.add(polyline)
                 }
             }

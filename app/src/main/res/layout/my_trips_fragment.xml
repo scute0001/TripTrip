@@ -13,7 +13,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.mytrips.MyTripsFragment">
+        tools:context=".ui.mytrips.MyTripsFragment"
+        android:background="@drawable/shape_background_gradient_white">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/button_add_trip"
@@ -34,7 +35,9 @@
             android:id="@+id/search_bar"
             android:layout_width="0dp"
             android:layout_height="56dp"
-            android:background="@drawable/shape_circle_btn"
+            android:background="@drawable/shape_background_gradient_search"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             app:iconifiedByDefault="true"
             app:queryHint="輸入名稱搜尋你的旅程"
             android:layout_marginStart="16dp"

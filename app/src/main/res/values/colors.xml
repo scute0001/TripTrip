@@ -5,8 +5,13 @@
     <color name="colorAccent">#9be7ff</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="white_two">#F0F0F0</color>
+    <color name="white_three">#E0E0E0</color>
     <color name="grayLight">#F0F0F0</color>
     <color name="grayImgWhite">#eaeff3</color>
     <color name="grayUnderline">#808080</color>
     <color name="orange">#ff6f00</color>
+    <color name="light_blue">#e1f5fe</color>
+    <color name="light_blue_two">#b3e5fc</color>
+    <color name="middle_blue">#2196f3</color>
 </resources>

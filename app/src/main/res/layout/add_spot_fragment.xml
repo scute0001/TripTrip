@@ -29,7 +29,7 @@
                 android:id="@+id/constraintLayout_in_scrollview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/grayImgWhite">
+                android:background="@drawable/shape_background_gradient_white">
 
                 <ImageView
                     android:id="@+id/image_title"
@@ -126,8 +126,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
                     android:background="@drawable/shape_add_spot_card"
                     android:padding="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/guideline_right"
                     app:layout_constraintStart_toStartOf="@id/guideline_left"
                     app:layout_constraintTop_toBottomOf="@+id/constraint_content">
@@ -148,12 +150,12 @@
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_marginStart="16dp"
+                        android:background="@drawable/shape_underline"
                         android:ems="10"
                         android:gravity="center"
                         android:hint="1HR"
-                        android:text="@={viewModel.stayTime}"
-                        android:background="@drawable/shape_underline"
                         android:inputType="text"
+                        android:text="@={viewModel.stayTime}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/text_stay_period_title"
@@ -331,40 +333,40 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout_add_picture"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/shape_add_spot_card"
-                    android:padding="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                    app:layout_constraintTop_toBottomOf="@+id/constraint_stay_period">
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/constraintLayout_add_picture"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:background="@drawable/shape_add_spot_card"-->
+<!--                    android:padding="16dp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/guideline_right"-->
+<!--                    app:layout_constraintHorizontal_bias="0.0"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/guideline_left"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/constraint_stay_period">-->
 
-                    <TextView
-                        android:id="@+id/text_add_pic_title"
-                        style="@style/add_spot_title_description"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/shape_add_spot_title"
-                        android:text="@string/upload_picture"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/text_add_pic_title"-->
+<!--                        style="@style/add_spot_title_description"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="@drawable/shape_add_spot_title"-->
+<!--                        android:text="@string/upload_picture"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
 
-                    <ImageButton
-                        android:id="@+id/button_add_pic"
-                        android:layout_width="0dp"
-                        android:layout_height="160dp"
-                        android:layout_marginTop="16dp"
-                        android:background="@drawable/shape_radius_for_spot_info_input"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/text_add_pic_title"
-                        android:src="@drawable/ic_camera_64" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/button_add_pic"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="160dp"-->
+<!--                        android:layout_marginTop="16dp"-->
+<!--                        android:background="@drawable/shape_radius_for_spot_info_input"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/text_add_pic_title"-->
+<!--                        android:src="@drawable/ic_camera_64" />-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline_left"
@@ -387,7 +389,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="0dp"
-            android:layout_height="56dp"
+            android:layout_height="64dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -396,8 +398,13 @@
                 android:id="@+id/button_submit_spot"
                 style="@style/add_spot_button"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:backgroundTint="@color/colorPrimary"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/shape_add_spot_title"
+                android:paddingTop="2dp"
                 android:text="@string/ok"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button_cancel"
@@ -409,8 +416,11 @@
                 android:id="@+id/button_cancel"
                 style="@style/add_spot_button"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:backgroundTint="@color/colorPrimary"
+                android:layout_height="48dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/shape_add_spot_title"
+                android:paddingTop="2dp"
                 android:text="@string/cancel"
                 app:layout_constraintBottom_toBottomOf="@+id/button_submit_spot"
                 app:layout_constraintEnd_toEndOf="parent"
