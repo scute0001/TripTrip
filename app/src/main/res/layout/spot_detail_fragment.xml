@@ -57,6 +57,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
+                android:paddingBottom="4dp"
                 android:background="@drawable/shape_underline"
                 android:ems="10"
                 android:enabled="false"
@@ -73,17 +74,17 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <EditText
+            <TextView
                 android:id="@+id/editText_spot_detail_start_time"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/shape_underline"
-                android:ems="10"
                 android:enabled="false"
-                android:hint="10:00"
-                android:inputType="textPersonName"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:paddingBottom="4dp"
                 android:textAlignment="center"
                 android:textColor="@color/grayUnderline"
                 android:textStyle="bold"
@@ -202,6 +203,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
+                android:paddingBottom="4dp"
                 android:background="@drawable/shape_underline"
                 android:ems="10"
                 android:enabled="false"

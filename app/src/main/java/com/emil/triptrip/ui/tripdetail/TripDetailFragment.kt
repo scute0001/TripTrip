@@ -159,6 +159,7 @@ class TripDetailFragment : Fragment() {
 
             it?.let {
                 selectTimeAdapter.submitList(it)
+                selectTimeAdapter.notifyDataSetChanged()
 
                 // clean before markers
                 viewModel.clearBeforeMarker()

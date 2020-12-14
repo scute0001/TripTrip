@@ -370,6 +370,9 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
                 repository.updateSpotInfo(data, tripData.id)
             }
         }
+
+        // update local select spot
+        spotDetail.value = data
     }
 
     // update my location to firebase done and clear data.
