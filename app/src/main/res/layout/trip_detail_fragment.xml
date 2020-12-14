@@ -84,6 +84,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recycler_trip_select_days" />
 
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="96dp"
+                android:background="@drawable/shape_recycler_background_gradient"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
             <ImageButton
                 android:id="@+id/butten_for_test"
