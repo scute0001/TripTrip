@@ -8,8 +8,13 @@ import com.emil.triptrip.database.User
 class MainActivityViewModel: ViewModel() {
     // Record current fragment to support data binding
     val currentFragmentType = MutableLiveData<String>()
+
+    //
+    val clickStatu = MutableLiveData<Boolean>()
+
     init {
         currentFragmentType.value = "TripTrip"
+        clickStatu.value = false
     }
 
 

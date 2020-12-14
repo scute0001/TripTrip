@@ -25,6 +25,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import com.emil.triptrip.MainActivityViewModel
+import com.emil.triptrip.PositionUpdateService
 import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.databinding.TripDetailFragmentBinding
@@ -232,7 +233,6 @@ class TripDetailFragment : Fragment() {
             binding.spotSheet.imageEdit.visibility = View.GONE
             binding.spotSheet.imageEditDel.visibility = View.VISIBLE
             binding.spotSheet.imageEditCancel.visibility = View.VISIBLE
-            Log.i("TTTTT", "BEFORE ${viewModel.spotDetail.value}")
         }
 
         binding.spotSheet.imageEditDone.setOnClickListener {
@@ -249,7 +249,6 @@ class TripDetailFragment : Fragment() {
             // set change data for update
             viewModel.uploadChangeSpotData()
 
-            Log.i("TTTTT", "DONE ${viewModel.spotDetail.value}")
         }
 
         binding.spotSheet.imageEditCancel.setOnClickListener {
@@ -335,6 +334,18 @@ class TripDetailFragment : Fragment() {
         activity?.let {
             ViewModelProvider(it).get(MainActivityViewModel::class.java).apply {
                 currentFragmentType.value = TripDetailFragmentArgs.fromBundle(requireArguments()).tripData.title
+
+                clickStatu.observe(this@TripDetailFragment, Observer { status ->
+                    Log.i("service", "$status")
+                    if (status == true) {
+                        val startIntent = Intent(context, PositionUpdateService::class.java)
+                        context?.startService(startIntent)
+                    } else {
+                        val stopIntent = Intent(context, PositionUpdateService::class.java)
+                        context?.stopService(stopIntent)
+                    }
+
+                })
             }
         }
         // 2. init fusedLocationProviderClient and set LocationServices object

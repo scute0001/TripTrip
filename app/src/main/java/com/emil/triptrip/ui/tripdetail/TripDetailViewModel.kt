@@ -394,7 +394,6 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
         val data = spotDetail.value as SpotTag
         data.lastEditor = UserManager.user.value?.name
         data.lastEditTime = System.currentTimeMillis()
-        Log.i("TTTT", "$data")
 
         // upload data to firebase
         coroutineScope.launch {

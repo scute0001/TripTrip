@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -34,7 +36,16 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
         binding.viewModel = viewModel
 
-
+        binding.toolbar.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.notification -> {
+                    viewModel.clickStatu.value?.let {
+                        viewModel.clickStatu.value = !it
+                    }
+                }
+            }
+            false
+        }
 
 
         setupDrawer()
