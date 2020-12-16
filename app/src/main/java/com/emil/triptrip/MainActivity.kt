@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
+import androidx.navigation.NavGraphNavigator
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -49,7 +50,11 @@ class MainActivity : AppCompatActivity() {
         binding.toolbar.setOnMenuItemClickListener {
             when(it.itemId) {
                 R.id.notification -> {
+                    val arrayList = viewModel.navToNotificationList.value?.toTypedArray()
                     //navigation to notification page here
+                    arrayList?.let { notificationArray ->
+                        findNavController(R.id.navHostFragment).navigate(NavigationDirections.actionGlobalNotificationFragment(notificationArray))
+                    }
 
 //                    viewModel.clickStatu.value?.let {
 //                        viewModel.clickStatu.value = !it
@@ -65,8 +70,9 @@ class MainActivity : AppCompatActivity() {
         })
 
         viewModel.notificationList.observe(this, Observer {notificationList ->
-            val list = notificationList.filter { it.status == NOT_READ }
-            Log.d("TTTT", "main viewmodel $list")
+            val list = notificationList.filter { it.status == NOT_READ }.sortedBy { it.createTime }
+            viewModel.navToNotificationList.value = list
+            Log.d("Firebase", "main notification list is $list")
             if (list.size == 0) {
                 binding.toolbar.menu.findItem(R.id.notification).setIcon(R.drawable.ic_baseline_notifications_active_24)
             } else {

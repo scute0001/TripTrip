@@ -78,5 +78,23 @@
         android:name="com.emil.triptrip.ui.dialog.AddSpotSuccessDialogFragment"
         android:label="AddSpotSuccessDialogFragment"
         tools:layout="@layout/fragment_login_success_dialog"/>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.emil.triptrip.ui.notification.NotificationFragment"
+        android:label="NotificationFragment"
+        tools:layout="@layout/notification_fragment">
+        <argument
+            android:name="notificationList"
+            app:argType="com.emil.triptrip.database.NotificationAddTrip[]" />
+        <action
+            android:id="@+id/action_notificationFragment_to_tripDetailFragment"
+            app:destination="@id/tripDetailFragment" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_notificationFragment"
+        app:destination="@id/notificationFragment"
+        app:popUpTo="@id/myTripsFragment"
+        app:popUpToInclusive="false" />
 
 </navigation>

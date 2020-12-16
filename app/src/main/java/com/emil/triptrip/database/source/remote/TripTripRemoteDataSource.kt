@@ -357,13 +357,31 @@ object TripTripRemoteDataSource : TripTripDataSource {
                     list.add(notification)
                 }
 
-                Log.d("TTTTTTT", "Change liveData list is $list")
-
                 liveData.value = list
             }
         return liveData
     }
+
+    override suspend fun getATrip(tripId: String): ResultUtil<Trip> = suspendCoroutine{continuation ->
+
+        FirebaseFirestore.getInstance()
+            .collection(PATH_TRIPS).document(tripId)
+            .get()
+            .addOnSuccessListener {
+                val trip = it.toObject(Trip::class.java)
+                trip?.let {
+                    continuation.resume(ResultUtil.Success(trip))
+                }
+
+            }
+            .addOnFailureListener {
+                Log.d("Firebase", "get trip data error!!!!! ${it.message}")
+                continuation.resume(ResultUtil.Error(it))
+            }
+    }
 }
+
+
 
 //
 //    override fun getLiveArticles(): MutableLiveData<List<Article>> {

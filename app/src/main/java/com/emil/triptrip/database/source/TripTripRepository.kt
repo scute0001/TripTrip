@@ -37,6 +37,8 @@ interface TripTripRepository {
 
     fun getLiveNotificationInfo(userEmail: String): MutableLiveData<List<NotificationAddTrip>>
 
+    suspend fun getATrip(tripId: String): ResultUtil<Trip>
+
 
 //    fun getLiveArticles(): MutableLiveData<List<Article>>
 

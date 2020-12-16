@@ -24,6 +24,7 @@ class MainActivityViewModel(app: Application, private val repository: TripTripRe
         get() = _user
 
     val notificationList = MutableLiveData<List<NotificationAddTrip>>()
+    val navToNotificationList = MutableLiveData<List<NotificationAddTrip>>()
 
 
 

@@ -12,6 +12,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.emil.triptrip.database.NotificationAddTrip
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -59,6 +60,12 @@ fun convertLongToDateString(textView: TextView, systemTime: Long){
         .format(systemTime)
 }
 
+@BindingAdapter("timeTransferFull")
+fun convertLongToDateStringFull(textView: TextView, systemTime: Long){
+    textView.text = SimpleDateFormat("yyyy.MM.dd HH:mm")
+        .format(systemTime)
+}
+
 @BindingAdapter("timeTransferHHmm")
 fun convertTimeHHmmToString(textView: TextView, systemTime: Long){
     textView.text = SimpleDateFormat("HH:mm")
@@ -76,4 +83,9 @@ fun convertTimeHHmmToStringGMT(textView: TextView, systemTime: Long){
     val sdf = SimpleDateFormat("HH:mm")
     sdf.setTimeZone(TimeZone.getTimeZone("GMT"))
     textView.text = sdf.format(systemTime).toString()
+}
+
+@BindingAdapter("notificationContent")
+fun setNotificationContent(textView: TextView, data: NotificationAddTrip) {
+    textView.text = "${data.inviterName} 已將你加入 ${data.tripTitle} 的夥伴，一起來規劃行程吧!!"
 }
