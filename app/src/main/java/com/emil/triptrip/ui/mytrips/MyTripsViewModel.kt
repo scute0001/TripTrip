@@ -8,11 +8,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
-import com.emil.triptrip.database.AttendUser
-import com.emil.triptrip.database.DayKey
-import com.emil.triptrip.database.ResultUtil
-import com.emil.triptrip.database.Trip
+import com.emil.triptrip.database.*
 import com.emil.triptrip.database.source.TripTripRepository
+import com.emil.triptrip.ui.login.UserManager
 import com.emil.triptrip.util.LoadApiStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -50,10 +48,21 @@ class MyTripsViewModel(app: Application, private val repository: TripTripReposit
     // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
+    // notification live data
+    var liveNotificationData = MutableLiveData<List<NotificationAddTrip>>()
+
     init {
         _navToTripDetail.value = null
 //        fakeData()
         getTripsData()
+        getNotificationLiveData()
+    }
+
+    // set notification snapshot and get notification live data
+    private fun getNotificationLiveData() {
+        UserManager.user.value?.email?.let {
+            liveNotificationData = repository.getLiveNotificationInfo(it)
+        }
     }
 
     // navigation to trip detail page completed and clean data

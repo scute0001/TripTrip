@@ -10,6 +10,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.emil.triptrip.MainActivityViewModel
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.database.AttendUser
 import com.emil.triptrip.database.DayKey
@@ -38,6 +39,7 @@ class MyTripsFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(MyTripsViewModel::class.java)
         binding.viewModel = viewModel
 
+        val mainViewModel = ViewModelProvider(requireActivity()).get(MainActivityViewModel::class.java)
 
         // setup recyclerView adapter
         val adapter = TripsAdapter(viewModel)
@@ -73,6 +75,11 @@ class MyTripsFragment : Fragment() {
                 adapter.submitList(viewModel.filter(viewModel.tripsData.value!!, newText!!))
                 return true
             }
+        })
+
+        // get notification data and sent to mainView Model
+        viewModel.liveNotificationData.observe(viewLifecycleOwner, Observer {
+            mainViewModel.notificationList.value = it
         })
 
 

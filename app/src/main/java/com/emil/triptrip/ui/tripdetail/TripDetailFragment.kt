@@ -335,17 +335,17 @@ class TripDetailFragment : Fragment() {
             ViewModelProvider(it).get(MainActivityViewModel::class.java).apply {
                 currentFragmentType.value = TripDetailFragmentArgs.fromBundle(requireArguments()).tripData.title
 
-                clickStatu.observe(this@TripDetailFragment, Observer { status ->
-                    Log.i("service", "$status")
-                    if (status == true) {
-                        val startIntent = Intent(context, PositionUpdateService::class.java)
-                        context?.startService(startIntent)
-                    } else {
-                        val stopIntent = Intent(context, PositionUpdateService::class.java)
-                        context?.stopService(stopIntent)
-                    }
-
-                })
+//                clickStatu.observe(this@TripDetailFragment, Observer { status ->
+//                    Log.i("service", "$status")
+//                    if (status == true) {
+//                        val startIntent = Intent(context, PositionUpdateService::class.java)
+//                        context?.startService(startIntent)
+//                    } else {
+//                        val stopIntent = Intent(context, PositionUpdateService::class.java)
+//                        context?.stopService(stopIntent)
+//                    }
+//
+//                })
             }
         }
         // 2. init fusedLocationProviderClient and set LocationServices object

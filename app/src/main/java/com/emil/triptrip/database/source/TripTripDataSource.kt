@@ -34,6 +34,7 @@ interface TripTripDataSource {
 
     fun getLiveUsersLocation(tripId: String): MutableLiveData<List<MyLocation>>
 
+    fun getLiveNotificationInfo(userEmail: String): MutableLiveData<List<NotificationAddTrip>>
 //    fun getLiveArticles(): MutableLiveData<List<Article>>
 
 

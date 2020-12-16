@@ -75,6 +75,9 @@ class DefaultTripTripRepository(private val remoteDataSource: TripTripDataSource
         return remoteDataSource.getLiveUsersLocation(tripId)
     }
 
+        override fun getLiveNotificationInfo(userEmail: String): MutableLiveData<List<NotificationAddTrip>> {
+        return remoteDataSource.getLiveNotificationInfo(userEmail)
+    }
 
     //    override fun getLiveArticles(): MutableLiveData<List<Article>> {
 //        return remoteDataSource.getLiveArticles()

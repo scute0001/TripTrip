@@ -18,7 +18,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.emil.triptrip.databinding.ActivityMainBinding
 import com.emil.triptrip.databinding.NavHeaderDrawerBinding
+import com.emil.triptrip.ui.login.LoginViewModelFactory
 import com.emil.triptrip.ui.login.UserManager
+
+private const val IS_READ = 1
+private const val NOT_READ = 0
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,19 +37,42 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         binding.lifecycleOwner = this
 
-        viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+        val app = this.application
+        val repository = (this.applicationContext as TripTripApplication).repository
+        val viewModelFactory = MainActivityViewModelFactory(app, repository)
+
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainActivityViewModel::class.java)
         binding.viewModel = viewModel
+
+
 
         binding.toolbar.setOnMenuItemClickListener {
             when(it.itemId) {
                 R.id.notification -> {
-                    viewModel.clickStatu.value?.let {
-                        viewModel.clickStatu.value = !it
-                    }
+                    //navigation to notification page here
+
+//                    viewModel.clickStatu.value?.let {
+//                        viewModel.clickStatu.value = !it
+//                    }
                 }
             }
             false
         }
+
+        // set current user and set snapshot for get notification
+        UserManager.user.observe(this, Observer {
+            viewModel.setCurrentUser(it)
+        })
+
+        viewModel.notificationList.observe(this, Observer {notificationList ->
+            val list = notificationList.filter { it.status == NOT_READ }
+            Log.d("TTTT", "main viewmodel $list")
+            if (list.size == 0) {
+                binding.toolbar.menu.findItem(R.id.notification).setIcon(R.drawable.ic_baseline_notifications_active_24)
+            } else {
+                binding.toolbar.menu.findItem(R.id.notification).setIcon(R.drawable.ic_baseline_notification_important_24)
+            }
+        })
 
 
         setupDrawer()
@@ -88,9 +115,9 @@ class MainActivity : AppCompatActivity() {
         bindingNavHeader.viewModel = viewModel
         binding.drawerNavView.addHeaderView(bindingNavHeader.root)
 
-        viewModel.user.observe(this, Observer {
-            Log.i("rrrrrrrr", "rrrr $it")
-        })
+
+
+
 
 
         // set toolbar drawer icon

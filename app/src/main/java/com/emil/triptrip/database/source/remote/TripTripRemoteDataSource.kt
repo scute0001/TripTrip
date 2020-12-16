@@ -334,6 +334,35 @@ object TripTripRemoteDataSource : TripTripDataSource {
         return liveData
     }
 
+
+//
+
+    override fun getLiveNotificationInfo(userEmail: String): MutableLiveData<List<NotificationAddTrip>> {
+
+        val liveData = MutableLiveData<List<NotificationAddTrip>>()
+        FirebaseFirestore.getInstance()
+            .collection(PATH_USER).document(userEmail).collection(PATH_NOTIFICATION)
+            .addSnapshotListener { snapshot, error ->
+                val list = mutableListOf<NotificationAddTrip>()
+
+                Log.i("Firebase", "add notification SnapshotListener detect")
+
+                error?.let {
+                    Log.w("Firebase", "[${this::class.simpleName}] Error getting documents. ${it.message}")
+                }
+
+                for (document in snapshot!!) {
+
+                    val notification = document.toObject(NotificationAddTrip::class.java)
+                    list.add(notification)
+                }
+
+                Log.d("TTTTTTT", "Change liveData list is $list")
+
+                liveData.value = list
+            }
+        return liveData
+    }
 }
 
 //
