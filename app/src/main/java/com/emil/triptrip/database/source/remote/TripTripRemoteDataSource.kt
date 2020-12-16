@@ -23,9 +23,11 @@ object TripTripRemoteDataSource : TripTripDataSource {
     private const val PATH_TRIPS = "trips"
     private const val PATH_SPOTS = "spots"
     private const val PATH_MYLOCATIONS = "myLocations"
+    private const val PATH_NOTIFICATION = "notification"
     private const val QUERY_MY_TRIPS = "users"
     private const val QUERY_SPOTS = "daySpotsKey"
     private const val QUERY_PHOTOLIST = "photoList"
+
 
 
     override suspend fun uploadUserDataToFirebase(userData: User): ResultUtil<Boolean> = suspendCoroutine { continuation ->
@@ -62,7 +64,7 @@ object TripTripRemoteDataSource : TripTripDataSource {
     }
 
     // add Trip data to firebase
-    override suspend fun uploadTripToFirebase(trip: Trip): ResultUtil<Boolean> = suspendCoroutine { continuation ->
+    override suspend fun uploadTripToFirebase(trip: Trip): ResultUtil<TripIdFeedback> = suspendCoroutine { continuation ->
 
         FirebaseFirestore.getInstance()
             .collection(PATH_TRIPS)
@@ -84,7 +86,35 @@ object TripTripRemoteDataSource : TripTripDataSource {
                 documentReference.update("id" , documentReference.id)
                 documentReference.update("dayKeyList", newDayKey)
 
-                continuation.resume(ResultUtil.Success(true))
+                // set notification data
+                val result = TripIdFeedback(
+                    tripId = documentReference.id,
+                    tripTitle = trip.title,
+                    users = trip.users
+                )
+
+                // set notification data
+                val notificationData = NotificationAddTrip(
+                    inviterName = UserManager.user.value?.name,
+                    inviterPhoto = UserManager.user.value?.photoUri,
+                    tripId = documentReference.id,
+                    tripTitle = trip.title
+                )
+                val users = trip.users?.filter { it != UserManager.user.value?.email } as List
+
+                // set notification data to firebase
+                users.forEach { userEmail ->
+                    FirebaseFirestore.getInstance()
+                        .collection(PATH_USER).document(userEmail).collection(PATH_NOTIFICATION)
+                        .add(notificationData)
+                        .addOnSuccessListener { documentReference ->
+                            Log.d("Firebase", "set $userEmail notification success")
+                        }
+                        .addOnFailureListener {
+                            Log.d("Firebase", "Add Spot data error!!!!! ${it.message}")
+                        }
+                }
+                continuation.resume(ResultUtil.Success(result))
             }
             .addOnFailureListener {
                 Log.d("Firebase", "Add trip data error!!!!! ${it.message}")
@@ -303,6 +333,7 @@ object TripTripRemoteDataSource : TripTripDataSource {
             }
         return liveData
     }
+
 }
 
 //

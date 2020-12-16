@@ -13,6 +13,7 @@ import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.database.*
 import com.emil.triptrip.database.source.TripTripRepository
+import com.emil.triptrip.ui.login.UserManager
 import com.emil.triptrip.util.LoadApiStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -168,6 +169,7 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
                     leave(true)
+                    Log.d("Firebase", "result of add trip is $result")
 
                     // set nav to mytrips
                     _addTripFinishedNavToMyTrips.value = true
@@ -187,6 +189,7 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
             }
         }
     }
+
 
 
 

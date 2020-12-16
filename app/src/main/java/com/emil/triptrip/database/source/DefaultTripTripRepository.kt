@@ -18,7 +18,7 @@ class DefaultTripTripRepository(private val remoteDataSource: TripTripDataSource
         return remoteDataSource.getUserData()
     }
 
-    override suspend fun uploadTripToFirebase(trip: Trip): ResultUtil<Boolean> {
+    override suspend fun uploadTripToFirebase(trip: Trip): ResultUtil<TripIdFeedback> {
         return remoteDataSource.uploadTripToFirebase(trip)
     }
 
@@ -74,6 +74,7 @@ class DefaultTripTripRepository(private val remoteDataSource: TripTripDataSource
     override fun getLiveUsersLocation(tripId: String): MutableLiveData<List<MyLocation>> {
         return remoteDataSource.getLiveUsersLocation(tripId)
     }
+
 
     //    override fun getLiveArticles(): MutableLiveData<List<Article>> {
 //        return remoteDataSource.getLiveArticles()

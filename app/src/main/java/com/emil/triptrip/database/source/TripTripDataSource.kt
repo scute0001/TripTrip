@@ -12,7 +12,7 @@ interface TripTripDataSource {
 
     suspend fun getUserData(): ResultUtil<List<User>>
 
-    suspend fun uploadTripToFirebase(trip: Trip): ResultUtil<Boolean>
+    suspend fun uploadTripToFirebase(trip: Trip): ResultUtil<TripIdFeedback>
 
     suspend fun getTrips(): ResultUtil<List<Trip>>
 
@@ -33,6 +33,7 @@ interface TripTripDataSource {
     suspend fun updateSpotPhoto(photoList: List<String>, tripId: String, spotId: String): ResultUtil<Boolean>
 
     fun getLiveUsersLocation(tripId: String): MutableLiveData<List<MyLocation>>
+
 //    fun getLiveArticles(): MutableLiveData<List<Article>>
 
 

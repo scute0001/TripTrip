@@ -310,7 +310,7 @@ class TripDetailFragment : Fragment() {
         viewModel.spotDetail.observe(viewLifecycleOwner, Observer { spot ->
             binding.spot = spot
             Log.i("TTTT", "spot.photoList ${spot.photoList}")
-            spotPicsAdapter.submitList(spot.photoList)
+            spotPicsAdapter.submitList(spot.photoList?.toList())
             binding.spotSheet.spotDetailSheet
 //            bottomBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             bottomBehavior.state = BottomSheetBehavior.STATE_COLLAPSED

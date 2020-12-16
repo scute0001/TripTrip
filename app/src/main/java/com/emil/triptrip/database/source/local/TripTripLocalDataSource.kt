@@ -36,7 +36,7 @@ class TripTripLocalDataSource(val context: Context) : TripTripDataSource {
         TODO("Not yet implemented")
     }
 
-    override suspend fun uploadTripToFirebase(trip: Trip): ResultUtil<Boolean> {
+    override suspend fun uploadTripToFirebase(trip: Trip): ResultUtil<TripIdFeedback> {
         TODO("Not yet implemented")
     }
 
@@ -74,4 +74,5 @@ class TripTripLocalDataSource(val context: Context) : TripTripDataSource {
     override fun getLiveUsersLocation(tripId: String): MutableLiveData<List<MyLocation>> {
         TODO("Not yet implemented")
     }
+
 }
