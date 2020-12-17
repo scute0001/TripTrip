@@ -2,12 +2,15 @@ package com.emil.triptrip
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import android.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -21,6 +24,7 @@ import com.emil.triptrip.databinding.ActivityMainBinding
 import com.emil.triptrip.databinding.NavHeaderDrawerBinding
 import com.emil.triptrip.ui.login.LoginViewModelFactory
 import com.emil.triptrip.ui.login.UserManager
+import kotlinx.coroutines.Delay
 
 private const val IS_READ = 1
 private const val NOT_READ = 0
@@ -31,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainActivityViewModel
     private lateinit var appBarConfiguration: AppBarConfiguration
     private var actionBarDrawerToggle: ActionBarDrawerToggle? = null
+    private var exitFlag: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,7 +81,7 @@ class MainActivity : AppCompatActivity() {
             if (list.size == 0) {
                 binding.toolbar.menu.findItem(R.id.notification).setIcon(R.drawable.ic_baseline_notifications_active_24)
             } else {
-                binding.toolbar.menu.findItem(R.id.notification).setIcon(R.drawable.ic_baseline_notification_important_24)
+                binding.toolbar.menu.findItem(R.id.notification).setIcon(R.drawable.ic_notification_important_24)
             }
         })
 
@@ -146,8 +151,32 @@ class MainActivity : AppCompatActivity() {
                 else -> resources.getString(R.string.app_name)
             }
 
+            viewModel.isHome.value = navController.currentDestination?.id == R.id.myTripsFragment
+
 //            if (navDestination.id != R.id.tripDetailFragment)
 //                viewModel.currentFragmentType.value = "TripTrip"
+        }
+    }
+
+    override fun onBackPressed() {
+        val backStackCount = fragmentManager.backStackEntryCount
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            if ( exitFlag == true ) {
+                super.onBackPressed()
+            } else {
+                if (viewModel.isHome.value == true) {
+                    exitFlag = true
+                    Toast.makeText(this, "再點擊一次離開", Toast.LENGTH_SHORT).show()
+                    Handler().postDelayed({
+                        exitFlag = false
+                    }, 2000)
+                } else {
+                    super.onBackPressed()
+                }
+
+            }
         }
     }
 }

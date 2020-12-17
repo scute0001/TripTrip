@@ -15,6 +15,9 @@ class MainActivityViewModel(app: Application, private val repository: TripTripRe
     // Record current fragment to support data binding
     val currentFragmentType = MutableLiveData<String>()
 
+    // for back stack check if home
+    val isHome = MutableLiveData<Boolean>()
+
     //
     val clickStatu = MutableLiveData<Boolean>()
 
