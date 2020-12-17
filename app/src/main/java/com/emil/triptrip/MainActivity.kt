@@ -24,6 +24,7 @@ import com.emil.triptrip.databinding.ActivityMainBinding
 import com.emil.triptrip.databinding.NavHeaderDrawerBinding
 import com.emil.triptrip.ui.login.LoginViewModelFactory
 import com.emil.triptrip.ui.login.UserManager
+import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.Delay
 
 private const val IS_READ = 1
@@ -103,6 +104,19 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)
         NavigationUI.setupWithNavController(binding.drawerNavView, navController)
+
+        binding.drawerNavView.setNavigationItemSelectedListener {
+            when(it.itemId) {
+                R.id.nav_my_notifications -> {
+                    val arrayList = viewModel.navToNotificationList.value?.toTypedArray()
+                    //navigation to notification page here
+                    binding.drawerLayout.closeDrawer(GravityCompat.START)
+                    findNavController(R.id.navHostFragment).navigate(NavigationDirections.actionGlobalNotificationFragment(arrayList!!))
+                    true
+                }
+                else -> false
+            }
+        }
 
         binding.drawerLayout.fitsSystemWindows = true
         binding.drawerLayout.clipToPadding = false

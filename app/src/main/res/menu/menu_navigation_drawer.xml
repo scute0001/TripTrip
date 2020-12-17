@@ -13,7 +13,7 @@
             <item
                 android:id="@+id/nav_my_notifications"
                 android:title="我的通知"
-                android:icon="@drawable/ic_information_64"/>
+                android:icon="@drawable/ic_information_64" />
         </menu>
     </item>
 
