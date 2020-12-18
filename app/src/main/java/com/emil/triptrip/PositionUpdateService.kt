@@ -24,6 +24,9 @@ class PositionUpdateService: Service() {
         // init fusedLocationProviderClient and set LocationServices object
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
+        val r = TripTripApplication.instance.repository
+
+
         startTimer()
 
         Log.i("service", "service onCreate")
