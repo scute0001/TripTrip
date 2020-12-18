@@ -39,6 +39,7 @@ interface TripTripRepository {
 
     suspend fun getATrip(tripId: String): ResultUtil<Trip>
 
+    suspend fun deleteSpot(tripId: String, spotId: String): ResultUtil<Boolean>
 
 //    fun getLiveArticles(): MutableLiveData<List<Article>>
 

@@ -407,6 +407,37 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
         spotDetail.value = data
     }
 
+    fun delSpotData() {
+        val tripId = tripData.id
+        val spotId = spotDetail.value?.id
+        if (tripId != null && spotId != null) {
+
+            coroutineScope.launch {
+                _status.value = LoadApiStatus.LOADING
+
+                when (val result = repository.deleteSpot(tripId, spotId)) {
+                    is ResultUtil.Success -> {
+                        _error.value = null
+                        _status.value = LoadApiStatus.DONE
+                    }
+                    is ResultUtil.Fail -> {
+                        _error.value = result.error
+                        _status.value = LoadApiStatus.ERROR
+                    }
+                    is ResultUtil.Error -> {
+                        _error.value = result.exception.toString()
+                        _status.value = LoadApiStatus.ERROR
+                    }
+                    else -> {
+                        _error.value = TripTripApplication.instance.getString(R.string.Unknown_error)
+                        _status.value = LoadApiStatus.ERROR
+                    }
+                }
+            }
+        }
+
+    }
+
     // upload pic to storage
     fun uploadPicToStorage(path: String) {
         coroutineScope.launch {

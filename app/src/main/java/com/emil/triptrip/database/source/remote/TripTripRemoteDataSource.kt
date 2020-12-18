@@ -379,6 +379,19 @@ object TripTripRemoteDataSource : TripTripDataSource {
                 continuation.resume(ResultUtil.Error(it))
             }
     }
+
+    override suspend fun deleteSpot(tripId: String, spotId: String): ResultUtil<Boolean> = suspendCoroutine {continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_TRIPS).document(tripId).collection(PATH_SPOTS).document(spotId)
+            .delete()
+            .addOnSuccessListener {
+                continuation.resume(ResultUtil.Success(true))
+            }
+            .addOnFailureListener {
+                Log.d("Firebase", "get trip data error!!!!! ${it.message}")
+                continuation.resume(ResultUtil.Error(it))
+            }
+    }
 }
 
 

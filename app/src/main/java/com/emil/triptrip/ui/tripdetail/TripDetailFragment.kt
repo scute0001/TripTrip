@@ -225,25 +225,11 @@ class TripDetailFragment : Fragment() {
 
         // edit spot position
         binding.spotSheet.imageEdit.setOnClickListener {
-            binding.spotSheet.editTextSpotDetailTitle.isEnabled = true
-            binding.spotSheet.editTextSpotDetailContent.isEnabled = true
-            binding.spotSheet.editTextSpotDetailStartTime.isEnabled = true
-            binding.spotSheet.editTextSpotDetailStayTime.isEnabled = true
-            binding.spotSheet.imageEditDone.visibility = View.VISIBLE
-            binding.spotSheet.imageEdit.visibility = View.GONE
-            binding.spotSheet.imageEditDel.visibility = View.VISIBLE
-            binding.spotSheet.imageEditCancel.visibility = View.VISIBLE
+            openEdit(binding)
         }
 
         binding.spotSheet.imageEditDone.setOnClickListener {
-            binding.spotSheet.editTextSpotDetailTitle.isEnabled = false
-            binding.spotSheet.editTextSpotDetailContent.isEnabled = false
-            binding.spotSheet.editTextSpotDetailStartTime.isEnabled = false
-            binding.spotSheet.editTextSpotDetailStayTime.isEnabled = false
-            binding.spotSheet.imageEditDone.visibility = View.GONE
-            binding.spotSheet.imageEdit.visibility = View.VISIBLE
-            binding.spotSheet.imageEditDel.visibility = View.GONE
-            binding.spotSheet.imageEditCancel.visibility = View.GONE
+            closeEdit(binding)
             Toast.makeText(requireContext(), "更新資料成功", Toast.LENGTH_SHORT).show()
             // sent data to api here
             // set change data for update
@@ -252,21 +238,17 @@ class TripDetailFragment : Fragment() {
         }
 
         binding.spotSheet.imageEditCancel.setOnClickListener {
-            binding.spotSheet.editTextSpotDetailTitle.isEnabled = false
-            binding.spotSheet.editTextSpotDetailContent.isEnabled = false
-            binding.spotSheet.editTextSpotDetailStartTime.isEnabled = false
-            binding.spotSheet.editTextSpotDetailStayTime.isEnabled = false
-            binding.spotSheet.imageEditDone.visibility = View.GONE
-            binding.spotSheet.imageEdit.visibility = View.VISIBLE
-            binding.spotSheet.imageEditDel.visibility = View.GONE
-            binding.spotSheet.imageEditCancel.visibility = View.GONE
+            closeEdit(binding)
         }
 
         binding.spotSheet.imageEditDel.setOnClickListener {
-            // toDO
             // del spot data api here
+            viewModel.delSpotData()
             // show dialog
+            Toast.makeText(requireContext(), "地點刪除成功", Toast.LENGTH_SHORT).show()
             // close all edit function here
+            closeEdit(binding)
+
         }
 
 
@@ -464,6 +446,28 @@ class TripDetailFragment : Fragment() {
             }
 
         }
+    }
+
+    private fun closeEdit(binding: TripDetailFragmentBinding) {
+        binding.spotSheet.editTextSpotDetailTitle.isEnabled = false
+        binding.spotSheet.editTextSpotDetailContent.isEnabled = false
+        binding.spotSheet.editTextSpotDetailStartTime.isEnabled = false
+        binding.spotSheet.editTextSpotDetailStayTime.isEnabled = false
+        binding.spotSheet.imageEditDone.visibility = View.GONE
+        binding.spotSheet.imageEdit.visibility = View.VISIBLE
+        binding.spotSheet.imageEditDel.visibility = View.GONE
+        binding.spotSheet.imageEditCancel.visibility = View.GONE
+    }
+
+    private fun openEdit(binding: TripDetailFragmentBinding) {
+        binding.spotSheet.editTextSpotDetailTitle.isEnabled = true
+        binding.spotSheet.editTextSpotDetailContent.isEnabled = true
+        binding.spotSheet.editTextSpotDetailStartTime.isEnabled = true
+        binding.spotSheet.editTextSpotDetailStayTime.isEnabled = true
+        binding.spotSheet.imageEditDone.visibility = View.VISIBLE
+        binding.spotSheet.imageEdit.visibility = View.GONE
+        binding.spotSheet.imageEditDel.visibility = View.VISIBLE
+        binding.spotSheet.imageEditCancel.visibility = View.VISIBLE
     }
 }
 
