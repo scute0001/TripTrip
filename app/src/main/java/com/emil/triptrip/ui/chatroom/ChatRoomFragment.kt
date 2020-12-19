@@ -2,6 +2,7 @@ package com.emil.triptrip.ui.chatroom
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -38,8 +39,8 @@ class ChatRoomFragment : Fragment() {
         binding.viewModel = viewModel
 
         // setup recyclerView adapter
-//        val adapter = NotificationAdapter(viewModel)
-//        binding.recyclerNotification.adapter = adapter
+        val adapter = ChatAdapter(viewModel)
+        binding.recyclerMassage.adapter = adapter
 
         // check message and sent data to firebase
         viewModel.message.observe(viewLifecycleOwner, Observer { message ->
@@ -49,6 +50,13 @@ class ChatRoomFragment : Fragment() {
                 viewModel.sentMessageToFirebase(message)
             }
         })
+
+        // massages live
+        viewModel.liveMessages.observe(viewLifecycleOwner, Observer { messages ->
+            Log.i("TTTTT", "$messages")
+            adapter.submitList(messages)
+        })
+
 
         // sent massage
         binding.btnSentComment.setOnClickListener {

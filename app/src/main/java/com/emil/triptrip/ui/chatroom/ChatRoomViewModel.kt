@@ -44,6 +44,15 @@ class ChatRoomViewModel(app: Application, private val repository: TripTripReposi
     // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
+    // chatroom message snapshot
+    var liveMessages = MutableLiveData<List<Message>>()
+
+
+    init {
+        getLiveMessages()
+    }
+
+
     // set Message
     fun setMessage() {
         val message = Message(
@@ -81,6 +90,13 @@ class ChatRoomViewModel(app: Application, private val repository: TripTripReposi
             }
         }
     }
+
+    //
+    private fun getLiveMessages() {
+        liveMessages = repository.getLiveMessage(tripId)
+        _status.value = LoadApiStatus.DONE
+    }
+
 
     fun cleanMessage() {
         _message.value = null

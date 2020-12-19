@@ -407,6 +407,29 @@ object TripTripRemoteDataSource : TripTripDataSource {
                 continuation.resume(ResultUtil.Error(it))
             }
     }
+
+    override fun getLiveMessage(tripId: String): MutableLiveData<List<Message>> {
+        val liveData = MutableLiveData<List<Message>>()
+        FirebaseFirestore.getInstance()
+            .collection(PATH_TRIPS).document(tripId).collection(PATH_MESSAGE)
+            .addSnapshotListener { snapshot, error ->
+                val list = mutableListOf<Message>()
+
+                Log.i("Firebase", "add notification SnapshotListener detect")
+
+                error?.let {
+                    Log.w("Firebase", "[${this::class.simpleName}] Error getting documents. ${it.message}")
+                }
+
+                for (document in snapshot!!) {
+                    val message = document.toObject(Message::class.java)
+                    list.add(message)
+                }
+                list.sortBy { it.time }
+                liveData.value = list
+            }
+        return liveData
+    }
 }
 
 

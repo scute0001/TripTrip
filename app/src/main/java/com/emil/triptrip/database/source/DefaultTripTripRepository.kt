@@ -91,6 +91,10 @@ class DefaultTripTripRepository(private val remoteDataSource: TripTripDataSource
         return remoteDataSource.sentMessage(tripId, message)
     }
 
+    override fun getLiveMessage(tripId: String): MutableLiveData<List<Message>> {
+        return remoteDataSource.getLiveMessage(tripId)
+    }
+
     //    override fun getLiveArticles(): MutableLiveData<List<Article>> {
 //        return remoteDataSource.getLiveArticles()
 //    }
