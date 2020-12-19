@@ -66,6 +66,11 @@ class MainActivity : AppCompatActivity() {
 //                        viewModel.clickStatu.value = !it
 //                    }
                 }
+                R.id.message -> {
+                    viewModel.selectTripId.value?.let {tripId->
+                        findNavController(R.id.navHostFragment).navigate(NavigationDirections.actionGlobalChatRoomFragment(tripId))
+                    }
+                }
             }
             false
         }
@@ -166,6 +171,12 @@ class MainActivity : AppCompatActivity() {
             }
 
             viewModel.isHome.value = navController.currentDestination?.id == R.id.myTripsFragment
+
+            if (navController.currentDestination?.id == R.id.tripDetailFragment){
+                binding.toolbar.menu.findItem(R.id.message).isVisible = true
+            } else {
+                binding.toolbar.menu.findItem(R.id.message).isVisible = false
+            }
 
 //            if (navDestination.id != R.id.tripDetailFragment)
 //                viewModel.currentFragmentType.value = "TripTrip"

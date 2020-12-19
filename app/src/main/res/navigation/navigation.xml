@@ -96,5 +96,15 @@
         app:destination="@id/notificationFragment"
         app:popUpTo="@id/myTripsFragment"
         app:popUpToInclusive="false" />
+    <fragment
+        android:id="@+id/chatRoomFragment"
+        android:name="com.emil.triptrip.ui.chatroom.ChatRoomFragment"
+        android:label="ChatRoomFragment"
+        tools:layout="@layout/chat_room_fragment">
+        <argument
+            android:name="tripId"
+            app:argType="string" />
+    </fragment>
+    <action android:id="@+id/action_global_chatRoomFragment" app:destination="@id/chatRoomFragment" />
 
 </navigation>

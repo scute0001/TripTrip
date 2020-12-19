@@ -29,6 +29,9 @@ class MainActivityViewModel(app: Application, private val repository: TripTripRe
     val notificationList = MutableLiveData<List<NotificationAddTrip>>()
     val navToNotificationList = MutableLiveData<List<NotificationAddTrip>>()
 
+    // for trip chatRoom record tripId
+    val selectTripId = MutableLiveData<String>()
+
 
 
     init {

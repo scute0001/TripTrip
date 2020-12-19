@@ -24,6 +24,7 @@ object TripTripRemoteDataSource : TripTripDataSource {
     private const val PATH_SPOTS = "spots"
     private const val PATH_MYLOCATIONS = "myLocations"
     private const val PATH_NOTIFICATION = "notification"
+    private const val PATH_MESSAGE = "message"
     private const val QUERY_MY_TRIPS = "users"
     private const val QUERY_SPOTS = "daySpotsKey"
     private const val QUERY_PHOTOLIST = "photoList"
@@ -385,6 +386,20 @@ object TripTripRemoteDataSource : TripTripDataSource {
             .collection(PATH_TRIPS).document(tripId).collection(PATH_SPOTS).document(spotId)
             .delete()
             .addOnSuccessListener {
+                continuation.resume(ResultUtil.Success(true))
+            }
+            .addOnFailureListener {
+                Log.d("Firebase", "get trip data error!!!!! ${it.message}")
+                continuation.resume(ResultUtil.Error(it))
+            }
+    }
+
+    override suspend fun sentMessage(tripId: String, message: Message): ResultUtil<Boolean> = suspendCoroutine {continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_TRIPS).document(tripId).collection(PATH_MESSAGE)
+            .add(message)
+            .addOnSuccessListener { documentReference ->
+                documentReference.update("id" , documentReference.id)
                 continuation.resume(ResultUtil.Success(true))
             }
             .addOnFailureListener {

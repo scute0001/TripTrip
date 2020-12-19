@@ -86,4 +86,8 @@ class TripTripLocalDataSource(val context: Context) : TripTripDataSource {
     override suspend fun deleteSpot(tripId: String, spotId: String): ResultUtil<Boolean> {
         TODO("Not yet implemented")
     }
+
+    override suspend fun sentMessage(tripId: String, message: Message): ResultUtil<Boolean> {
+        TODO("Not yet implemented")
+    }
 }

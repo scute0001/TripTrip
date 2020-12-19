@@ -316,6 +316,7 @@ class TripDetailFragment : Fragment() {
         activity?.let {
             ViewModelProvider(it).get(MainActivityViewModel::class.java).apply {
                 currentFragmentType.value = TripDetailFragmentArgs.fromBundle(requireArguments()).tripData.title
+                selectTripId.value = TripDetailFragmentArgs.fromBundle(requireArguments()).tripData.id
 
 //                clickStatu.observe(this@TripDetailFragment, Observer { status ->
 //                    Log.i("service", "$status")

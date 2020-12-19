@@ -4,9 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/message"
+        android:icon="@drawable/ic_chat"
+        android:title=""
+        android:visible="false"
+        app:showAsAction="ifRoom"/>
+
+    <item
         android:id="@+id/notification"
         android:icon="@drawable/ic_baseline_notifications_active_24"
         android:title=""
         app:showAsAction="ifRoom" />
 
+    
 </menu>

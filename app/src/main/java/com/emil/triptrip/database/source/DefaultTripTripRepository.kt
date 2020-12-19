@@ -87,6 +87,10 @@ class DefaultTripTripRepository(private val remoteDataSource: TripTripDataSource
         return remoteDataSource.deleteSpot(tripId, spotId)
     }
 
+    override suspend fun sentMessage(tripId: String, message: Message): ResultUtil<Boolean> {
+        return remoteDataSource.sentMessage(tripId, message)
+    }
+
     //    override fun getLiveArticles(): MutableLiveData<List<Article>> {
 //        return remoteDataSource.getLiveArticles()
 //    }
