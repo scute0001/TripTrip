@@ -71,6 +71,7 @@ class MainActivity : AppCompatActivity() {
                         findNavController(R.id.navHostFragment).navigate(NavigationDirections.actionGlobalChatRoomFragment(tripId))
                     }
                 }
+                R.id.setting -> viewModel.navToModifyTripFlag.value = true
             }
             false
         }
@@ -167,6 +168,9 @@ class MainActivity : AppCompatActivity() {
             viewModel.currentFragmentType.value = when (navController.currentDestination?.id) {
                 R.id.addTripFragment -> resources.getString(R.string.add_new_trip)
                 R.id.addSpotFragment -> resources.getString(R.string.add_new_spot)
+                R.id.chatRoomFragment -> viewModel.currentFragmentType.value
+                R.id.tripDetailFragment -> viewModel.currentFragmentType.value
+                R.id.modifyTripFragment -> viewModel.currentFragmentType.value
                 else -> resources.getString(R.string.app_name)
             }
 
@@ -174,9 +178,20 @@ class MainActivity : AppCompatActivity() {
 
             if (navController.currentDestination?.id == R.id.tripDetailFragment){
                 binding.toolbar.menu.findItem(R.id.message).isVisible = true
+                binding.toolbar.menu.findItem(R.id.setting).isVisible = true
+                binding.toolbar.menu.findItem(R.id.notification).isVisible = false
+
+            } else if(navController.currentDestination?.id == R.id.modifyTripFragment){
+                binding.toolbar.menu.findItem(R.id.message).isVisible = false
+                binding.toolbar.menu.findItem(R.id.setting).isVisible = false
+                binding.toolbar.menu.findItem(R.id.notification).isVisible = false
             } else {
                 binding.toolbar.menu.findItem(R.id.message).isVisible = false
+                binding.toolbar.menu.findItem(R.id.setting).isVisible = false
+                binding.toolbar.menu.findItem(R.id.notification).isVisible = true
             }
+
+
 
 //            if (navDestination.id != R.id.tripDetailFragment)
 //                viewModel.currentFragmentType.value = "TripTrip"

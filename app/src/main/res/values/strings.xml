@@ -6,6 +6,7 @@
     <string name="attend_user">參與者:</string>
     <string name="spot_name_title">地點名稱</string>
     <string name="trip_name_title">行程名稱</string>
+    <string name="change_trip_name_title">更改名稱</string>
     <string name="start_time">開始時間</string>
     <string name="stay_time">預計停留</string>
     <string name="add_spot">標記地圖</string>
@@ -16,6 +17,7 @@
     <string name="cancel">取消</string>
     <string name="upload_trip_background">上傳底圖</string>
     <string name="add_attend_user">加入參與者</string>
+    <string name="change_attend_user">變更參與</string>
     <string name="add_new_trip">Add Your Trip</string>
     <string name="add_new_spot">Add New Spot</string>
     <string name="profile_information">Logout!!</string>
@@ -26,4 +28,5 @@
     <string name="select_attend_user">選擇參與者</string>
     <string name="last_edit">最後編輯:</string>
     <string name="add_success">新增成功</string>
+    <string name="change_date_range">更改日期</string>
 </resources>

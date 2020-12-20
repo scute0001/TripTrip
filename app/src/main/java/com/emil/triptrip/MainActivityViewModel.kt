@@ -32,11 +32,14 @@ class MainActivityViewModel(app: Application, private val repository: TripTripRe
     // for trip chatRoom record tripId
     val selectTripId = MutableLiveData<String>()
 
+    val navToModifyTripFlag = MutableLiveData<Boolean>()
+
 
 
     init {
         currentFragmentType.value = "TripTrip"
         clickStatu.value = false
+        navToModifyTripFlag.value = null
 
     }
 
@@ -45,6 +48,9 @@ class MainActivityViewModel(app: Application, private val repository: TripTripRe
         _user.value = currentUser
     }
 
+    fun clearNavToModifyTripFlag() {
+        navToModifyTripFlag.value = null
+    }
 
 
 

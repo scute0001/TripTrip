@@ -113,6 +113,16 @@ class TripDetailFragment : Fragment() {
         val viewModelFactory = TripDetailViewModelFactory(app, tripData, repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(TripDetailViewModel::class.java)
 
+        val mainActivityViewModel = ViewModelProvider(requireActivity()).get(MainActivityViewModel::class.java)
+
+        // for nav to modify trip page
+        mainActivityViewModel.navToModifyTripFlag.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                findNavController().navigate(TripDetailFragmentDirections.actionTripDetailFragmentToModifyTripFragment(tripData))
+                mainActivityViewModel.clearNavToModifyTripFlag()
+            }
+        })
+
         //set data and create to xml
         binding.viewModel = viewModel
 

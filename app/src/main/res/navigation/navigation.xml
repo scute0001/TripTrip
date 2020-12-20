@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_tripDetailFragment_to_addSpotFragment"
             app:destination="@id/addSpotFragment" />
+        <action
+            android:id="@+id/action_tripDetailFragment_to_modifyTripFragment"
+            app:destination="@id/modifyTripFragment" />
     </fragment>
     <fragment
         android:id="@+id/addSpotFragment"
@@ -106,5 +109,14 @@
             app:argType="string" />
     </fragment>
     <action android:id="@+id/action_global_chatRoomFragment" app:destination="@id/chatRoomFragment" />
+    <fragment
+        android:id="@+id/modifyTripFragment"
+        android:name="com.emil.triptrip.ui.modify.ModifyTripFragment"
+        android:label="modify_trip_fragment"
+        tools:layout="@layout/modify_trip_fragment" >
+        <argument
+            android:name="trip"
+            app:argType="com.emil.triptrip.database.Trip" />
+    </fragment>
 
 </navigation>

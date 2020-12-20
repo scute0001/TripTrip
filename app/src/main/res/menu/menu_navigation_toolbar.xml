@@ -16,5 +16,12 @@
         android:title=""
         app:showAsAction="ifRoom" />
 
-    
+    <item
+        android:id="@+id/setting"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title=""
+        app:showAsAction="ifRoom"
+        android:visible="false"/>
+
+
 </menu>
