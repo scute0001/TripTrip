@@ -12,23 +12,42 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:elevation="4dp"
-        android:layout_height="50dp">
+        android:layout_height="48dp">
 
-        <TextView
+        <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:cardCornerRadius="56dp"
             android:layout_marginEnd="16dp"
-            android:text="@{user.userId}"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:fontFamily="@font/architects_daughter"
-            android:background="@drawable/shape_attend_user_background"
-            style="@style/TextAppearance.MaterialComponents.Headline6"
-            android:gravity="center"
+            android:padding="2dp"
+            android:background="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/image_user"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:imageUrl="@{user.photo}"/>
+
+        </androidx.cardview.widget.CardView>
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:text="@{user.userId}"-->
+<!--            android:paddingLeft="16dp"-->
+<!--            android:paddingRight="16dp"-->
+<!--            android:fontFamily="@font/architects_daughter"-->
+<!--            android:background="@drawable/shape_attend_user_background"-->
+<!--            style="@style/TextAppearance.MaterialComponents.Headline6"-->
+<!--            android:gravity="center"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

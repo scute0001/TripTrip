@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -81,9 +80,6 @@ class ModifyTripFragment : Fragment() {
             adapter.submitList(it.toList())
         })
 
-//        viewModel.tripData.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-//            Log.i("TTTTT", "$it")
-//        })
 
         viewModel.modifyDataFlag.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             if (it == true) {
