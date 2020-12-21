@@ -53,7 +53,8 @@ class ModifyUsersDialog(val userList: List<User>, val viewModel: ModifyTripViewM
                         }
                         Log.d("DATADATA", "$selectUsers")
                         currentList.addAll(selectUsers)
-                        viewModel._currentUsersData.value = currentList
+
+                        viewModel._currentUsersData.value = currentList.toSet().toList()
                     })
                 .setNegativeButton(R.string.cancel,
                     DialogInterface.OnClickListener { dialog, id ->

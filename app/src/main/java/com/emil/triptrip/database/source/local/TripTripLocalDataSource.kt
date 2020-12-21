@@ -94,4 +94,8 @@ class TripTripLocalDataSource(val context: Context) : TripTripDataSource {
     override fun getLiveMessage(tripId: String): MutableLiveData<List<Message>> {
         TODO("Not yet implemented")
     }
+
+    override suspend fun modifyTrip(trip: Trip): ResultUtil<Trip> {
+        TODO("Not yet implemented")
+    }
 }

@@ -44,6 +44,8 @@ interface TripTripRepository {
     suspend fun sentMessage(tripId: String, message: Message): ResultUtil<Boolean>
 
     fun getLiveMessage(tripId: String): MutableLiveData<List<Message>>
+
+    suspend fun modifyTrip(trip: Trip): ResultUtil<Trip>
 //    fun getLiveArticles(): MutableLiveData<List<Article>>
 
 }

@@ -1,24 +1,21 @@
 package com.emil.triptrip.ui.modify
 
-import androidx.lifecycle.ViewModelProviders
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.emil.triptrip.R
+import androidx.navigation.fragment.findNavController
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.databinding.ModifyTripFragmentBinding
 import com.emil.triptrip.ui.addtrip.AttendUsersAdapter
 import com.emil.triptrip.ui.dialog.ModifyUsersDialog
-import com.emil.triptrip.ui.dialog.SelectUserDialog
-import com.emil.triptrip.ui.notification.NotificationFragmentArgs
-import com.emil.triptrip.ui.notification.NotificationViewModel
-import com.emil.triptrip.ui.notification.NotificationViewModelFactory
 import com.google.android.material.datepicker.MaterialDatePicker
-import java.util.*
+
 
 class ModifyTripFragment : Fragment() {
 
@@ -63,6 +60,11 @@ class ModifyTripFragment : Fragment() {
             }
         }
 
+        // change modify data true and set modify data
+        binding.buttonSubmitModify.setOnClickListener {
+            showDialog()
+        }
+
 
         // set modify users click
         binding.buttonModifyAttendUser.setOnClickListener {
@@ -76,14 +78,49 @@ class ModifyTripFragment : Fragment() {
         })
 
         viewModel.currentUsersData.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            Log.i("TTTTT", "current $it")
-            adapter.submitList(it)
-            adapter.notifyDataSetChanged()
+            adapter.submitList(it.toList())
+        })
+
+//        viewModel.tripData.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+//            Log.i("TTTTT", "$it")
+//        })
+
+        viewModel.modifyDataFlag.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            if (it == true) {
+                //call update firebase here
+                viewModel.modifyTripToFirebase()
+                viewModel.modifyDataFinished()
+            }
+        })
+
+        viewModel.navToTripDetailData.observe(viewLifecycleOwner, androidx.lifecycle.Observer {trip ->
+            trip?.let {
+                //show success dialog
+                findNavController().navigate(ModifyTripFragmentDirections.actionModifyTripFragmentToTripDetailFragment(trip))
+                viewModel.navToTripDetailFinished()
+            }
         })
 
 
 
+
         return binding.root
+    }
+
+    private fun showDialog() {
+
+        val alertDialog = AlertDialog.Builder(requireContext())
+        alertDialog.apply {
+            setTitle("設定")
+            setMessage("確定要變更設定?")
+            setPositiveButton("確定", DialogInterface.OnClickListener { dialog, which ->
+                viewModel.modifyData()
+            })
+            setNegativeButton("取消", DialogInterface.OnClickListener { dialog, which ->
+
+            })
+            setCancelable(false)
+        }.show()
     }
 
 

@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Trip(
     val id: String? = "",
-    val title: String? = "",
+    var title: String? = "",
     var startTime: Long? = -1L,
     var stopTime: Long? = -1L,
     var status: Int? = -1,

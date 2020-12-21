@@ -430,6 +430,20 @@ object TripTripRemoteDataSource : TripTripDataSource {
             }
         return liveData
     }
+
+    override suspend fun modifyTrip(trip: Trip): ResultUtil<Trip> = suspendCoroutine { continuation ->
+
+        FirebaseFirestore.getInstance()
+            .collection(PATH_TRIPS).document(trip.id!!)
+            .set(trip)
+            .addOnSuccessListener { documentReference ->
+                continuation.resume(ResultUtil.Success(trip))
+            }
+            .addOnFailureListener {
+                Log.d("Firebase", "get trip data error!!!!! ${it.message}")
+                continuation.resume(ResultUtil.Error(it))
+            }
+    }
 }
 
 

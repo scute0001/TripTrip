@@ -1,21 +1,20 @@
 package com.emil.triptrip.ui.modify
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
-import com.emil.triptrip.database.NotificationAddTrip
-import com.emil.triptrip.database.ResultUtil
-import com.emil.triptrip.database.Trip
-import com.emil.triptrip.database.User
+import com.emil.triptrip.database.*
 import com.emil.triptrip.database.source.TripTripRepository
 import com.emil.triptrip.util.LoadApiStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 
 class ModifyTripViewModel(app: Application, private val repository: TripTripRepository, private val trip: Trip) : AndroidViewModel(app) {
 
@@ -44,6 +43,13 @@ class ModifyTripViewModel(app: Application, private val repository: TripTripRepo
     // Un attend Users
     val unAttendUsers = MutableLiveData<List<User>>()
 
+    private val _modifyDataFlag = MutableLiveData<Boolean>()
+    val modifyDataFlag: LiveData<Boolean>
+        get() = _modifyDataFlag
+
+    private val _navToTripDetailData = MutableLiveData<Trip>()
+    val navToTripDetailData: LiveData<Trip>
+        get() = _navToTripDetailData
 
 
     // status: The internal MutableLiveData that stores the status of the most recent request
@@ -125,6 +131,99 @@ class ModifyTripViewModel(app: Application, private val repository: TripTripRepo
 
         _currentUsersData.value = selectUsers
         unAttendUsers.value = notSelectUsers
+    }
+
+
+    // set modify tripData for upload to firebase
+    fun setTripData() {
+
+        // set UserData
+        val userList = mutableListOf<String>()
+        val selectedUsers = currentUsersData.value
+        selectedUsers?.forEach {
+            it.email?.let { email ->
+                userList.add(email)
+            }
+        }
+
+
+        // set day list  ///////////////////
+        val dayList = mutableListOf<DayKey>()
+        startDay.value?.let { startDay ->
+
+            var timeCounter = startDay
+            val oneDaySec = (60 * 60 * 24 * 1000).toLong()
+            val simpleDateFormat = SimpleDateFormat("MM/dd")
+            var counter = 0
+
+            while ( timeCounter <= endDay.value!!) {
+
+                var date = startDay + ( oneDaySec * counter )
+                val dayKey = DayKey (dayCount = "Day${counter+1}", date = simpleDateFormat.format(date), dateTimeStamp = date, daySpotsKey = "Day${counter+1}${trip.id}")
+
+                dayList.add(dayKey)
+                timeCounter += oneDaySec
+                counter++
+            }
+            Log.i("TimeTime", "Start time $dayList")
+        }
+        ///////////////////////////////////
+
+        // check data source and set modify trip data
+        val currentTripData = tripData.value as Trip
+        currentTripData.title = tripTitle.value
+        currentTripData.dayKeyList = dayList
+        currentTripData.users = userList
+        currentTripData.startTime = startDay.value
+        currentTripData.stopTime = endDay.value
+
+        _tripData.value = currentTripData
+
+    }
+
+    // modify trip to firebase
+    fun modifyTripToFirebase() {
+
+        coroutineScope.launch {
+            _status.value = LoadApiStatus.LOADING
+
+            when (val result = repository.modifyTrip(tripData.value as Trip)) {
+                is ResultUtil.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                    leave(true)
+                    Log.d("Firebase", "result of add trip is $result")
+
+                    // set nav to mytrips
+                    _navToTripDetailData.value = result.data
+                }
+                is ResultUtil.Fail -> {
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                }
+                is ResultUtil.Error -> {
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                }
+                else -> {
+                    _error.value = TripTripApplication.instance.getString(R.string.Unknown_error)
+                    _status.value = LoadApiStatus.ERROR
+                }
+            }
+        }
+    }
+
+    fun navToTripDetailFinished() {
+        _navToTripDetailData.value = null
+    }
+
+    fun modifyData() {
+        _modifyDataFlag.value = true
+        setTripData()
+    }
+
+    fun modifyDataFinished() {
+        _modifyDataFlag.value = null
     }
 
 
