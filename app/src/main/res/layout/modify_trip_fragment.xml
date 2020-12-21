@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="com.emil.triptrip.ui.modify.ModifyTripViewModel" />
@@ -212,6 +213,7 @@
                         android:background="@drawable/shape_underline"
                         android:gravity="center"
                         android:hint="選擇參與者"
+                        android:visibility="@{viewModel.currentUsersData != null ? View.GONE : View.VISIBLE}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/button_modify_attend_user"
                         app:layout_constraintHorizontal_chainStyle="packed"
