@@ -15,7 +15,6 @@
         android:layout_height="match_parent"
         tools:context=".ui.notification.NotificationFragment">
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_notification"
             android:layout_width="match_parent"
@@ -24,6 +23,22 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+
+
+        <TextView
+            android:id="@+id/text_no_data_notify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_notifications"
+            android:visibility="gone"
+            style="@style/no_data"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

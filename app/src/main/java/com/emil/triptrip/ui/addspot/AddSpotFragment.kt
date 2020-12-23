@@ -75,6 +75,9 @@ class AddSpotFragment : Fragment() {
         binding.buttonSubmitSpot.setOnClickListener {
             viewModel.setSpotData()
         }
+        binding.buttonCancel.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
 
 
         viewModel.selectLocation.observe(viewLifecycleOwner, Observer {

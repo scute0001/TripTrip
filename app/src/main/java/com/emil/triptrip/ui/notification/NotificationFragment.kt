@@ -48,6 +48,12 @@ class NotificationFragment : Fragment() {
             if (notificationList != null) {
                 adapter.submitList(notificationList)
             }
+
+            if (notificationList.isEmpty()) {
+                binding.textNoDataNotify.visibility = View.VISIBLE
+            } else {
+                binding.textNoDataNotify.visibility = View.GONE
+            }
         })
 
         // if trip data ready and navigation to trip detail

@@ -34,12 +34,13 @@ class LoginFragment : Fragment() {
     private lateinit var viewModel: LoginViewModel
     private val GOOGLE_SIGN_IN = 9999
     private lateinit var auth: FirebaseAuth
+    private lateinit var binding: LoginFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = LoginFragmentBinding.inflate(inflater, container, false)
+        binding = LoginFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
 
         val app = requireNotNull(activity).application
@@ -55,6 +56,7 @@ class LoginFragment : Fragment() {
         // sign in
         binding.constraintLoginLogo.setOnClickListener {
             signIn()
+            binding.constraintLoginLogo.isClickable = false
         }
 
         // get data and navigation to main page

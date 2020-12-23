@@ -114,6 +114,10 @@ class AddTripFragment : Fragment() {
             viewModel.setTripData()
         }
 
+        binding.buttonCancelSubmitTrip.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
+
 
         // test imager picker select photo
         //

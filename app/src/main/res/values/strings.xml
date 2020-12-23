@@ -16,7 +16,7 @@
     <string name="ok">確定</string>
     <string name="cancel">取消</string>
     <string name="upload_trip_background">上傳底圖</string>
-    <string name="add_attend_user">加入參與者</string>
+    <string name="add_attend_user">加入夥伴</string>
     <string name="change_attend_user">變更參與</string>
     <string name="add_new_trip">Add Your Trip</string>
     <string name="add_new_spot">Add New Spot</string>
@@ -29,4 +29,6 @@
     <string name="last_edit">最後編輯:</string>
     <string name="add_success">新增成功</string>
     <string name="change_date_range">更改日期</string>
+    <string name="now_no_data">目前沒有任何資料喔，立即新增吧!</string>
+    <string name="no_notifications">目前沒有任何通知!</string>
 </resources>

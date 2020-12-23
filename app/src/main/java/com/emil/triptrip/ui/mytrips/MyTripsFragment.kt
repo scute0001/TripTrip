@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -41,6 +42,13 @@ class MyTripsFragment : Fragment() {
 
         val mainViewModel = ViewModelProvider(requireActivity()).get(MainActivityViewModel::class.java)
 
+        // swipe down refresh
+        val swipeRefresh = binding.mytripsSwipeRefresh
+        swipeRefresh.setOnRefreshListener {
+            viewModel.getTripsData()
+            swipeRefresh.isRefreshing = false
+        }
+
         // setup recyclerView adapter
         val adapter = TripsAdapter(viewModel)
         binding.recyclerTrips.adapter = adapter
@@ -48,7 +56,10 @@ class MyTripsFragment : Fragment() {
         // submit trips data to recyclerView
         viewModel.tripsData.observe(viewLifecycleOwner, Observer { trips ->
             if (trips != null) {
+                binding.textNoData.visibility = View.GONE
                 adapter.submitList(trips)
+            } else {
+                binding.textNoData.visibility = View.VISIBLE
             }
         })
 
