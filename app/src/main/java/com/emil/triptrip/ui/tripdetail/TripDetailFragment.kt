@@ -6,7 +6,6 @@ import android.app.Activity
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.icu.util.Calendar
 import android.location.Location
 import android.os.Bundle
@@ -20,16 +19,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.SimpleTarget
-import com.bumptech.glide.request.transition.Transition
 import com.emil.triptrip.MainActivityViewModel
-import com.emil.triptrip.PositionUpdateService
 import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.databinding.TripDetailFragmentBinding
-import com.emil.triptrip.util.GlideCircleBorderTransform
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -37,9 +30,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 
@@ -63,6 +54,8 @@ class TripDetailFragment : Fragment() {
 
         myMap = googleMap
         getLocationPermission()
+        updateLocationUI()
+        getDeviceLocation()
         //set marker click event
         googleMap.setOnMarkerClickListener {
             // call get spot detail api here
@@ -83,8 +76,7 @@ class TripDetailFragment : Fragment() {
          */
 
         //set friends Location
-        updateLocationUI()
-        getDeviceLocation()
+
 
         // set My location btn gone
         @SuppressLint("ResourceType")
