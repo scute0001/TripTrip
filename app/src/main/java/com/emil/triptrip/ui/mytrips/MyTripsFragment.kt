@@ -1,5 +1,7 @@
 package com.emil.triptrip.ui.mytrips
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -7,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +22,8 @@ import com.emil.triptrip.database.SpotTag
 import com.emil.triptrip.database.Trip
 import com.emil.triptrip.databinding.MyTripsFragmentBinding
 import com.google.firebase.firestore.FirebaseFirestore
+
+private const val PERMISSION_ID = 1010
 
 class MyTripsFragment : Fragment() {
 
@@ -106,7 +111,17 @@ class MyTripsFragment : Fragment() {
 //            testFirebaseSPOTTAG()
 //        }
 
+        getLocationPermission()
         return binding.root
+    }
+
+    // get permission
+    private fun getLocationPermission() {
+
+        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
+            ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ) {
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE), PERMISSION_ID)
+        }
     }
 
 
