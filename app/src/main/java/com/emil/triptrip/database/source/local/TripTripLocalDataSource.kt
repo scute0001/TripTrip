@@ -98,4 +98,12 @@ class TripTripLocalDataSource(val context: Context) : TripTripDataSource {
     override suspend fun modifyTrip(trip: Trip): ResultUtil<Trip> {
         TODO("Not yet implemented")
     }
+
+    override suspend fun updateCurrentLocation(
+        tripId: String,
+        latitude: Double,
+        longitude: Double
+    ): ResultUtil<Boolean> {
+        TODO("Not yet implemented")
+    }
 }

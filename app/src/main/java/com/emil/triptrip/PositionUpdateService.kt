@@ -6,8 +6,13 @@ import android.content.Intent
 import android.location.Location
 import android.os.IBinder
 import android.util.Log
+import com.emil.triptrip.database.source.TripTripRepository
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.concurrent.schedule
 
@@ -18,22 +23,34 @@ class PositionUpdateService: Service() {
     private val PERMISSION_ID = 1010
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var lastKnownLocation: Location? = null
+    private var tripId: String? = ""
+
+    // Create a Coroutine scope using a job to be able to cancel when needed
+    private var myJob = Job()
+
+    // the Coroutine runs using the Main (UI) dispatcher
+    private val coroutineScope = CoroutineScope(myJob + Dispatchers.IO)
 
     override fun onCreate() {
         super.onCreate()
         // init fusedLocationProviderClient and set LocationServices object
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
-        val r = TripTripApplication.instance.repository
 
 
-        startTimer()
+
+
 
         Log.i("service", "service onCreate")
 
     }
 
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        tripId = intent?.getStringExtra("MY TRIP ID")
+        startTimer()
 
+        return super.onStartCommand(intent, flags, startId)
+    }
 
     override fun onBind(intent: Intent?): IBinder? {
         Log.i("service", "currentTime onBind")
@@ -60,7 +77,10 @@ class PositionUpdateService: Service() {
             if (task.isSuccessful) {
                 lastKnownLocation = task.result
                 if (lastKnownLocation != null) {
+
                     Log.i("service", "location data ${lastKnownLocation!!.latitude}, ${lastKnownLocation!!.longitude}")
+
+                    updateMyLocation(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude)
                 }
             }
         }
@@ -70,19 +90,28 @@ class PositionUpdateService: Service() {
     private fun startTimer(){
 
         var second = 0
-        val REPEAT_TIME = 10
+        val REPEAT_TIME = 60
         timer.schedule(1000, 1000) {
             Log.i("service", "second is $second")
             second += 1
-            if (second == 10) {
+            if (second == REPEAT_TIME) {
                 getDeviceLocation()
-                second -= REPEAT_TIME
+                second = 0
             }
         }
     }
 
     private fun stopTimer() {
         timer.cancel()
+    }
+
+    private fun updateMyLocation(latitude: Double, longitude: Double) {
+        val repository = TripTripApplication.instance.repository
+        coroutineScope.launch {
+            tripId?.let {
+                repository.updateCurrentLocation(it, latitude, longitude)
+            }
+        }
     }
 
 

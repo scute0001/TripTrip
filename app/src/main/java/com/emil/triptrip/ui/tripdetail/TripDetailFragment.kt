@@ -20,6 +20,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.emil.triptrip.MainActivityViewModel
+import com.emil.triptrip.PositionUpdateService
 import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.databinding.TripDetailFragmentBinding
@@ -333,6 +334,14 @@ class TripDetailFragment : Fragment() {
 //                })
             }
         }
+
+        // start service update my position
+        val startIntent = Intent(context, PositionUpdateService::class.java).putExtra(
+            "MY TRIP ID",
+            TripDetailFragmentArgs.fromBundle(requireArguments()).tripData.id)
+        context?.startService(startIntent)
+
+
         // 2. init fusedLocationProviderClient and set LocationServices object
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
     }
@@ -471,6 +480,12 @@ class TripDetailFragment : Fragment() {
         binding.spotSheet.imageEdit.visibility = View.GONE
         binding.spotSheet.imageEditDel.visibility = View.VISIBLE
         binding.spotSheet.imageEditCancel.visibility = View.VISIBLE
+    }
+
+    override fun onDestroy() {
+        val stopIntent = Intent(context, PositionUpdateService::class.java)
+        context?.stopService(stopIntent)
+        super.onDestroy()
     }
 }
 

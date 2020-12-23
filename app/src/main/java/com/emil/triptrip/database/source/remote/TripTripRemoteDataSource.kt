@@ -444,6 +444,26 @@ object TripTripRemoteDataSource : TripTripDataSource {
                 continuation.resume(ResultUtil.Error(it))
             }
     }
+
+    // for move update self position
+    override suspend fun updateCurrentLocation(
+        tripId: String,
+        latitude: Double,
+        longitude: Double
+    ): ResultUtil<Boolean> = suspendCoroutine {continuation ->
+
+        FirebaseFirestore.getInstance()
+            .collection(PATH_TRIPS).document(tripId).collection(PATH_MYLOCATIONS).document(UserManager.user.value?.email as String)
+            .update("latitude", latitude,
+                "longitude", longitude)
+            .addOnSuccessListener { documentReference ->
+                continuation.resume(ResultUtil.Success(true))
+            }
+            .addOnFailureListener {
+                Log.d("Firebase", "get trip data error!!!!! ${it.message}")
+                continuation.resume(ResultUtil.Error(it))
+            }
+    }
 }
 
 
