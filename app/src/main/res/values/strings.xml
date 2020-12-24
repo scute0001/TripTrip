@@ -31,4 +31,5 @@
     <string name="change_date_range">更改日期</string>
     <string name="now_no_data">目前沒有任何資料喔，立即新增吧!</string>
     <string name="no_notifications">目前沒有任何通知!</string>
+    <string name="no_message">目前沒有訊息，與夥伴聊聊吧。</string>
 </resources>

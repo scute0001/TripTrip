@@ -53,8 +53,14 @@ class ChatRoomFragment : Fragment() {
 
         // massages live
         viewModel.liveMessages.observe(viewLifecycleOwner, Observer { messages ->
-            Log.i("TTTTT", "$messages")
-            adapter.submitList(messages)
+            if (messages.isNotEmpty()) {
+                adapter.submitList(messages)
+                binding.recyclerMassage.smoothScrollToPosition(0)
+                binding.textNoMessage.visibility = View.GONE
+            } else {
+                binding.textNoMessage.visibility = View.VISIBLE
+            }
+
         })
 
 
