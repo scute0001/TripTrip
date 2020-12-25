@@ -100,6 +100,11 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
     val usersLocation: LiveData<List<MyLocation>>
         get() = _usersLocation
 
+    // for photo update refresh photo list
+    private val _photoList = MutableLiveData<List<String>>()
+    val photoList: LiveData<List<String>>
+        get() = _photoList
+
     // get live spots data change by other users
     var liveSpotsData = MutableLiveData<List<SpotTag>>()
 
@@ -109,6 +114,7 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
 
     init {
         _spotsData.value = null
+        _photoList.value = null
         getUsersLocation()
 
         // set live spots and users listener
@@ -314,7 +320,6 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
                 }
             }
         }
-
     }
 
     // get Users location list
@@ -484,6 +489,7 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
                     leave(true)
+                    _photoList.value = result.data
 
                 }
                 is ResultUtil.Fail -> {
@@ -500,6 +506,11 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
                 }
             }
         }
+    }
+
+    // after refresh photo list to spot detail
+    fun clearPhotoList() {
+        _photoList.value = null
     }
 
     // update my location to firebase done and clear data.

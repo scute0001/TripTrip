@@ -125,7 +125,7 @@ class TripDetailFragment : Fragment() {
 
 
         //set select day recyclerView adapter
-        val selectDayAdapter = SelectDayAdapter(viewModel)
+        val selectDayAdapter = SelectDayAdapter(viewModel, bottomBehavior)
         binding.recyclerTripSelectDays.adapter = selectDayAdapter
 //        test submit
         selectDayAdapter.submitList(tripData.dayKeyList)
@@ -294,11 +294,19 @@ class TripDetailFragment : Fragment() {
         // show spot detail
         viewModel.spotDetail.observe(viewLifecycleOwner, Observer { spot ->
             binding.spot = spot
-            Log.i("TTTT", "spot.photoList ${spot.photoList}")
             spotPicsAdapter.submitList(spot.photoList?.toList())
             binding.spotSheet.spotDetailSheet
 //            bottomBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             bottomBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        })
+
+        // refresh photo after update photo
+        viewModel.photoList.observe(viewLifecycleOwner, Observer { photoList ->
+            photoList?.let {
+                spotPicsAdapter.submitList(photoList)
+                binding.spotSheet.recyclerSpotDetailPictures.smoothScrollToPosition(photoList.size)
+                viewModel.clearPhotoList()
+            }
         })
 
         return binding.root
@@ -438,7 +446,9 @@ class TripDetailFragment : Fragment() {
 
     private fun getLocalImg() {
         ImagePicker.with(this)
+            .compress(1024)
             .crop()
+            .maxResultSize(300, 150)
             .start()
     }
 

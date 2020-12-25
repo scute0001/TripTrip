@@ -115,6 +115,7 @@
                 android:layout_height="150dp"
                 android:visibility="@{viewModel.status == LoadApiStatus.LOADING ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -125,10 +126,14 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
         <include layout="@layout/spot_detail_fragment"
             android:id="@+id/spot_sheet"
             app:viewModelSheet="@{viewModel}"
             app:spotSheet="@{spot}"/>
+
+
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

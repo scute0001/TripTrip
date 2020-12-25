@@ -67,7 +67,7 @@ class DefaultTripTripRepository(private val remoteDataSource: TripTripDataSource
         photoList: List<String>,
         tripId: String,
         spotId: String
-    ): ResultUtil<Boolean> {
+    ): ResultUtil<List<String>> {
         return remoteDataSource.updateSpotPhoto(photoList, tripId, spotId)
     }
 

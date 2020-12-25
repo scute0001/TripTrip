@@ -67,7 +67,7 @@ class TripTripLocalDataSource(val context: Context) : TripTripDataSource {
         photoList: List<String>,
         tripId: String,
         spotId: String
-    ): ResultUtil<Boolean> {
+    ): ResultUtil<List<String>> {
         TODO("Not yet implemented")
     }
 

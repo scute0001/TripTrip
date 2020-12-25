@@ -296,13 +296,13 @@ object TripTripRemoteDataSource : TripTripDataSource {
         photoList: List<String>,
         tripId: String,
         spotId: String
-    ): ResultUtil<Boolean> = suspendCoroutine{continuation ->
+    ): ResultUtil<List<String>> = suspendCoroutine{continuation ->
         FirebaseFirestore.getInstance()
             .collection(PATH_TRIPS).document(tripId).collection(PATH_SPOTS).document(spotId)
             .update(QUERY_PHOTOLIST, photoList)
             .addOnSuccessListener { documentReference ->
 
-                continuation.resume(ResultUtil.Success(true))
+                continuation.resume(ResultUtil.Success(photoList))
             }
             .addOnFailureListener {
                 Log.d("Firebase", "Add Spot data error!!!!! ${it.message}")
