@@ -82,6 +82,11 @@ class AddSpotFragment : Fragment() {
 
         viewModel.selectLocation.observe(viewLifecycleOwner, Observer {
             viewModel.setOnSelectLocationFlag()
+            binding.lottieSuccess.apply {
+                visibility = View.VISIBLE
+                playAnimation()
+            }
+
         })
 
         // upload spot to firebase

@@ -55,7 +55,7 @@ class ChatRoomFragment : Fragment() {
         viewModel.liveMessages.observe(viewLifecycleOwner, Observer { messages ->
             if (messages.isNotEmpty()) {
                 adapter.submitList(messages)
-                binding.recyclerMassage.smoothScrollToPosition(0)
+                binding.recyclerMassage.smoothScrollToPosition(messages.size)
                 binding.textNoMessage.visibility = View.GONE
             } else {
                 binding.textNoMessage.visibility = View.VISIBLE

@@ -214,6 +214,18 @@
                         app:layout_constraintTop_toBottomOf="@+id/text_spot_location_title"
                         tools:text="AppWorks School" />
 
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/lottie_success"
+                        android:layout_width="72dp"
+                        android:layout_height="64dp"
+                        android:layout_marginEnd="48dp"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="@+id/text_search_from_map"
+                        app:layout_constraintEnd_toStartOf="@+id/button_choice_from_map"
+                        app:lottie_autoPlay="false"
+                        app:lottie_fileName="lottie_located.json"
+                        app:lottie_loop="false" />
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

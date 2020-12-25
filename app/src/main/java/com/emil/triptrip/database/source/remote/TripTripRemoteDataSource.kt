@@ -425,7 +425,7 @@ object TripTripRemoteDataSource : TripTripDataSource {
                     val message = document.toObject(Message::class.java)
                     list.add(message)
                 }
-                list.sortByDescending { it.time }
+                list.sortBy { it.time }
                 liveData.value = list
             }
         return liveData

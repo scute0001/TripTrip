@@ -76,7 +76,6 @@ class SelectMapFragment(val viewModel: AddSpotViewModel) : DialogFragment() {
             if (marker?.position != null) {
                 viewModel.selectLocation.value = marker?.position
                 dismiss()
-                Toast.makeText(requireContext(), "新增成功", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(requireContext(), "你還沒有選擇地點喔", Toast.LENGTH_SHORT).show()
             }
