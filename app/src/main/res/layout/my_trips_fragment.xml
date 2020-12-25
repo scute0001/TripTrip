@@ -7,6 +7,8 @@
         <variable
             name="viewModel"
             type="com.emil.triptrip.ui.mytrips.MyTripsViewModel" />
+        <import type="com.emil.triptrip.util.LoadApiStatus"/>
+        <import type="android.view.View"/>
 
     </data>
 

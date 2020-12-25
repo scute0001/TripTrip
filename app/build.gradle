@@ -107,7 +107,8 @@ dependencies {
     implementation 'com.github.dhaval2404:imagepicker:1.7.5'
 
     // lottie
-    implementation 'com.airbnb.android:lottie:2.8.0'
+//    implementation 'com.airbnb.android:lottie:2.8.0'
+    implementation 'com.airbnb.android:lottie:3.0.0'
 
     // Declare the dependencies for the Crashlytics and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies

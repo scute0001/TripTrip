@@ -34,6 +34,11 @@ class AddSpotSuccessDialogFragment : DialogFragment() {
             },
             1500)
 
+        binding.dialogLottie.apply {
+            speed = 1.7F
+            playAnimation()
+        }
+
         return binding.root
     }
 

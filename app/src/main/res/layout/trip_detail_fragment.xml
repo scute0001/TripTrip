@@ -6,6 +6,7 @@
 
     <data>
         <import type="android.view.View"/>
+        <import type="com.emil.triptrip.util.LoadApiStatus"/>
         <variable
             name="viewModel"
             type="com.emil.triptrip.ui.tripdetail.TripDetailViewModel" />
@@ -107,6 +108,20 @@
                 android:src="@drawable/ic_focus_64"
                 app:layout_constraintBottom_toTopOf="@+id/butten_add_spot"
                 app:layout_constraintEnd_toEndOf="parent" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottie_loading"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:visibility="@{viewModel.status == LoadApiStatus.LOADING ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_speed="3.0"
+                app:lottie_fileName="lottie_loading_circle_line.json"
+                app:lottie_loop="true"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

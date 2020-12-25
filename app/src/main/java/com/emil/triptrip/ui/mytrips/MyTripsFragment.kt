@@ -10,16 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
-import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.emil.triptrip.MainActivityViewModel
 import com.emil.triptrip.TripTripApplication
-import com.emil.triptrip.database.AttendUser
-import com.emil.triptrip.database.DayKey
 import com.emil.triptrip.database.SpotTag
-import com.emil.triptrip.database.Trip
 import com.emil.triptrip.databinding.MyTripsFragmentBinding
 import com.google.firebase.firestore.FirebaseFirestore
 
