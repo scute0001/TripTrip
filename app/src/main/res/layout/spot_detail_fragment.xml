@@ -318,7 +318,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraint_last_edit">
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/text_spot_photo_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -327,6 +327,8 @@
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_spot_detail_pictures"
@@ -340,8 +342,23 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                app:layout_constraintTop_toBottomOf="@+id/text_spot_photo_title"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/text_no_data"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                style="@style/no_data"
+                android:text="@string/please_add_photo"
+                android:background="@drawable/shape_border_corner_solid_black"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/recycler_spot_detail_pictures"
+                app:layout_constraintEnd_toEndOf="@+id/recycler_spot_detail_pictures"
+                app:layout_constraintStart_toStartOf="@+id/recycler_spot_detail_pictures"
+                app:layout_constraintTop_toTopOf="@+id/recycler_spot_detail_pictures" />
 
             <ImageButton
                 android:id="@+id/add_pics"

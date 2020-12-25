@@ -101,7 +101,7 @@ class AddSpotViewModel(app: Application,
 
             // for temp default photo list
             if (spotData.photoList == null) {
-                spotData.photoList = mutableListOf("https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg","https://i.imgur.com/QZdKyq8.jpg")
+                spotData.photoList = mutableListOf()
             }
             /////////////////////////////////
 

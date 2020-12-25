@@ -295,6 +295,16 @@ class TripDetailFragment : Fragment() {
         viewModel.spotDetail.observe(viewLifecycleOwner, Observer { spot ->
             binding.spot = spot
             spotPicsAdapter.submitList(spot.photoList?.toList())
+
+            spot.photoList?.let {
+
+                if (it.isNotEmpty()) {
+                    binding.spotSheet.textNoData.visibility = View.GONE
+                } else {
+                    binding.spotSheet.textNoData.visibility = View.VISIBLE
+                }
+            }
+
             binding.spotSheet.spotDetailSheet
 //            bottomBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             bottomBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
