@@ -391,7 +391,10 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
     // set change spot start time
     fun changeStartTime(hours: Int, minute: Int) {
         spotDetail.value?.startDay?.let {
-            spotDetail.value?.startTime =  it + (hours * 60 * 60 * 1000) + (minute * 60 * 1000)
+//            spotDetail.value?.startTime =  it + (hours * 60 * 60 * 1000) + (minute * 60 * 1000)
+            val newSpotData = spotDetail.value
+            newSpotData?.startTime = it + (hours * 60 * 60 * 1000) + (minute * 60 * 1000)
+            spotDetail.value = newSpotData
         }
     }
 
