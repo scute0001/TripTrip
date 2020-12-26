@@ -8,56 +8,67 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/black"
-        tools:context=".ui.dialog.LoginSuccessDialogFragment">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView"-->
-<!--            android:layout_width="44dp"-->
-<!--            android:layout_height="44dp"-->
-<!--            android:layout_marginStart="40dp"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            android:layout_marginEnd="40dp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            tools:srcCompat="@drawable/icons_44px_success01"-->
-<!--            android:src="@drawable/icons_44px_success01" />-->
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/dialog_lottie"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="40dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lottie_autoPlay="false"
-            app:lottie_fileName="lottie_success.json"
-            app:lottie_loop="false" />
-
-        <TextView
-            android:id="@+id/textView2"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="27dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="27dp"
-            android:layout_marginBottom="20dp"
-            android:fontFamily="@font/noto_sans"
-            android:gravity="center"
-            android:letterSpacing="0.15"
-            android:text="@string/login_success"
-            android:textColor="@color/success_blue"
-            android:textSize="14sp"
+            android:background="@drawable/shape_success_block_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dialog_lottie" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:context=".ui.dialog.LoginSuccessDialogFragment">
+
+            <!--        <ImageView-->
+            <!--            android:id="@+id/imageView"-->
+            <!--            android:layout_width="44dp"-->
+            <!--            android:layout_height="44dp"-->
+            <!--            android:layout_marginStart="40dp"-->
+            <!--            android:layout_marginTop="20dp"-->
+            <!--            android:layout_marginEnd="40dp"-->
+            <!--            app:layout_constraintEnd_toEndOf="parent"-->
+            <!--            app:layout_constraintStart_toStartOf="parent"-->
+            <!--            app:layout_constraintTop_toTopOf="parent"-->
+            <!--            tools:srcCompat="@drawable/icons_44px_success01"-->
+            <!--            android:src="@drawable/icons_44px_success01" />-->
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/dialog_lottie"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="false"
+                app:lottie_fileName="lottie_success.json"
+                app:lottie_loop="false" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="27dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/noto_sans"
+                android:gravity="center"
+                android:letterSpacing="0.15"
+                android:text="@string/login_success"
+                android:textColor="@color/success_blue"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dialog_lottie" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -17,4 +17,5 @@
     <color name="middle_blue">#2196f3</color>
     <color name="message_blue">#CFEFFE</color>
     <color name="success_blue">#75A4F2</color>
+    <color name="dialog_transparent">#cc000000</color>
 </resources>

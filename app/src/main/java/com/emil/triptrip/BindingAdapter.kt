@@ -26,8 +26,8 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
 
         Glide.with(imgView.context)
             .load(imgUrl)
-            .placeholder(R.drawable.ic_placeholder)
-            .error(R.drawable.ic_placeholder)
+            .placeholder(R.drawable.ic_placeholder_big)
+            .error(R.drawable.ic_placeholder_big)
             .apply(
                 RequestOptions().transform(CenterCrop(), RoundedCorners(50))
 //                RequestOptions.bitmapTransform(RoundedCorners(20))
@@ -44,8 +44,8 @@ fun bindSelectImage(imgView: ImageView, imgUrl: String?) {
     } else {
         Glide.with(imgView.context)
             .load(imgUrl)
-            .placeholder(R.drawable.ic_placeholder)
-            .error(R.drawable.ic_placeholder)
+            .placeholder(R.drawable.ic_placeholder_big)
+            .error(R.drawable.ic_placeholder_big)
             .apply(
                 RequestOptions().transform(CenterCrop(), RoundedCorners(50))
             )
