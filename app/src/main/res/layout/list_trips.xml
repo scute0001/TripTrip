@@ -46,15 +46,15 @@
                 android:id="@+id/text_trips_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="32dp"
-                android:paddingLeft="32dp"
+                android:paddingTop="28dp"
+                android:paddingLeft="28dp"
                 android:paddingRight="16dp"
                 android:paddingBottom="8dp"
                 android:fontFamily="@font/architects_daughter"
                 android:letterSpacing="0.2"
                 android:text="@{tripData.title}"
                 android:textColor="@color/black_light"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -64,57 +64,77 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        <TextView
-            android:id="@+id/text_dash"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="－"
-            android:textSize="20sp"
-            android:fontFamily="@font/architects_daughter"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="@+id/text_start_date"
-            app:layout_constraintEnd_toStartOf="@+id/text_stop_date"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/text_start_date"
-            app:layout_constraintTop_toTopOf="@+id/text_start_date" />
-
-        <TextView
-            android:id="@+id/text_start_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:background="@drawable/background_tape"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="32dp"
-            android:fontFamily="@font/architects_daughter"
-            android:letterSpacing="0.15"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
-            app:layout_constraintEnd_toStartOf="@+id/text_dash"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraint_title"
-            app:timeTransfer="@{tripData.startTime}"
-            tools:text="2000.01.01" />
-
-        <TextView
-            android:id="@+id/text_stop_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/text_dash"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            android:textSize="20sp"
-            android:fontFamily="@font/architects_daughter"
-            android:letterSpacing="0.15"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toEndOf="@+id/text_dash"
-            app:layout_constraintTop_toTopOf="@+id/text_dash"
-            app:timeTransfer="@{tripData.stopTime}"
-            tools:text="2000.01.05"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraint_title">
+
+            <TextView
+                android:id="@+id/text_dash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/architects_daughter"
+                android:text="~"
+                android:textColor="@color/black_light"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/text_start_date"
+                app:layout_constraintEnd_toStartOf="@+id/text_stop_date"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/text_start_date"
+                app:layout_constraintTop_toTopOf="@+id/text_start_date" />
+
+            <TextView
+                android:id="@+id/text_start_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/architects_daughter"
+                android:letterSpacing="0.15"
+                android:textColor="@color/black_light"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/text_dash"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:timeTransfer="@{tripData.startTime}"
+                tools:text="2000.01.01" />
+
+            <TextView
+                android:id="@+id/text_stop_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/architects_daughter"
+                android:letterSpacing="0.15"
+                android:textColor="@color/black_light"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/text_dash"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/text_dash"
+                app:layout_constraintTop_toTopOf="@+id/text_dash"
+                app:timeTransfer="@{tripData.stopTime}"
+                tools:text="2000.01.05" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
         <ImageView
             android:id="@+id/imageView4"
@@ -164,7 +184,7 @@
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/architects_daughter"
             android:gravity="center"
-            android:text="Partner:"
+            android:text="@string/member"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -206,7 +226,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="200dp"/>
+            app:layout_constraintGuide_begin="240dp"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

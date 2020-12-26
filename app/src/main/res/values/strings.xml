@@ -35,4 +35,5 @@
     <string name="no_message">目前沒有訊息，與夥伴聊聊吧。</string>
     <string name="spot_photo">景點相簿:</string>
     <string name="please_add_photo">相簿是空的喔，快新增吧。</string>
+    <string name="member">Member:</string>
 </resources>
