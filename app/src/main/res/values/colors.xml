@@ -19,4 +19,5 @@
     <color name="success_blue">#75A4F2</color>
     <color name="dialog_transparent">#cc000000</color>
     <color name="black_101010">#101010</color>
+    <color name="black_light">#48494E</color>
 </resources>
