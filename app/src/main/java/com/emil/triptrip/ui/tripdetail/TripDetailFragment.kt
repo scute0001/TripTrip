@@ -9,7 +9,6 @@ import android.content.pm.PackageManager
 import android.icu.util.Calendar
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +23,7 @@ import com.emil.triptrip.PositionUpdateService
 import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.databinding.TripDetailFragmentBinding
+import com.emil.triptrip.ui.dialog.ConfirmDialog
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -245,13 +245,8 @@ class TripDetailFragment : Fragment() {
         }
 
         binding.spotSheet.imageEditDel.setOnClickListener {
-            // del spot data api here
-            viewModel.delSpotData()
-            // show dialog
-            Toast.makeText(requireContext(), "地點刪除成功", Toast.LENGTH_SHORT).show()
-            // close all edit function here
-            closeEdit(binding)
-
+            // confirm delete dialog
+            fragmentManager?.let { it1 -> ConfirmDialog(viewModel, binding, bottomBehavior).show(it1, "DELETE") }
         }
 
 

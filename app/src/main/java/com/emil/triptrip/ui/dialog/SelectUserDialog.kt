@@ -5,10 +5,15 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Button
+import androidx.appcompat.widget.AlertDialogLayout
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import com.emil.triptrip.R
 import com.emil.triptrip.database.User
 import com.emil.triptrip.ui.addtrip.AddTripViewModel
+import kotlinx.android.synthetic.main.fragment_confirm_dialog.view.*
 
 
 class SelectUserDialog(val userList: List<User>,val viewModel: AddTripViewModel) : DialogFragment() {
@@ -58,6 +63,7 @@ class SelectUserDialog(val userList: List<User>,val viewModel: AddTripViewModel)
                     })
 
             builder.create()
+
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
