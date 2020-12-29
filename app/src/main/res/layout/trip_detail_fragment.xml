@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <import type="com.emil.triptrip.util.LoadApiStatus"/>
+        <variable
+            name="viewModel"
+            type="com.emil.triptrip.ui.tripdetail.TripDetailViewModel" />
+        <variable
+            name="spot"
+            type="com.emil.triptrip.database.SpotTag" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.tripdetail.TripDetailFragment">
+
+
+
+            <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/recycler_trip_select_days"
+                tools:context=".ui.tripdetail.TripDetailFragment" />
+
+
+            <ImageButton
+                android:id="@+id/butten_add_spot"
+                android:layout_width="66dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/shape_btn_map_circle"
+                android:clickable="true"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="4dp"
+                android:scaleType="fitEnd"
+                android:src="@drawable/ic_spot_add"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_trip_select_days"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:background="@android:color/transparent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_trip_select_time"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:paddingLeft="16dp"
+                android:background="@android:color/transparent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                android:visibility="@{viewModel.selectedDay != null ? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.275"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recycler_trip_select_days" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="96dp"
+                android:background="@drawable/shape_recycler_background_gradient"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageButton
+                android:id="@+id/butten_for_test"
+                android:layout_width="66dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/shape_btn_map_circle"
+                android:clickable="true"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="4dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_focus_64"
+                app:layout_constraintBottom_toTopOf="@+id/butten_add_spot"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottie_loading"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:visibility="@{viewModel.status == LoadApiStatus.LOADING ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_speed="3.0"
+                app:lottie_fileName="lottie_loading_circle_line.json"
+                app:lottie_loop="true"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        <include layout="@layout/spot_detail_fragment"
+            android:id="@+id/spot_sheet"
+            app:viewModelSheet="@{viewModel}"
+            app:spotSheet="@{spot}"/>
+
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+</layout>

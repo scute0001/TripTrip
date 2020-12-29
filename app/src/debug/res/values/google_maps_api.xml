@@ -1,0 +1,25 @@
+<resources>
+    <!--
+    TODO: Before you run your application, you need a Google Maps API key.
+
+    To get one, follow this link, follow the directions and press "Create" at the end:
+
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=70:9E:3F:31:26:39:08:3F:CA:74:91:D5:61:91:9E:39:36:34:33:86%3Bcom.emil.triptrip.ui.tripdetail
+
+    You can also add your credentials to an existing key, using these values:
+
+    Package name:
+    com.emil.triptrip.ui.tripdetail
+
+    SHA-1 certificate fingerprint:
+    70:9E:3F:31:26:39:08:3F:CA:74:91:D5:61:91:9E:39:36:34:33:86
+
+    Alternatively, follow the directions here:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <!--    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyB__h-ELzho2v_ZSzyCJ-ThW3kCSbiCezA</string>-->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBY8SlU8XwWh5eHtHylYJhax5-fx8mrwGI</string>
+</resources>

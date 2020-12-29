@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+    <item android:title="我的功能">
+        <menu>
+            <item
+                android:id="@+id/nav_friend_list"
+                android:title="好友清單"
+                android:icon="@drawable/ic_friends_64"/>
+            <item
+                android:id="@+id/nav_my_notifications"
+                android:title="我的通知"
+                android:icon="@drawable/ic_information_64" />
+        </menu>
+    </item>
+
+</menu>

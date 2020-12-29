@@ -5,6 +5,8 @@ apply plugin: 'kotlin-kapt'
 // add navigation with argument
 apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'com.google.gms.google-services'
+// Apply the Crashlytics Gradle plugin
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     compileSdkVersion 30
@@ -43,6 +45,13 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'com.google.firebase:firebase-firestore:17.1.2'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.firebase:firebase-auth:16.0.5'
+    // firebase storage
+    implementation 'com.google.firebase:firebase-storage:16.0.4'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -74,6 +83,35 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
 
     // Import the BoM for the Firebase platform
-    implementation platform('com.google.firebase:firebase-bom:26.0.0')
+    implementation platform('com.google.firebase:firebase-bom:26.2.0')
 
+    // Material Components for Android
+//    implementation 'com.google.android.material:material:<version>'
+    implementation("com.google.android.material:material:1.2.0-alpha03")
+
+    // google location
+    implementation 'com.google.android.gms:play-services-location:17.1.0'
+
+    // FirebaseUI
+    implementation 'com.firebaseui:firebase-ui-auth:6.4.0'
+
+    // google Firebase
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
+
+    // google map place api
+    implementation 'com.google.android.libraries.places:places:2.4.0'
+
+
+    // image picker
+    implementation 'com.github.dhaval2404:imagepicker:1.7.5'
+
+    // lottie
+//    implementation 'com.airbnb.android:lottie:2.8.0'
+    implementation 'com.airbnb.android:lottie:3.0.0'
+
+    // Declare the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 }

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/myTripsFragment"
+        android:name="com.emil.triptrip.ui.mytrips.MyTripsFragment"
+        android:label="my_trips_fragment"
+        tools:layout="@layout/my_trips_fragment" >
+        <action
+            android:id="@+id/action_myTripsFragment_to_tripDetailFragment"
+            app:destination="@id/tripDetailFragment" />
+        <action
+            android:id="@+id/action_myTripsFragment_to_addTripFragment"
+            app:destination="@id/addTripFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tripDetailFragment"
+        android:name="com.emil.triptrip.ui.tripdetail.TripDetailFragment"
+        android:label="trip_detail_fragment"
+        tools:layout="@layout/trip_detail_fragment">
+        <argument android:name="tripData"
+            app:argType="com.emil.triptrip.database.Trip"/>
+        <action
+            android:id="@+id/action_tripDetailFragment_to_addSpotFragment"
+            app:destination="@id/addSpotFragment" />
+        <action
+            android:id="@+id/action_tripDetailFragment_to_modifyTripFragment"
+            app:destination="@id/modifyTripFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addSpotFragment"
+        android:name="com.emil.triptrip.ui.addspot.AddSpotFragment"
+        android:label="add_spot_fragment"
+        tools:layout="@layout/add_spot_fragment" >
+        <argument
+            android:name="tripId"
+            app:argType="string" />
+        <argument
+            android:name="dayKey"
+            app:argType="com.emil.triptrip.database.DayKey"/>
+    </fragment>
+    <fragment
+        android:id="@+id/addTripFragment"
+        android:name="com.emil.triptrip.ui.addtrip.AddTripFragment"
+        android:label="AddTripFragment"
+        tools:layout="@layout/add_trip_fragment">
+        <action
+            android:id="@+id/action_addTripFragment_to_myTripsFragment"
+            app:destination="@id/myTripsFragment"
+            app:popUpTo="@id/myTripsFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.emil.triptrip.ui.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/login_fragment">
+        <action
+            android:id="@+id/action_loginFragment_to_loginSuccessDialogFragment"
+            app:destination="@id/loginSuccessDialogFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <dialog
+        android:id="@+id/loginSuccessDialogFragment"
+        android:name="com.emil.triptrip.ui.dialog.LoginSuccessDialogFragment"
+        android:label="LoginSuccessDialogFragment"
+        tools:layout="@layout/fragment_login_success_dialog">
+        <action
+            android:id="@+id/action_loginSuccessDialogFragment_to_myTripsFragment"
+            app:destination="@id/myTripsFragment"
+            app:popUpTo="@id/myTripsFragment"
+            app:popUpToInclusive="true" />
+    </dialog>
+    <dialog
+        android:id="@+id/addSpotSuccessDialogFragment"
+        android:name="com.emil.triptrip.ui.dialog.AddSpotSuccessDialogFragment"
+        android:label="AddSpotSuccessDialogFragment"
+        tools:layout="@layout/fragment_login_success_dialog"/>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.emil.triptrip.ui.notification.NotificationFragment"
+        android:label="NotificationFragment"
+        tools:layout="@layout/notification_fragment">
+        <argument
+            android:name="notificationList"
+            app:argType="com.emil.triptrip.database.NotificationAddTrip[]" />
+        <action
+            android:id="@+id/action_notificationFragment_to_tripDetailFragment"
+            app:destination="@id/tripDetailFragment" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_notificationFragment"
+        app:destination="@id/notificationFragment"
+        app:popUpTo="@id/myTripsFragment"
+        app:popUpToInclusive="false" />
+    <fragment
+        android:id="@+id/chatRoomFragment"
+        android:name="com.emil.triptrip.ui.chatroom.ChatRoomFragment"
+        android:label="ChatRoomFragment"
+        tools:layout="@layout/chat_room_fragment">
+        <argument
+            android:name="tripId"
+            app:argType="string" />
+    </fragment>
+    <action android:id="@+id/action_global_chatRoomFragment" app:destination="@id/chatRoomFragment" />
+    <fragment
+        android:id="@+id/modifyTripFragment"
+        android:name="com.emil.triptrip.ui.modify.ModifyTripFragment"
+        android:label="modify_trip_fragment"
+        tools:layout="@layout/modify_trip_fragment" >
+        <argument
+            android:name="trip"
+            app:argType="com.emil.triptrip.database.Trip" />
+        <action
+            android:id="@+id/action_modifyTripFragment_to_tripDetailFragment"
+            app:destination="@id/tripDetailFragment"
+            app:popUpTo="@id/tripDetailFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+</navigation>

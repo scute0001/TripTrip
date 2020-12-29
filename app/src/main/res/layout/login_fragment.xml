@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_login_background"
+        tools:context=".ui.login.LoginFragment">
+
+
+
+
+<!--            <com.google.android.gms.common.SignInButton-->
+<!--                android:id="@+id/sign_in_button"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:padding="10dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                app:layout_constraintEnd_toEndOf="@+id/image_login_logo"-->
+<!--                app:cardCornerRadius="30dp"-->
+<!--                android:background="@drawable/shape_trips_card_background"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/image_login_logo"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/image_login_logo"/>-->
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.8" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.2" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="false"
+            app:lottie_fileName="lottie_mountain.json"
+            app:lottie_loop="false" />
+
+        <ImageView
+            android:id="@+id/image_login_logo"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:src="@drawable/ic_triptrip_logo"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/constraint_login_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_login_title"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/text_login_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/architects_daughter"
+            android:letterSpacing="0.05"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="56sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/guideline_down"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline_down" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_login_logo"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginEnd="64dp"
+            android:background="@drawable/shape_google_login"
+            android:elevation="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline_up"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline_up">
+
+            <ImageView
+                android:id="@+id/image_google"
+                android:layout_width="72dp"
+                android:layout_height="56dp"
+                android:padding="12dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_google_logo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/text_login_logo_description"
+                android:layout_width="277dp"
+                android:layout_height="55dp"
+                android:fontFamily="@font/noto_sans"
+                android:gravity="center"
+                android:paddingLeft="24dp"
+                android:paddingRight="8dp"
+                android:text="使用 Google 帳戶登入"
+                android:textColor="@color/grayUnderline"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/image_google"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
