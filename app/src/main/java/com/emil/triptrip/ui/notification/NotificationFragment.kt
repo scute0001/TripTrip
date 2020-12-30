@@ -1,8 +1,6 @@
 package com.emil.triptrip.ui.notification
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +8,10 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.emil.triptrip.R
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.databinding.NotificationFragmentBinding
-import com.emil.triptrip.ui.mytrips.TripsAdapter
-import com.emil.triptrip.ui.tripdetail.TripDetailViewModel
-import com.emil.triptrip.ui.tripdetail.TripDetailViewModelFactory
+import com.emil.triptrip.util.SwipeToDeleteCallBack
 
 class NotificationFragment : Fragment() {
 
@@ -44,6 +40,12 @@ class NotificationFragment : Fragment() {
         binding.recyclerNotification.adapter = adapter
 
 
+        //
+        val swipeHandler = object : SwipeToDeleteCallBack(requireContext(), adapter){}
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(binding.recyclerNotification)
+
+
         viewModel.notificationList.observe(viewLifecycleOwner, Observer {notificationList ->
             if (notificationList != null) {
                 adapter.submitList(notificationList)
@@ -62,6 +64,10 @@ class NotificationFragment : Fragment() {
                 findNavController().navigate(NotificationFragmentDirections.actionNotificationFragmentToTripDetailFragment(it))
                 viewModel.navToTripDetailFinished()
             }
+        })
+
+        viewModel.liveNotificationData.observe(viewLifecycleOwner, Observer {
+            viewModel.setLiveNotifyToShow(it)
         })
 
 

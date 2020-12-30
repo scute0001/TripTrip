@@ -13,6 +13,7 @@ import com.emil.triptrip.databinding.ListNotificationBinding
 class NotificationAdapter(val viewModel: NotificationViewModel): ListAdapter<NotificationAddTrip, NotificationViewHolder>(
     NotificationDiffCallback()
 ) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {
         return NotificationViewHolder.from(parent)
     }
@@ -20,6 +21,12 @@ class NotificationAdapter(val viewModel: NotificationViewModel): ListAdapter<Not
     override fun onBindViewHolder(holder: NotificationViewHolder, position: Int) {
         holder.bind(viewModel, getItem(position))
     }
+
+    fun deleteNotification(position: Int) {
+        val item = getItem(position)
+        viewModel.deleteNotification(item)
+    }
+
 }
 
 class NotificationViewHolder(val binding: ListNotificationBinding): RecyclerView.ViewHolder(binding.root) {
@@ -41,6 +48,8 @@ class NotificationViewHolder(val binding: ListNotificationBinding): RecyclerView
             return NotificationViewHolder(binding)
         }
     }
+
+
 
 }
 

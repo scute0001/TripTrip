@@ -5,13 +5,13 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.database.NotificationAddTrip
 import com.emil.triptrip.database.ResultUtil
 import com.emil.triptrip.database.Trip
 import com.emil.triptrip.database.source.TripTripRepository
+import com.emil.triptrip.ui.login.UserManager
 import com.emil.triptrip.util.LoadApiStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -48,8 +48,13 @@ class NotificationViewModel(app: Application, private val repository: TripTripRe
     val tripData: LiveData<Trip>
         get() = _tripData
 
+    private var _liveNotificationData = MutableLiveData<List<NotificationAddTrip>>()
+    val liveNotificationData: LiveData<List<NotificationAddTrip>>
+        get() = _liveNotificationData
+
     init {
-        _notificationList.value = notificationList
+//        _notificationList.value = notificationList
+        getNotificationLiveData()
     }
 
     fun getTripData(tripId: String) {
@@ -95,6 +100,47 @@ class NotificationViewModel(app: Application, private val repository: TripTripRe
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
+    }
+
+    fun deleteNotification(notification: NotificationAddTrip) {
+        val userEmail = UserManager.user.value?.email as String
+
+        coroutineScope.launch {
+            _status.value = LoadApiStatus.LOADING
+
+            when (val result = repository.deleteNotification(userEmail, notification)) {
+                is ResultUtil.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                    leave(true)
+
+                }
+                is ResultUtil.Fail -> {
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                }
+                is ResultUtil.Error -> {
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                }
+                else -> {
+                    _error.value = TripTripApplication.instance.getString(R.string.Unknown_error)
+                    _status.value = LoadApiStatus.ERROR
+                }
+            }
+        }
+    }
+
+    // set notification snapshot and get notification live data
+    private fun getNotificationLiveData() {
+        UserManager.user.value?.email?.let {
+            _liveNotificationData = repository.getLiveNotificationInfo(it)
+        }
+    }
+
+    // set notification snapshot and get notification live data
+    fun setLiveNotifyToShow(notificationList: List<NotificationAddTrip>) {
+        _notificationList.value = notificationList.filter { it.status == 0 }
     }
 
 }

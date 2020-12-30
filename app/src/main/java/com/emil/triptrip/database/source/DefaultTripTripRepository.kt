@@ -107,6 +107,13 @@ class DefaultTripTripRepository(private val remoteDataSource: TripTripDataSource
         return remoteDataSource.updateCurrentLocation(tripId, latitude, longitude)
     }
 
+    override suspend fun deleteNotification(
+        userEmail: String,
+        notification: NotificationAddTrip
+    ): ResultUtil<Boolean> {
+        return remoteDataSource.deleteNotification(userEmail, notification)
+    }
+
     //    override fun getLiveArticles(): MutableLiveData<List<Article>> {
 //        return remoteDataSource.getLiveArticles()
 //    }
