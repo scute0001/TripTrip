@@ -36,4 +36,9 @@
     <string name="spot_photo">景點相簿:</string>
     <string name="please_add_photo">相簿是空的喔，快新增吧。</string>
     <string name="member">Member:</string>
+    <string name="input_spot_name_here">Input spot name here.</string>
+    <string name="select_start_time">選擇開始時間</string>
+    <string name="one_hr">1HR</string>
+    <string name="search_from_map">從地圖搜尋</string>
+    <string name="add_your_travel_detail_here">Add your travel detail here.</string>
 </resources>

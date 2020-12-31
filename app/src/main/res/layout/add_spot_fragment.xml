@@ -38,7 +38,6 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/img_add_spot_title"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,9 +45,9 @@
                     android:id="@+id/constraint_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="@dimen/fragment_vertical_margin_std"
                     android:background="@drawable/shape_add_spot_card"
-                    android:padding="16dp"
+                    android:padding="@dimen/fragment_padding_std"
                     app:layout_constraintEnd_toStartOf="@+id/guideline_right"
                     app:layout_constraintStart_toStartOf="@+id/guideline_left"
                     app:layout_constraintTop_toBottomOf="@+id/constraint_spot_type">
@@ -56,11 +55,11 @@
                     <EditText
                         android:id="@+id/editText_spot_title"
                         android:layout_width="0dp"
-                        android:layout_height="48dp"
-                        android:layout_marginStart="16dp"
+                        android:layout_height="@dimen/edittext_height"
+                        android:layout_marginStart="@dimen/fragment_horizon_margin_std"
                         android:ems="10"
                         android:text="@={viewModel.spotTitle}"
-                        android:hint="Input spot name here."
+                        android:hint="@string/input_spot_name_here"
                         android:background="@drawable/shape_underline"
                         android:inputType="textPersonName"
                         android:textAlignment="center"
@@ -86,9 +85,9 @@
                     android:id="@+id/constraint_start_time"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="@dimen/fragment_vertical_margin_std"
                     android:background="@drawable/shape_add_spot_card"
-                    android:padding="16dp"
+                    android:padding="@dimen/fragment_padding_std"
                     app:layout_constraintEnd_toStartOf="@+id/guideline_right"
                     app:layout_constraintStart_toStartOf="@+id/guideline_left"
                     app:layout_constraintTop_toBottomOf="@id/constraint_title">
@@ -107,11 +106,11 @@
                     <TextView
                         android:id="@+id/text_start_time"
                         android:layout_width="0dp"
-                        android:layout_height="48dp"
-                        android:layout_marginStart="16dp"
+                        android:layout_height="@dimen/edittext_height"
+                        android:layout_marginStart="@dimen/fragment_horizon_margin_std"
                         android:background="@drawable/shape_underline"
                         android:gravity="center"
-                        android:hint="選擇開始時間"
+                        android:hint="@string/select_start_time"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/text_start_time_title"
@@ -125,10 +124,10 @@
                     android:id="@+id/constraint_stay_period"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="@dimen/fragment_vertical_margin_std"
+                    android:layout_marginBottom="@dimen/fragment_vertical_margin_std"
                     android:background="@drawable/shape_add_spot_card"
-                    android:padding="16dp"
+                    android:padding="@dimen/fragment_padding_std"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/guideline_right"
                     app:layout_constraintStart_toStartOf="@id/guideline_left"
@@ -148,12 +147,12 @@
                     <EditText
                         android:id="@+id/editText_stay_time"
                         android:layout_width="0dp"
-                        android:layout_height="48dp"
-                        android:layout_marginStart="16dp"
+                        android:layout_height="@dimen/edittext_height"
+                        android:layout_marginStart="@dimen/fragment_horizon_margin_std"
                         android:background="@drawable/shape_underline"
                         android:ems="10"
                         android:gravity="center"
-                        android:hint="1HR"
+                        android:hint="@string/one_hr"
                         android:inputType="text"
                         android:text="@={viewModel.stayTime}"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -168,9 +167,9 @@
                     android:id="@+id/constraint_select_map"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="@dimen/fragment_vertical_margin_std"
                     android:background="@drawable/shape_add_spot_card"
-                    android:padding="16dp"
+                    android:padding="@dimen/fragment_padding_std"
                     app:layout_constraintEnd_toStartOf="@+id/guideline_right"
                     app:layout_constraintStart_toStartOf="@+id/guideline_left"
                     app:layout_constraintTop_toBottomOf="@+id/constraint_start_time">
@@ -183,7 +182,7 @@
                         android:background="@drawable/shape_add_spot_title"
                         android:text="@string/add_spot"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"/>
 
                     <ImageButton
                         android:id="@+id/button_choice_from_map"
@@ -194,18 +193,17 @@
                         android:src="@drawable/ic_baseline_add_circle_24"
                         app:layout_constraintBottom_toBottomOf="@+id/text_search_from_map"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/text_search_from_map"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintTop_toTopOf="@+id/text_search_from_map"/>
 
                     <TextView
                         android:id="@+id/text_search_from_map"
                         android:layout_width="0dp"
-                        android:layout_height="48dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_height="@dimen/edittext_height"
+                        android:layout_marginTop="@dimen/fragment_vertical_margin_std"
                         android:layout_marginEnd="8dp"
                         android:background="@drawable/shape_underline"
                         android:gravity="center"
-                        android:hint="從地圖搜尋"
+                        android:hint="@string/search_from_map"
                         android:text="@{viewModel.selectLocationString}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/button_choice_from_map"
@@ -235,9 +233,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/shape_add_spot_card"
-                    android:padding="16dp"
+                    android:padding="@dimen/fragment_padding_std"
                     app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/guideline_left"
                     app:layout_constraintTop_toBottomOf="@+id/image_title">
 
@@ -255,12 +252,15 @@
                         android:id="@+id/button_food"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_marginStart="32dp"
+                        android:layout_marginStart="@dimen/fragment_horizon_margin_large"
                         android:background="@android:color/transparent"
-                        android:tint="@{viewModel.selectSpotType == 0 ? @color/colorPrimaryDark : @color/grayUnderline}"
                         android:scaleType="fitCenter"
                         android:src="@drawable/ic_spot_food"
+                        android:tint="@{viewModel.selectSpotType == 0 ? @color/colorPrimaryDark : @color/grayUnderline}"
                         app:layout_constraintBottom_toBottomOf="@+id/text_spot_type_title"
+                        app:layout_constraintEnd_toStartOf="@+id/button_scene"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintHorizontal_chainStyle="packed"
                         app:layout_constraintStart_toEndOf="@+id/text_spot_type_title"
                         app:layout_constraintTop_toTopOf="@+id/text_spot_type_title" />
 
@@ -268,12 +268,13 @@
                         android:id="@+id/button_scene"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginStart="@dimen/fragment_horizon_margin_std"
                         android:background="@android:color/transparent"
-                        android:tint="@{viewModel.selectSpotType == 1 ? @color/colorPrimaryDark : @color/grayUnderline}"
                         android:scaleType="fitCenter"
                         android:src="@drawable/ic_spot_scene_64"
+                        android:tint="@{viewModel.selectSpotType == 1 ? @color/colorPrimaryDark : @color/grayUnderline}"
                         app:layout_constraintBottom_toBottomOf="@+id/button_food"
+                        app:layout_constraintEnd_toStartOf="@+id/button_trans"
                         app:layout_constraintStart_toEndOf="@+id/button_food"
                         app:layout_constraintTop_toTopOf="@+id/button_food" />
 
@@ -281,12 +282,13 @@
                         android:id="@+id/button_trans"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginStart="@dimen/fragment_horizon_margin_std"
                         android:background="@android:color/transparent"
-                        android:tint="@{viewModel.selectSpotType == 2 ? @color/colorPrimaryDark : @color/grayUnderline}"
                         android:scaleType="fitCenter"
                         android:src="@drawable/ic_spot_trans"
+                        android:tint="@{viewModel.selectSpotType == 2 ? @color/colorPrimaryDark : @color/grayUnderline}"
                         app:layout_constraintBottom_toBottomOf="@+id/button_scene"
+                        app:layout_constraintEnd_toStartOf="@+id/button_hotel"
                         app:layout_constraintStart_toEndOf="@+id/button_scene"
                         app:layout_constraintTop_toTopOf="@+id/button_scene" />
 
@@ -294,12 +296,13 @@
                         android:id="@+id/button_hotel"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginStart="@dimen/fragment_horizon_margin_std"
                         android:background="@android:color/transparent"
-                        android:tint="@{viewModel.selectSpotType == 3 ? @color/colorPrimaryDark : @color/grayUnderline}"
                         android:scaleType="fitCenter"
                         android:src="@drawable/ic_spot_hotel"
+                        android:tint="@{viewModel.selectSpotType == 3 ? @color/colorPrimaryDark : @color/grayUnderline}"
                         app:layout_constraintBottom_toBottomOf="@+id/button_trans"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/button_trans"
                         app:layout_constraintTop_toTopOf="@+id/button_trans" />
 
@@ -309,11 +312,10 @@
                     android:id="@+id/constraint_content"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="@dimen/fragment_vertical_margin_std"
                     android:background="@drawable/shape_add_spot_card"
-                    android:padding="16dp"
+                    android:padding="@dimen/fragment_padding_std"
                     app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/guideline_left"
                     app:layout_constraintTop_toBottomOf="@+id/constraint_select_map">
 
@@ -331,12 +333,12 @@
                         android:id="@+id/editText_content"
                         android:layout_width="0dp"
                         android:layout_height="180dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/fragment_vertical_margin_std"
                         android:background="@drawable/shape_radius_for_spot_info_input"
                         android:ems="10"
                         android:gravity="start|top"
                         android:text="@={viewModel.content}"
-                        android:hint="Add your travel detail here."
+                        android:hint="@string/add_your_travel_detail_here"
                         android:inputType="textMultiLine"
                         android:padding="16dp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -345,54 +347,19 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                    android:id="@+id/constraintLayout_add_picture"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="16dp"-->
-<!--                    android:background="@drawable/shape_add_spot_card"-->
-<!--                    android:padding="16dp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintEnd_toStartOf="@+id/guideline_right"-->
-<!--                    app:layout_constraintHorizontal_bias="0.0"-->
-<!--                    app:layout_constraintStart_toStartOf="@+id/guideline_left"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/constraint_stay_period">-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/text_add_pic_title"-->
-<!--                        style="@style/add_spot_title_description"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:background="@drawable/shape_add_spot_title"-->
-<!--                        android:text="@string/upload_picture"-->
-<!--                        app:layout_constraintStart_toStartOf="parent"-->
-<!--                        app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--                    <ImageButton-->
-<!--                        android:id="@+id/button_add_pic"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="160dp"-->
-<!--                        android:layout_marginTop="16dp"-->
-<!--                        android:background="@drawable/shape_radius_for_spot_info_input"-->
-<!--                        app:layout_constraintEnd_toEndOf="parent"-->
-<!--                        app:layout_constraintStart_toStartOf="parent"-->
-<!--                        app:layout_constraintTop_toBottomOf="@+id/text_add_pic_title"-->
-<!--                        android:src="@drawable/ic_camera_64" />-->
-<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
-
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline_left"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_begin="16dp" />
+                    app:layout_constraintGuide_begin="@dimen/fragment_horizon_margin_std" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline_right"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_end="16dp" />
+                    app:layout_constraintGuide_end="@dimen/fragment_horizon_margin_std" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -401,7 +368,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="0dp"
-            android:layout_height="64dp"
+            android:layout_height="@dimen/low_check_bar_height"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -410,8 +377,8 @@
                 android:id="@+id/button_submit_spot"
                 style="@style/add_spot_button"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="16dp"
+                android:layout_height="@dimen/lower_check_bar_button_height"
+                android:layout_marginStart="@dimen/fragment_horizon_margin_std"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="4dp"
                 android:layout_marginBottom="8dp"
@@ -420,7 +387,6 @@
                 android:text="@string/ok"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button_cancel"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -428,19 +394,17 @@
                 android:id="@+id/button_cancel"
                 style="@style/add_spot_button"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
+                android:layout_height="@dimen/lower_check_bar_button_height"
                 android:layout_marginStart="4dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/fragment_horizon_margin_std"
                 android:background="@drawable/shape_add_spot_title"
                 android:paddingTop="2dp"
                 android:text="@string/cancel"
                 app:layout_constraintBottom_toBottomOf="@+id/button_submit_spot"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/button_submit_spot"
                 app:layout_constraintTop_toTopOf="@+id/button_submit_spot" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
