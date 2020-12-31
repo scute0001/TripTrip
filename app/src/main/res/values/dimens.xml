@@ -25,5 +25,6 @@
     <!-- lower check bar ok or cancel   -->
     <dimen name="low_check_bar_height">64dp</dimen>
     <dimen name="lower_check_bar_button_height">48dp</dimen>
+    <dimen name="fragment_padding_small">8dp</dimen>
 
 </resources>

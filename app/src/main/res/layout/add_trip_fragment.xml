@@ -53,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layout_constraintGuide_end="@dimen/fragment_horizon_margin_std" />
-                
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraint_add_trip_range"
                     android:layout_width="0dp"
