@@ -110,6 +110,7 @@ object TripTripRemoteDataSource : TripTripDataSource {
                         .add(notificationData)
                         .addOnSuccessListener { documentReference ->
                             Log.d("Firebase", "set $userEmail notification success")
+                            documentReference.update("id" , documentReference.id)
                         }
                         .addOnFailureListener {
                             Log.d("Firebase", "Add Spot data error!!!!! ${it.message}")
@@ -456,6 +457,22 @@ object TripTripRemoteDataSource : TripTripDataSource {
             .collection(PATH_TRIPS).document(tripId).collection(PATH_MYLOCATIONS).document(UserManager.user.value?.email as String)
             .update("latitude", latitude,
                 "longitude", longitude)
+            .addOnSuccessListener { documentReference ->
+                continuation.resume(ResultUtil.Success(true))
+            }
+            .addOnFailureListener {
+                Log.d("Firebase", "get trip data error!!!!! ${it.message}")
+                continuation.resume(ResultUtil.Error(it))
+            }
+    }
+
+    override suspend fun deleteNotification(
+        userEmail: String,
+        notification: NotificationAddTrip
+    ): ResultUtil<Boolean> = suspendCoroutine { continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_USER).document(userEmail).collection(PATH_NOTIFICATION).document(notification.id!!)
+            .update("status", 1)
             .addOnSuccessListener { documentReference ->
                 continuation.resume(ResultUtil.Success(true))
             }

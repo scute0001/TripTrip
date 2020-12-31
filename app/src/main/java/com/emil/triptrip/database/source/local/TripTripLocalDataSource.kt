@@ -106,4 +106,11 @@ class TripTripLocalDataSource(val context: Context) : TripTripDataSource {
     ): ResultUtil<Boolean> {
         TODO("Not yet implemented")
     }
+
+    override suspend fun deleteNotification(
+        userEmail: String,
+        notification: NotificationAddTrip
+    ): ResultUtil<Boolean> {
+        TODO("Not yet implemented")
+    }
 }

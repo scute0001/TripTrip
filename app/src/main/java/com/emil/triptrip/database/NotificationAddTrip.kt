@@ -10,6 +10,7 @@ data class NotificationAddTrip(
     val tripId: String? = "",
     val tripTitle: String? = "",
     val createTime: Long? = System.currentTimeMillis(),
-    var status: Int? = 0
+    var status: Int? = 0,
+    val id: String? = ""
 ): Parcelable {
 }
