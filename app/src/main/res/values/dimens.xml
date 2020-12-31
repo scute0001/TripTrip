@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default screen margins -->
+    <dimen name="fragment_horizon_margin_std">16dp</dimen>
+    <dimen name="fragment_vertical_margin_std">16dp</dimen>
+
+    <!-- Search bar -->
+    <dimen name="fragment_search_bar_height">56dp</dimen>
+
+    <!-- Floating Button -->
+    <dimen name="floating_btn_height">56dp</dimen>
+    <dimen name="floating_btn_width">56dp</dimen>
+</resources>

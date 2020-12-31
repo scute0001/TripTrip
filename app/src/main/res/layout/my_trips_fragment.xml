@@ -20,10 +20,10 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/button_add_trip"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_width="@dimen/floating_btn_width"
+            android:layout_height="@dimen/floating_btn_height"
+            android:layout_marginEnd="@dimen/fragment_horizon_margin_std"
+            android:layout_marginBottom="@dimen/fragment_vertical_margin_std"
             android:clickable="true"
             app:maxImageSize="48dp"
             android:src="@drawable/ic_baseline_add_24"
@@ -36,17 +36,16 @@
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_bar"
             android:layout_width="0dp"
-            android:layout_height="56dp"
+            android:layout_height="@dimen/fragment_search_bar_height"
             android:background="@drawable/shape_background_gradient_search"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             app:iconifiedByDefault="true"
             app:queryHint="輸入名稱搜尋你的旅程"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/fragment_horizon_margin_std"
+            android:layout_marginTop="@dimen/fragment_vertical_margin_std"
+            android:layout_marginEnd="@dimen/fragment_horizon_margin_std"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -56,9 +55,9 @@
             android:id="@+id/mytrips_swipe_refresh"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/fragment_horizon_margin_std"
+            android:layout_marginTop="@dimen/fragment_vertical_margin_std"
+            android:layout_marginEnd="@dimen/fragment_horizon_margin_std"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,9 +67,9 @@
                 android:id="@+id/recycler_trips"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/fragment_horizon_margin_std"
+                android:layout_marginTop="@dimen/fragment_vertical_margin_std"
+                android:layout_marginEnd="@dimen/fragment_horizon_margin_std"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -87,36 +86,6 @@
             app:layout_constraintTop_toBottomOf="@+id/search_bar"
             style="@style/no_data" />
 
-
-        <!--        <EditText-->
-<!--            android:id="@+id/editTextTextPersonName"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:enabled="false"-->
-<!--            android:layout_marginStart="16dp"-->
-<!--            android:layout_marginTop="16dp"-->
-<!--            android:layout_marginEnd="16dp"-->
-<!--            android:background="@drawable/border_search"-->
-<!--            android:paddingLeft="8dp"-->
-<!--            android:ems="10"-->
-<!--            android:hint="@string/search_trip"-->
-<!--            android:inputType="textPersonName"-->
-<!--            app:layout_constraintEnd_toStartOf="@+id/imageButton2"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--        <ImageButton-->
-<!--            android:id="@+id/imageButton2"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:padding="4dp"-->
-<!--            android:layout_marginEnd="16dp"-->
-<!--            android:background="@drawable/ic_loupe"-->
-<!--            android:scaleType="centerCrop"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"-->
-<!--            app:layout_constraintDimensionRatio="h,1:1"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName" />-->
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottie_loading"
             android:layout_width="150dp"
