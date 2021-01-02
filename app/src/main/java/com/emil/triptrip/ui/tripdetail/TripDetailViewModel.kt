@@ -18,6 +18,7 @@ import com.emil.triptrip.database.source.TripTripRepository
 import com.emil.triptrip.ui.login.UserManager
 import com.emil.triptrip.util.GlideCircleBorderTransform
 import com.emil.triptrip.util.LoadApiStatus
+import com.emil.triptrip.util.Transfer
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.*
@@ -393,7 +394,8 @@ class TripDetailViewModel(app: Application,val tripData: Trip,private val reposi
         spotDetail.value?.startDay?.let {
 //            spotDetail.value?.startTime =  it + (hours * 60 * 60 * 1000) + (minute * 60 * 1000)
             val newSpotData = spotDetail.value
-            newSpotData?.startTime = it + (hours * 60 * 60 * 1000) + (minute * 60 * 1000)
+//            newSpotData?.startTime = it + (hours * 60 * 60 * 1000) + (minute * 60 * 1000)
+            newSpotData?.startTime = Transfer().combineToTimeStamp(it, hours, minute)
             spotDetail.value = newSpotData
         }
     }

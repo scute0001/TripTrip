@@ -1,0 +1,315 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: NavigationDirections</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.emil.triptrip</a> ]
+</div>
+
+<h1>Coverage Summary for Class: NavigationDirections (com.emil.triptrip)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NavigationDirections</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">NavigationDirections$ActionGlobalChatRoomFragment</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 35)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">NavigationDirections$ActionGlobalNotificationFragment</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 35)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 73)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.emil.triptrip;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import android.os.Bundle;
+<i>4</i>&nbsp;import androidx.annotation.NonNull;
+<i>5</i>&nbsp;import androidx.navigation.NavDirections;
+<i>6</i>&nbsp;import com.emil.triptrip.database.NotificationAddTrip;
+<i>7</i>&nbsp;import java.lang.IllegalArgumentException;
+<i>8</i>&nbsp;import java.lang.Object;
+<i>9</i>&nbsp;import java.lang.Override;
+<i>10</i>&nbsp;import java.lang.String;
+<i>11</i>&nbsp;import java.lang.SuppressWarnings;
+<i>12</i>&nbsp;import java.util.HashMap;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;public class NavigationDirections {
+<b class="nc"><i>15</i>&nbsp;  private NavigationDirections() {</b>
+<i>16</i>&nbsp;  }
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;  @NonNull
+<i>19</i>&nbsp;  public static ActionGlobalNotificationFragment actionGlobalNotificationFragment(
+<i>20</i>&nbsp;      @NonNull NotificationAddTrip[] notificationList) {
+<b class="nc"><i>21</i>&nbsp;    return new ActionGlobalNotificationFragment(notificationList);</b>
+<i>22</i>&nbsp;  }
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;  @NonNull
+<i>25</i>&nbsp;  public static ActionGlobalChatRoomFragment actionGlobalChatRoomFragment(@NonNull String tripId) {
+<b class="nc"><i>26</i>&nbsp;    return new ActionGlobalChatRoomFragment(tripId);</b>
+<i>27</i>&nbsp;  }
+<i>28</i>&nbsp;
+<b class="nc"><i>29</i>&nbsp;  public static class ActionGlobalNotificationFragment implements NavDirections {</b>
+<b class="nc"><i>30</i>&nbsp;    private final HashMap arguments = new HashMap();</b>
+<i>31</i>&nbsp;
+<b class="nc"><i>32</i>&nbsp;    private ActionGlobalNotificationFragment(@NonNull NotificationAddTrip[] notificationList) {</b>
+<b class="nc"><i>33</i>&nbsp;      if (notificationList == null) {</b>
+<b class="nc"><i>34</i>&nbsp;        throw new IllegalArgumentException(&quot;Argument \&quot;notificationList\&quot; is marked as non-null but was passed a null value.&quot;);</b>
+<i>35</i>&nbsp;      }
+<b class="nc"><i>36</i>&nbsp;      this.arguments.put(&quot;notificationList&quot;, notificationList);</b>
+<i>37</i>&nbsp;    }
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;    @NonNull
+<i>40</i>&nbsp;    public ActionGlobalNotificationFragment setNotificationList(
+<i>41</i>&nbsp;        @NonNull NotificationAddTrip[] notificationList) {
+<b class="nc"><i>42</i>&nbsp;      if (notificationList == null) {</b>
+<b class="nc"><i>43</i>&nbsp;        throw new IllegalArgumentException(&quot;Argument \&quot;notificationList\&quot; is marked as non-null but was passed a null value.&quot;);</b>
+<i>44</i>&nbsp;      }
+<b class="nc"><i>45</i>&nbsp;      this.arguments.put(&quot;notificationList&quot;, notificationList);</b>
+<b class="nc"><i>46</i>&nbsp;      return this;</b>
+<i>47</i>&nbsp;    }
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    @Override
+<i>50</i>&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+<i>51</i>&nbsp;    @NonNull
+<i>52</i>&nbsp;    public Bundle getArguments() {
+<b class="nc"><i>53</i>&nbsp;      Bundle __result = new Bundle();</b>
+<b class="nc"><i>54</i>&nbsp;      if (arguments.containsKey(&quot;notificationList&quot;)) {</b>
+<b class="nc"><i>55</i>&nbsp;        NotificationAddTrip[] notificationList = (NotificationAddTrip[]) arguments.get(&quot;notificationList&quot;);</b>
+<b class="nc"><i>56</i>&nbsp;        __result.putParcelableArray(&quot;notificationList&quot;, notificationList);</b>
+<i>57</i>&nbsp;      }
+<b class="nc"><i>58</i>&nbsp;      return __result;</b>
+<i>59</i>&nbsp;    }
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;    @Override
+<i>62</i>&nbsp;    public int getActionId() {
+<b class="nc"><i>63</i>&nbsp;      return R.id.action_global_notificationFragment;</b>
+<i>64</i>&nbsp;    }
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+<i>67</i>&nbsp;    @NonNull
+<i>68</i>&nbsp;    public NotificationAddTrip[] getNotificationList() {
+<b class="nc"><i>69</i>&nbsp;      return (NotificationAddTrip[]) arguments.get(&quot;notificationList&quot;);</b>
+<i>70</i>&nbsp;    }
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    @Override
+<i>73</i>&nbsp;    public boolean equals(Object object) {
+<b class="nc"><i>74</i>&nbsp;      if (this == object) {</b>
+<b class="nc"><i>75</i>&nbsp;          return true;</b>
+<i>76</i>&nbsp;      }
+<b class="nc"><i>77</i>&nbsp;      if (object == null || getClass() != object.getClass()) {</b>
+<b class="nc"><i>78</i>&nbsp;          return false;</b>
+<i>79</i>&nbsp;      }
+<b class="nc"><i>80</i>&nbsp;      ActionGlobalNotificationFragment that = (ActionGlobalNotificationFragment) object;</b>
+<b class="nc"><i>81</i>&nbsp;      if (arguments.containsKey(&quot;notificationList&quot;) != that.arguments.containsKey(&quot;notificationList&quot;)) {</b>
+<b class="nc"><i>82</i>&nbsp;        return false;</b>
+<i>83</i>&nbsp;      }
+<b class="nc"><i>84</i>&nbsp;      if (getNotificationList() != null ? !getNotificationList().equals(that.getNotificationList()) : that.getNotificationList() != null) {</b>
+<b class="nc"><i>85</i>&nbsp;        return false;</b>
+<i>86</i>&nbsp;      }
+<b class="nc"><i>87</i>&nbsp;      if (getActionId() != that.getActionId()) {</b>
+<b class="nc"><i>88</i>&nbsp;        return false;</b>
+<i>89</i>&nbsp;      }
+<b class="nc"><i>90</i>&nbsp;      return true;</b>
+<i>91</i>&nbsp;    }
+<i>92</i>&nbsp;
+<i>93</i>&nbsp;    @Override
+<i>94</i>&nbsp;    public int hashCode() {
+<b class="nc"><i>95</i>&nbsp;      int result = 1;</b>
+<b class="nc"><i>96</i>&nbsp;      result = 31 * result + java.util.Arrays.hashCode(getNotificationList());</b>
+<b class="nc"><i>97</i>&nbsp;      result = 31 * result + getActionId();</b>
+<b class="nc"><i>98</i>&nbsp;      return result;</b>
+<i>99</i>&nbsp;    }
+<i>100</i>&nbsp;
+<i>101</i>&nbsp;    @Override
+<i>102</i>&nbsp;    public String toString() {
+<b class="nc"><i>103</i>&nbsp;      return &quot;ActionGlobalNotificationFragment(actionId=&quot; + getActionId() + &quot;){&quot;</b>
+<b class="nc"><i>104</i>&nbsp;          + &quot;notificationList=&quot; + getNotificationList()</b>
+<i>105</i>&nbsp;          + &quot;}&quot;;
+<i>106</i>&nbsp;    }
+<i>107</i>&nbsp;  }
+<i>108</i>&nbsp;
+<b class="nc"><i>109</i>&nbsp;  public static class ActionGlobalChatRoomFragment implements NavDirections {</b>
+<b class="nc"><i>110</i>&nbsp;    private final HashMap arguments = new HashMap();</b>
+<i>111</i>&nbsp;
+<b class="nc"><i>112</i>&nbsp;    private ActionGlobalChatRoomFragment(@NonNull String tripId) {</b>
+<b class="nc"><i>113</i>&nbsp;      if (tripId == null) {</b>
+<b class="nc"><i>114</i>&nbsp;        throw new IllegalArgumentException(&quot;Argument \&quot;tripId\&quot; is marked as non-null but was passed a null value.&quot;);</b>
+<i>115</i>&nbsp;      }
+<b class="nc"><i>116</i>&nbsp;      this.arguments.put(&quot;tripId&quot;, tripId);</b>
+<i>117</i>&nbsp;    }
+<i>118</i>&nbsp;
+<i>119</i>&nbsp;    @NonNull
+<i>120</i>&nbsp;    public ActionGlobalChatRoomFragment setTripId(@NonNull String tripId) {
+<b class="nc"><i>121</i>&nbsp;      if (tripId == null) {</b>
+<b class="nc"><i>122</i>&nbsp;        throw new IllegalArgumentException(&quot;Argument \&quot;tripId\&quot; is marked as non-null but was passed a null value.&quot;);</b>
+<i>123</i>&nbsp;      }
+<b class="nc"><i>124</i>&nbsp;      this.arguments.put(&quot;tripId&quot;, tripId);</b>
+<b class="nc"><i>125</i>&nbsp;      return this;</b>
+<i>126</i>&nbsp;    }
+<i>127</i>&nbsp;
+<i>128</i>&nbsp;    @Override
+<i>129</i>&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+<i>130</i>&nbsp;    @NonNull
+<i>131</i>&nbsp;    public Bundle getArguments() {
+<b class="nc"><i>132</i>&nbsp;      Bundle __result = new Bundle();</b>
+<b class="nc"><i>133</i>&nbsp;      if (arguments.containsKey(&quot;tripId&quot;)) {</b>
+<b class="nc"><i>134</i>&nbsp;        String tripId = (String) arguments.get(&quot;tripId&quot;);</b>
+<b class="nc"><i>135</i>&nbsp;        __result.putString(&quot;tripId&quot;, tripId);</b>
+<i>136</i>&nbsp;      }
+<b class="nc"><i>137</i>&nbsp;      return __result;</b>
+<i>138</i>&nbsp;    }
+<i>139</i>&nbsp;
+<i>140</i>&nbsp;    @Override
+<i>141</i>&nbsp;    public int getActionId() {
+<b class="nc"><i>142</i>&nbsp;      return R.id.action_global_chatRoomFragment;</b>
+<i>143</i>&nbsp;    }
+<i>144</i>&nbsp;
+<i>145</i>&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+<i>146</i>&nbsp;    @NonNull
+<i>147</i>&nbsp;    public String getTripId() {
+<b class="nc"><i>148</i>&nbsp;      return (String) arguments.get(&quot;tripId&quot;);</b>
+<i>149</i>&nbsp;    }
+<i>150</i>&nbsp;
+<i>151</i>&nbsp;    @Override
+<i>152</i>&nbsp;    public boolean equals(Object object) {
+<b class="nc"><i>153</i>&nbsp;      if (this == object) {</b>
+<b class="nc"><i>154</i>&nbsp;          return true;</b>
+<i>155</i>&nbsp;      }
+<b class="nc"><i>156</i>&nbsp;      if (object == null || getClass() != object.getClass()) {</b>
+<b class="nc"><i>157</i>&nbsp;          return false;</b>
+<i>158</i>&nbsp;      }
+<b class="nc"><i>159</i>&nbsp;      ActionGlobalChatRoomFragment that = (ActionGlobalChatRoomFragment) object;</b>
+<b class="nc"><i>160</i>&nbsp;      if (arguments.containsKey(&quot;tripId&quot;) != that.arguments.containsKey(&quot;tripId&quot;)) {</b>
+<b class="nc"><i>161</i>&nbsp;        return false;</b>
+<i>162</i>&nbsp;      }
+<b class="nc"><i>163</i>&nbsp;      if (getTripId() != null ? !getTripId().equals(that.getTripId()) : that.getTripId() != null) {</b>
+<b class="nc"><i>164</i>&nbsp;        return false;</b>
+<i>165</i>&nbsp;      }
+<b class="nc"><i>166</i>&nbsp;      if (getActionId() != that.getActionId()) {</b>
+<b class="nc"><i>167</i>&nbsp;        return false;</b>
+<i>168</i>&nbsp;      }
+<b class="nc"><i>169</i>&nbsp;      return true;</b>
+<i>170</i>&nbsp;    }
+<i>171</i>&nbsp;
+<i>172</i>&nbsp;    @Override
+<i>173</i>&nbsp;    public int hashCode() {
+<b class="nc"><i>174</i>&nbsp;      int result = 1;</b>
+<b class="nc"><i>175</i>&nbsp;      result = 31 * result + (getTripId() != null ? getTripId().hashCode() : 0);</b>
+<b class="nc"><i>176</i>&nbsp;      result = 31 * result + getActionId();</b>
+<b class="nc"><i>177</i>&nbsp;      return result;</b>
+<i>178</i>&nbsp;    }
+<i>179</i>&nbsp;
+<i>180</i>&nbsp;    @Override
+<i>181</i>&nbsp;    public String toString() {
+<b class="nc"><i>182</i>&nbsp;      return &quot;ActionGlobalChatRoomFragment(actionId=&quot; + getActionId() + &quot;){&quot;</b>
+<b class="nc"><i>183</i>&nbsp;          + &quot;tripId=&quot; + getTripId()</b>
+<i>184</i>&nbsp;          + &quot;}&quot;;
+<i>185</i>&nbsp;    }
+<i>186</i>&nbsp;  }
+<i>187</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-01-02 17:09</div>
+</div>
+</body>
+</html>
