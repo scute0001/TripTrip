@@ -12,7 +12,6 @@
         <variable
             name="spotSheet"
             type="com.emil.triptrip.database.SpotTag" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,14 +29,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="17dp" />
+            app:layout_constraintGuide_begin="@dimen/fragment_horizon_margin_std" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_spot_detail_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_end="21dp" />
+            app:layout_constraintGuide_end="@dimen/fragment_horizon_margin_std" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_spot_detail_title"
@@ -55,13 +54,13 @@
                 style="@style/spot_detail"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/fragment_horizon_margin_std"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/shape_underline"
                 android:ems="10"
                 android:enabled="false"
-                android:hint="Input spot name here."
+                android:hint="@string/input_spot_name_here"
                 android:inputType="textPersonName"
                 android:paddingBottom="4dp"
                 android:text="@={viewModelSheet.spotDetail.positionName}"
@@ -69,18 +68,16 @@
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/editText_spot_detail_start_time"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_weight="3"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
                 android:id="@+id/editText_spot_detail_start_time"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/fragment_horizon_margin_std"
+                android:layout_marginEnd="@dimen/fragment_horizon_margin_std"
                 android:background="@drawable/shape_underline"
                 android:enabled="false"
                 android:gravity="center"
@@ -91,20 +88,18 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/editText_spot_detail_title"
                 app:layout_constraintTop_toTopOf="parent"
-                app:timeTransferHHmmGMT="@{spotSheet.startTime}" />
+                app:timeTransferHHmmGMT="@{spotSheet.startTime}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/fragment_vertical_margin_std"
             android:elevation="4dp"
             app:layout_constraintStart_toStartOf="@+id/guideline_spot_detail_left"
             app:layout_constraintTop_toBottomOf="@+id/constraint_spot_detail_title">
@@ -120,7 +115,6 @@
                 android:tint="@{spotSheet.property == 0 ? @color/colorPrimaryDark : @color/grayUnderline}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button_spot_detail_scene"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -135,7 +129,6 @@
                 android:tint="@{spotSheet.property == 1 ? @color/colorPrimaryDark : @color/grayUnderline}"
                 app:layout_constraintBottom_toBottomOf="@+id/button_spot_detail_food"
                 app:layout_constraintEnd_toStartOf="@+id/button_spot_detail_trans"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/button_spot_detail_food"
                 app:layout_constraintTop_toTopOf="@+id/button_spot_detail_food" />
 
@@ -150,7 +143,6 @@
                 android:tint="@{spotSheet.property == 2 ? @color/colorPrimaryDark : @color/grayUnderline}"
                 app:layout_constraintBottom_toBottomOf="@+id/button_spot_detail_scene"
                 app:layout_constraintEnd_toStartOf="@+id/button_spot_detail_hotel"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/button_spot_detail_scene"
                 app:layout_constraintTop_toTopOf="@+id/button_spot_detail_scene" />
 
@@ -159,14 +151,13 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/fragment_horizon_margin_std"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_spot_hotel"
                 android:tint="@{spotSheet.property == 3 ? @color/colorPrimaryDark : @color/grayUnderline}"
                 app:layout_constraintBottom_toBottomOf="@+id/button_spot_detail_trans"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/button_spot_detail_trans"
                 app:layout_constraintTop_toTopOf="@+id/button_spot_detail_trans" />
 
@@ -185,13 +176,13 @@
                 android:id="@+id/text_spot_detail_stay_period_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="@dimen/fragment_vertical_margin_std"
+                android:layout_marginBottom="@dimen/fragment_horizon_margin_std"
                 android:background="@drawable/shape_add_spot_title"
                 android:fontFamily="@font/architects_daughter"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
-                android:text="Stay"
+                android:text="@string/stay"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -201,9 +192,9 @@
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="@dimen/fragment_vertical_margin_std"
+                android:layout_marginEnd="@dimen/fragment_horizon_margin_std"
+                android:layout_marginBottom="@dimen/fragment_vertical_margin_std"
                 android:paddingBottom="4dp"
                 android:background="@drawable/shape_underline"
                 android:ems="10"
@@ -211,7 +202,7 @@
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textColor="@color/grayUnderline"
-                android:hint="1HR"
+                android:hint="@string/one_hr"
                 android:text="@={viewModelSheet.spotDetail.stayTime}"
                 android:inputType="text"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -221,12 +212,11 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_spot_detail_content"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/fragment_vertical_margin_std"
             android:layout_marginLeft="1dp"
             android:layout_marginRight="1dp"
             android:elevation="4dp"
@@ -238,9 +228,9 @@
                 android:id="@+id/editText_spot_detail_content"
                 android:layout_width="0dp"
                 android:layout_height="180dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/fragment_horizon_margin_std"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/fragment_horizon_margin_std"
                 android:layout_marginBottom="8dp"
                 android:textStyle="bold"
                 android:textColor="@color/grayUnderline"
@@ -249,17 +239,15 @@
                 android:ems="10"
                 android:text="@={viewModelSheet.spotDetail.content}"
                 android:gravity="start|top"
-                android:hint="Add your travel detail here."
+                android:hint="@string/add_your_travel_detail_here"
                 android:inputType="textMultiLine"
-                android:padding="16dp"
+                android:padding="@dimen/fragment_padding_std"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_last_edit"
@@ -268,7 +256,6 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline_spot_detail_right"
             app:layout_constraintStart_toStartOf="@+id/guideline_spot_detail_left"
             app:layout_constraintTop_toBottomOf="@+id/constraint_spot_detail_content">
-
 
             <TextView
                 android:id="@+id/text_last_edit_title"
@@ -285,7 +272,7 @@
                 android:id="@+id/text_last_edit_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/fragment_horizon_margin_std"
                 android:gravity="center"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -321,31 +308,27 @@
                 android:id="@+id/text_spot_photo_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/fragment_horizon_margin_std"
                 android:text="@string/spot_photo"
                 android:textColor="@color/grayUnderline"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_spot_detail_pictures"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/fragment_horizon_margin_std"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/fragment_horizon_margin_std"
                 android:layout_marginBottom="8dp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_spot_photo_title"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/text_spot_photo_title"/>
 
             <TextView
                 android:id="@+id/text_no_data"
@@ -371,6 +354,7 @@
                 android:src="@drawable/ic_image_acc"
                 app:layout_constraintBottom_toBottomOf="@+id/recycler_spot_detail_pictures"
                 app:layout_constraintEnd_toEndOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
@@ -421,7 +405,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/quantum_ic_clear_grey600_24"
             app:tint="@color/black" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

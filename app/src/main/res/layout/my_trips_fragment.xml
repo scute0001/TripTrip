@@ -9,7 +9,6 @@
             type="com.emil.triptrip.ui.mytrips.MyTripsViewModel" />
         <import type="com.emil.triptrip.util.LoadApiStatus"/>
         <import type="android.view.View"/>
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -99,7 +98,6 @@
             app:lottie_speed="3.0"
             app:lottie_fileName="lottie_loading_circle_line.json"
             app:lottie_loop="true"/>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

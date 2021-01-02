@@ -3,29 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/shape_login_background"
         tools:context=".ui.login.LoginFragment">
-
-
-
-
-<!--            <com.google.android.gms.common.SignInButton-->
-<!--                android:id="@+id/sign_in_button"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:padding="10dp"-->
-<!--                android:layout_height="match_parent"-->
-<!--                app:layout_constraintEnd_toEndOf="@+id/image_login_logo"-->
-<!--                app:cardCornerRadius="30dp"-->
-<!--                android:background="@drawable/shape_trips_card_background"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/image_login_logo"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/image_login_logo"/>-->
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_up"
@@ -80,7 +62,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline_down" />
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_login_logo"
             android:layout_width="0dp"
@@ -103,8 +84,7 @@
                 android:src="@drawable/ic_google_logo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/text_login_logo_description"
@@ -114,19 +94,16 @@
                 android:gravity="center"
                 android:paddingLeft="24dp"
                 android:paddingRight="8dp"
-                android:text="使用 Google 帳戶登入"
+                android:text="@string/google_sign_in"
                 android:textColor="@color/grayUnderline"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/image_google"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

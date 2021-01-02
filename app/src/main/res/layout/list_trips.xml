@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/shape_trips_card_background"
         android:elevation="4dp"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="@dimen/recycler_view_item_margin">
 
 
         <ImageView
@@ -26,7 +26,6 @@
             app:imageUrl="@{tripData.mainImg}"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
@@ -38,7 +37,6 @@
             android:background="@drawable/background_tape"
             android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -60,7 +58,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="旅程名稱" />
+                tools:text="@string/trip_name" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -69,8 +67,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/background_tape"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginTop="@dimen/fragment_vertical_margin_std"
+            android:layout_marginBottom="@dimen/fragment_vertical_margin_large"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -81,13 +79,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/architects_daughter"
-                android:text="~"
+                android:text="@string/sign_bug"
                 android:textColor="@color/black_light"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/text_start_date"
                 app:layout_constraintEnd_toStartOf="@+id/text_stop_date"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/text_start_date"
                 app:layout_constraintTop_toTopOf="@+id/text_start_date" />
 
@@ -95,10 +92,10 @@
                 android:id="@+id/text_start_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginStart="@dimen/fragment_horizon_margin_large"
+                android:layout_marginTop="@dimen/fragment_vertical_margin_std"
+                android:layout_marginEnd="@dimen/fragment_horizon_margin_std"
+                android:layout_marginBottom="@dimen/fragment_vertical_margin_std"
                 android:fontFamily="@font/architects_daughter"
                 android:letterSpacing="0.15"
                 android:textColor="@color/black_light"
@@ -115,8 +112,8 @@
                 android:id="@+id/text_stop_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/fragment_horizon_margin_std"
+                android:layout_marginEnd="@dimen/fragment_horizon_margin_std"
                 android:fontFamily="@font/architects_daughter"
                 android:letterSpacing="0.15"
                 android:textColor="@color/black_light"
@@ -130,11 +127,7 @@
                 app:timeTransfer="@{tripData.stopTime}"
                 tools:text="2000.01.05" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 
         <ImageView
             android:id="@+id/imageView4"
@@ -146,40 +139,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline" />
 
-<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--            android:id="@+id/constraintLayout3"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:background="@android:color/transparent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/guideline">-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/text_attend_title"-->
-<!--                style="@style/TextAppearance.MaterialComponents.Headline6"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="0dp"-->
-<!--                android:layout_marginStart="16dp"-->
-<!--                android:fontFamily="@font/noto_sans"-->
-<!--                android:gravity="center"-->
-<!--                android:text="@string/attend_user"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textStyle="bold"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent" />-->
-
-
-
-
-<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
-
         <TextView
             android:id="@+id/text_attend_title"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/fragment_horizon_margin_std"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/architects_daughter"
@@ -206,7 +170,6 @@
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="@+id/guideline" />
 
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
             android:layout_width="wrap_content"
@@ -227,7 +190,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="240dp"/>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
