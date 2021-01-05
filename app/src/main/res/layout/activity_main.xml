@@ -39,6 +39,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/architects_daughter"
                     android:letterSpacing="0.15"
+                    android:singleLine="true"
                     android:text="@{viewModel.currentFragmentType}"
                     android:textColor="@color/white"
                     android:textSize="20sp"

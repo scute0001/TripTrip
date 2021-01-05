@@ -48,6 +48,7 @@
                 android:paddingLeft="28dp"
                 android:paddingRight="16dp"
                 android:paddingBottom="8dp"
+                android:singleLine="true"
                 android:fontFamily="@font/architects_daughter"
                 android:letterSpacing="0.2"
                 android:text="@{tripData.title}"
