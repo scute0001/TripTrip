@@ -250,25 +250,24 @@
 
                     <ImageButton
                         android:id="@+id/button_food"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="@dimen/fragment_horizon_margin_large"
+                        android:layout_width="@dimen/spot_icon_size"
+                        android:layout_height="@dimen/spot_icon_size"
+                        android:layout_marginStart="16dp"
                         android:background="@android:color/transparent"
                         android:scaleType="fitCenter"
                         android:src="@drawable/ic_spot_food"
                         android:tint="@{viewModel.selectSpotType == 0 ? @color/colorPrimaryDark : @color/grayUnderline}"
                         app:layout_constraintBottom_toBottomOf="@+id/text_spot_type_title"
                         app:layout_constraintEnd_toStartOf="@+id/button_scene"
-                        app:layout_constraintHorizontal_bias="0"
-                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintHorizontal_chainStyle="spread"
                         app:layout_constraintStart_toEndOf="@+id/text_spot_type_title"
                         app:layout_constraintTop_toTopOf="@+id/text_spot_type_title" />
 
                     <ImageButton
                         android:id="@+id/button_scene"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="@dimen/fragment_horizon_margin_std"
+                        android:layout_width="@dimen/spot_icon_size"
+                        android:layout_height="@dimen/spot_icon_size"
                         android:background="@android:color/transparent"
                         android:scaleType="fitCenter"
                         android:src="@drawable/ic_spot_scene_64"
@@ -280,9 +279,8 @@
 
                     <ImageButton
                         android:id="@+id/button_trans"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="@dimen/fragment_horizon_margin_std"
+                        android:layout_width="@dimen/spot_icon_size"
+                        android:layout_height="@dimen/spot_icon_size"
                         android:background="@android:color/transparent"
                         android:scaleType="fitCenter"
                         android:src="@drawable/ic_spot_trans"
@@ -294,9 +292,8 @@
 
                     <ImageButton
                         android:id="@+id/button_hotel"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="@dimen/fragment_horizon_margin_std"
+                        android:layout_width="@dimen/spot_icon_size"
+                        android:layout_height="@dimen/spot_icon_size"
                         android:background="@android:color/transparent"
                         android:scaleType="fitCenter"
                         android:src="@drawable/ic_spot_hotel"
