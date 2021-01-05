@@ -8,7 +8,6 @@
         <variable
             name="viewModel"
             type="com.emil.triptrip.ui.chatroom.ChatRoomViewModel" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +15,6 @@
         android:layout_height="match_parent"
         tools:context=".ui.chatroom.ChatRoomFragment"
         android:background="@drawable/shape_recycler_background_gradient">
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:background="@color/white"
@@ -31,19 +29,19 @@
                 android:id="@+id/editText_comment"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginStart="@dimen/fragment_horizon_margin_std"
+                android:layout_marginTop="@dimen/fragment_vertical_margin_std"
+                android:layout_marginEnd="@dimen/fragment_horizon_margin_std"
+                android:layout_marginBottom="@dimen/fragment_vertical_margin_std"
                 android:background="@drawable/shape_trip_day_card"
                 android:ems="10"
-                android:hint="輸入訊息"
+                android:hint="@string/input_message"
                 android:text="@={viewModel.comment}"
                 android:inputType="textMultiLine"
-                android:paddingLeft="16dp"
-                android:paddingTop="8dp"
-                android:paddingRight="16dp"
-                android:paddingBottom="8dp"
+                android:paddingLeft="@dimen/fragment_padding_std"
+                android:paddingTop="@dimen/fragment_padding_small"
+                android:paddingRight="@dimen/fragment_padding_std"
+                android:paddingBottom="@dimen/fragment_padding_small"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btn_sent_comment"
                 app:layout_constraintStart_toStartOf="parent"
@@ -53,8 +51,8 @@
                 android:id="@+id/btn_sent_comment"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/ic_baseline_add_circle_24"
+                android:layout_marginEnd="@dimen/fragment_horizon_margin_std"
+                android:background="@drawable/ic_baseline_send_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -85,7 +83,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

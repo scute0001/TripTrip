@@ -13,21 +13,16 @@
         <variable
             name="spot"
             type="com.emil.triptrip.database.SpotTag" />
-
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".ui.tripdetail.TripDetailFragment">
-
-
 
             <fragment
                 android:id="@+id/map"
@@ -40,13 +35,12 @@
                 app:layout_constraintTop_toTopOf="@+id/recycler_trip_select_days"
                 tools:context=".ui.tripdetail.TripDetailFragment" />
 
-
             <ImageButton
                 android:id="@+id/butten_add_spot"
                 android:layout_width="66dp"
                 android:layout_height="60dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="@dimen/fragment_horizon_margin_std"
+                android:layout_marginBottom="@dimen/fragment_vertical_margin_std"
                 android:background="@drawable/shape_btn_map_circle"
                 android:clickable="true"
                 android:paddingHorizontal="6dp"
@@ -60,28 +54,26 @@
                 android:id="@+id/recycler_trip_select_days"
                 android:layout_width="0dp"
                 android:layout_height="56dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
+                android:paddingLeft="@dimen/fragment_padding_std"
+                android:paddingRight="@dimen/fragment_padding_std"
                 android:background="@android:color/transparent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-
             </androidx.recyclerview.widget.RecyclerView>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_trip_select_time"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
-                android:paddingLeft="16dp"
+                android:paddingLeft="@dimen/fragment_padding_std"
                 android:background="@android:color/transparent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:orientation="horizontal"
                 android:visibility="@{viewModel.selectedDay != null ? View.VISIBLE : View.INVISIBLE}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.275"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recycler_trip_select_days" />
 
@@ -93,13 +85,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
             <ImageButton
                 android:id="@+id/butten_for_test"
                 android:layout_width="66dp"
                 android:layout_height="60dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="@dimen/fragment_horizon_margin_std"
+                android:layout_marginBottom="@dimen/fragment_vertical_margin_std"
                 android:background="@drawable/shape_btn_map_circle"
                 android:clickable="true"
                 android:paddingHorizontal="6dp"
@@ -126,16 +117,11 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
         <include layout="@layout/spot_detail_fragment"
             android:id="@+id/spot_sheet"
             app:viewModelSheet="@{viewModel}"
             app:spotSheet="@{spot}"/>
 
-
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 
 </layout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default screen margins -->
+    <dimen name="fragment_horizon_margin_std">16dp</dimen>
+    <dimen name="fragment_vertical_margin_std">16dp</dimen>
+    <dimen name="fragment_horizon_margin_large">32dp</dimen>
+    <dimen name="fragment_vertical_margin_large">32dp</dimen>
+
+    <!-- Search bar -->
+    <dimen name="fragment_search_bar_height">56dp</dimen>
+
+    <!-- Floating Button -->
+    <dimen name="floating_btn_height">56dp</dimen>
+    <dimen name="floating_btn_width">56dp</dimen>
+
+    <!-- Toolbar -->
+    <dimen name="toolbar_height">56dp</dimen>
+
+    <!-- Default screen padding -->
+    <dimen name="fragment_padding_std">16dp</dimen>
+    <dimen name="fragment_padding_small">8dp</dimen>
+
+    <!-- edit text height   -->
+    <dimen name="edittext_height">48dp</dimen>
+
+    <!-- lower check bar ok or cancel   -->
+    <dimen name="low_check_bar_height">64dp</dimen>
+    <dimen name="lower_check_bar_button_height">48dp</dimen>
+
+    <!-- recycler_view -->
+    <dimen name="recycler_view_item_margin">16dp</dimen>
+
+</resources>

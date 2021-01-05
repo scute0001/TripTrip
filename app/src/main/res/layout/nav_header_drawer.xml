@@ -7,7 +7,6 @@
         <variable
             name="viewModel"
             type="com.emil.triptrip.MainActivityViewModel" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -12,7 +12,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:background="@drawable/shape_trips_card_background"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="@dimen/recycler_view_item_margin"
         android:layout_width="wrap_content"
         android:layout_height="48dp">
 

@@ -10,7 +10,6 @@
         <variable
             name="spotData"
             type="com.emil.triptrip.database.SpotTag"/>
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +26,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
             <TextView
                 android:id="@+id/text_time"
                 style="@style/trip_recycler_day"
@@ -41,7 +39,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:timeTransferHHmmGMT="@{spotData.startTime}"
                 tools:text="10:00" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
