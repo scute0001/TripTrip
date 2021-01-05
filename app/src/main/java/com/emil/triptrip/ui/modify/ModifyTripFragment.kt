@@ -70,6 +70,11 @@ class ModifyTripFragment : Fragment() {
             fragmentManager?.let { it1 -> ModifyUsersDialog(viewModel.unAttendUsers.value!!, viewModel).show(it1, "Modify") }
         }
 
+        // set backpress on cancel btn
+        binding.buttonCancelSubmitModify.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
+
         viewModel.allUsersData.observe(viewLifecycleOwner, androidx.lifecycle.Observer { allUsers ->
             allUsers?.let {
                 viewModel.filterSelectUsers()
