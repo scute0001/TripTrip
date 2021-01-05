@@ -199,6 +199,9 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
         // set UserData
         val userList = mutableListOf<AttendUser>()
         val users = mutableListOf<String>()
+
+        selfAddToSelectedUser(selectedUsers.value)
+
         selectedUsers.value?.forEach {
             val temp = AttendUser(userId = it.name, photo = it.photoUri)
             userList.add(temp)
@@ -246,6 +249,15 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
 
     }
 
+    private fun selfAddToSelectedUser(userList: List<User>?) {
+        var list = userList as MutableList
+        if (UserManager.user.value in list) {
+
+        } else {
+            list.add(UserManager.user.value!!)
+            _selectedUsers.value = list
+        }
+    }
 
 
     fun clearCheckDataFlag() {
