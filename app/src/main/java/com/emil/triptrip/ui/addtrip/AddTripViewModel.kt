@@ -201,7 +201,7 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
         val users = mutableListOf<String>()
 
         selfAddToSelectedUser(selectedUsers.value)
-        
+
         selectedUsers.value?.forEach {
             val temp = AttendUser(userId = it.name, photo = it.photoUri)
             userList.add(temp)
