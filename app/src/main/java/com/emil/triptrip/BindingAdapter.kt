@@ -8,6 +8,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.emil.triptrip.database.NotificationAddTrip
+import com.emil.triptrip.util.Util
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -78,7 +79,5 @@ fun convertTimeHHmmToStringGMT(textView: TextView, systemTime: Long){
 
 @BindingAdapter("notificationContent")
 fun setNotificationContent(textView: TextView, data: NotificationAddTrip) {
-    var notificationStringFirst = TripTripApplication.instance.applicationContext.resources.getText(R.string.notification_added)
-    var notificationStringSec = TripTripApplication.instance.applicationContext.resources.getText(R.string.notification_member)
-    textView.text = "${data.inviterName} $notificationStringFirst ${data.tripTitle} $notificationStringSec "
+    textView.text = "${data.inviterName} ${Util.getString(R.string.notification_added)} ${data.tripTitle} ${Util.getString(R.string.notification_member)}"
 }
