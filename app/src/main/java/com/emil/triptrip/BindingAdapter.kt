@@ -2,11 +2,8 @@ package com.emil.triptrip
 
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.graphics.drawable.RoundedBitmapDrawable
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
@@ -20,23 +17,18 @@ import java.util.*
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
     imgUrl?.let {
-//        imgView.setBackgroundResource(R.drawable.shape_circle_btn)
-
-
-
         Glide.with(imgView.context)
             .load(imgUrl)
             .placeholder(R.drawable.ic_placeholder_big)
             .error(R.drawable.ic_placeholder_big)
             .apply(
                 RequestOptions().transform(CenterCrop(), RoundedCorners(50))
-//                RequestOptions.bitmapTransform(RoundedCorners(20))
             )
             .into(imgView)
     }
 }
 
-
+// check isSelect image and show on UI
 @BindingAdapter("imagePathUrl")
 fun bindSelectImage(imgView: ImageView, imgUrl: String?) {
     if (imgUrl == "" || imgUrl == null) {
@@ -52,7 +44,6 @@ fun bindSelectImage(imgView: ImageView, imgUrl: String?) {
             .into(imgView)
     }
 }
-
 
 @BindingAdapter("timeTransfer")
 fun convertLongToDateString(textView: TextView, systemTime: Long){
@@ -87,5 +78,7 @@ fun convertTimeHHmmToStringGMT(textView: TextView, systemTime: Long){
 
 @BindingAdapter("notificationContent")
 fun setNotificationContent(textView: TextView, data: NotificationAddTrip) {
-    textView.text = "${data.inviterName} 已將你加入 ${data.tripTitle} 的夥伴，一起來規劃行程吧!!"
+    var notificationStringFirst = TripTripApplication.instance.applicationContext.resources.getText(R.string.notification_added)
+    var notificationStringSec = TripTripApplication.instance.applicationContext.resources.getText(R.string.notification_member)
+    textView.text = "${data.inviterName} $notificationStringFirst ${data.tripTitle} $notificationStringSec "
 }
