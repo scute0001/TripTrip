@@ -49,4 +49,6 @@
     <string name="google_sign_in">使用 Google 帳戶登入</string>
     <string name="input_spot_name_here">Input spot name here.</string>
     <string name="stay">Stay</string>
+    <string name="notification_added"> 已將你加入 </string>
+    <string name="notification_member"> 的夥伴，一起來規劃行程吧!!</string>
 </resources>
