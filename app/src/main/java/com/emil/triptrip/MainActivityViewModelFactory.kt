@@ -20,5 +20,4 @@ class MainActivityViewModelFactory(private val application: Application,
         }
         throw IllegalArgumentException("Unknown ViewModel")
     }
-
 }

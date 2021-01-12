@@ -1,37 +1,28 @@
 package com.emil.triptrip
 
-import android.Manifest
-import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import androidx.navigation.NavGraphNavigator
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.emil.triptrip.databinding.ActivityMainBinding
 import com.emil.triptrip.databinding.NavHeaderDrawerBinding
-import com.emil.triptrip.ui.login.LoginViewModelFactory
 import com.emil.triptrip.ui.login.UserManager
-import com.google.android.material.navigation.NavigationView
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.Delay
 
 private const val IS_READ = 1
 private const val NOT_READ = 0
@@ -61,8 +52,6 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainActivityViewModel::class.java)
         binding.viewModel = viewModel
 
-
-
         binding.toolbar.setOnMenuItemClickListener {
             when(it.itemId) {
                 R.id.notification -> {
@@ -71,10 +60,6 @@ class MainActivity : AppCompatActivity() {
                     arrayList?.let { notificationArray ->
                         findNavController(R.id.navHostFragment).navigate(NavigationDirections.actionGlobalNotificationFragment(notificationArray))
                     }
-
-//                    viewModel.clickStatu.value?.let {
-//                        viewModel.clickStatu.value = !it
-//                    }
                 }
                 R.id.message -> {
                     viewModel.selectTripId.value?.let {tripId->
@@ -102,21 +87,14 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-
         setupDrawer()
         setupNavController()
     }
 
-
-
-
     // Set up Drawer
     private fun setupDrawer() {
-
         //set up toolbar
         val navController = this.findNavController(R.id.navHostFragment)
-//        setSupportActionBar(binding.toolbar)
-//        supportActionBar?.title = null
 
         appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)
         NavigationUI.setupWithNavController(binding.drawerNavView, navController)
@@ -156,18 +134,9 @@ class MainActivity : AppCompatActivity() {
         bindingNavHeader.viewModel = viewModel
         binding.drawerNavView.addHeaderView(bindingNavHeader.root)
 
-
-
-
-
-
         // set toolbar drawer icon
         binding.toolbar.setNavigationIcon(R.drawable.ic_baseline_format_list_bulleted_24)
-
-
-
     }
-
 
     /**
      * Set up [NavController.addOnDestinationChangedListener] to record the current fragment, it better than another design
@@ -200,11 +169,6 @@ class MainActivity : AppCompatActivity() {
                 binding.toolbar.menu.findItem(R.id.setting).isVisible = false
                 binding.toolbar.menu.findItem(R.id.notification).isVisible = true
             }
-
-
-
-//            if (navDestination.id != R.id.tripDetailFragment)
-//                viewModel.currentFragmentType.value = "TripTrip"
         }
     }
 
@@ -225,7 +189,6 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     super.onBackPressed()
                 }
-
             }
         }
     }

@@ -17,7 +17,6 @@ abstract class SwipeToDeleteCallBack(
     private val background = ColorDrawable()
     private val icon = ContextCompat.getDrawable(context, R.drawable.ic_baseline_delete_forever_24)
 
-
     override fun onMove(
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder,
@@ -25,7 +24,6 @@ abstract class SwipeToDeleteCallBack(
     ): Boolean {
         return false
     }
-
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         val position = viewHolder.adapterPosition
@@ -60,7 +58,6 @@ abstract class SwipeToDeleteCallBack(
         // Draw the delete icon
         icon.setBounds(iconLeft, iconTop, iconRight, iconBottom)
         icon.draw(c)
-
 
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
     }

@@ -4,7 +4,6 @@ import android.graphics.*
 import com.bumptech.glide.load.Key
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
-import com.emil.triptrip.MainActivity
 import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
 import java.security.MessageDigest
@@ -55,7 +54,6 @@ class GlideCircleBorderTransform(private val borderWidth: Float, private val bor
         return result
     }
 
-
     override fun transform(
         pool: BitmapPool,
         toTransform: Bitmap,
@@ -64,8 +62,6 @@ class GlideCircleBorderTransform(private val borderWidth: Float, private val bor
     ): Bitmap {
         return circleCrop(pool, toTransform)
     }
-
-
 
     override fun updateDiskCacheKey(messageDigest: MessageDigest) {
         messageDigest.update(ID.toByteArray(Key.CHARSET))
