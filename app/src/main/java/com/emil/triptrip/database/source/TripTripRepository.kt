@@ -50,6 +50,5 @@ interface TripTripRepository {
     suspend fun updateCurrentLocation(tripId: String, latitude: Double, longitude: Double ): ResultUtil<Boolean>
 
     suspend fun deleteNotification(userEmail: String, notification: NotificationAddTrip): ResultUtil<Boolean>
-//    fun getLiveArticles(): MutableLiveData<List<Article>>
 
 }

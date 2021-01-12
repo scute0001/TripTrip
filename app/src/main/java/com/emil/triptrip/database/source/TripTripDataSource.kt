@@ -50,7 +50,4 @@ interface TripTripDataSource {
 
     suspend fun deleteNotification(userEmail: String, notification: NotificationAddTrip): ResultUtil<Boolean>
 
-//    fun getLiveArticles(): MutableLiveData<List<Article>>
-
-
 }
