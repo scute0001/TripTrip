@@ -1,6 +1,5 @@
 package com.emil.triptrip.ui.tripdetail
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -11,11 +10,8 @@ import com.emil.triptrip.R
 import com.emil.triptrip.database.DayKey
 import com.emil.triptrip.databinding.ListTripDaysBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.api.ResourceProto.resource
-import okhttp3.internal.notify
 
 class SelectDayAdapter(val viewModel: TripDetailViewModel, val bottomBehavior: BottomSheetBehavior<ConstraintLayout>): ListAdapter<DayKey, DayViewHolder>(DayDiffCallback()) {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayViewHolder {
         return DayViewHolder.from(parent)
     }
@@ -23,7 +19,6 @@ class SelectDayAdapter(val viewModel: TripDetailViewModel, val bottomBehavior: B
     override fun onBindViewHolder(holder: DayViewHolder, position: Int) {
         holder.bind(viewModel, getItem(position), bottomBehavior)
     }
-
 }
 
 
@@ -45,13 +40,13 @@ class DayViewHolder(val binding: ListTripDaysBinding): RecyclerView.ViewHolder(b
 
         if (adapterPosition == viewModel.selectedDayPosition) {
             binding.constraintDay.setBackgroundResource(R.drawable.shape_selected_card)
-
         } else {
             binding.constraintDay.setBackgroundResource(R.drawable.shape_trip_day_card)
         }
 
         binding.executePendingBindings()
     }
+
     companion object {
         fun from(parent: ViewGroup): DayViewHolder {
             val inflater = LayoutInflater.from(parent.context)
@@ -59,7 +54,6 @@ class DayViewHolder(val binding: ListTripDaysBinding): RecyclerView.ViewHolder(b
             return DayViewHolder(binding)
         }
     }
-
 }
 
 

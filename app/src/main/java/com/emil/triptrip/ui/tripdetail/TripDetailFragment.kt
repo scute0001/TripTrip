@@ -48,7 +48,6 @@ class TripDetailFragment : Fragment() {
     var mapFragment: SupportMapFragment? = null
     private lateinit var locationButton:View
 
-
     private val callback = OnMapReadyCallback { googleMap ->
         // map UI setting
         googleMap.setPadding(0 , 240, 0 , 200)
@@ -76,9 +75,6 @@ class TripDetailFragment : Fragment() {
          * user has installed Google Play services and returned to the app.
          */
 
-        //set friends Location
-
-
         // set My location btn gone
         @SuppressLint("ResourceType")
         locationButton = mapFragment?.view?.rootView?.findViewById<View>(2)!!
@@ -86,7 +82,6 @@ class TripDetailFragment : Fragment() {
         locationButton?.let {
             it.setVisibility(View.GONE)
         }
-
     }
 
     override fun onCreateView(
@@ -127,7 +122,6 @@ class TripDetailFragment : Fragment() {
         //set select day recyclerView adapter
         val selectDayAdapter = SelectDayAdapter(viewModel, bottomBehavior)
         binding.recyclerTripSelectDays.adapter = selectDayAdapter
-//        test submit
         selectDayAdapter.submitList(tripData.dayKeyList)
 
         // set selected day view
@@ -145,7 +139,6 @@ class TripDetailFragment : Fragment() {
                 viewModel.drawUsersLocation(it, usersLocationList) }
         })
 
-
         // observe selected DayKey and set spotsList for map
         viewModel.selectedDayKey.observe(viewLifecycleOwner, Observer { dayKey ->
             // call query selected day spots API here
@@ -157,16 +150,12 @@ class TripDetailFragment : Fragment() {
             viewModel.setLiveSpotsToLocal()
         })
 
-
-
-
         //set select time recyclerView adapter
         val selectTimeAdapter = SelectTimeAdapter(viewModel)
         binding.recyclerTripSelectTime.adapter = selectTimeAdapter
 
         //set data to time recyclerView and draw markers on the map
         viewModel.spotsData.observe(viewLifecycleOwner, Observer {
-
             it?.let {
                 selectTimeAdapter.submitList(it)
                 selectTimeAdapter.notifyDataSetChanged()
@@ -177,14 +166,12 @@ class TripDetailFragment : Fragment() {
                 // set spot marker data
                 myMap?.let { it1 -> viewModel.drawSpotPosition(it1, it) }
             }
-
         })
 
         // set selected time view
         viewModel.refreshSelectedTimeAdapter.observe(viewLifecycleOwner, Observer {
             it?.let {
                 bottomBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-//                bottomBehavior.state = BottomSheetBehavior.STATE_EXPANDED
                 selectTimeAdapter.notifyDataSetChanged()
                 viewModel.onSelectTimeAdapterRefreshed()
             }
@@ -203,13 +190,9 @@ class TripDetailFragment : Fragment() {
             viewModel.setLiveUsersLocationToLocal()
         })
 
-
         // set detail spot pics
         val spotPicsAdapter = SpotPicAdapter(viewModel)
         binding.spotSheet.recyclerSpotDetailPictures.adapter = spotPicsAdapter
-
-
-
 
         // click add spot and navigation add spot page
         binding.buttenAddSpot.setOnClickListener {
@@ -237,7 +220,6 @@ class TripDetailFragment : Fragment() {
             // sent data to api here
             // set change data for update
             viewModel.uploadChangeSpotData()
-
         }
 
         binding.spotSheet.imageEditCancel.setOnClickListener {
@@ -248,7 +230,6 @@ class TripDetailFragment : Fragment() {
             // confirm delete dialog
             fragmentManager?.let { it1 -> ConfirmDialog(viewModel, binding, bottomBehavior).show(it1, "DELETE") }
         }
-
 
         // change start time
         binding.spotSheet.editTextSpotDetailStartTime.setOnClickListener {
@@ -273,9 +254,6 @@ class TripDetailFragment : Fragment() {
             getLocalImg()
         }
 
-
-
-
         viewModel._moveToSelectedSpot.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 myMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(it, 12F))
@@ -283,16 +261,12 @@ class TripDetailFragment : Fragment() {
             }
         })
 
-
-
-
         // show spot detail
         viewModel.spotDetail.observe(viewLifecycleOwner, Observer { spot ->
             binding.spot = spot
             spotPicsAdapter.submitList(spot.photoList?.toList())
 
             spot.photoList?.let {
-
                 if (it.isNotEmpty()) {
                     binding.spotSheet.textNoData.visibility = View.GONE
                 } else {
@@ -301,7 +275,6 @@ class TripDetailFragment : Fragment() {
             }
 
             binding.spotSheet.spotDetailSheet
-//            bottomBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             bottomBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         })
 
@@ -315,7 +288,6 @@ class TripDetailFragment : Fragment() {
         })
 
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -333,18 +305,6 @@ class TripDetailFragment : Fragment() {
             ViewModelProvider(it).get(MainActivityViewModel::class.java).apply {
                 currentFragmentType.value = TripDetailFragmentArgs.fromBundle(requireArguments()).tripData.title
                 selectTripId.value = TripDetailFragmentArgs.fromBundle(requireArguments()).tripData.id
-
-//                clickStatu.observe(this@TripDetailFragment, Observer { status ->
-//                    Log.i("service", "$status")
-//                    if (status == true) {
-//                        val startIntent = Intent(context, PositionUpdateService::class.java)
-//                        context?.startService(startIntent)
-//                    } else {
-//                        val stopIntent = Intent(context, PositionUpdateService::class.java)
-//                        context?.stopService(stopIntent)
-//                    }
-//
-//                })
             }
         }
 
@@ -353,7 +313,6 @@ class TripDetailFragment : Fragment() {
             "MY TRIP ID",
             TripDetailFragmentArgs.fromBundle(requireArguments()).tripData.id)
         context?.startService(startIntent)
-
 
         // 2. init fusedLocationProviderClient and set LocationServices object
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
@@ -407,7 +366,6 @@ class TripDetailFragment : Fragment() {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     getLocalImg()
                 } else {
-
                 }
             }
         }
@@ -424,19 +382,12 @@ class TripDetailFragment : Fragment() {
                         if (lastKnownLocation != null) {
 
                             myMap?.apply {
-//                                addMarker(MarkerOptions()
-//                                    .position(LatLng(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude))
-//                                    .title("It's ME!!")
-//                                    .snippet("${lastKnownLocation!!.latitude}, ${lastKnownLocation!!.longitude}")
-//                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location_self_64)))
-
                                 moveCamera(
                                     CameraUpdateFactory.newLatLngZoom(
                                         LatLng(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude), 11f))
                             }
                             // set update my location to firebase here
                             viewModel.setMyLocationData(lastKnownLocation?.latitude, lastKnownLocation?.longitude)
-
                         }
                     } else {
                         myMap?.uiSettings?.isMyLocationButtonEnabled = false
@@ -447,7 +398,6 @@ class TripDetailFragment : Fragment() {
             e.printStackTrace()
         }
     }
-
 
     private fun getLocalImg() {
         ImagePicker.with(this)
@@ -471,7 +421,6 @@ class TripDetailFragment : Fragment() {
             ImagePicker.RESULT_ERROR -> {
                 Toast.makeText(requireContext(), "Load picture fail.", Toast.LENGTH_SHORT).show()
             }
-
         }
     }
 
@@ -503,115 +452,6 @@ class TripDetailFragment : Fragment() {
         super.onDestroy()
     }
 }
-
-
-//    private fun getUsersLocation() {
-//
-//        val userA = LatLng(25.0250383, 121.5327086)
-//        val userB = LatLng(25.1714657, 121.4359783)
-//        val userC = LatLng(25.0669043, 121.469388)
-//        val userList = listOf(userA, userB, userC)
-//
-//        userList.forEach {
-//
-//            Glide.with(requireActivity())
-//                .asBitmap()
-//                .load("https://lh3.googleusercontent.com/a-/AOh14GiTzookZLQ8BzSdQs_lRfoczt6DpfEBMYXg6erEtQ=s96-c")
-//                .apply(
-////                    RequestOptions().transform(CenterCrop(), RoundedCorners(50), GlideCircleBorderTransform(100f, 10))
-////                    RequestOptions().transform(GlideCircleBorderTransform(100f, 10))
-//                    RequestOptions().transform(GlideCircleBorderTransform(135f, 0))
-//                )
-//                .into( object : SimpleTarget<Bitmap>(150, 150) {
-//                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-//                        myMap?.apply {
-//                            addMarker(MarkerOptions()
-//                                .title("匿名蠑螈")
-//                                .position(it)
-//                                .icon(BitmapDescriptorFactory.fromBitmap(resource)))
-//                        }
-//
-//                    }
-//                })
-//
-//        }
-//
-//
-//
-////        myMap?.apply {
-////            val userA = LatLng(25.0250383, 121.5327086)
-////            val userB = LatLng(25.1714657, 121.4359783)
-////            val userC = LatLng(25.0669043, 121.469388)
-////            val userList = listOf(userA, userB, userC)
-////
-////
-////            addMarker(MarkerOptions()
-////                .position(userA)
-////                .title("匿名蠑螈")
-////                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_location_64)))
-////
-////            addMarker(MarkerOptions()
-////                .position(userB)
-////                .title("匿名海豹")
-////                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_location_64)))
-////
-////            addMarker(MarkerOptions()
-////                .position(userC)
-////                .title("匿名喵喵")
-////                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_location_64)))
-////        }
-//
-//
-//    }
-
-
-
-
-
-
-//        val spotA = LatLng(25.0424825, 121.5626907)
-//        val spotB = LatLng(25.0476935, 121.5152081)
-//        val spotC = LatLng(25.0774806, 121.2331741)
-//        val spotD = LatLng(25.1763029, 121.5462675)
-//        val spotList = listOf(spotA, spotB, spotC, spotD)
-//
-//        googleMap?.apply {
-//            // close google map link btn
-//            uiSettings.isMapToolbarEnabled = false
-//
-//            for (spot in spotList) {
-//                addMarker(MarkerOptions()
-//                    .position(spot)
-//                    .title("Spot")
-//                    .snippet("${spot.latitude}, ${spot.longitude}")
-//                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker)))
-//            }
-//            addPolyline(PolylineOptions()
-//                .add(spotA, spotB)
-//                .color(0xFF2286c3.toInt())
-//                .width(10F)
-//                .pattern(listOf(Dot(),Gap(20F), Dash(40F), Gap(20F)))
-//                .endCap(CustomCap(BitmapDescriptorFactory.fromResource(R.drawable.ic_triangle_up))))
-//
-//            addPolyline(PolylineOptions()
-//                .add(spotB, spotC)
-//                .color(0xFF2286c3.toInt())
-//                .width(10F)
-//                .pattern(listOf(Dot(),Gap(20F), Dash(40F), Gap(20F)))
-//                .endCap(CustomCap(BitmapDescriptorFactory.fromResource(R.drawable.ic_triangle_up))))
-//
-//            addPolyline(PolylineOptions()
-//                .add(spotC, spotD)
-//                .color(0xFF2286c3.toInt())
-//                .width(10F)
-//                .pattern(listOf(Dot(),Gap(20F), Dash(40F), Gap(20F)))
-//                .endCap(CustomCap(BitmapDescriptorFactory.fromResource(R.drawable.ic_triangle_up))))
-//
-//            moveCamera(CameraUpdateFactory.newLatLngZoom(spotA, 10F))
-//
-//
-//        }
-
 
 //            val bounds = googleMap.projection.visibleRegion.latLngBounds
 //            var up: Double = bounds.northeast.latitude
