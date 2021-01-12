@@ -81,7 +81,6 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
     // firebase storage pic uri
     private val firebaseStoragePicUri = MutableLiveData<String>()
 
-
     init {
         selectPicUri.value = ""
     }
@@ -91,7 +90,6 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
         selectPicUri.value = uri
     }
 
-
     // for Navigation to myTrips page finished clear
     fun clearAddTripFinishedNavToMyTrips() {
         _addTripFinishedNavToMyTrips.value = false
@@ -99,9 +97,7 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
 
     // uploadUserDataToFirebase
     fun getUsersData() {
-
         coroutineScope.launch {
-
             _status.value = LoadApiStatus.LOADING
 
             when (val result = repository.getUserData()) {
@@ -157,10 +153,8 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
         }
     }
 
-
     // add trip to firebase
     fun uploadTripToFirebase(trip: Trip) {
-
         coroutineScope.launch {
             _status.value = LoadApiStatus.LOADING
 
@@ -190,12 +184,8 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
         }
     }
 
-
-
-
     // set add tripData for upload to firebase
     fun setTripData() {
-
         // set UserData
         val userList = mutableListOf<AttendUser>()
         val users = mutableListOf<String>()
@@ -207,7 +197,6 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
             userList.add(temp)
             users.add("${it.email}")
         }
-
 
         // set day list  ///////////////////
         val dayList = mutableListOf<DayKey>()
@@ -229,7 +218,6 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
             }
             Log.i("TimeTime", "Start time $dayList")
         }
-        ///////////////////////////////////
 
         // check data source and set trip data
         if ( _tripTitle.value != null && startDay.value != null && endDay.value != null && selectedUsers.value != null) {
@@ -246,7 +234,6 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
         } else {
             _checkDataFlag.value = false
         }
-
     }
 
     private fun selfAddToSelectedUser(userList: List<User>?) {
@@ -259,17 +246,13 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
         }
     }
 
-
     fun clearCheckDataFlag() {
         _checkDataFlag.value = null
     }
 
-
-
     fun leave(needRefresh: Boolean = false) {
         _leave.value = needRefresh
     }
-
 
     override fun onCleared() {
         super.onCleared()

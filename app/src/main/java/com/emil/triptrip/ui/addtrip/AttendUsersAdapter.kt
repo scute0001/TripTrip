@@ -32,9 +32,7 @@ class AddUsersViewHolder(val binding: ListAddTripUsersBinding): RecyclerView.Vie
             return AddUsersViewHolder(binding)
         }
     }
-
 }
-
 
 class UsersDiffCallback: DiffUtil.ItemCallback<User>() {
     override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
