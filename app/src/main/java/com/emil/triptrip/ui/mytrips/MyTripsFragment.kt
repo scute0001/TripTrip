@@ -23,7 +23,6 @@ private const val PERMISSION_ID = 1010
 
 class MyTripsFragment : Fragment() {
 
-
     private lateinit var viewModel: MyTripsViewModel
 
     override fun onCreateView(
@@ -77,9 +76,7 @@ class MyTripsFragment : Fragment() {
             findNavController().navigate(MyTripsFragmentDirections.actionMyTripsFragmentToAddTripFragment())
         }
 
-
         // set search bar
-//        binding.searchBar.setIconified(false);
         binding.searchBar.setOnQueryTextListener( object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean = false
 
@@ -94,54 +91,15 @@ class MyTripsFragment : Fragment() {
             mainViewModel.notificationList.value = it
         })
 
-
-
-
-        //////////////////////
-
-//        binding.button.setOnClickListener {
-//            testFirebase()
-//        }
-//
-//        binding.button2.setOnClickListener {
-//            testFirebaseSPOTTAG()
-//        }
-
         getLocationPermission()
         return binding.root
     }
 
     // get permission
     private fun getLocationPermission() {
-
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
             ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ) {
             ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE), PERMISSION_ID)
         }
     }
-
-
-
-    private fun testFirebaseSPOTTAG() {
-        // Access a Cloud Firestore instance from your Activity
-        val db = FirebaseFirestore.getInstance()
-
-        val testSpot = SpotTag(positionName = "this is a pen")
-
-        db.collection("trips").document("3p2f5wkQQjr3xDAUgp77").collection("Spots")
-            .add(testSpot)
-            .addOnSuccessListener { documentReference ->
-                Log.d("Test", "DocumentSnapshot added with ID: ${documentReference.id}")
-                documentReference.update("id", documentReference.id)
-                documentReference.update("daySpotsKey", "Day33p2f5wkQQjr3xDAUgp77")
-            }
-            .addOnFailureListener { e ->
-                Log.w("test", "Error adding document", e)
-            }
-
-
-    }
-
-
-
 }

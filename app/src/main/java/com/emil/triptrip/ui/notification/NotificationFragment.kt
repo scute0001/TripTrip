@@ -24,7 +24,6 @@ class NotificationFragment : Fragment() {
         val binding = NotificationFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
 
-
         val notificationList = NotificationFragmentArgs.fromBundle(requireArguments()).notificationList.toList()
 
         val app = requireNotNull(activity).application
@@ -39,12 +38,9 @@ class NotificationFragment : Fragment() {
         val adapter = NotificationAdapter(viewModel)
         binding.recyclerNotification.adapter = adapter
 
-
-        //
         val swipeHandler = object : SwipeToDeleteCallBack(requireContext(), adapter){}
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(binding.recyclerNotification)
-
 
         viewModel.notificationList.observe(viewLifecycleOwner, Observer {notificationList ->
             if (notificationList != null) {
@@ -70,10 +66,6 @@ class NotificationFragment : Fragment() {
             viewModel.setLiveNotifyToShow(it)
         })
 
-
-
-
         return binding.root
     }
-
 }

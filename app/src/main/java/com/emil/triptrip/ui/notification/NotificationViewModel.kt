@@ -53,7 +53,6 @@ class NotificationViewModel(app: Application, private val repository: TripTripRe
         get() = _liveNotificationData
 
     init {
-//        _notificationList.value = notificationList
         getNotificationLiveData()
     }
 
@@ -91,11 +90,9 @@ class NotificationViewModel(app: Application, private val repository: TripTripRe
         _tripData.value = null
     }
 
-
     fun leave(needRefresh: Boolean = false) {
         _leave.value = needRefresh
     }
-
 
     override fun onCleared() {
         super.onCleared()
@@ -104,7 +101,6 @@ class NotificationViewModel(app: Application, private val repository: TripTripRe
 
     fun deleteNotification(notification: NotificationAddTrip) {
         val userEmail = UserManager.user.value?.email as String
-
         coroutineScope.launch {
             _status.value = LoadApiStatus.LOADING
 
@@ -142,5 +138,4 @@ class NotificationViewModel(app: Application, private val repository: TripTripRe
     fun setLiveNotifyToShow(notificationList: List<NotificationAddTrip>) {
         _notificationList.value = notificationList.filter { it.status == 0 }
     }
-
 }

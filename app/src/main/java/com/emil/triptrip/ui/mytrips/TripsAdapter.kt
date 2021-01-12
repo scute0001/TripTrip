@@ -34,8 +34,8 @@ class TripViewHolder(val binding: ListTripsBinding): RecyclerView.ViewHolder(bin
         binding.root.setOnClickListener {
             viewModel._navToTripDetail.value = item
         }
-
     }
+
     companion object {
         fun from(parent: ViewGroup): TripViewHolder {
             val inflater = LayoutInflater.from(parent.context)
@@ -43,9 +43,7 @@ class TripViewHolder(val binding: ListTripsBinding): RecyclerView.ViewHolder(bin
             return TripViewHolder(binding)
         }
     }
-
 }
-
 
 class DiffCallback: DiffUtil.ItemCallback<Trip>() {
     override fun areItemsTheSame(oldItem: Trip, newItem: Trip): Boolean {
