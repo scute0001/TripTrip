@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.database.*
@@ -17,7 +16,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class MyTripsViewModel(app: Application, private val repository: TripTripRepository) : AndroidViewModel(app) {
+class MyTripsViewModel(app: Application, private val repository: TripTripRepository) :
+    AndroidViewModel(app) {
 
     private val _tripsData = MutableLiveData<List<Trip>>()
     val tripsData: LiveData<List<Trip>>
@@ -26,7 +26,6 @@ class MyTripsViewModel(app: Application, private val repository: TripTripReposit
     val _navToTripDetail = MutableLiveData<Trip>()
     val navToTripDetail: LiveData<Trip>
         get() = _navToTripDetail
-
 
     // status: The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<LoadApiStatus>()
@@ -53,7 +52,6 @@ class MyTripsViewModel(app: Application, private val repository: TripTripReposit
 
     init {
         _navToTripDetail.value = null
-//        fakeData()
         getTripsData()
         getNotificationLiveData()
     }
@@ -71,7 +69,6 @@ class MyTripsViewModel(app: Application, private val repository: TripTripReposit
     }
 
     fun getTripsData() {
-
         coroutineScope.launch {
             _status.value = LoadApiStatus.LOADING
 
@@ -99,11 +96,9 @@ class MyTripsViewModel(app: Application, private val repository: TripTripReposit
         }
     }
 
-
     fun leave(needRefresh: Boolean = false) {
         _leave.value = needRefresh
     }
-
 
     override fun onCleared() {
         super.onCleared()
@@ -122,51 +117,4 @@ class MyTripsViewModel(app: Application, private val repository: TripTripReposit
         }
         return filteredList
     }
-
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////
-    // Create Fake data
-    fun fakeData() {
-        val fakeTrips = mutableListOf<Trip>()
-
-        val testData1 = Trip(
-            title = "民主聖地五日遊",
-            startTime = 1605850702139,
-            stopTime = 1605850702139,
-            status = 0,
-            attendUserList = mutableListOf(AttendUser(userId = "Emil"), AttendUser(userId = "Nori"), AttendUser(userId = "Rukka")),
-            dayKeyList = mutableListOf(DayKey("Day1","Day1QQ"),DayKey("Day2","Day2QQ"),DayKey("Day3")),
-            private = true,
-            mainImg = "https://www.taiwan.net.tw/att/1/big_scenic_spots/pic_R29_12.jpg"
-        )
-
-        val testData2 = Trip(
-            title = "C8763",
-            startTime = System.currentTimeMillis(),
-            stopTime = System.currentTimeMillis(),
-            status = 0,
-            attendUserList = mutableListOf(AttendUser(userId = "TEAR"), AttendUser(userId = "MAMAMIYA"), AttendUser(userId = "ARARA")),
-            dayKeyList = mutableListOf(DayKey("Day1","Day1YY"),DayKey("Day2","Day2YY"),DayKey("Day3")),
-            private = true,
-            mainImg = "https://i.imgur.com/PfFPryx.jpg"
-        )
-
-        val testData3 = Trip(
-            title = "真心不騙老司機上車旅",
-            startTime = 1605859702139,
-            stopTime = 1606859702139,
-            status = 0,
-            attendUserList = mutableListOf(AttendUser(userId = "Gary"), AttendUser(userId = "BigGuy"), AttendUser(userId = "Moto")),
-            dayKeyList = mutableListOf(DayKey("Day1","Day1GG"),DayKey("Day2","Day2GG"),DayKey("Day3")),
-            private = true,
-            mainImg = "https://api.appworks-school.tw/assets/201807242232/0.jpg"
-        )
-        fakeTrips.add(testData1)
-        fakeTrips.add(testData2)
-        fakeTrips.add(testData3)
-
-        _tripsData.value = fakeTrips
-    }
-
-
 }

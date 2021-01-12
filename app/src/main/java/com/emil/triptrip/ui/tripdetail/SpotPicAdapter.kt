@@ -10,7 +10,6 @@ import com.emil.triptrip.databinding.ListTripDetailImgsBinding
 
 
 class SpotPicAdapter(val viewModel: TripDetailViewModel): ListAdapter<String, PicViewHolder>(SpotPicDiffCallback()) {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PicViewHolder {
         return PicViewHolder.from(parent)
     }
@@ -18,7 +17,6 @@ class SpotPicAdapter(val viewModel: TripDetailViewModel): ListAdapter<String, Pi
     override fun onBindViewHolder(holder: PicViewHolder, position: Int) {
         holder.bind(viewModel, getItem(position))
     }
-
 }
 
 
@@ -26,6 +24,7 @@ class PicViewHolder(val binding: ListTripDetailImgsBinding): RecyclerView.ViewHo
     fun bind(viewModel: TripDetailViewModel, item: String) {
         binding.pic = item
     }
+
     companion object {
         fun from(parent: ViewGroup): PicViewHolder {
             val inflater = LayoutInflater.from(parent.context)

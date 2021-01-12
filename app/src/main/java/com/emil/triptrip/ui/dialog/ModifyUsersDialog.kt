@@ -8,7 +8,6 @@ import android.util.Log
 import androidx.fragment.app.DialogFragment
 import com.emil.triptrip.R
 import com.emil.triptrip.database.User
-import com.emil.triptrip.ui.addtrip.AddTripViewModel
 import com.emil.triptrip.ui.modify.ModifyTripViewModel
 
 
@@ -58,11 +57,9 @@ class ModifyUsersDialog(val userList: List<User>, val viewModel: ModifyTripViewM
                     })
                 .setNegativeButton(R.string.cancel,
                     DialogInterface.OnClickListener { dialog, id ->
-
                     })
 
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
-
 }

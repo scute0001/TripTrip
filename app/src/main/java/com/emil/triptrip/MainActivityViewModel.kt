@@ -34,15 +34,11 @@ class MainActivityViewModel(app: Application, private val repository: TripTripRe
 
     val navToModifyTripFlag = MutableLiveData<Boolean>()
 
-
-
     init {
         currentFragmentType.value = "TripTrip"
         clickStatu.value = false
         navToModifyTripFlag.value = null
-
     }
-
 
     fun setCurrentUser(currentUser: User) {
         _user.value = currentUser
@@ -51,8 +47,4 @@ class MainActivityViewModel(app: Application, private val repository: TripTripRe
     fun clearNavToModifyTripFlag() {
         navToModifyTripFlag.value = null
     }
-
-
-
-
 }

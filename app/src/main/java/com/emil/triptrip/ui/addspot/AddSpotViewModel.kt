@@ -1,9 +1,6 @@
 package com.emil.triptrip.ui.addspot
 
 import android.app.Application
-import android.icu.text.SimpleDateFormat
-import android.icu.util.TimeZone
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -20,7 +17,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.util.*
 
 const val TYPE_FOOD = 0
 const val TYPE_SCENE = 1
@@ -53,7 +49,6 @@ class AddSpotViewModel(app: Application,
     // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-
     val selectLocation = MutableLiveData<LatLng>()
     val selectLocationString = MutableLiveData<String>()
     var selectSpotType = MutableLiveData<Int>()
@@ -70,7 +65,6 @@ class AddSpotViewModel(app: Application,
     val _navUploadSpotSuccess = MutableLiveData<Boolean>()
     val navUploadSpotSuccess: LiveData<Boolean>
         get() = _navUploadSpotSuccess
-
 
     init {
         selectLocationString.value = "從地圖搜尋"
@@ -99,11 +93,10 @@ class AddSpotViewModel(app: Application,
                 lastEditTime = System.currentTimeMillis()
             )
 
-            // for temp default photo list
+            // for default photo list
             if (spotData.photoList == null) {
                 spotData.photoList = mutableListOf()
             }
-            /////////////////////////////////
 
             _toFirebaseSpotData.value = spotData
         } else {
@@ -167,20 +160,16 @@ class AddSpotViewModel(app: Application,
                 }
             }
         }
-
     }
-
 
     fun navUploadSpotSuccessFinished() {
         clearToFirebaseSpotData()
         _navUploadSpotSuccess.value = null
     }
 
-
     fun leave(needRefresh: Boolean = false) {
         _leave.value = needRefresh
     }
-
 
     override fun onCleared() {
         super.onCleared()

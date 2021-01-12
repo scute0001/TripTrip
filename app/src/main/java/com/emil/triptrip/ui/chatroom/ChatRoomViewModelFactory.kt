@@ -3,9 +3,7 @@ package com.emil.triptrip.ui.chatroom
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.emil.triptrip.database.NotificationAddTrip
 import com.emil.triptrip.database.source.TripTripRepository
-import com.emil.triptrip.ui.notification.NotificationViewModel
 import java.lang.IllegalArgumentException
 
 

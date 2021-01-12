@@ -3,7 +3,6 @@ package com.emil.triptrip.ui.addspot
 import android.app.TimePickerDialog
 import android.icu.util.Calendar
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.databinding.AddSpotFragmentBinding
 import com.emil.triptrip.ui.dialog.AddSpotSuccessDialogFragment
@@ -56,7 +54,6 @@ class AddSpotFragment : Fragment() {
             fragmentManager?.let { it1 -> SelectMapFragment(viewModel).show(it1, "select") }
         }
 
-
         // set select spot type
         binding.buttonFood.setOnClickListener {
             viewModel.setTypeFood()
@@ -79,14 +76,12 @@ class AddSpotFragment : Fragment() {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
 
-
         viewModel.selectLocation.observe(viewLifecycleOwner, Observer {
             viewModel.setOnSelectLocationFlag()
             binding.lottieSuccess.apply {
                 visibility = View.VISIBLE
                 playAnimation()
             }
-
         })
 
         // upload spot to firebase
@@ -110,10 +105,7 @@ class AddSpotFragment : Fragment() {
                 viewModel.navUploadSpotSuccessFinished()
             }
         })
-
-
         return binding.root
     }
-
 
 }

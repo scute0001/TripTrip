@@ -114,8 +114,4 @@ class DefaultTripTripRepository(private val remoteDataSource: TripTripDataSource
         return remoteDataSource.deleteNotification(userEmail, notification)
     }
 
-    //    override fun getLiveArticles(): MutableLiveData<List<Article>> {
-//        return remoteDataSource.getLiveArticles()
-//    }
-
 }

@@ -13,7 +13,6 @@ object UserManager {
     private const val USER_TOKEN = "user_token"
 
     val _user = MutableLiveData<User>()
-
     val user: LiveData<User>
         get() = _user
 
@@ -46,7 +45,6 @@ object UserManager {
     val isLoggedIn: Boolean
         get() = userToken != null
 
-
     /**
      * Clear the [userToken] and the [user]/[_user] data
      */
@@ -77,5 +75,4 @@ object UserManager {
             }
         }
     }
-
 }

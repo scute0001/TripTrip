@@ -35,12 +35,6 @@ class PositionUpdateService: Service() {
         super.onCreate()
         // init fusedLocationProviderClient and set LocationServices object
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-
-
-
-
-
-
         Log.i("service", "service onCreate")
 
     }
@@ -48,7 +42,6 @@ class PositionUpdateService: Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         tripId = intent?.getStringExtra("MY TRIP ID")
         startTimer()
-
         return super.onStartCommand(intent, flags, startId)
     }
 
@@ -66,29 +59,23 @@ class PositionUpdateService: Service() {
         super.onDestroy()
         Log.i("service", "service onDestroy")
         stopTimer()
-
     }
 
     @SuppressLint("MissingPermission")
     private fun getDeviceLocation() {
-
         val locationRequest = fusedLocationProviderClient.lastLocation
         locationRequest.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 lastKnownLocation = task.result
                 if (lastKnownLocation != null) {
-
                     Log.i("service", "location data ${lastKnownLocation!!.latitude}, ${lastKnownLocation!!.longitude}")
-
                     updateMyLocation(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude)
                 }
             }
         }
     }
 
-
     private fun startTimer(){
-
         var second = 0
         val REPEAT_TIME = 60
         timer.schedule(1000, 1000) {
@@ -113,6 +100,4 @@ class PositionUpdateService: Service() {
             }
         }
     }
-
-
 }

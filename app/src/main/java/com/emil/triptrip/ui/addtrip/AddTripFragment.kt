@@ -40,8 +40,6 @@ class AddTripFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(AddTripViewModel::class.java)
         binding.viewModel = viewModel
 
-
-
         // setup select date
         val builder = MaterialDatePicker.Builder.dateRangePicker()
         val now = Calendar.getInstance()
@@ -64,12 +62,6 @@ class AddTripFragment : Fragment() {
         val adapter = AttendUsersAdapter()
         binding.recyclerAddAttendUser.adapter = adapter
 
-        // observe all users DATA get from firebase
-        viewModel.usersData.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-
-        })
-
-
         // observe selected users data and to adapter
         viewModel.selectedUsers.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             adapter.submitList(it)
@@ -87,7 +79,6 @@ class AddTripFragment : Fragment() {
         // lottile setting
         binding.lottieSuccess.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationRepeat(animation: Animator?) {
-
             }
 
             override fun onAnimationEnd(animation: Animator?) {
@@ -97,13 +88,10 @@ class AddTripFragment : Fragment() {
             }
 
             override fun onAnimationCancel(animation: Animator?) {
-
             }
 
             override fun onAnimationStart(animation: Animator?) {
-
             }
-
         })
 
         // add data finished and nav to mytrips
@@ -141,9 +129,7 @@ class AddTripFragment : Fragment() {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
 
-
-        // test imager picker select photo
-        //
+        // image picker select photo
         binding.buttonAddPic.setOnClickListener {
             val permission = requireActivity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
             if (permission != PackageManager.PERMISSION_GRANTED) {
@@ -151,10 +137,6 @@ class AddTripFragment : Fragment() {
             }
             getLocalImg()
         }
-
-
-
-
 
         return binding.root
     }
@@ -177,8 +159,6 @@ class AddTripFragment : Fragment() {
         }
     }
 
-
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -188,8 +168,6 @@ class AddTripFragment : Fragment() {
             REQ_CODE_PIC_CAMERA -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     getLocalImg()
-                } else {
-
                 }
             }
         }
@@ -200,6 +178,4 @@ class AddTripFragment : Fragment() {
             .crop()
             .start()
     }
-
-
 }

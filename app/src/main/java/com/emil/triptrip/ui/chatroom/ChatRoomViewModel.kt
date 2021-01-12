@@ -47,11 +47,9 @@ class ChatRoomViewModel(app: Application, private val repository: TripTripReposi
     // chatroom message snapshot
     var liveMessages = MutableLiveData<List<Message>>()
 
-
     init {
         getLiveMessages()
     }
-
 
     // set Message
     fun setMessage() {
@@ -91,22 +89,18 @@ class ChatRoomViewModel(app: Application, private val repository: TripTripReposi
         }
     }
 
-    //
     private fun getLiveMessages() {
         liveMessages = repository.getLiveMessage(tripId)
         _status.value = LoadApiStatus.DONE
     }
 
-
     fun cleanMessage() {
         _message.value = null
-
     }
 
     fun leave(needRefresh: Boolean = false) {
         _leave.value = needRefresh
     }
-
 
     override fun onCleared() {
         super.onCleared()

@@ -5,8 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.emil.triptrip.database.Trip
 import com.emil.triptrip.database.source.TripTripRepository
-import com.emil.triptrip.ui.mytrips.MyTripsViewModel
-import com.google.android.gms.maps.GoogleMap
 import java.lang.IllegalArgumentException
 
 
@@ -21,5 +19,4 @@ class TripDetailViewModelFactory(private val application: Application,
         }
         throw IllegalArgumentException("Unknown ViewModel")
     }
-
 }

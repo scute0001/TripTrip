@@ -3,7 +3,6 @@ package com.emil.triptrip.ui.tripdetail
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +13,6 @@ import com.google.android.gms.maps.model.LatLng
 
 
 class SelectTimeAdapter(val viewModel: TripDetailViewModel): ListAdapter<SpotTag, SpotViewHolder>(SpotDiffCallback()) {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpotViewHolder {
         return SpotViewHolder.from(parent)
     }
@@ -22,7 +20,6 @@ class SelectTimeAdapter(val viewModel: TripDetailViewModel): ListAdapter<SpotTag
     override fun onBindViewHolder(holder: SpotViewHolder, position: Int) {
         holder.bind(viewModel, getItem(position))
     }
-
 }
 
 
@@ -54,8 +51,8 @@ class SpotViewHolder(val binding: ListOneDayTimeBinding): RecyclerView.ViewHolde
         }
 
         binding.executePendingBindings()
-
     }
+
     companion object {
         fun from(parent: ViewGroup): SpotViewHolder {
             val inflater = LayoutInflater.from(parent.context)
@@ -63,7 +60,6 @@ class SpotViewHolder(val binding: ListOneDayTimeBinding): RecyclerView.ViewHolde
             return SpotViewHolder(binding)
         }
     }
-
 }
 
 

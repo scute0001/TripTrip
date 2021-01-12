@@ -26,7 +26,6 @@ class NotificationAdapter(val viewModel: NotificationViewModel): ListAdapter<Not
         val item = getItem(position)
         viewModel.deleteNotification(item)
     }
-
 }
 
 class NotificationViewHolder(val binding: ListNotificationBinding): RecyclerView.ViewHolder(binding.root) {
@@ -39,7 +38,6 @@ class NotificationViewHolder(val binding: ListNotificationBinding): RecyclerView
                 viewModel.getTripData(item.tripId)
             }
         }
-
     }
     companion object {
         fun from(parent: ViewGroup): NotificationViewHolder {
@@ -48,9 +46,6 @@ class NotificationViewHolder(val binding: ListNotificationBinding): RecyclerView
             return NotificationViewHolder(binding)
         }
     }
-
-
-
 }
 
 

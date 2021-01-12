@@ -55,16 +55,12 @@ class SelectUserDialog(val userList: List<User>,val viewModel: AddTripViewModel)
                         }
                         Log.d("DATADATA", "$selectUsers")
                         viewModel._selectedUsers.value = selectUsers
-
                     })
                 .setNegativeButton(R.string.cancel,
                     DialogInterface.OnClickListener { dialog, id ->
-
                     })
 
             builder.create()
-
         } ?: throw IllegalStateException("Activity cannot be null")
     }
-
 }

@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.emil.triptrip.database.AttendUser
 import com.emil.triptrip.databinding.ListAttendUserBinding
 
-
 class UsersAdapter(): ListAdapter<AttendUser, UsersViewHolder>(
     UsersDiffCallback()
 ) {
@@ -33,7 +32,6 @@ class UsersViewHolder(val binding: ListAttendUserBinding): RecyclerView.ViewHold
             return UsersViewHolder(binding)
         }
     }
-
 }
 
 
