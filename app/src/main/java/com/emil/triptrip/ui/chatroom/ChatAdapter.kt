@@ -35,9 +35,8 @@ class MessageViewHolder(val binding: ListMessageBinding): RecyclerView.ViewHolde
             binding.constraintMyMessage.visibility = View.GONE
             binding.constraintFriendMessage.visibility = View.VISIBLE
         }
-
-
     }
+
     companion object {
         fun from(parent: ViewGroup): MessageViewHolder {
             val inflater = LayoutInflater.from(parent.context)
@@ -45,9 +44,7 @@ class MessageViewHolder(val binding: ListMessageBinding): RecyclerView.ViewHolde
             return MessageViewHolder(binding)
         }
     }
-
 }
-
 
 class MessageDiffCallback: DiffUtil.ItemCallback<Message>() {
     override fun areItemsTheSame(oldItem: Message, newItem: Message): Boolean {

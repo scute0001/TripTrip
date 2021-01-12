@@ -28,16 +28,13 @@ class LoginSuccessDialogFragment: DialogFragment() {
         binding.dialogLottie.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationRepeat(animation: Animator?) {
             }
-
             override fun onAnimationEnd(animation: Animator?) {
                 dismiss()
                 findNavController().navigate(LoginSuccessDialogFragmentDirections.actionLoginSuccessDialogFragmentToMyTripsFragment())
             }
             override fun onAnimationCancel(animation: Animator?) {
-
             }
             override fun onAnimationStart(animation: Animator?) {
-
             }
         })
 
@@ -46,13 +43,6 @@ class LoginSuccessDialogFragment: DialogFragment() {
             playAnimation()
         }
 
-
-//        Handler().postDelayed(
-//            {dismiss()
-//                findNavController().navigate(LoginSuccessDialogFragmentDirections.actionLoginSuccessDialogFragmentToMyTripsFragment())
-//            },
-//            1000)
-
         return binding.root
     }
 
@@ -60,6 +50,4 @@ class LoginSuccessDialogFragment: DialogFragment() {
         super.onCreate(savedInstanceState)
         setStyle(DialogFragment.STYLE_NO_FRAME, R.style.MessageDialog)
     }
-
-
 }

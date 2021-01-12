@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import androidx.navigation.fragment.findNavController
 import com.emil.triptrip.R
 import com.emil.triptrip.databinding.FragmentLoginSuccessDialogBinding
 
@@ -46,6 +45,4 @@ class AddSpotSuccessDialogFragment : DialogFragment() {
 
         return binding.root
     }
-
-
 }

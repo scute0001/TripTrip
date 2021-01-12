@@ -54,27 +54,22 @@ class ConfirmDialog(val viewModel: TripDetailViewModel,
         binding.dialogLottie.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationRepeat(animation: Animator?) {
             }
-
             override fun onAnimationEnd(animation: Animator?) {
                 dismiss()
             }
             override fun onAnimationCancel(animation: Animator?) {
-
             }
             override fun onAnimationStart(animation: Animator?) {
-
             }
         })
 
         return binding.root
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(DialogFragment.STYLE_NO_FRAME, R.style.MessageDialog)
     }
-
 
     private fun closeEdit(binding: TripDetailFragmentBinding) {
         binding.spotSheet.editTextSpotDetailTitle.isEnabled = false
