@@ -45,11 +45,9 @@ class SelectMapFragment(val viewModel: AddSpotViewModel) : DialogFragment() {
     lateinit var placeClient: PlacesClient
 
     private val callback = OnMapReadyCallback { googleMap ->
-
         myMap = googleMap
         getLocationPermission()
         getDeviceLocation()
-
     }
 
     override fun onCreateView(
@@ -59,19 +57,15 @@ class SelectMapFragment(val viewModel: AddSpotViewModel) : DialogFragment() {
     ): View? {
         val binding = FragmentSelectMapBinding.inflate(inflater, container, false)
 
-
-
         // set select location
         binding.buttonAddPosition.setOnClickListener {
             val position = myMap?.cameraPosition?.target
-
             position?.let {
                 setMarker(position)
             }
         }
 
         // submit location data and back
-
         binding.buttonSubmit.setOnClickListener {
             if (marker?.position != null) {
                 viewModel.selectLocation.value = marker?.position
@@ -81,15 +75,8 @@ class SelectMapFragment(val viewModel: AddSpotViewModel) : DialogFragment() {
             }
         }
 
-
-
-
         // Initialize the AutocompleteSupportFragment.
         val autocompleteFragment = childFragmentManager.findFragmentById(R.id.search) as AutocompleteSupportFragment
-//        autocompleteFragment.view?.apply {
-//            setBackgroundResource(R.drawable.shape_login_background)
-//        }
-
         autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
 
         // Search and get position marker
@@ -104,14 +91,12 @@ class SelectMapFragment(val viewModel: AddSpotViewModel) : DialogFragment() {
             }
         })
 
-
         return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL, android.R.style.Theme_Material_NoActionBar_Fullscreen)
-
 
         // initial placeClient
         if (!Places.isInitialized()) {
@@ -129,8 +114,6 @@ class SelectMapFragment(val viewModel: AddSpotViewModel) : DialogFragment() {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
     }
-
-
 
     // 1. check Permission and get user get permission
     private fun getLocationPermission() {
@@ -189,12 +172,6 @@ class SelectMapFragment(val viewModel: AddSpotViewModel) : DialogFragment() {
                         if (lastKnownLocation != null) {
 
                             myMap?.apply {
-//                                addMarker(MarkerOptions()
-//                                    .position(LatLng(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude))
-//                                    .title("It's ME!!")
-//                                    .snippet("${lastKnownLocation!!.latitude}, ${lastKnownLocation!!.longitude}")
-//                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location_self_64)))
-
                                 moveCamera(
                                     CameraUpdateFactory.newLatLngZoom(
                                         LatLng(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude), 13f))
@@ -216,9 +193,6 @@ class SelectMapFragment(val viewModel: AddSpotViewModel) : DialogFragment() {
             .position(position)
             .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_location_64)))
     }
-
-
-
 }
 
 

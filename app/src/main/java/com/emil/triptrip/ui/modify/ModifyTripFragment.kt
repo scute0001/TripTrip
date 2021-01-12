@@ -27,7 +27,6 @@ class ModifyTripFragment : Fragment() {
         val binding = ModifyTripFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
 
-
         val trip = ModifyTripFragmentArgs.fromBundle(requireArguments()).trip
         val app = requireNotNull(activity).application
         val repository = (requireContext().applicationContext as TripTripApplication).repository
@@ -36,7 +35,6 @@ class ModifyTripFragment : Fragment() {
 
         //set data and create to xml
         binding.viewModel = viewModel
-
 
         // setup select date
         val builder = MaterialDatePicker.Builder.dateRangePicker()
@@ -63,7 +61,6 @@ class ModifyTripFragment : Fragment() {
         binding.buttonSubmitModify.setOnClickListener {
             showDialog()
         }
-
 
         // set modify users click
         binding.buttonModifyAttendUser.setOnClickListener {
@@ -102,14 +99,10 @@ class ModifyTripFragment : Fragment() {
             }
         })
 
-
-
-
         return binding.root
     }
 
     private fun showDialog() {
-
         val alertDialog = AlertDialog.Builder(requireContext())
         alertDialog.apply {
             setTitle("設定")
@@ -118,11 +111,9 @@ class ModifyTripFragment : Fragment() {
                 viewModel.modifyData()
             })
             setNegativeButton("取消", DialogInterface.OnClickListener { dialog, which ->
-
             })
             setCancelable(false)
         }.show()
     }
-
 
 }

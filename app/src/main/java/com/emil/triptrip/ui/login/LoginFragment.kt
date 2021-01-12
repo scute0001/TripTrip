@@ -48,8 +48,6 @@ class LoginFragment : Fragment() {
         val viewModelFactory = LoginViewModelFactory(app, repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(LoginViewModel::class.java)
 
-
-
         // for firebase auth
         auth = Firebase.auth
 
@@ -98,10 +96,8 @@ class LoginFragment : Fragment() {
                     binding.imageLoginLogo.startAnimation(stb)
                 }, 2500)
             }
-
         })
         binding.lottie.playAnimation()
-
 
         return binding.root
     }
@@ -120,10 +116,7 @@ class LoginFragment : Fragment() {
                 Log.d("TAG", "Google sign in failed: ${e.message}", e)
             }
         }
-
     }
-
-
 
     // after google logon success, To Firebase Authentication.
     private fun firebaseAuthWithGoogle(idToken: String) {
@@ -158,8 +151,6 @@ class LoginFragment : Fragment() {
             }
         }
     }
-
-
 
     // function to google sign in API
     private fun signIn() {

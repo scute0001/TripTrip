@@ -39,16 +39,13 @@ class LoginViewModel(app: Application, private val repository: TripTripRepositor
     // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-
     // for upload User to Firebase done and navigation to main page
     private val _uploadUserDataNavFlag = MutableLiveData<Boolean>()
     val uploadUserDataNavFlag: LiveData<Boolean>
         get() = _uploadUserDataNavFlag
 
-
     // uploadUserDataToFirebase
     fun uploadUserDataToFirebase(userDara: User) {
-
         coroutineScope.launch {
             _status.value = LoadApiStatus.LOADING
 
@@ -82,11 +79,9 @@ class LoginViewModel(app: Application, private val repository: TripTripRepositor
         _uploadUserDataNavFlag.value = null
     }
 
-
     fun leave(needRefresh: Boolean = false) {
         _leave.value = needRefresh
     }
-
 
     override fun onCleared() {
         super.onCleared()

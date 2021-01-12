@@ -33,12 +33,10 @@ class ModifyTripViewModel(app: Application, private val repository: TripTripRepo
     val allUsersData: LiveData<List<User>>
         get() = _allUsersData
 
-
     // Current Users List of add attend users
     val _currentUsersData = MutableLiveData<List<User>>()
     val currentUsersData: LiveData<List<User>>
         get() = _currentUsersData
-
 
     // Un attend Users
     val unAttendUsers = MutableLiveData<List<User>>()
@@ -50,7 +48,6 @@ class ModifyTripViewModel(app: Application, private val repository: TripTripRepo
     private val _navToTripDetailData = MutableLiveData<Trip>()
     val navToTripDetailData: LiveData<Trip>
         get() = _navToTripDetailData
-
 
     // status: The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<LoadApiStatus>()
@@ -72,7 +69,6 @@ class ModifyTripViewModel(app: Application, private val repository: TripTripRepo
     // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-
     init {
         _tripData.value = trip
         startDay.value = trip.startTime
@@ -85,9 +81,7 @@ class ModifyTripViewModel(app: Application, private val repository: TripTripRepo
 
     // getAllUserDataToFirebase
     private fun getAllUsersData() {
-
         coroutineScope.launch {
-
             _status.value = LoadApiStatus.LOADING
 
             when (val result = repository.getUserData()) {
@@ -133,10 +127,8 @@ class ModifyTripViewModel(app: Application, private val repository: TripTripRepo
         unAttendUsers.value = notSelectUsers
     }
 
-
     // set modify tripData for upload to firebase
     fun setTripData() {
-
         // set UserData
         val userList = mutableListOf<String>()
         val attendUserList = mutableListOf<AttendUser>()
@@ -148,8 +140,7 @@ class ModifyTripViewModel(app: Application, private val repository: TripTripRepo
             }
         }
 
-
-        // set day list  ///////////////////
+        // set day list
         val dayList = mutableListOf<DayKey>()
         startDay.value?.let { startDay ->
 
@@ -169,7 +160,6 @@ class ModifyTripViewModel(app: Application, private val repository: TripTripRepo
             }
             Log.i("TimeTime", "Start time $dayList")
         }
-        ///////////////////////////////////
 
         // check data source and set modify trip data
         val currentTripData = tripData.value as Trip
@@ -186,7 +176,6 @@ class ModifyTripViewModel(app: Application, private val repository: TripTripRepo
 
     // modify trip to firebase
     fun modifyTripToFirebase() {
-
         coroutineScope.launch {
             _status.value = LoadApiStatus.LOADING
 
@@ -229,15 +218,12 @@ class ModifyTripViewModel(app: Application, private val repository: TripTripRepo
         _modifyDataFlag.value = null
     }
 
-
     fun leave(needRefresh: Boolean = false) {
         _leave.value = needRefresh
     }
-
 
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
     }
-
 }
