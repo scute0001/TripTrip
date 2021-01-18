@@ -483,34 +483,3 @@ object TripTripRemoteDataSource : TripTripDataSource {
     }
 }
 
-
-
-//
-//    override fun getLiveArticles(): MutableLiveData<List<Article>> {
-//
-//        val liveData = MutableLiveData<List<Article>>()
-//
-//        FirebaseFirestore.getInstance()
-//            .collection(PATH_ARTICLES)
-//            .orderBy(KEY_CREATED_TIME, Query.Direction.DESCENDING)
-//            .addSnapshotListener { snapshot, exception ->
-//
-//                Logger.i("addSnapshotListener detect")
-//
-//                exception?.let {
-//                    Logger.w("[${this::class.simpleName}] Error getting documents. ${it.message}")
-//                }
-//
-//                val list = mutableListOf<Article>()
-//                for (document in snapshot!!) {
-//                    Logger.d(document.id + " => " + document.data)
-//
-//                    val article = document.toObject(Article::class.java)
-//                    list.add(article)
-//                }
-//
-//                liveData.value = list
-//            }
-//        return liveData
-//    }
-//

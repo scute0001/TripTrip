@@ -57,4 +57,13 @@
     <string name="my_trip_id">MY TRIP ID</string>
     <string name="load_pic_success">Load picture success.</string>
     <string name="load_pic_fail">Load picture fail.</string>
+    <string name="setting">設定</string>
+    <string name="makesure_change_setting">確定要變更設定?</string>
+    <string name="authentication_fail">Authentication Failed.</string>
+    <string name="select_position_yet">你還沒有選擇地點喔</string>
+    <string name="empty_input">輸入的訊息是空的喔</string>
+    <string name="add_trip_success">新增旅程成功</string>
+    <string name="DEFAULT_MAIN_IMAGE_URL">https://i.imgur.com/QZdKyq8.jpg</string>
+    <string name="input_spot_info">請輸入景點資訊</string>
+    <string name="selected">已選擇</string>
 </resources>

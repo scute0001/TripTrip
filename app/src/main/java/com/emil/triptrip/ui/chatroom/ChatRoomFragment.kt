@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.databinding.ChatRoomFragmentBinding
 
@@ -38,7 +39,7 @@ class ChatRoomFragment : Fragment() {
         // check message and sent data to firebase
         viewModel.message.observe(viewLifecycleOwner, Observer { message ->
             if (message.message == "" || message.message == null) {
-                Toast.makeText(requireContext(), "輸入的訊息是空的喔", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.empty_input), Toast.LENGTH_SHORT).show()
             } else {
                 viewModel.sentMessageToFirebase(message)
             }

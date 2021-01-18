@@ -15,6 +15,7 @@ import com.emil.triptrip.database.*
 import com.emil.triptrip.database.source.TripTripRepository
 import com.emil.triptrip.ui.login.UserManager
 import com.emil.triptrip.util.LoadApiStatus
+import com.emil.triptrip.util.Util
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -228,7 +229,7 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
                 attendUserList = userList,
                 users = users,
                 dayKeyList = dayList,
-                mainImg = firebaseStoragePicUri.value ?: "https://i.imgur.com/QZdKyq8.jpg"
+                mainImg = firebaseStoragePicUri.value ?: Util.getString(R.string.DEFAULT_MAIN_IMAGE_URL)
             )
             _tripData.value = data
         } else {
