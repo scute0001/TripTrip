@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.databinding.AddSpotFragmentBinding
 import com.emil.triptrip.ui.dialog.AddSpotSuccessDialogFragment
@@ -91,7 +92,7 @@ class AddSpotFragment : Fragment() {
                 viewModel.sendSpotData(spotData)
 
             } else if (spotData == null && viewModel.navUploadSpotSuccess.value == false){
-                Toast.makeText(requireContext(), "請輸入景點資訊", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.input_spot_info), Toast.LENGTH_SHORT).show()
             }
         })
 

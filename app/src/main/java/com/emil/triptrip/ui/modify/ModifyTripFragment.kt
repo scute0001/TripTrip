@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.databinding.ModifyTripFragmentBinding
 import com.emil.triptrip.ui.addtrip.AttendUsersAdapter
@@ -105,12 +106,12 @@ class ModifyTripFragment : Fragment() {
     private fun showDialog() {
         val alertDialog = AlertDialog.Builder(requireContext())
         alertDialog.apply {
-            setTitle("設定")
-            setMessage("確定要變更設定?")
-            setPositiveButton("確定", DialogInterface.OnClickListener { dialog, which ->
+            setTitle(getString(R.string.setting))
+            setMessage(getString(R.string.makesure_change_setting))
+            setPositiveButton(getString(R.string.ok), DialogInterface.OnClickListener { dialog, which ->
                 viewModel.modifyData()
             })
-            setNegativeButton("取消", DialogInterface.OnClickListener { dialog, which ->
+            setNegativeButton(getString(R.string.cancel), DialogInterface.OnClickListener { dialog, which ->
             })
             setCancelable(false)
         }.show()

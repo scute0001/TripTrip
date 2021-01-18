@@ -38,41 +38,4 @@ object UserManager {
                 }
             }
         }
-
-    /**
-     * It can be use to check login status directly
-     */
-    val isLoggedIn: Boolean
-        get() = userToken != null
-
-    /**
-     * Clear the [userToken] and the [user]/[_user] data
-     */
-    fun clear() {
-        userToken = null
-        _user.value = null
-    }
-
-    private var lastChallengeTime: Long = 0
-    private var challengeCount: Int = 0
-    private const val CHALLENGE_LIMIT = 5
-
-    /**
-     * Winter is coming
-     */
-    fun challenge() {
-        if (System.currentTimeMillis() - lastChallengeTime > 5000) {
-            lastChallengeTime = System.currentTimeMillis()
-            challengeCount = 0
-        } else {
-            if (challengeCount == CHALLENGE_LIMIT) {
-                userToken = null
-                Toast.makeText(TripTripApplication.instance,
-                    "Logout success!",
-                    Toast.LENGTH_SHORT).show()
-            } else {
-                challengeCount++
-            }
-        }
-    }
 }

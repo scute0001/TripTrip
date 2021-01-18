@@ -9,6 +9,7 @@ import com.emil.triptrip.database.NotificationAddTrip
 import com.emil.triptrip.database.User
 import com.emil.triptrip.database.source.TripTripRepository
 import com.emil.triptrip.ui.login.UserManager
+import com.emil.triptrip.util.Util
 
 class MainActivityViewModel(app: Application, private val repository: TripTripRepository) : AndroidViewModel(app) {
 
@@ -35,7 +36,7 @@ class MainActivityViewModel(app: Application, private val repository: TripTripRe
     val navToModifyTripFlag = MutableLiveData<Boolean>()
 
     init {
-        currentFragmentType.value = "TripTrip"
+        currentFragmentType.value = Util.getString(R.string.app_name)
         clickStatu.value = false
         navToModifyTripFlag.value = null
     }

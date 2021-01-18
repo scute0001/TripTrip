@@ -97,7 +97,7 @@ class AddTripFragment : Fragment() {
         // add data finished and nav to mytrips
         viewModel.addTripFinishedNavToMyTrips.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             if (it == true) {
-                Toast.makeText(requireContext(), "新增旅程成功", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.add_trip_success), Toast.LENGTH_SHORT).show()
                 binding.constraintSuccess.visibility = View.VISIBLE
                 binding.lottieSuccess.playAnimation()
             }
@@ -149,11 +149,11 @@ class AddTripFragment : Fragment() {
                 filePath?.let {
                     // save file path here
                     viewModel.setSelectedPicUri(filePath)
-                    Toast.makeText(requireContext(), "Load picture success.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.load_pic_success), Toast.LENGTH_SHORT).show()
                 }
             }
             ImagePicker.RESULT_ERROR -> {
-                Toast.makeText(requireContext(), "Load picture fail.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.load_pic_fail), Toast.LENGTH_SHORT).show()
             }
 
         }

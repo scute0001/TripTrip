@@ -1,25 +1,21 @@
 package com.emil.triptrip.ui.addtrip
 
 import android.app.Application
-import android.icu.util.Calendar
-import android.icu.util.TimeUnit
 import android.util.Log
-import android.util.TimeUtils
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.database.*
 import com.emil.triptrip.database.source.TripTripRepository
 import com.emil.triptrip.ui.login.UserManager
 import com.emil.triptrip.util.LoadApiStatus
+import com.emil.triptrip.util.Util
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.sql.Timestamp
 import java.text.SimpleDateFormat
 
 class AddTripViewModel(app: Application, private val repository: TripTripRepository) : AndroidViewModel(app) {
@@ -220,7 +216,11 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
         }
 
         // check data source and set trip data
-        if ( _tripTitle.value != null && startDay.value != null && endDay.value != null && selectedUsers.value != null) {
+        if ( _tripTitle.value != null &&
+            _tripTitle.value != "" &&
+            startDay.value != null &&
+            endDay.value != null &&
+            selectedUsers.value != null) {
             val data = Trip(
                 title = _tripTitle.value,
                 stopTime = endDay.value,
@@ -228,7 +228,7 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
                 attendUserList = userList,
                 users = users,
                 dayKeyList = dayList,
-                mainImg = firebaseStoragePicUri.value ?: "https://i.imgur.com/QZdKyq8.jpg"
+                mainImg = firebaseStoragePicUri.value ?: Util.getString(R.string.DEFAULT_MAIN_IMAGE_URL)
             )
             _tripData.value = data
         } else {
@@ -237,12 +237,14 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
     }
 
     private fun selfAddToSelectedUser(userList: List<User>?) {
-        var list = userList as MutableList
-        if (UserManager.user.value in list) {
+        userList?.let {
+            val list = userList as MutableList
+            if (UserManager.user.value in list) {
 
-        } else {
-            list.add(UserManager.user.value!!)
-            _selectedUsers.value = list
+            } else {
+                list.add(UserManager.user.value!!)
+                _selectedUsers.value = list
+            }
         }
     }
 
@@ -261,5 +263,7 @@ class AddTripViewModel(app: Application, private val repository: TripTripReposit
 
     init {
         getUsersData()
+        startDay.value = System.currentTimeMillis()
+        endDay.value = System.currentTimeMillis()
     }
 }

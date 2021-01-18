@@ -12,6 +12,7 @@ import com.emil.triptrip.database.SpotTag
 import com.emil.triptrip.database.source.TripTripRepository
 import com.emil.triptrip.ui.login.UserManager
 import com.emil.triptrip.util.LoadApiStatus
+import com.emil.triptrip.util.Util
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -67,14 +68,14 @@ class AddSpotViewModel(app: Application,
         get() = _navUploadSpotSuccess
 
     init {
-        selectLocationString.value = "從地圖搜尋"
+        selectLocationString.value = Util.getString(R.string.search_from_map)
         selectSpotType.value = -1
         startTime.value = 0L
         _navUploadSpotSuccess.value = false
     }
 
     fun setOnSelectLocationFlag() {
-        selectLocationString.value = "已選擇"
+        selectLocationString.value = Util.getString(R.string.selected)
     }
 
     fun setSpotData() {

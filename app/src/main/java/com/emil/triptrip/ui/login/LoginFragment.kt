@@ -147,7 +147,7 @@ class LoginFragment : Fragment() {
                 viewModel.userData.value = userData
 
             } else {
-                Toast.makeText(requireContext(), "Authentication Failed.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.authentication_fail), Toast.LENGTH_SHORT).show()
             }
         }
     }
