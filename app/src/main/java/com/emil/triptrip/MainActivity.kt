@@ -20,6 +20,7 @@ import androidx.navigation.ui.NavigationUI
 import com.emil.triptrip.databinding.ActivityMainBinding
 import com.emil.triptrip.databinding.NavHeaderDrawerBinding
 import com.emil.triptrip.ui.login.UserManager
+import com.emil.triptrip.util.Util
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
@@ -138,10 +139,8 @@ class MainActivity : AppCompatActivity() {
         binding.toolbar.setNavigationIcon(R.drawable.ic_baseline_format_list_bulleted_24)
     }
 
-    /**
-     * Set up [NavController.addOnDestinationChangedListener] to record the current fragment, it better than another design
-     * which is change the [CurrentFragmentType] enum value by [MainViewModel] at [onCreateView]
-     */
+
+    //  Set up [NavController.addOnDestinationChangedListener] to record the current fragment
     private fun setupNavController() {
         findNavController(R.id.navHostFragment).addOnDestinationChangedListener { navController: NavController, navDestination: NavDestination, _: Bundle? ->
             viewModel.currentFragmentType.value = when (navController.currentDestination?.id) {
@@ -182,7 +181,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 if (viewModel.isHome.value == true) {
                     exitFlag = true
-                    Toast.makeText(this, "再點擊一次離開", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, Util.getString(R.string.click_again_to_exit), Toast.LENGTH_SHORT).show()
                     Handler().postDelayed({
                         exitFlag = false
                     }, 2000)

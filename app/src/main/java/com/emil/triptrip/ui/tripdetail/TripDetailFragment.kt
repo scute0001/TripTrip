@@ -24,6 +24,7 @@ import com.emil.triptrip.R
 import com.emil.triptrip.TripTripApplication
 import com.emil.triptrip.databinding.TripDetailFragmentBinding
 import com.emil.triptrip.ui.dialog.ConfirmDialog
+import com.emil.triptrip.util.Util
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -200,7 +201,7 @@ class TripDetailFragment : Fragment() {
                 findNavController().navigate(TripDetailFragmentDirections.actionTripDetailFragmentToAddSpotFragment(
                     viewModel.tripData.id!!, viewModel.selectedDayKey.value!! ))
             } else {
-                Toast.makeText(requireContext(), "請先選擇日期", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.select_date_first_plz), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -216,7 +217,7 @@ class TripDetailFragment : Fragment() {
 
         binding.spotSheet.imageEditDone.setOnClickListener {
             closeEdit(binding)
-            Toast.makeText(requireContext(), "更新資料成功", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.refresh_data_success), Toast.LENGTH_SHORT).show()
             // sent data to api here
             // set change data for update
             viewModel.uploadChangeSpotData()
@@ -310,7 +311,7 @@ class TripDetailFragment : Fragment() {
 
         // start service update my position
         val startIntent = Intent(context, PositionUpdateService::class.java).putExtra(
-            "MY TRIP ID",
+            getString(R.string.my_trip_id),
             TripDetailFragmentArgs.fromBundle(requireArguments()).tripData.id)
         context?.startService(startIntent)
 
@@ -415,11 +416,11 @@ class TripDetailFragment : Fragment() {
                 filePath?.let {
                     // save file path here
                     viewModel.uploadPicToStorage(filePath)
-                    Toast.makeText(requireContext(), "Load picture success.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.load_pic_success), Toast.LENGTH_SHORT).show()
                 }
             }
             ImagePicker.RESULT_ERROR -> {
-                Toast.makeText(requireContext(), "Load picture fail.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.load_pic_fail), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -452,17 +453,3 @@ class TripDetailFragment : Fragment() {
         super.onDestroy()
     }
 }
-
-//            val bounds = googleMap.projection.visibleRegion.latLngBounds
-//            var up: Double = bounds.northeast.latitude
-//            var down: Double = bounds.southwest.latitude
-//            var right: Double = bounds.northeast.longitude
-//            var left: Double = bounds.southwest.longitude
-//
-//            var newUp = up - ((abs(up - down)) / 4 )
-//            var newDown = down - ((abs(up - down)) / 4 )
-//            val newBound = LatLngBounds(LatLng(newDown, left), LatLng(newUp, right))
-//
-//            Log.d("BBBBBB", "${bounds.southwest} ${bounds.northeast}")
-//            Log.d("BBBBBB", "${newBound.southwest} ${newBound.northeast}")
-//            googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(newBound, 0))

@@ -51,4 +51,10 @@
     <string name="stay">Stay</string>
     <string name="notification_added"> 已將你加入 </string>
     <string name="notification_member"> 的夥伴，一起來規劃行程吧!!</string>
+    <string name="click_again_to_exit">再點擊一次離開</string>
+    <string name="select_date_first_plz">請先選擇日期</string>
+    <string name="refresh_data_success">更新資料成功</string>
+    <string name="my_trip_id">MY TRIP ID</string>
+    <string name="load_pic_success">Load picture success.</string>
+    <string name="load_pic_fail">Load picture fail.</string>
 </resources>

@@ -51,8 +51,8 @@ class PositionUpdateService: Service() {
     }
 
     override fun onUnbind(intent: Intent?): Boolean {
-        return super.onUnbind(intent)
         Log.i("service", "service onUnbind")
+        return super.onUnbind(intent)
     }
 
     override fun onDestroy() {
