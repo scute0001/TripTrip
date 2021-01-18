@@ -39,7 +39,10 @@
 
 ### Version history
 ---
-![](https://img.shields.io/badge/Version-1.3-blue) 
+![](https://img.shields.io/badge/Version-1.4-blue) 
+
+  2021/01/18 ver 1.4 released
+   - 修正新增旅程異常當機 bug
 
   2021/01/05 released
 
