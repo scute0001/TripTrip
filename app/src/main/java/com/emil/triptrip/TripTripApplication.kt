@@ -26,6 +26,4 @@ class TripTripApplication : Application() {
         super.onCreate()
         instance = this
     }
-
-    fun isLiveDataDesign() = true
 }
